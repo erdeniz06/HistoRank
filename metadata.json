@@ -1,0 +1,6 @@
+{
+  "name": "Pantheon: Tarihsel Liderler Puanlama & Kıyaslama Platformu",
+  "description": "Dünya tarihine ve ulusal siyasete yön veren liderlerin askeri, ekonomik, reform ve yönetim boyutlarında puanlanıp kıyaslandığı etkileşimli tarih platformu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
