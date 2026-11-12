@@ -1,4 +1,8 @@
 import { DimensionInfo, EraInfo, Leader, TierConfig } from '../types';
+import { ADDITIONAL_LEADERS } from './additionalLeaders';
+import { OTTOMAN_SULTANS } from './ottomanSultans';
+import { MONARCHS_AND_CHANCELLORS } from './monarchsAndChancellors';
+import { PARTY_LEADERS_AND_SPAIN } from './partyLeadersAndSpain';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
@@ -53,8 +57,9 @@ export const DIMENSIONS: DimensionInfo[] = [
 
 export const ERAS: EraInfo[] = [
   { key: 'all', label: 'Tüm Dönemler', description: 'Antik çağlardan günümüze tüm tarihi liderler', centuries: [] },
-  { key: 'ancient', label: 'Antik Çağ', description: 'MÖ 3000 – MS 500 dönemi', centuries: ['MÖ 6. yy', 'MÖ 4. yy', 'MÖ 1. yy', '2. yy'] },
-  { key: 'medieval', label: 'Orta Çağ', description: '6. – 15. Yüzyıllar arası', centuries: ['12. yy', '13. yy', '15. yy'] },
+  { key: 'ancient', label: 'Antik Çağ', description: 'MÖ 3000 – MS 500 dönemi', centuries: ['MÖ 6. yy', 'MÖ 5. yy', 'MÖ 4. yy', 'MÖ 1. yy', '2. yy'] },
+  { key: 'early-medieval', label: 'Erken Orta Çağ', description: 'MS 5. – 10. Yüzyıllar (Kavimler Göçü & Erken Feodal)', centuries: ['5. yy', '6. yy', '7. yy', '8. yy', '9. yy', '10. yy'] },
+  { key: 'medieval', label: 'Yüksek & Geç Orta Çağ', description: '11. – 15. Yüzyıllar arası', centuries: ['11. yy', '12. yy', '13. yy', '14. yy', '15. yy'] },
   { key: 'early-modern', label: 'Yeni Çağ', description: '16. – 18. Yüzyıllar', centuries: ['16. yy', '17. yy', '18. yy'] },
   { key: '19th', label: '19. Yüzyıl', description: '1801 – 1900 Sanayi ve İmparatorluklar Çağı', centuries: ['19. yy'] },
   { key: '20th', label: '20. Yüzyıl', description: '1901 – 2000 Dünya Savaşları ve Soğuk Savaş', centuries: ['20. yy'] },
@@ -83,6 +88,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1923 – 1938',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     avatarUrl: '/src/assets/images/historical_pantheon_hero_1794074512877.jpg',
     defaultScores: {
       military: 96,
@@ -101,8 +108,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Montrö Boğazlar Sözleşmesi ve Sadabat/Balkan Paktları diplomasisi',
     ],
     controversies: [
-      'Radikal seküler ve kültürel dönüşüm hızının gelenekçi kesimlerce tartışılması',
-      'Tek partili kuruluş döneminin dönemsel siyasi kısıtları',
+      '1937–1938 Dersim olayları, askeri harekâtlar ve zorunlu iskân politikalarının yol açtığı insani trajediler ve tartışmalar',
+      'Takrir-i Sükûn Kanunu, İstiklal Mahkemeleri yargılamaları ve muhalefet partilerinin kapatılmasıyla oluşan siyasi tutuklamalar ve baskı ortamı',
+      '1929 Büyük Buhranı ve zorunlu devletçilik yatırımları döneminde Anadolu halkının hissettiği ağır ekonomik bunalım ve geçim sıkıntıları',
     ],
     famousQuote: 'Yurtta sulh, cihanda sulh.',
   },
@@ -120,6 +128,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'ancient',
     yearsActive: 'MÖ 49 – MÖ 44',
     category: 'ancient',
+    subCategory: 'ancient-rome',
+    region: 'mediterranean',
     defaultScores: {
       military: 98,
       economy: 80,
@@ -135,8 +145,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Roma senatosunu ve vatandaşlık haklarını genişletmesi',
     ],
     controversies: [
-      'Cumhuriyetçi senatörlerin tasfiyesi ve ömür boyu diktatörlük ilanı',
-      'Galya seferlerindeki sert nüfus kırımları',
+      'Cumhuriyet kurumlarını ve Roma Senatosu’nu tasfiye edip ömür boyu diktatörlük kurması',
+      'Galya Seferi sırasındaki sert askeri yöntemler ve sivil kayıplar',
+      'Rubicon nehrini geçerek Roma Cumhuriyeti içinde iç savaş başlatması',
     ],
     famousQuote: 'Veni, vidi, vici (Geldim, gördüm, yendim).',
   },
@@ -154,6 +165,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'ancient',
     yearsActive: 'MÖ 336 – MÖ 323',
     category: 'ancient',
+    subCategory: 'ancient-greece',
+    region: 'mediterranean',
     defaultScores: {
       military: 100,
       economy: 72,
@@ -169,8 +182,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Farklı halkları ve kültürleri birleştiren evrensel imparatorluk vizyonu',
     ],
     controversies: [
-      'Kalıcı bir veraset sistemi kuramadan ölmesiyle imparatorluğun bölünmesi',
-      'Persepolis yangını ve bazı yakın komutanlarını tasfiye etmesi',
+      'Pers İmparatorluğu’nun başkenti Persepolis’i yaktırması',
+      'Asya geleneklerini benimseyerek komutanları arasında otokrasi tepkisi yaratması',
+      'Clitus the Black ve Callisthenes gibi yakın dava arkadaşlarını öfke anında idam ettirmesi',
     ],
     famousQuote: 'Korkularını aşan kişiye dünya üzerinde hiçbir sınır engel olamaz.',
   },
@@ -188,6 +202,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'ancient',
     yearsActive: 'MÖ 27 – MS 14',
     category: 'ancient',
+    subCategory: 'ancient-rome',
+    region: 'mediterranean',
     defaultScores: {
       military: 84,
       economy: 93,
@@ -203,8 +219,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Roma mimarisinin, yollarının ve kamusal anıtlarının altın çağı',
     ],
     controversies: [
-      'İkinci Triumvirlik dönemindeki acımasız yasaklama listeleri (proscriptions)',
-      'Cumhuriyetçi özgürlüklerin fiilen tek adam otoritesine dönüştürülmesi',
+      'Cumhuriyeti koruma retoriği altında tüm gücü tek elde toplayan otokratik Principatus rejimini kurması',
+      'Proskripsiyon listeleriyle siyasi muhalifleri ve Cicero gibi senatörleri tasfiye etmesi',
+      'Ahlak ve evlilik yasalarıyla (Lex Julia) Roma yurttaşlarının özel hayatına katı müdahaleler getirmesi',
     ],
     famousQuote: 'Roma’yı tuğladan buldum, mermerden bıraktım.',
   },
@@ -222,6 +239,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'ancient',
     yearsActive: 'MS 161 – MS 180',
     category: 'ancient',
+    subCategory: 'ancient-rome',
+    region: 'mediterranean',
     defaultScores: {
       military: 83,
       economy: 76,
@@ -237,8 +256,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Köleler, dullar ve yetimler lehine adil yargı reformları',
     ],
     controversies: [
-      'Evlatlık selef geleneğini bozarak tahtı hazırlıksız oğlu Commodus’a devretmesi',
-      'Hristiyanlara yönelik dönemsel yerel kovuşturmalar',
+      'Liyakat geleneğini bozarak istikrarsız oğlu Commodus’u veliaht tayin etmesi',
+      'Stoacı hümanist felsefesine rağmen erken Hristiyan topluluklara yönelik kovuşturmaları durdurmaması',
+      'Marcomanni savaşlarında Roma maliyesini ve lejyon kaynaklarını tüketmesi',
     ],
     famousQuote: 'Ruhun, düşüncelerinin rengine boyanır.',
   },
@@ -256,6 +276,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'medieval',
     yearsActive: '1451 – 1481',
     category: 'turkey',
+    subCategory: 'ottoman-sultan',
+    region: 'mediterranean',
     avatarUrl: '/src/assets/images/fatih_renaissance_art_1794074511324.jpg',
     defaultScores: {
       military: 97,
@@ -273,8 +295,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Bellini gibi Avrupalı ve Ali Kuşçu gibi Doğulu bilginleri sarayında toplaması',
     ],
     controversies: [
-      'Nizam-ı Âlem için kardeş katli fetvasını kanunlaştırması',
-      'Sürekli seferlerin getirdiği yüksek vergi yükleri',
+      'Taht kavgalarını önlemek amacıyla kardeş katlini kanunlaştırması (Kânûnnâme-i Âl-i Osman)',
+      'Yoğun seferleri finanse etmek için vakıf arazilerini kamulaştırması ve sikkede tağşiş yapması',
+      'Çandarlı Halil Paşa gibi köklü vezir ailelerini tasfiye ederek merkezi mutlak otorite kurması',
     ],
     famousQuote: 'İmkanın sınırını görmek için imkansızı denemek gerekir.',
   },
@@ -292,6 +315,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '19th',
     yearsActive: '1799 – 1815',
     category: 'france',
+    subCategory: 'fr-leader',
+    region: 'europe',
     avatarUrl: '/src/assets/images/napoleon_imperial_art_1794074513070.jpg',
     defaultScores: {
       military: 99,
@@ -328,6 +353,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'medieval',
     yearsActive: '1206 – 1227',
     category: 'world',
+    subCategory: 'world-icon',
+    region: 'world',
     defaultScores: {
       military: 100,
       economy: 79,
@@ -343,8 +370,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Tarihteki ilk kıtalararası posta ve haberleşme sistemi (Yam/Örtöö)',
     ],
     controversies: [
-      'Şehir kuşatmalarında uygulanan topyekun katliamlar ve korku psikolojisi',
-      'Harizmşahlar ve Bağdat seferlerindeki tarihi kütüphane ve kanal tahribatı',
+      'Teslim olmayan Harezm, Semerkant ve Bağdat gibi şehirlere yönelik uygulanan kitlesel yıkımlar',
+      'Fethettiği coğrafyaların nüfus ve kültürel dengelerinde yarattığı sarsıcı tahribat',
+      'İmparatorluğu oğulları arasında paylaştırması sonucu hanedan içi kanlı bölünmelerin başlaması',
     ],
     famousQuote: 'Bir ok kolay kırılır, ama bir demet oku kimse kıramaz.',
   },
@@ -362,6 +390,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'early-modern',
     yearsActive: '1740 – 1786',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 96,
       economy: 85,
@@ -378,8 +408,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Sanssouci Sarayı’nda felsefe ve müzik odaklı aydınlanma merkezi kurması',
     ],
     controversies: [
-      'Polonya’nın I. Parçalanması’ndaki agresif rolü',
-      'Otokratik ve tavizsiz saray disiplini',
+      'Silezya’yı Avusturya’dan ilhak ederek Avrupa’yı sarsan Yedi Yıl Savaşı’nı tetiklemesi',
+      'Toplumu katı Prusya askeri hiyerarşisi altına sokarak köylü serfliğini sürdürmesi',
+      'Polonya’nın ilk paylaşımına (1772) öncülük ederek egemen bir devleti parçalaması',
     ],
     famousQuote: 'Hükümdar, devletin ilk hizmetkarıdır.',
   },
@@ -397,6 +428,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '19th',
     yearsActive: '1871 – 1890',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 87,
       economy: 90,
@@ -412,8 +445,9 @@ export const INITIAL_LEADERS: Leader[] = [
       '1878 Berlin Kongresi ile Avrupa güç dengesini yöneten dahi ittifak diplomasisi',
     ],
     controversies: [
-      'Katolik Kilisesi’ne karşı Kulturkampf mücadelesi',
-      'Sosyalist karşıtı yasalarla muhalefeti baskı altına alma girişimleri',
+      'Kültürkampf (Kültür Savaşı) ile Katolik Kilisesi ve kurumlarına karşı sert kısıtlamalar getirmesi',
+      'Sosyalist Yasa (Sozialistengesetz) ile sosyal demokrat hareketleri yasaklayıp baskı altına alması',
+      'Alman meclisi Reichstag’ı bypass ederek bürokratik otokratik bir yönetim modeli dayatması',
     ],
     famousQuote: 'Tarihin büyük meseleleri nutuklarla değil, kan ve demirle çözülür.',
   },
@@ -431,6 +465,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1933 – 1945',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 58,
       economy: 42,
@@ -465,6 +501,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2005 – 2021',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 60,
       economy: 89,
@@ -480,8 +518,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Almanya’nın nükleer enerjiden çıkış (Energiewende) kararı',
     ],
     controversies: [
-      'Rusya’ya yönelik Kuzey Akım enerji bağımlılığının yol açtığı jeopolitik zaaflar',
-      'Alman ordusu (Bundeswehr) modernizasyonunun geciktirilmesi',
+      '2015 sığınmacı krizinde "Wir schaffen das" politikası ve Avrupa genelindeki siyasi kutuplaşma',
+      'Almanya’nın Rus doğal gazına aşırı enerji bağımlılığı (Nord Stream 2)',
+      'Euro krizi sırasında Güney Avrupa ve Yunanistan’a uygulanan katı kemer sıkma baskısı',
     ],
     famousQuote: 'Bunu başarabiliriz (Wir schaffen das).',
   },
@@ -499,6 +538,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1940 – 1946 / 1958 – 1969',
     category: 'france',
+    subCategory: 'fr-leader',
+    region: 'europe',
     defaultScores: {
       military: 89,
       economy: 83,
@@ -515,8 +556,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Fransa’yı bağımsız bir nükleer güç ve küresel aktör haline getirmesi',
     ],
     controversies: [
-      'NATO askeri kanadından Fransa’yı çekmesi ve ABD ile sert polemikleri',
-      'Mayıs 1968 gençlik hareketlerine karşı başlangıçtaki sert tutumu',
+      'Cezayir’in bağımsızlığını tanıma sürecinde ordu ve aşırı sağ ile yaşadığı derin iç kriz',
+      'NATO’nun askeri kanadından çekilerek Batı ittifakında yarattığı çatlak',
+      'Mayıs 1968 toplumsal öğrenci ve işçi protestolarında halkın taleplerine başlangıçta direnmesi',
     ],
     famousQuote: 'Bütün hayatım boyunca Fransa hakkında kendime belirli bir fikir edindim.',
   },
@@ -534,6 +576,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2017 – Günümüz',
     category: 'france',
+    subCategory: 'fr-leader',
+    region: 'europe',
     defaultScores: {
       military: 74,
       economy: 79,
@@ -569,6 +613,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2011 – Günümüz',
     category: 'france',
+    subCategory: 'fr-leader',
+    region: 'europe',
     defaultScores: {
       military: 60,
       economy: 55,
@@ -583,8 +629,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Üç kez cumhurbaşkanlığı ikinci turuna kalma başarısı',
     ],
     controversies: [
-      'Katı göçmen karşıtlığı ve ulusal öncelik ("préférence nationale") politikaları',
-      'Geçmişteki Rusya yanlısı mali ve siyasi bağlantı iddiaları',
+      'Aşırı sağ ve göçmen karşıtı söylemlerin Fransız anayasal laiklik ve eşitlik ilkeleriyle çelişmesi',
+      'Avrupa Birliği ve Schengen karşıtı duruşunun yaratabileceği ekonomik izolasyon',
+      'Geçmişte Rusya bağlantılı banka kredileri ve Avrupa Parlamentosu fonları soruşturmaları',
     ],
     famousQuote: 'Biz ne sağcıyız ne solcuyuz; biz Fransızız.',
   },
@@ -637,6 +684,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'early-modern',
     yearsActive: '1792 – 1794',
     category: 'france',
+    subCategory: 'fr-leader',
+    region: 'europe',
     defaultScores: {
       military: 75,
       economy: 64,
@@ -651,8 +700,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Kamu Güvenliği Komitesi’nin ilk kurucusu ve yöneticisi olması',
     ],
     controversies: [
-      'Eylül Katliamları sırasındaki eylemsizliği ve finansal yolsuzluk şüpheleri',
-      'Siyasi radikalleşme dalgasını başlangıçta bizzat körüklemesi',
+      'Eylül Katliamları ve Devrim Mahkemeleri’nin kuruluşundaki dolaylı sorumluluğu',
+      'Kişisel zenginleşme ve devrim fonlarını zimmetine geçirme suçlamaları',
+      'Terör dönemini dizginleme çabası sırasında Robespierre ile çatışarak giyotine gitmesi',
     ],
     famousQuote: 'Cellat, başımı halka göster; buna bakmaya değer!',
   },
@@ -670,6 +720,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1938 – 1950',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 89,
       economy: 70,
@@ -686,8 +738,9 @@ export const INITIAL_LEADERS: Leader[] = [
       '1950 seçimleriyle iktidarı kansız biçimde Demokrat Parti’ye devretmesi',
     ],
     controversies: [
-      'Varlık Vergisi uygulaması ve dönemsel karne/kıtlık yönetimi',
-      'Tek partili dönemin bürokratik katılığı ve basına yönelik kısıtlar',
+      'Varlık Vergisi uygulaması ve gayrimüslim sermayeye yönelik tartışmalı mali tedbirler',
+      'Tek parti dönemi katı devletçilik ve basın sansürü eleştirileri',
+      'İkinci Dünya Savaşı yıllarındaki karne uygulaması ve kırsal köylünün sırtındaki ağır vergi yükü',
     ],
     famousQuote: 'Bir memlekette namuslular da en az namussuzlar kadar cesur olmadıkça, o memleket kurtulamaz.',
   },
@@ -705,6 +758,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1950 – 1960',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 70,
       economy: 76,
@@ -720,8 +775,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Kore Savaşı’na katılım ile Batı bloğundaki yerin pekişmesi',
     ],
     controversies: [
-      '6-7 Eylül 1955 olayları sırasındaki devlet zaafı',
-      '1950’lerin sonunda artan kutuplaşma ve Tahkikat Komisyonu süreci',
+      'Tahkikat Komisyonu gibi kararlarla DP döneminde basın ve muhalefete yönelik baskıcı tutum',
+      '6-7 Eylül 1955 olaylarında hükümetin güvenlik ve idari zaafiyeti',
+      '27 Mayıs darbesi öncesinde muhalefetle uzlaşmayı reddeden kutuplaştırıcı tavrı',
     ],
     famousQuote: 'Bu kış komünizm gelecektir.',
   },
@@ -739,6 +795,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1960 – 1966',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 78,
       economy: 68,
@@ -753,7 +811,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'İlk yerli Türk otomobili "Devrim" projesinin başlatılması',
     ],
     controversies: [
-      '27 Mayıs askeri darbesine liderlik etmesi ve Yassıada idamlarının engellenememesi',
+      '27 Mayıs 1960 askeri müdahalesinin lideri olması ve Adnan Menderes’in idamını engelleyememesi',
+      'Milli Birlik Komitesi içindeki 14’ler hizbini tasfiye edip yurt dışına sürgüne göndermesi',
+      'Ordunun Türk siyasi yaşamında vesayetçi bir anayasal aktör haline gelmesine zemin hazırlaması',
     ],
     famousQuote: 'Memlekette hürriyet ve adalet hissini yeniden yeşertmeliyiz.',
   },
@@ -771,6 +831,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1966 – 1973',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 72,
       economy: 65,
@@ -785,8 +847,9 @@ export const INITIAL_LEADERS: Leader[] = [
       '12 Mart ara rejiminde sivil meclisin tamamen kapatılmasını önleme çabası',
     ],
     controversies: [
-      '12 Mart Muhtırası ile demokratik süreçlerin kesintiye uğraması',
-      'İdam kararlarının onaylanması süreci',
+      '12 Mart 1971 Askeri Muhtırası sürecini onaylaması ve parlamenter siyaseti askıya alması',
+      'Sol hareketler ve gençlik örgütlenmelerine yönelik sert sıkıyönetim uygulamaları',
+      'Deniz Gezmiş ve arkadaşlarının idam kararlarını onaylayarak toplumsal barışı onaramaması',
     ],
     famousQuote: 'Devletin bekası her türlü siyasi mülahazanın üzerindedir.',
   },
@@ -804,6 +867,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1973 – 1980',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 77,
       economy: 60,
@@ -818,8 +883,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Kutuplaşmış koalisyonlar döneminde anayasal tarafsızlık duruşu',
     ],
     controversies: [
-      '1970’lerdeki sağ-sol sokak çatışmaları ve ekonomik krizin derinleşmesi',
-      '1980 öncesi meclisin aylarca cumhurbaşkanı seçememesi krizinin aşılamaması',
+      '1970’ler siyasi kutuplaşması ve sokak çatışmalarını önlemede cumhurbaşkanlığı makamının etkisiz kalması',
+      '12 Eylül darbesine giden süreçte siyasi parti liderlerini uzlaştıramaması',
+      'Hükümet krizleri döneminde Milliyetçi Cephe koalisyonlarının meclis kilitlenmesini aşamaması',
     ],
     famousQuote: 'Milletimizin barış ve huzuru ancak anayasal nizama sadakatle temin edilir.',
   },
@@ -837,6 +903,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1980 – 1989',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 65,
       economy: 62,
@@ -871,6 +939,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1989 – 1993',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 70,
       economy: 92,
@@ -887,8 +957,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Kürt meselesinde sivil ve tabuları yıkan çözüm arayışları',
     ],
     controversies: [
-      'Gelir adaletsizliğinin artması ve "benim memurum işini bilir" pragmatizmi eleştirisi',
-      'Anayasayı dönemsel olarak esnetme eğilimi ("Anayasayı bir kere delmekle bir şey olmaz")',
+      '24 Ocak Kararları ile ani piyasa serbestleşmesinin yol açtığı gelir adaletsizliği ve enflasyon',
+      'Körfez Savaşı’nda ABD’ye tam destek verme ve "bir koyup üç alma" yaklaşımının tartışılması',
+      '"Anayasayı bir defa delmekle bir şey olmaz" anlayışıyla anayasal teamülleri esnetme eleştirileri',
     ],
     famousQuote: 'Demokrasilerde çareler tükenmez.',
   },
@@ -906,6 +977,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1993 – 2000',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 72,
       economy: 75,
@@ -921,8 +994,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Türk Dünyası ile ilişkilerin kurumsallaşması ve Kafkasya diplomasisi',
     ],
     controversies: [
-      '1970’lerdeki Milliyetçi Cephe hükümetleri ve enflasyonist baskılar',
-      '1990’lar faili meçhuller dönemi ve Susurluk skandalı gölgesi',
+      '12 Mart ve 12 Eylül öncesi dönemlerde derin siyasi kamplaşma ve ekonomik krizleri yönetememesi',
+      '28 Şubat 1997 post-modern darbe sürecindeki kriz yönetimi ve tarafsızlık tartışmaları',
+      '1970’lerdeki Milliyetçi Cephe koalisyonlarıyla siyasi istikrarsızlığı derinleştirdiği eleştirileri',
     ],
     famousQuote: 'Dün dündür, bugün bugündür.',
   },
@@ -940,6 +1014,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2000 – 2007',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 68,
       economy: 65,
@@ -955,8 +1031,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Cumhurbaşkanlığı ödeneğinin harcanmayan kısımlarını her yıl Hazine’ye iade etmesi',
     ],
     controversies: [
-      '2001 Milli Güvenlik Kurulu toplantısında Ecevit ile yaşadığı anayasa kitapçığı geriliminin ekonomik krizi tetiklemesi',
-      'Katı bürokratik vesayet anlayışına sahip olduğu yönündeki siyasi eleştiriler',
+      '2001 ekonomik krizini tetikleyen Başbakan Ecevit ile yaşadığı meşhur anayasa kitapçığı krizi',
+      'Katı bürokratik ve yasalcı vetolarıyla yürütme organıyla sürekli kurumsal çatışma yaşaması',
+      'Atama ve kanun vetolarının kamu yönetiminde bürokratik tıkanmalara neden olduğu eleştirisi',
     ],
     famousQuote: 'Hukuk devleti ilkesi demokrasinin vazgeçilmez temel taşıdır.',
   },
@@ -974,6 +1051,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2007 – 2014',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 70,
       economy: 82,
@@ -989,8 +1068,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Gezi Parkı olaylarında uzlaşmacı ve tansiyonu düşürücü devlet dili kullanması',
     ],
     controversies: [
-      'Hükümetten gelen tartışmalı kanunları neredeyse hiç veto etmemesi eleştirisi',
-      '2007 Cumhurbaşkanlığı seçimindeki 367 krizi ve e-muhtıra kutuplaşması',
+      '2007 367 krizi ve e-muhtıra gölgesinde tartışmalı adaylık ve cumhurbaşkanlığı seçimi süreci',
+      'Gezi Parkı olayları ve 17-25 Aralık süreçlerinde aktif siyasi inisiyatif almaması eleştirileri',
+      'Görev süresi boyunca meclisten geçen tartışmalı yasaların neredeyse tamamını onaylaması',
     ],
     famousQuote: 'Demokrasi sadece sandıktan ibaret değildir; temel haklar ve özgürlükler de esastır.',
   },
@@ -1008,6 +1088,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '2014 – Günümüz (Başbakanlık: 2003 – 2014)',
     category: 'turkey',
+    subCategory: 'tr-president',
+    region: 'mediterranean',
     defaultScores: {
       military: 86,
       economy: 66,
@@ -1044,6 +1126,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'early-modern',
     yearsActive: '1520 – 1566',
     category: 'turkey',
+    subCategory: 'ottoman-sultan',
+    region: 'mediterranean',
     defaultScores: {
       military: 96,
       economy: 92,
@@ -1059,8 +1143,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Mimar Sinan ile Süleymaniye Külliyesi gibi abidevi eserlerin inşası',
     ],
     controversies: [
-      'Şehzade Mustafa ve Şehzade Bayezid’in idamı gibi trajik hanedan içi infazlar',
-      'Fransa’ya verilen kapitülasyonların sonraki yüzyıllarda yarattığı imtiyaz sorunları',
+      'Şehzade Mustafa ve Şehzade Bayezid’i idam ettirmesi sonucu hanedan içi liyakat dengesinin bozulması',
+      'Sadrazam Pargalı İbrahim Paşa’yı uykusunda boğdurtması ve saray içi güç kliklerinin yükselişi',
+      'Viyana Kuşatması’nın sonuçsuz kalması ve Safevi seferlerinin devlete getirdiği ağır mali yük',
     ],
     famousQuote: 'Halk içinde muteber bir nesne yok devlet gibi, olmaya devlet cihanda bir nefes sıhhat gibi.',
   },
@@ -1077,7 +1162,9 @@ export const INITIAL_LEADERS: Leader[] = [
     century: '19. yy',
     era: '19th',
     yearsActive: '1861 – 1865',
-    category: 'world',
+    category: 'usa',
+    subCategory: 'us-president',
+    region: 'americas',
     defaultScores: {
       military: 84,
       economy: 78,
@@ -1093,7 +1180,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'İç Savaş krizinde birliği parçalanmaktan kurtarması',
     ],
     controversies: [
-      'Savaş sırasında Habeas Corpus (keyfi tutuklama yasağı) hakkını askıya alması',
+      'İç Savaş sırasında habeas corpus güvencesini askıya alarak anayasal hakları sınırlaması',
+      'Köleliğin kaldırılmasını başlangıçta ahlaki ilkeden ziyade askeri-stratejik bir hamle olarak uygulaması',
+      'Savaş karşıtı Kuzeyli muhalif gazete ve siyasetçileri askeri mahkemelerde yargılatması',
     ],
     famousQuote: 'Halkın, halk tarafından, halk için yönetimi yeryüzünden silinmeyecektir.',
   },
@@ -1110,7 +1199,9 @@ export const INITIAL_LEADERS: Leader[] = [
     century: '20. yy',
     era: '20th',
     yearsActive: '1940 – 1945 / 1951 – 1955',
-    category: 'world',
+    category: 'uk',
+    subCategory: 'uk-pm',
+    region: 'europe',
     defaultScores: {
       military: 88,
       economy: 71,
@@ -1181,6 +1272,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'medieval',
     yearsActive: '1174 – 1193',
     category: 'world',
+    subCategory: 'world-icon',
+    region: 'world',
     defaultScores: {
       military: 94,
       economy: 80,
@@ -1196,7 +1289,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Hristiyan hacılara serbest geçiş hakkı tanıyan Ramla Antlaşması',
     ],
     controversies: [
-      'Fatımi Hilafeti’ni ilga ederken Kahire’deki dönemsel tasfiyeler',
+      'Hattin Zaferi sonrası Renaud de Châtillon ve Tapınak Şövalyeleri’nin idam edilmesi',
+      'Kudüs fethi sonrası hanedan içi toprak paylaştırmasının Eyyubi devletini hızla zayıflatması',
+      'Fatimî hilafetini tasfiye ederken Şii ulema ve kurumlarına uyguladığı sert tasfiyeler',
     ],
     famousQuote: 'Kandan sakınınız; çünkü dökülen kan asla uyumaz.',
   },
@@ -1214,6 +1309,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1982 – 1998',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 65,
       economy: 84,
@@ -1229,8 +1326,9 @@ export const INITIAL_LEADERS: Leader[] = [
       '16 yıl süren kesintisiz istikrarlı şansölyelik',
     ],
     controversies: [
-      'Birleşme sonrası Doğu eyaletlerindeki sanayi çöküşü ve işsizlik dalgası',
-      '1999 CDU gizli bağış skandalı',
+      '1999 CDU bağış ve gizli hesaplar skandalı ile siyasi itibarının sarsılması',
+      'Doğu Almanya’nın hızlı ekonomik entegrasyonunda yüksek işsizlik ve sanayi tasfiyesi faturası',
+      'Euro para birimine geçişte Alman Markı’ndan vazgeçilmesinin kamuoyunda yarattığı endişe',
     ],
     famousQuote: 'Tarihin pelerini insanın omzuna nadiren dokunur; dokunduğunda onu sımsıkı yakalamalısınız.',
   },
@@ -1248,6 +1346,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: '20th',
     yearsActive: '1969 – 1974',
     category: 'germany',
+    subCategory: 'de-chancellor',
+    region: 'europe',
     defaultScores: {
       military: 60,
       economy: 79,
@@ -1263,7 +1363,9 @@ export const INITIAL_LEADERS: Leader[] = [
       'Kniefall von Warschau (Varşova’da diz çöküş) ile tarihi ahlaki yüzleşme',
     ],
     controversies: [
-      'Yakın danışmanı Günter Guillaume’un Doğu Alman casusu (Stasi) çıkması skandalı ve istifası',
+      'Doğu Bloku ile yakınlaşma (Ostpolitik) politikasının muhafazakarlarca taviz olarak görülmesi',
+      'Özel kalem müdürü Günter Guillaume’un Doğu Alman casusu çıkması sonucu istifaya mecbur kalması',
+      'Radikaller Kararnamesi ile sol görüşlü kamu çalışanlarına uygulanan fişleme uygulamaları',
     ],
     famousQuote: 'Daha fazla demokrasiyi göze almalıyız (Wir wollen mehr Demokratie wagen).',
   },
@@ -1281,6 +1383,8 @@ export const INITIAL_LEADERS: Leader[] = [
     era: 'ancient',
     yearsActive: 'MÖ 461 – MÖ 429',
     category: 'ancient',
+    subCategory: 'ancient-greece',
+    region: 'mediterranean',
     defaultScores: {
       military: 81,
       economy: 86,
@@ -1296,9 +1400,14 @@ export const INITIAL_LEADERS: Leader[] = [
       'Tarihin ilk kapsamlı cenaze söyleviyle demokrasi felsefesini tanımlaması',
     ],
     controversies: [
-      'Delos Deniz Birliği hazinesini haksız yere Atina’nın imarında kullanması',
-      'Peloponnesos Savaşı’nı başlatarak Atina’nın veba salgınıyla çöküşüne zemin hazırlaması',
+      'Peloponez Savaşı’nı başlatarak Atina’nın Sparta karşısında felaketine zemin hazırlaması',
+      'Delos Birliği’nin ortak savunma hazinesini Atina Akropolisi inşaatında keyfi kullanması',
+      'Savaş sırasında veba salgınında halkı surlar içine toplayarak kitlesel ölümlere yol açması',
     ],
     famousQuote: 'Siyasetle ilgilenmeyen bir vatandaşa zararsız değil, işe yaramaz deriz.',
   },
+  ...ADDITIONAL_LEADERS,
+  ...OTTOMAN_SULTANS,
+  ...MONARCHS_AND_CHANCELLORS,
+  ...PARTY_LEADERS_AND_SPAIN,
 ];

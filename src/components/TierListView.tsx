@@ -101,11 +101,14 @@ export const TierListView: React.FC<TierListViewProps> = ({
             className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-300 focus:outline-none"
           >
             <option value="all">Tüm Koleksiyonlar</option>
-            <option value="turkey">🇹🇷 Türkiye & Osmanlı</option>
+            <option value="turkey">🇹🇷 Türkiye (Padişahlar, CB & Başbakanlar)</option>
+            <option value="uk">🇬🇧 Birleşik Krallık (İngiltere)</option>
+            <option value="usa">🇺🇸 Amerika Birleşik Devletleri</option>
+            <option value="spain">🇪🇸 İspanya Krallığı & Siyaseti</option>
             <option value="france">🇫🇷 Fransa</option>
             <option value="germany">🇩🇪 Almanya & Prusya</option>
             <option value="ancient">🏛️ Roma & Antik</option>
-            <option value="world">🌍 Diğer Dünya Devleri</option>
+            <option value="world">👑 Diğer Dünya Devleri</option>
           </select>
 
           {/* Era Filter */}
@@ -116,7 +119,8 @@ export const TierListView: React.FC<TierListViewProps> = ({
           >
             <option value="all">Tüm Yüzyıllar / Dönemler</option>
             <option value="ancient">Antik Çağ</option>
-            <option value="medieval">Orta Çağ</option>
+            <option value="early-medieval">Erken Orta Çağ (MS 5.-10. yy)</option>
+            <option value="medieval">Yüksek & Geç Orta Çağ</option>
             <option value="early-modern">Yeni Çağ</option>
             <option value="19th">19. Yüzyıl</option>
             <option value="20th">20. Yüzyıl</option>

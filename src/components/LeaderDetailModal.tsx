@@ -449,19 +449,21 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
             </div>
 
             {/* Controversies */}
-            <div className="p-4 rounded-xl bg-stone-950/40 border border-stone-800/80">
+            <div className="p-4 rounded-xl bg-stone-950/60 border border-rose-950/40">
               <div className="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-3">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Tarihsel Eleştiriler & Bunalımlar</span>
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>En Tartışmalı 3 Konusu (Bilgilendirme Amaçlı)</span>
               </div>
-              <ul className="space-y-2 text-xs text-stone-300">
-                {leader.controversies.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="text-rose-500 font-bold shrink-0">✕</span>
-                    <span>{item}</span>
+              <ol className="space-y-2.5 text-xs text-stone-300">
+                {leader.controversies.slice(0, 3).map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
+                    <span className="font-mono text-xs bg-rose-500/10 border border-rose-500/20 text-rose-400 font-bold px-1.5 py-0.5 rounded shrink-0">
+                      {idx + 1}
+                    </span>
+                    <span className="text-stone-300">{item}</span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Leader, UserRating } from '../types';
 import { LeaderCard } from './LeaderCard';
+import { CultureKey } from '../audio/culturalAudioEngine';
 import { Flag, Landmark, ShieldCheck, Crown, BookOpen } from 'lucide-react';
 
 interface SpecialCollectionsProps {
@@ -9,12 +10,12 @@ interface SpecialCollectionsProps {
   comparedIds: string[];
   onToggleCompare: (leader: Leader) => void;
   onSelectLeader: (leader: Leader) => void;
-  onSelectCulture?: (culture: 'turkey' | 'germany' | 'france' | 'ancient' | 'mongolia' | 'world') => void;
+  onSelectCulture?: (culture: CultureKey) => void;
 }
 
 interface CollectionDef {
   id: string;
-  culture: 'turkey' | 'germany' | 'france' | 'ancient' | 'mongolia' | 'world';
+  culture: CultureKey;
   title: string;
   subtitle: string;
   description: string;
@@ -35,13 +36,35 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
     {
       id: 'turkey-presidents',
       culture: 'turkey',
-      title: 'Türkiye Siyaseti: Cumhurbaşkanları & Devlet Adamları',
-      subtitle: 'Cumhuriyetin kuruluşundan 13. Cumhurbaşkanlığına ve Osmanlı Zirvesine',
+      title: 'Türkiye Siyaseti: CB’ler, Başbakanlar & Güncel Liderler',
+      subtitle: 'Cumhuriyetin kuruluşundan 13. CB’ye, Erbakan, Ecevit, Menderes, İmamoğlu ve Türkeş',
       description:
-        'Mustafa Kemal Atatürk, İsmet İnönü, Celal Bayar, Turgut Özal, Süleyman Demirel, Ahmet Necdet Sezer, Abdullah Gül, Recep Tayyip Erdoğan ve diğer tüm cumhurbaşkanları ile Fatih ve Kanuni.',
+        'Mustafa Kemal Atatürk, İsmet İnönü, Turgut Özal, Süleyman Demirel, Recep Tayyip Erdoğan; efsane başbakanlar Necmettin Erbakan, Bülent Ecevit, Adnan Menderes, Tansu Çiller; güncel liderler Ekrem İmamoğlu, Mansur Yavaş, Kemal Kılıçdaroğlu, Devlet Bahçeli.',
       flag: '🇹🇷',
       icon: Landmark,
       filterFn: (l) => l.category === 'turkey' || l.countryCode === 'TR',
+    },
+    {
+      id: 'uk-premiers',
+      culture: 'uk',
+      title: 'Birleşik Krallık: 10 Downing Street Başbakanları',
+      subtitle: 'Son 25 yılın tüm başbakanları, Thatcher, Churchill & Tudor Çağı',
+      description:
+        'Keir Starmer, Rishi Sunak, Liz Truss, Boris Johnson, Theresa May, David Cameron, Gordon Brown, Tony Blair; efsanevi Margaret Thatcher ("Demir Leydi"), Winston Churchill ve Kraliçe I. Elizabeth.',
+      flag: '🇬🇧',
+      icon: Crown,
+      filterFn: (l) => l.category === 'uk' || l.countryCode === 'GB',
+    },
+    {
+      id: 'usa-presidents',
+      culture: 'usa',
+      title: 'Amerika Birleşik Devletleri: Beyaz Saray Başkanları',
+      subtitle: 'Kurucu Babalardan Soğuk Savaş ve Modern Süper Güce',
+      description:
+        'Donald Trump, Joe Biden, Barack Obama, George W. Bush, Bill Clinton, Ronald Reagan, John F. Kennedy (JFK), Franklin D. Roosevelt (FDR), Abraham Lincoln ve George Washington.',
+      flag: '🇺🇸',
+      icon: ShieldCheck,
+      filterFn: (l) => l.category === 'usa' || l.countryCode === 'US',
     },
     {
       id: 'france-history',
@@ -64,6 +87,17 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
       flag: '🇩🇪',
       icon: ShieldCheck,
       filterFn: (l) => l.category === 'germany' || l.countryCode === 'DE',
+    },
+    {
+      id: 'spain-monarchy',
+      culture: 'spain',
+      title: 'İspanya: Küresel Monarşi & Modern Siyaset',
+      subtitle: 'Katolik Krallardan 4 Büyük Partinin Liderlerine',
+      description:
+        'I. İsabella’nın birleşik İspanya’sı, II. Felipe’nin cihan imparatorluğu, Pedro Sánchez, Alberto Feijóo, Santiago Abascal ve Yolanda Díaz.',
+      flag: '🇪🇸',
+      icon: Crown,
+      filterFn: (l) => l.category === 'spain' || l.countryCode === 'ES',
     },
     {
       id: 'ancient-world',
@@ -90,7 +124,7 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
   return (
     <div className="space-y-8">
       {/* Tab Switcher Strip */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {collections.map((col) => {
           const isActive = col.id === activeCollectionId;
           const count = leaders.filter(col.filterFn).length;

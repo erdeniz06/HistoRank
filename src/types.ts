@@ -17,12 +17,13 @@ export interface DimensionInfo {
 
 export type EraKey =
   | 'all'
-  | 'ancient'
-  | 'medieval'
-  | 'early-modern'
-  | '19th'
-  | '20th'
-  | '21st';
+  | 'ancient'        // MÖ 3000 – MS 500
+  | 'early-medieval'  // MS 5. yy – 10. yy (Erken Orta Çağ)
+  | 'medieval'        // 11. yy – 15. yy (Yüksek & Geç Orta Çağ)
+  | 'early-modern'   // 16. yy – 18. yy (Yeni Çağ)
+  | '19th'           // 19. Yüzyıl (1801 - 1900)
+  | '20th'           // 20. Yüzyıl (1901 - 2000)
+  | '21st';          // 21. Yüzyıl & Günümüz
 
 export interface EraInfo {
   key: EraKey;
@@ -37,7 +38,39 @@ export type LeaderCategory =
   | 'turkey'
   | 'france'
   | 'germany'
+  | 'uk'
+  | 'usa'
+  | 'spain'
   | 'ancient';
+
+export type GeographicRegion =
+  | 'all'
+  | 'europe'
+  | 'asia'
+  | 'americas'
+  | 'mediterranean'
+  | 'world';
+
+export type SubCategoryKey =
+  | 'all'
+  | 'ottoman-sultan'
+  | 'tr-president'
+  | 'tr-pm'
+  | 'tr-party'
+  | 'uk-monarch'
+  | 'uk-pm'
+  | 'uk-party'
+  | 'us-president'
+  | 'us-party'
+  | 'de-chancellor'
+  | 'de-party'
+  | 'fr-leader'
+  | 'fr-party'
+  | 'es-monarch'
+  | 'es-party'
+  | 'ancient-rome'
+  | 'ancient-greece'
+  | 'world-icon';
 
 export interface LeaderScores {
   military: number;
@@ -60,7 +93,9 @@ export interface Leader {
   era: EraKey;
   yearsActive: string;
   avatarUrl?: string;
-  category: 'world' | 'turkey' | 'france' | 'germany' | 'ancient' | 'custom';
+  category: 'world' | 'turkey' | 'france' | 'germany' | 'uk' | 'usa' | 'spain' | 'ancient' | 'custom';
+  subCategory?: SubCategoryKey;
+  region?: GeographicRegion;
   defaultScores: LeaderScores;
   summary: string;
   keyAchievements: string[];

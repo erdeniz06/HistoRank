@@ -18,6 +18,7 @@ import { TierListView } from './components/TierListView';
 import { SpecialCollections } from './components/SpecialCollections';
 import { AddLeaderModal } from './components/AddLeaderModal';
 import { GiantsView } from './components/GiantsView';
+import { CountryPortalView } from './components/CountryPortalView';
 import { AudioPlayerBar } from './components/AudioPlayerBar';
 import { culturalAudio, CultureKey } from './audio/culturalAudioEngine';
 import {
@@ -34,8 +35,8 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  // Navigation State (defaults to 'giants' as requested by user!)
-  const [activeTab, setActiveTab] = useState<NavTab>('giants');
+  // Navigation State (defaults to 'portals' for clean country selection hub!)
+  const [activeTab, setActiveTab] = useState<NavTab>('portals');
 
   // Culture & Procedural AI Audio State
   const [currentCulture, setCurrentCulture] = useState<CultureKey>('turkey');
@@ -144,6 +145,8 @@ export default function App() {
       // Category
       if (selectedCategory !== 'all') {
         if (selectedCategory === 'turkey' && leader.category !== 'turkey' && leader.countryCode !== 'TR') return false;
+        if (selectedCategory === 'uk' && leader.category !== 'uk' && leader.countryCode !== 'GB') return false;
+        if (selectedCategory === 'usa' && leader.category !== 'usa' && leader.countryCode !== 'US') return false;
         if (selectedCategory === 'france' && leader.category !== 'france' && leader.countryCode !== 'FR') return false;
         if (selectedCategory === 'germany' && leader.category !== 'germany' && leader.countryCode !== 'DE') return false;
         if (selectedCategory === 'ancient' && leader.category !== 'ancient' && leader.era !== 'ancient') return false;
@@ -176,6 +179,10 @@ export default function App() {
     if (leader) {
       if (leader.category === 'turkey' || leader.countryCode === 'TR') {
         handleSelectCulture('turkey');
+      } else if (leader.category === 'uk' || leader.countryCode === 'GB') {
+        handleSelectCulture('uk');
+      } else if (leader.category === 'usa' || leader.countryCode === 'US') {
+        handleSelectCulture('usa');
       } else if (leader.category === 'germany' || leader.countryCode === 'DE') {
         handleSelectCulture('germany');
       } else if (leader.category === 'france' || leader.countryCode === 'FR') {
@@ -214,7 +221,19 @@ export default function App() {
 
       {/* Main Body */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
-        {/* TAB 0: DEWLER (THE GIANTS) - Real-time Crowdsourced Clash */}
+        {/* TAB 0: COUNTRY & ERA PORTALS (Sade, Medeniyet Odaklı Atlas) */}
+        {activeTab === 'portals' && (
+          <CountryPortalView
+            allLeaders={leaders}
+            userRatings={userRatings}
+            comparedLeaders={comparedLeaders}
+            onToggleCompare={handleToggleCompare}
+            onSelectLeader={handleSelectLeaderWithCulture}
+            onSelectCulture={handleSelectCulture}
+          />
+        )}
+
+        {/* TAB 1: DEWLER (THE GIANTS) - Real-time Crowdsourced Clash */}
         {activeTab === 'giants' && (
           <GiantsView
             allLeaders={leaders}
@@ -326,6 +345,9 @@ export default function App() {
                       const cat = e.target.value;
                       setSelectedCategory(cat);
                       if (cat === 'turkey') handleSelectCulture('turkey');
+                      else if (cat === 'uk') handleSelectCulture('uk');
+                      else if (cat === 'usa') handleSelectCulture('usa');
+                      else if (cat === 'spain') handleSelectCulture('spain');
                       else if (cat === 'france') handleSelectCulture('france');
                       else if (cat === 'germany') handleSelectCulture('germany');
                       else if (cat === 'ancient') handleSelectCulture('ancient');
@@ -334,9 +356,12 @@ export default function App() {
                     className="w-full px-3 py-2 text-xs bg-stone-950 border border-stone-800 rounded-xl text-stone-300 focus:outline-none focus:border-amber-500 cursor-pointer"
                   >
                     <option value="all">🌍 Tüm Ülkeler & Coğrafyalar</option>
-                    <option value="turkey">🇹🇷 Türkiye (13 CB & Osmanlı)</option>
+                    <option value="turkey">🇹🇷 Türkiye (Padişahlar, CB’ler, Başbakanlar & Liderler)</option>
+                    <option value="uk">🇬🇧 Birleşik Krallık (Krallar, Başbakanlar & Partiler)</option>
+                    <option value="usa">🇺🇸 Amerika Birleşik Devletleri (Başkanlar & Kongre)</option>
+                    <option value="spain">🇪🇸 İspanya (Monarklar & 4 Büyük Parti)</option>
                     <option value="france">🇫🇷 Fransa (İhtilal & 5. Cumhuriyet)</option>
-                    <option value="germany">🇩🇪 Almanya & Prusya</option>
+                    <option value="germany">🇩🇪 Almanya (Şansölyeler & Partiler)</option>
                     <option value="ancient">🏛️ Roma & Antik Dünya</option>
                     <option value="world">👑 Diğer Dünya İmparatorlukları</option>
                   </select>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
-export type NavTab = 'giants' | 'catalog' | 'compare' | 'tierlist' | 'collections';
+export type NavTab = 'portals' | 'giants' | 'catalog' | 'compare' | 'tierlist' | 'collections';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-8 px-4 sm:px-6 py-3.5">
         {/* Zone 1: Brand title, one line wordmark */}
         <button
-          onClick={() => onSelectTab('giants')}
+          onClick={() => onSelectTab('portals')}
           className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
         >
           <span className="font-cinzel text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
@@ -32,8 +32,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           </span>
         </button>
 
-        {/* Zone 2: 5 nav links, single-line text links */}
+        {/* Zone 2: Nav links, single-line text links */}
         <nav className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium overflow-x-auto no-scrollbar py-1">
+          <button
+            onClick={() => onSelectTab('portals')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 flex items-center gap-1.5 ${
+              activeTab === 'portals'
+                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            <span>Ülke & Dönem Portalları</span>
+            <span className="px-1.5 py-0.2 text-[9px] font-mono bg-emerald-500/20 text-emerald-400 font-bold rounded">
+              Yeni
+            </span>
+          </button>
+
           <button
             onClick={() => onSelectTab('giants')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 flex items-center gap-1.5 ${
@@ -56,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            Lider Kataloğu
+            Tüm Katalog
           </button>
 
           <button

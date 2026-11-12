@@ -29,6 +29,7 @@ import {
   Crown,
   Hourglass,
   X,
+  AlertTriangle,
 } from 'lucide-react';
 
 interface GiantsViewProps {
@@ -221,16 +222,34 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               Atatürk vs Sezar
             </button>
             <button
+              onClick={() => { setDuelFighter1Id('winston-churchill'); setDuelFighter2Id('margaret-thatcher'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Churchill vs Thatcher
+            </button>
+            <button
+              onClick={() => { setDuelFighter1Id('donald-trump'); setDuelFighter2Id('barack-obama'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Trump vs Obama
+            </button>
+            <button
+              onClick={() => { setDuelFighter1Id('necmettin-erbakan'); setDuelFighter2Id('bulent-ecevit'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Erbakan vs Ecevit
+            </button>
+            <button
               onClick={() => { setDuelFighter1Id('napoleon'); setDuelFighter2Id('alexander-the-great'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
               Napolyon vs İskender
             </button>
             <button
-              onClick={() => { setDuelFighter1Id('fatih-mehmed'); setDuelFighter2Id('otto-von-bismarck'); }}
+              onClick={() => { setDuelFighter1Id('george-washington'); setDuelFighter2Id('abraham-lincoln'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
-              Fatih vs Bismarck
+              Washington vs Lincoln
             </button>
           </div>
         </div>
@@ -290,6 +309,21 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                 </div>
               </div>
             </div>
+
+            {fighter1.controversies && fighter1.controversies.length > 0 && (
+              <div className="bg-stone-900/80 p-2.5 rounded-lg border border-amber-950/40 text-[11px] space-y-1">
+                <div className="flex items-center gap-1 font-semibold text-rose-400">
+                  <AlertTriangle className="w-3 h-3 text-rose-400" />
+                  <span>En Tartışmalı 3 Konusu:</span>
+                </div>
+                {fighter1.controversies.slice(0, 3).map((c, idx) => (
+                  <p key={idx} className="text-stone-300 leading-snug line-clamp-1">
+                    <span className="font-mono text-rose-500 font-bold mr-1">{idx + 1}.</span>
+                    {c}
+                  </p>
+                ))}
+              </div>
+            )}
 
             <button
               onClick={() => handleOpenVote(fighter1)}
@@ -363,6 +397,21 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                 </div>
               </div>
             </div>
+
+            {fighter2.controversies && fighter2.controversies.length > 0 && (
+              <div className="bg-stone-900/80 p-2.5 rounded-lg border border-cyan-950/40 text-[11px] space-y-1">
+                <div className="flex items-center gap-1 font-semibold text-rose-400">
+                  <AlertTriangle className="w-3 h-3 text-rose-400" />
+                  <span>En Tartışmalı 3 Konusu:</span>
+                </div>
+                {fighter2.controversies.slice(0, 3).map((c, idx) => (
+                  <p key={idx} className="text-stone-300 leading-snug line-clamp-1">
+                    <span className="font-mono text-rose-500 font-bold mr-1">{idx + 1}.</span>
+                    {c}
+                  </p>
+                ))}
+              </div>
+            )}
 
             <button
               onClick={() => handleOpenVote(fighter2)}
@@ -555,6 +604,24 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                       </div>
                     ))}
                   </div>
+
+                  {/* En Tartışmalı 3 Konusu (Bilgilendirme Amaçlı) */}
+                  {leader.controversies && leader.controversies.length > 0 && (
+                    <div className="mb-4 bg-stone-950/70 p-2.5 rounded-xl border border-rose-950/40 text-[11px]">
+                      <div className="flex items-center gap-1.5 font-semibold text-rose-400 mb-1.5">
+                        <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                        <span>En Tartışmalı 3 Konusu:</span>
+                      </div>
+                      <ol className="space-y-1">
+                        {leader.controversies.slice(0, 3).map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-1.5 leading-snug">
+                            <span className="font-mono text-rose-500 font-bold shrink-0">{idx + 1}.</span>
+                            <span className="text-stone-300 line-clamp-2">{item}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Actions */}

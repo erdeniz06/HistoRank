@@ -2,7 +2,7 @@ import React from 'react';
 import { Leader, UserRating } from '../types';
 import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
-import { BarChart3, Check, Plus, Star } from 'lucide-react';
+import { AlertTriangle, BarChart3, Check, Plus, Star } from 'lucide-react';
 
 interface LeaderCardProps {
   leader: Leader;
@@ -113,6 +113,24 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
             );
           })}
         </div>
+
+        {/* En Tartışmalı 3 Konusu - Bilgilendirme Amaçlı */}
+        {leader.controversies && leader.controversies.length > 0 && (
+          <div className="pt-3 border-t border-stone-800/80 mb-3 bg-stone-950/40 p-2.5 rounded-lg border border-rose-950/30">
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-rose-400 mb-2">
+              <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+              <span>En Tartışmalı 3 Konusu (Bilgilendirme)</span>
+            </div>
+            <ol className="space-y-1.5 text-[11px]">
+              {leader.controversies.slice(0, 3).map((item, idx) => (
+                <li key={idx} className="flex items-start gap-1.5 leading-snug">
+                  <span className="font-mono text-rose-500 font-bold shrink-0">{idx + 1}.</span>
+                  <span className="text-stone-300 line-clamp-2">{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>
 
       {/* Card Footer: Overall Score + Compare Button */}
