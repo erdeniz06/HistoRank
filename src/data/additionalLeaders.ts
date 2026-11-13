@@ -369,7 +369,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1996 – 1997 (Başbakanlık)',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 75,
       economy: 86,
@@ -405,7 +406,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1974 / 1977 / 1978 – 1979 / 1999 – 2002',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 89,
       economy: 68,
@@ -441,7 +443,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1950 – 1960',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 72,
       economy: 82,
@@ -476,7 +479,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1993 – 1996',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 82,
       economy: 60,
@@ -511,7 +515,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1991 / 1996 / 1997 – 1999',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 68,
@@ -546,7 +551,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1965 – 1997',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 84,
       economy: 67,
@@ -581,7 +587,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '2010 – 2023',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 60,
       economy: 72,
@@ -616,7 +623,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1997 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 77,
       economy: 66,
@@ -651,7 +659,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '2019 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 60,
       economy: 79,
@@ -686,7 +695,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '2019 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 60,
       economy: 85,
@@ -721,7 +731,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '1996 – 1997 / 2017 – 2024',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 68,
@@ -755,7 +766,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '2009 – 2016',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 68,
       economy: 75,
@@ -790,7 +802,8 @@ export const ADDITIONAL_LEADERS: Leader[] = [
     yearsActive: '2002 – 2018',
     category: 'turkey',
     subCategory: 'tr-pm',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 82,

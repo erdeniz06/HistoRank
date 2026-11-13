@@ -2,7 +2,7 @@ import React from 'react';
 import { Leader, UserRating } from '../types';
 import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
-import { AlertTriangle, BarChart3, Check, Plus, Star } from 'lucide-react';
+import { Check, Plus } from 'lucide-react';
 
 interface LeaderCardProps {
   leader: Leader;
@@ -27,105 +27,79 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   return (
     <div
       onClick={() => onSelect(leader)}
-      className="group relative flex flex-col justify-between p-5 rounded-xl bg-stone-900/70 border border-stone-800 hover:border-amber-700/60 transition-all duration-200 cursor-pointer hover:shadow-xl hover:shadow-black/40"
+      className="group flex flex-col justify-between p-5 rounded-xl bg-stone-900/60 border border-stone-800/90 hover:border-amber-600/50 hover:bg-stone-900 transition-all duration-200 cursor-pointer"
     >
       <div>
-        {/* Top Header Row: Country Flag + Era / Century metadata (NO PILLS, clean text) */}
-        <div className="flex items-center justify-between text-xs text-stone-400 mb-2.5">
-          <div className="flex items-center gap-1.5 font-medium">
-            <span className="text-base">{leader.flag}</span>
-            <span>{leader.country}</span>
+        {/* Header Metadata */}
+        <div className="flex items-center justify-between text-xs text-stone-400 mb-3">
+          <div className="flex items-center gap-1.5 min-w-0 truncate">
+            <span className="text-base shrink-0">{leader.flag}</span>
+            <span className="font-medium text-stone-300 truncate">{leader.country}</span>
             <span aria-hidden="true" className="text-stone-600">·</span>
-            <span>{leader.century}</span>
+            <span className="shrink-0">{leader.century}</span>
           </div>
 
-          {/* Tier indicator: Clean typographic stamp */}
-          <div
-            className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold tracking-wider uppercase"
-            style={{
-              backgroundColor: tier.bgColor,
-              color: tier.color,
-              border: `1px solid ${tier.borderColor}`,
-            }}
+          <span
+            className="text-[11px] font-mono font-bold tracking-wider shrink-0 ml-2"
+            style={{ color: tier.color }}
           >
-            <span>{tier.tier}-KATEGORİ</span>
-          </div>
+            {tier.tier} · {overallScore}
+          </span>
         </div>
 
-        {/* Leader Portrait / Avatar + Name Lockup */}
-        <div className="flex items-start gap-3.5 mb-3.5">
-          <div className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-stone-800 border border-stone-700/80">
-            {leader.avatarUrl ? (
-              <img
-                src={leader.avatarUrl}
-                alt={leader.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-950 text-stone-400 font-cinzel text-xl font-bold">
-                {leader.name.charAt(0)}
-              </div>
+        {/* Name & Title */}
+        <div className="mb-2.5">
+          <h3 className="text-base font-bold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
+            {leader.name}
+          </h3>
+          <p className="text-xs text-stone-400 line-clamp-1 mt-0.5">
+            {leader.title}
+          </p>
+          <div className="flex items-center gap-2 text-[11px] text-stone-500 mt-1">
+            <span>{leader.yearsActive}</span>
+            {hasUserScore && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span className="text-amber-400 font-medium">Puanlandı</span>
+              </>
+            )}
+            {leader.isCustom && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span className="text-cyan-400">Özel</span>
+              </>
             )}
           </div>
-
-          <div className="flex-1 min-w-0">
-            <h3 className="text-base font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
-              {leader.name}
-            </h3>
-            <p className="text-xs text-stone-400 line-clamp-1 mt-0.5">
-              {leader.title}
-            </p>
-            <div className="flex items-center gap-2 text-[11px] text-stone-500 mt-1">
-              <span>{leader.yearsActive}</span>
-              {hasUserScore && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span className="text-amber-400/90 font-medium">Özel Puanınız</span>
-                </>
-              )}
-              {leader.isCustom && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span className="text-cyan-400">Özel Eklenen</span>
-                </>
-              )}
-            </div>
-          </div>
         </div>
 
-        {/* Leader Summary preview */}
-        <p className="text-xs text-stone-400 line-clamp-2 leading-relaxed mb-4">
+        {/* Summary */}
+        <p className="text-xs text-stone-400 line-clamp-2 leading-relaxed mb-3.5">
           {leader.summary}
         </p>
 
-        {/* 6 Dimension Mini Bar Sparklines */}
-        <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 pt-3 border-t border-stone-800/80 mb-4">
-          {DIMENSIONS.map((dim) => {
-            const val = scores[dim.key];
-            return (
-              <div key={dim.key} className="flex items-center justify-between text-[11px]">
-                <span className="text-stone-400 truncate">{dim.shortLabel}</span>
-                <span className="font-mono tabular-nums font-semibold text-stone-300 ml-1">
-                  {val}
-                </span>
-              </div>
-            );
-          })}
+        {/* Compact 6-Dimension Scores */}
+        <div className="grid grid-cols-3 gap-x-3 gap-y-1 py-2.5 border-t border-stone-800/70 text-[11px]">
+          {DIMENSIONS.map((dim) => (
+            <div key={dim.key} className="flex items-center justify-between">
+              <span className="text-stone-500 truncate">{dim.shortLabel}</span>
+              <span className="font-mono tabular-nums font-semibold text-stone-300 ml-1">
+                {scores[dim.key]}
+              </span>
+            </div>
+          ))}
         </div>
 
-        {/* En Tartışmalı 3 Konusu - Bilgilendirme Amaçlı */}
+        {/* Clean 3 Controversies List */}
         {leader.controversies && leader.controversies.length > 0 && (
-          <div className="pt-3 border-t border-stone-800/80 mb-3 bg-stone-950/40 p-2.5 rounded-lg border border-rose-950/30">
-            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-rose-400 mb-2">
-              <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-              <span>En Tartışmalı 3 Konusu (Bilgilendirme)</span>
+          <div className="pt-2.5 border-t border-stone-800/70 mb-3">
+            <div className="text-[10px] font-semibold uppercase tracking-wider text-rose-400/90 mb-1.5">
+              Tartışmalı 3 Konu
             </div>
-            <ol className="space-y-1.5 text-[11px]">
+            <ol className="space-y-1 text-[11px]">
               {leader.controversies.slice(0, 3).map((item, idx) => (
                 <li key={idx} className="flex items-start gap-1.5 leading-snug">
-                  <span className="font-mono text-rose-500 font-bold shrink-0">{idx + 1}.</span>
-                  <span className="text-stone-300 line-clamp-2">{item}</span>
+                  <span className="font-mono text-rose-500/80 font-bold shrink-0">{idx + 1}.</span>
+                  <span className="text-stone-400 line-clamp-1">{item}</span>
                 </li>
               ))}
             </ol>
@@ -133,18 +107,11 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
         )}
       </div>
 
-      {/* Card Footer: Overall Score + Compare Button */}
-      <div className="flex items-center justify-between pt-3 border-t border-stone-800/80">
-        <div className="flex items-baseline gap-1.5">
-          <span className="text-[11px] text-stone-400 uppercase tracking-wider">Genel Skor:</span>
-          <span
-            className="text-xl font-bold font-mono tabular-nums"
-            style={{ color: tier.color }}
-          >
-            {overallScore}
-          </span>
-          <span className="text-xs text-stone-500">/100</span>
-        </div>
+      {/* Footer */}
+      <div className="flex items-center justify-between pt-3 border-t border-stone-800/70">
+        <span className="text-xs text-stone-400 group-hover:text-amber-400 transition-colors font-medium">
+          Puanla & İncele →
+        </span>
 
         <button
           type="button"
@@ -152,10 +119,10 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
             e.stopPropagation();
             onToggleCompare(leader);
           }}
-          className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-md transition-colors ${
+          className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
             isCompared
-              ? 'bg-amber-600 text-stone-950 font-semibold'
-              : 'bg-stone-800 text-stone-300 hover:bg-stone-700 hover:text-white'
+              ? 'bg-amber-500 text-stone-950 font-semibold'
+              : 'bg-stone-800/80 text-stone-300 hover:bg-stone-700 hover:text-white'
           }`}
           title={isCompared ? 'Kıyaslamadan çıkar' : 'Kıyaslamaya ekle'}
         >

@@ -18,8 +18,8 @@ export interface DimensionInfo {
 export type EraKey =
   | 'all'
   | 'ancient'        // MÖ 3000 – MS 500
-  | 'early-medieval'  // MS 5. yy – 10. yy (Erken Orta Çağ)
-  | 'medieval'        // 11. yy – 15. yy (Yüksek & Geç Orta Çağ)
+  | 'early-medieval' // MS 5. yy – 10. yy (Erken Orta Çağ)
+  | 'medieval'       // 11. yy – 15. yy (Yüksek & Geç Orta Çağ)
   | 'early-modern'   // 16. yy – 18. yy (Yeni Çağ)
   | '19th'           // 19. Yüzyıl (1801 - 1900)
   | '20th'           // 20. Yüzyıl (1901 - 2000)
@@ -34,28 +34,35 @@ export interface EraInfo {
 
 export type LeaderCategory =
   | 'all'
-  | 'world'
   | 'turkey'
   | 'france'
   | 'germany'
   | 'uk'
   | 'usa'
   | 'spain'
+  | 'belgium'
+  | 'netherlands'
+  | 'italy'
+  | 'poland'
+  | 'russia'
+  | 'china'
+  | 'cuba'
+  | 'vietnam'
+  | 'yugoslavia'
+  | 'mongolia'
+  | 'egypt'
   | 'ancient';
 
-export type GeographicRegion =
-  | 'all'
-  | 'europe'
-  | 'asia'
-  | 'americas'
-  | 'mediterranean'
-  | 'world';
+// Strictly Europe, Asia, Americas as requested
+export type GeographicRegion = 'all' | 'europe' | 'asia' | 'americas';
 
 export type SubCategoryKey =
   | 'all'
+  | 'turkic-seljuk'
   | 'ottoman-sultan'
   | 'tr-president'
   | 'tr-pm'
+  | 'tr-minister'
   | 'tr-party'
   | 'uk-monarch'
   | 'uk-pm'
@@ -68,9 +75,20 @@ export type SubCategoryKey =
   | 'fr-party'
   | 'es-monarch'
   | 'es-party'
+  | 'be-party'
+  | 'nl-party'
+  | 'it-party'
+  | 'pl-party'
+  | 'ru-leader'
+  | 'ussr-leader'
+  | 'cn-leader'
+  | 'cu-leader'
+  | 'vn-leader'
+  | 'yu-leader'
+  | 'mn-leader'
+  | 'eg-leader'
   | 'ancient-rome'
-  | 'ancient-greece'
-  | 'world-icon';
+  | 'ancient-greece';
 
 export interface LeaderScores {
   military: number;
@@ -92,10 +110,29 @@ export interface Leader {
   century: string;
   era: EraKey;
   yearsActive: string;
-  avatarUrl?: string;
-  category: 'world' | 'turkey' | 'france' | 'germany' | 'uk' | 'usa' | 'spain' | 'ancient' | 'custom';
+  category:
+    | 'turkey'
+    | 'france'
+    | 'germany'
+    | 'uk'
+    | 'usa'
+    | 'spain'
+    | 'belgium'
+    | 'netherlands'
+    | 'italy'
+    | 'poland'
+    | 'russia'
+    | 'china'
+    | 'cuba'
+    | 'vietnam'
+    | 'yugoslavia'
+    | 'mongolia'
+    | 'egypt'
+    | 'ancient'
+    | 'custom';
   subCategory?: SubCategoryKey;
   region?: GeographicRegion;
+  regions?: ('europe' | 'asia' | 'americas')[];
   defaultScores: LeaderScores;
   summary: string;
   keyAchievements: string[];

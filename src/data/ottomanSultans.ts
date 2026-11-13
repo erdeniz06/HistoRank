@@ -20,7 +20,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1299 – 1326',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 91, economy: 76, societal: 82, diplomacy: 84, leadership: 94, legacy: 99 },
     summary: 'Söğüt ve Domaniç havzasında 600 yılı aşkın sürecek cihan imparatorluğunun temellerini atan, aşiretten beyliğe geçişi sağlayan kurucu lider.',
     keyAchievements: [
@@ -50,7 +51,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1326 – 1362',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 90, economy: 84, societal: 88, diplomacy: 85, leadership: 89, legacy: 95 },
     summary: 'Bursa’yı fethedip başkent yapan, ilk düzenli orduyu (Yaya ve Müsellem), ilk medreseyi ve divan teşkilatını kurarak aşireti gerçek bir devlete dönüştüren padişah.',
     keyAchievements: [
@@ -79,7 +81,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1362 – 1389',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 94, economy: 83, societal: 86, diplomacy: 88, leadership: 93, legacy: 94 },
     summary: 'Edirne’yi fethedip başkent yapan, Yeniçeri Ocağı’nı ve Devşirme sistemini kuran, Sırpsındığı ve I. Kosova zaferleriyle Balkanlar’ı Türk yurdu haline getiren hükümdar.',
     keyAchievements: [
@@ -108,7 +111,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1389 – 1402',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 92, economy: 78, societal: 76, diplomacy: 71, leadership: 85, legacy: 86 },
     summary: 'Yıldırım hızındaki seferleriyle Anadolu Türk birliğini ilk kez geniş ölçüde sağlayan, Niğbolu’da Avrupa şövalyelerini yok eden ancak Ankara Savaşı’nda Timur’a yenilen hükümdar.',
     keyAchievements: [
@@ -137,7 +141,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1413 – 1421',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 87, economy: 81, societal: 85, diplomacy: 91, leadership: 90, legacy: 93 },
     summary: '11 yıl süren Fetret Devri kardeş kavgalarını sona erdirerek parçalanmanın eşiğindeki Osmanlı Devleti’ni yeniden ayağa kaldıran diplomat hükümdar.',
     keyAchievements: [
@@ -166,7 +171,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1421 – 1444, 1446 – 1451',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 93, economy: 83, societal: 87, diplomacy: 89, leadership: 90, legacy: 92 },
     summary: 'Tahtı kendi rızasıyla 12 yaşındaki oğlu Fatih’e bırakacak kadar derviş ruhlu, ancak Haçlı tehlikesinde geri dönerek Varna ve II. Kosova zaferleriyle Balkanlar’daki Türk varlığını perçinleyen lider.',
     keyAchievements: [
@@ -197,7 +203,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1481 – 1512',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 78, economy: 85, societal: 89, diplomacy: 84, leadership: 79, legacy: 85 },
     summary: 'İspanya’dan sürülen yüz binlerce Sefarad Yahudisi’ni kurtarıp imparatorluğa yerleştiren, Edirne Darüşşifası’nda müzikle tedavi uygulatan, ancak Cem Sultan kriziyle eli kolu bağlanan barışçı sultan.',
     keyAchievements: [
@@ -226,7 +233,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1512 – 1520',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 98, economy: 95, societal: 76, diplomacy: 82, leadership: 96, legacy: 97 },
     summary: '8 yıllık saltanatına 80 yıllık fetih sığdıran, Çaldıran ve Mercidabık zaferleriyle Memlük Devleti’ni yıkarak Hilafeti Osmanlı’ya getiren, devlet hazinesini mühürleyen kudret timsali.',
     keyAchievements: [
@@ -258,7 +266,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1566 – 1574',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 79, economy: 83, societal: 85, diplomacy: 86, leadership: 78, legacy: 86 },
     summary: 'Devlet işlerini dahi Sadrazam Sokollu Mehmed Paşa’ya emanet eden, sefere bizzat çıkmayan ilk padişah olmasına rağmen Kıbrıs’ı fetheden ve Mimar Sinan’a Selimiye Camii’ni yaptıran sultan.',
     keyAchievements: [
@@ -287,7 +296,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1574 – 1595',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 78, economy: 70, societal: 74, diplomacy: 80, leadership: 73, legacy: 77 },
     summary: 'İmparatorluğun doğuda Hazar Denizi’ne kadar en geniş sınırlarına ulaştığı dönemi yöneten, Takiyüddin’in rasathanesini kurdurup ardından yıktıran, harem nüfuzunun arttığı saltanat.',
     keyAchievements: [
@@ -316,7 +326,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1595 – 1603',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 82, economy: 71, societal: 72, diplomacy: 75, leadership: 78, legacy: 76 },
     summary: 'Uzun bir aradan sonra ordunun başında bizzat sefere çıkarak Haçova Meydan Muharebesi’ni kazanan ve Eğri Kalesi’ni alan, ancak 19 kardeşini birden idam ettiren padişah.',
     keyAchievements: [
@@ -345,7 +356,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1603 – 1617',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 77, economy: 76, societal: 85, diplomacy: 81, leadership: 84, legacy: 89 },
     summary: 'Kardeş katlini önlemek için "Ekber ve Erşed" (En yaşlı ve olgun) veraset sistemini getiren, İstanbul’un incisi Sultanahmet Camii’ni (Mavi Cami) inşa ettiren dindar padişah.',
     keyAchievements: [
@@ -374,7 +386,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1617 – 1618, 1622 – 1623',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 52, economy: 55, societal: 56, diplomacy: 58, leadership: 50, legacy: 54 },
     summary: 'Kafes hayatı ve ölüm korkusu nedeniyle akli dengesi bozulan, iki kez tahta çıkarılıp iki kez akıl sağlığı yetersizliğiyle indirilen trajik hükümdar.',
     keyAchievements: [
@@ -401,7 +414,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1618 – 1622',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 79, economy: 74, societal: 88, diplomacy: 76, leadership: 85, legacy: 88 },
     summary: 'Bozulan Yeniçeri Ocağı’nı kaldırmayı, başkenti Anadolu’ya taşımayı ve saray dışından evlenerek harem nüfuzunu kırmayı planlayan, ancak yeniçerilerce Yedikule zindanlarında katledilen ilk devrimci sultan.',
     keyAchievements: [
@@ -430,7 +444,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1623 – 1640',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 96, economy: 83, societal: 78, diplomacy: 85, leadership: 97, legacy: 92 },
     summary: 'Anarşi ve isyanları demir yumrukla ezen, tütün, içki ve gece sokağa çıkma yasaklarıyla asayişi sağlayan, Revan ve Bağdat’ı fethederek Kasr-ı Şirin Antlaşması’yla bugünkü Türkiye-İran sınırını çizen kudretli padişah.',
     keyAchievements: [
@@ -460,7 +475,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1640 – 1648',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 68, economy: 58, societal: 62, diplomacy: 71, leadership: 56, legacy: 62 },
     summary: 'Kardeşi IV. Murad’ın korkusuyla kafeste geçirdiği yıllar sonrası tahta çıkan, Girit Seferi’ni başlatan ancak lüks saray harcamaları ve dengesizliği sonucu tahttan indirilip boğdurulan sultan.',
     keyAchievements: [
@@ -488,7 +504,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1648 – 1687',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 78, economy: 75, societal: 76, diplomacy: 74, leadership: 72, legacy: 75 },
     summary: 'Kanuni’den sonra en uzun süre (39 yıl) tahtta kalan, Köprülüler devriyle devleti şaha kaldıran ancak 1683 II. Viyana Kuşatması hezimetiyle tahttan indirilen hükümdar.',
     keyAchievements: [
@@ -517,7 +534,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1687 – 1691',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 72, economy: 71, societal: 75, diplomacy: 74, leadership: 70, legacy: 72 },
     summary: '40 yıl kafeste yaşadıktan sonra tahta çıkan, Fazıl Mustafa Paşa’yı sadarete getirerek Belgrad’ı geri alan dindar ve sade hükümdar.',
     keyAchievements: [
@@ -545,7 +563,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1691 – 1695',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 66, economy: 68, societal: 72, diplomacy: 71, leadership: 67, legacy: 68 },
     summary: 'Salankamen hezimetinde Fazıl Mustafa Paşa’nın şehadetiyle sarsılan, Kutsal İttifak savaşlarının en buhranlı yıllarında 4 yıl hüküm süren padişah.',
     keyAchievements: [
@@ -573,7 +592,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1695 – 1703',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 76, economy: 72, societal: 73, diplomacy: 75, leadership: 74, legacy: 76 },
     summary: '"Gazi" unvanı almak için bizzat 3 kez Avusturya seferine çıkan, ancak Zenta faciası sonrası tarihin ilk büyük toprak kaybı olan Karlofça Antlaşması’na imza atan sultan.',
     keyAchievements: [
@@ -601,7 +621,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1703 – 1730',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 81, economy: 79, societal: 88, diplomacy: 85, leadership: 82, legacy: 89 },
     summary: 'Sadrazam Nevşehirli Damat İbrahim Paşa ile Lale Devri’ni başlatan; matbaa, kütüphaneler, tulumbacılar ocağı ve çiçekaşısı gibi Batılılaşma adımlarını atan, Prut Zaferi’ni kazanan ancak Patrona Halil İsyanı ile indirilen sultan.',
     keyAchievements: [
@@ -630,7 +651,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1730 – 1754',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 87, economy: 83, societal: 85, diplomacy: 88, leadership: 86, legacy: 88 },
     summary: 'Patrona Halil asilerini ustaca bir tertiple ortadan kaldıran, Fransız Kont de Bonneval’e (Humbaracı Ahmed Paşa) orduda ilk Batılı askeri okulu (Hendesehane) kurduran ve Belgrad’ı geri alan başarılı lider.',
     keyAchievements: [
@@ -659,7 +681,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1754 – 1757',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 65, economy: 72, societal: 74, diplomacy: 76, leadership: 68, legacy: 72 },
     summary: '51 yıl kafeste kaldıktan sonra 3 yıl tahtta oturan, Nuruosmaniye Camii’ni tamamlayan, kadınların çarşaflarına ve gayrimüslim kıyafetlerine katı nizam getiren hükümdar.',
     keyAchievements: [
@@ -687,7 +710,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1757 – 1774',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 77, economy: 80, societal: 84, diplomacy: 75, leadership: 80, legacy: 83 },
     summary: 'Baron de Tott eliyle sürat topçuları ocağını ve Deniz Mühendishanesi’ni kuran, maliyeyi güçlendiren ancak 1768 Rus Savaşı ve Çeşme faciasının kahrıyla vefat eden reformcu sultan.',
     keyAchievements: [
@@ -715,7 +739,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1774 – 1789',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 72, economy: 76, societal: 82, diplomacy: 74, leadership: 79, legacy: 80 },
     summary: 'Küçük Kaynarca Antlaşması ile Kırım’ın kaybedilmesinin acısını yaşayan, orduda yabancı uzmanlarla reformları sürdüren, Özi Kalesi’nin katliam haberini alınca felç geçirip ölen merhametli hükümdar.',
     keyAchievements: [
@@ -743,7 +768,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1789 – 1807',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 82, economy: 79, societal: 91, diplomacy: 84, leadership: 80, legacy: 92 },
     summary: 'Klasik Türk müziğinde makamlar icat eden büyük bir bestekâr, Fransız tarzı üniformalı ve modern "Nizam-ı Cedid" ordusunu kuran, ancak Kabakçı Mustafa İsyanı ile tahttan indirilip şehit edilen vizyoner padişah.',
     keyAchievements: [
@@ -772,7 +798,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1807 – 1808',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 50, economy: 56, societal: 48, diplomacy: 54, leadership: 52, legacy: 50 },
     summary: 'Kabakçı Mustafa isyancılarının kuklası olarak tahta çıkan, Nizam-ı Cedid’i lağvedip reformcuları katlettiren, Alemdar Mustafa Paşa sarayı basınca tahttan indirilen 14 aylık padişah.',
     keyAchievements: [
@@ -799,7 +826,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1808 – 1839',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 88, economy: 78, societal: 95, diplomacy: 84, leadership: 96, legacy: 98 },
     summary: 'Vaka-i Hayriye ile 450 yıllık Yeniçeri Ocağı’nı topa tutarak kaldıran, fes, pantolon, modern bakanlıklar, posta teşkilatı ve Takvim-i Vekayi ile modern Türkiye’nin kurumsal temelini atan devrimci padişah.',
     keyAchievements: [
@@ -828,7 +856,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1839 – 1861',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 78, economy: 71, societal: 94, diplomacy: 89, leadership: 85, legacy: 93 },
     summary: '1839 Tanzimat Fermanı (Gülhane Hatt-ı Hümayunu) ile kanun önünde eşitlik, can ve mal güvenliğini anayasal güvenceye bağlayan, Dolmabahçe Sarayı’nı yaptıran, Kırım Savaşı’nı kazanan reformcu hükümdar.',
     keyAchievements: [
@@ -857,7 +886,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1861 – 1876',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 84, economy: 69, societal: 85, diplomacy: 87, leadership: 83, legacy: 86 },
     summary: 'Avrupa başkentlerine resmi ziyarette bulunan ilk padişah; dünyanın en büyük 3. zırhlı donanmasını kuran, Darüşşafaka, Galatasaray Lisesi ve Danıştay’ı açan, askeri darbeyle indirilip şüpheli şekilde vefat eden lider.',
     keyAchievements: [
@@ -886,7 +916,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1876 (Mayıs – Ağustos)',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 55, economy: 60, societal: 72, diplomacy: 68, leadership: 54, legacy: 60 },
     summary: 'Tarihin en kısa süre tahtta kalan padişahı. Amcası Abdülaziz’in ölümü ve Çerkes Hasan baskını şokuyla akli melekelerini kaybettiği için 93 gün sonra tahttan indirilen hükümdar.',
     keyAchievements: [
@@ -913,7 +944,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1876 – 1909',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 82, economy: 86, societal: 87, diplomacy: 97, leadership: 93, legacy: 96 },
     summary: '33 yıllık iktidarında demiryolları (Hicaz Demiryolu), telgraf ağları, binlerce modern okul açan, emperyalist devletleri denge diplomasisiyle birbirine düşüren, ancak istibdat rejimi ve 93 Harbi faturasıyla tartışılan lider.',
     keyAchievements: [
@@ -942,7 +974,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1909 – 1918',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 72, economy: 65, societal: 73, diplomacy: 68, leadership: 66, legacy: 70 },
     summary: 'İkinci Meşrutiyet’in sembolik padişahı. İttihat ve Terakki Triumvirliği’nin (Enver, Talat, Cemal Paşalar) gölgesinde Trablusgarp, Balkan ve I. Dünya Savaşı felaketlerini yaşayan sultan.',
     keyAchievements: [
@@ -970,7 +1003,8 @@ export const OTTOMAN_SULTANS: Leader[] = [
     yearsActive: '1918 – 1922',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 56, economy: 54, societal: 58, diplomacy: 60, leadership: 55, legacy: 62 },
     summary: 'Mondros Mütarekesi sonrası işgal altındaki İstanbul’da tahtta bulunan, Sevr Antlaşması süreci, Damat Ferid hükümetleri ve Kuva-yı İnzibatiye fetvaları nedeniyle vatan hainliği tartışmaları içinde saltanatı sona eren son Osmanlı padişahı.',
     keyAchievements: [

@@ -190,20 +190,9 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
         {/* Scrollable Content Body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           {/* Hero Profile Block */}
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden shrink-0 bg-stone-800 border border-stone-700 shadow-lg">
-              {leader.avatarUrl ? (
-                <img
-                  src={leader.avatarUrl}
-                  alt={leader.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-950 text-stone-300 font-cinzel text-3xl font-bold">
-                  {leader.name.charAt(0)}
-                </div>
-              )}
+          <div className="flex flex-col sm:flex-row gap-5 items-start">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shrink-0 bg-stone-950 border border-stone-800 flex items-center justify-center text-4xl shadow-inner">
+              {leader.flag}
             </div>
 
             <div className="flex-1 min-w-0">

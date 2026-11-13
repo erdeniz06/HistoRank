@@ -12,6 +12,9 @@ export type CultureKey =
   | 'uk'
   | 'usa'
   | 'spain'
+  | 'ussr'
+  | 'turkic'
+  | 'europe'
   | 'ancient'
   | 'mongolia'
   | 'world';
@@ -90,6 +93,27 @@ export const CULTURES: CultureAudioProfile[] = [
     instruments: 'Hömey (Gırtlak Müziği) & Morin Khuur (At Başlı Keman)',
     scaleDescription: 'Pentatonik Bozkır Ezgisi & Doğan Ton',
     flag: '🇲🇳',
+  },
+  {
+    key: 'ussr',
+    name: 'SSCB Koral Marş & Senfoni',
+    instruments: 'Kızıl Ordu Pirinçleri, Bas Koro & Minör Yaylılar',
+    scaleDescription: 'Rus Romantik Minör & Törensel Marş',
+    flag: '☭',
+  },
+  {
+    key: 'turkic',
+    name: 'Eski Türk & Selçuklu Bozkırı',
+    instruments: 'Kopuz Mızrabı, Kaval & Savaş Davulu',
+    scaleDescription: 'Orta Asya Pentatonik & Selçuklu Segâh',
+    flag: '🐺',
+  },
+  {
+    key: 'europe',
+    name: 'Avrupa Oda Müziği & Rönesans',
+    instruments: 'Venedik Yaylıları, Flaman Org & Leh Polonezi',
+    scaleDescription: 'Klasik Kıta Avrupası Kontrpuanı',
+    flag: '🇪🇺',
   },
   {
     key: 'world',
@@ -513,6 +537,99 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
         [N.D2, N.A2, N.D3],
       ],
       instrumentType: 'strings',
+    },
+  ],
+
+  ussr: [
+    {
+      title: 'Kızıl Meydan Kış Marşı',
+      subTitle: 'Pirinç Nefesliler & Dramatik Rus Minör Armonisi',
+      mood: 'Anıtsal & Kararlı',
+      tempoBpm: 76,
+      scale: [N.C4, N.D4, N.Eb4, N.F4, N.G4, N.Ab4, N.B4, N.C5],
+      chords: [
+        [N.C3, N.G3, N.Eb4],
+        [N.F2, N.C3, N.Ab3],
+        [N.G2, N.D3, N.B3],
+        [N.C3, N.G3, N.C4],
+      ],
+      instrumentType: 'brass',
+    },
+    {
+      title: 'Şostakoviç & Leningrad Ağıtı',
+      subTitle: 'Derin Yaylılar & Soğuk Savaş Gerilimi',
+      mood: 'Ciddi & Trajik',
+      tempoBpm: 62,
+      scale: [N.D4, N.E4, N.F4, N.G4, N.A4, N.Bb4, N['C#5'], N.D5],
+      chords: [
+        [N.D3, N.A3, N.F4],
+        [N.Bb2, N.F3, N.D4],
+        [N.A2, N.E3, N['C#4']],
+        [N.D3, N.A3, N.D4],
+      ],
+      instrumentType: 'strings',
+    },
+  ],
+
+  turkic: [
+    {
+      title: 'Ötüken Bozkır Kopuzu',
+      subTitle: 'Pentatonik Dombra & Bozkır Rüzgarı',
+      mood: 'Destansı & Kadim',
+      tempoBpm: 80,
+      scale: [N.D4, N.E4, N.G4, N.A4, N.C5, N.D5, N.E5],
+      chords: [
+        [N.D3, N.A3, N.D4],
+        [N.C3, N.G3, N.C4],
+        [N.A2, N.E3, N.A3],
+        [N.D3, N.A3, N.D4],
+      ],
+      instrumentType: 'pluck',
+    },
+    {
+      title: 'Malazgirt & Selçuklu Çevganı',
+      subTitle: 'Atlı Akın Nefeslisi & Tören Ritimleri',
+      mood: 'Coşkulu & Fatih',
+      tempoBpm: 92,
+      scale: [N.G3, N.A3, N.Bb3, N.C4, N.D4, N.F4, N.G4],
+      chords: [
+        [N.G2, N.D3, N.G3],
+        [N.F2, N.C3, N.F3],
+        [N.D3, N.A3, N.D4],
+        [N.G2, N.D3, N.Bb3],
+      ],
+      instrumentType: 'throat',
+    },
+  ],
+
+  europe: [
+    {
+      title: 'Venedik & Brüksel Oda Konçertosu',
+      subTitle: 'Klasik Kıta Yaylıları & Zarif Kontrpuan',
+      mood: 'Entelektüel & Parlak',
+      tempoBpm: 78,
+      scale: [N.G3, N.A3, N.B3, N.C4, N.D4, N.E4, N['F#4'], N.G4],
+      chords: [
+        [N.G2, N.D3, N.B3],
+        [N.C3, N.G3, N.E4],
+        [N.D3, N.A3, N['F#4']],
+        [N.G2, N.D3, N.G3],
+      ],
+      instrumentType: 'strings',
+    },
+    {
+      title: 'Varşova & Amsterdam Katedral Orgu',
+      subTitle: 'Barok Org & Sivil Toplum Harmonisi',
+      mood: 'Asil & Dengeli',
+      tempoBpm: 72,
+      scale: [N.C4, N.D4, N.E4, N.F4, N.G4, N.A4, N.B4, N.C5],
+      chords: [
+        [N.C3, N.G3, N.E4],
+        [N.F2, N.C3, N.A3],
+        [N.G2, N.D3, N.B3],
+        [N.C3, N.G3, N.C4],
+      ],
+      instrumentType: 'organ',
     },
   ],
 

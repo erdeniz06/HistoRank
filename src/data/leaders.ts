@@ -3,6 +3,8 @@ import { ADDITIONAL_LEADERS } from './additionalLeaders';
 import { OTTOMAN_SULTANS } from './ottomanSultans';
 import { MONARCHS_AND_CHANCELLORS } from './monarchsAndChancellors';
 import { PARTY_LEADERS_AND_SPAIN } from './partyLeadersAndSpain';
+import { EUROPE_USSR_TURKIC_COMMUNIST } from './europeUssrTurkicCommunist';
+import { CHINA_CUBA_AND_TR_MINISTERS } from './chinaCubaAndTrMinisters';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
@@ -89,8 +91,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1923 – 1938',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
-    avatarUrl: '/src/assets/images/historical_pantheon_hero_1794074512877.jpg',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 96,
       economy: 82,
@@ -129,7 +131,7 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: 'MÖ 49 – MÖ 44',
     category: 'ancient',
     subCategory: 'ancient-rome',
-    region: 'mediterranean',
+    region: 'europe',
     defaultScores: {
       military: 98,
       economy: 80,
@@ -166,7 +168,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: 'MÖ 336 – MÖ 323',
     category: 'ancient',
     subCategory: 'ancient-greece',
-    region: 'mediterranean',
+    region: 'europe',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 100,
       economy: 72,
@@ -203,7 +206,7 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: 'MÖ 27 – MS 14',
     category: 'ancient',
     subCategory: 'ancient-rome',
-    region: 'mediterranean',
+    region: 'europe',
     defaultScores: {
       military: 84,
       economy: 93,
@@ -240,7 +243,7 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: 'MS 161 – MS 180',
     category: 'ancient',
     subCategory: 'ancient-rome',
-    region: 'mediterranean',
+    region: 'europe',
     defaultScores: {
       military: 83,
       economy: 76,
@@ -277,8 +280,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1451 – 1481',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
-    avatarUrl: '/src/assets/images/fatih_renaissance_art_1794074511324.jpg',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 97,
       economy: 88,
@@ -317,7 +320,6 @@ export const INITIAL_LEADERS: Leader[] = [
     category: 'france',
     subCategory: 'fr-leader',
     region: 'europe',
-    avatarUrl: '/src/assets/images/napoleon_imperial_art_1794074513070.jpg',
     defaultScores: {
       military: 99,
       economy: 80,
@@ -352,9 +354,9 @@ export const INITIAL_LEADERS: Leader[] = [
     century: '13. yy',
     era: 'medieval',
     yearsActive: '1206 – 1227',
-    category: 'world',
-    subCategory: 'world-icon',
-    region: 'world',
+    category: 'mongolia',
+    subCategory: 'mn-leader',
+    region: 'asia',
     defaultScores: {
       military: 100,
       economy: 79,
@@ -721,7 +723,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1938 – 1950',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 89,
       economy: 70,
@@ -759,7 +762,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1950 – 1960',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 76,
@@ -796,7 +800,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1960 – 1966',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 78,
       economy: 68,
@@ -832,7 +837,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1966 – 1973',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 72,
       economy: 65,
@@ -868,7 +874,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1973 – 1980',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 77,
       economy: 60,
@@ -904,7 +911,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1980 – 1989',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 65,
       economy: 62,
@@ -940,7 +948,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1989 – 1993',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 92,
@@ -978,7 +987,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1993 – 2000',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 72,
       economy: 75,
@@ -1015,7 +1025,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '2000 – 2007',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 68,
       economy: 65,
@@ -1052,7 +1063,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '2007 – 2014',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 70,
       economy: 82,
@@ -1089,7 +1101,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '2014 – Günümüz (Başbakanlık: 2003 – 2014)',
     category: 'turkey',
     subCategory: 'tr-president',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 86,
       economy: 66,
@@ -1127,7 +1140,8 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: '1520 – 1566',
     category: 'turkey',
     subCategory: 'ottoman-sultan',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 96,
       economy: 92,
@@ -1236,7 +1250,10 @@ export const INITIAL_LEADERS: Leader[] = [
     century: '18. yy',
     era: 'early-modern',
     yearsActive: '1682 – 1725',
-    category: 'world',
+    category: 'russia',
+    subCategory: 'ru-leader',
+    region: 'europe',
+    regions: ['europe', 'asia'],
     defaultScores: {
       military: 92,
       economy: 82,
@@ -1265,15 +1282,15 @@ export const INITIAL_LEADERS: Leader[] = [
     name: 'Selahaddin Eyyubi',
     originalName: 'Salah ad-Din Yusuf ibn Ayyub',
     title: 'Eyyubiler Sultanı, Kudüs Fatihi & Şövalye Hükümdar',
-    country: 'Eyyubiler / Orta Doğu',
+    country: 'Mısır / Eyyubiler',
     countryCode: 'EG',
-    flag: '👑',
+    flag: '🇪🇬',
     century: '12. yy',
     era: 'medieval',
     yearsActive: '1174 – 1193',
-    category: 'world',
-    subCategory: 'world-icon',
-    region: 'world',
+    category: 'egypt',
+    subCategory: 'eg-leader',
+    region: 'asia',
     defaultScores: {
       military: 94,
       economy: 80,
@@ -1384,7 +1401,7 @@ export const INITIAL_LEADERS: Leader[] = [
     yearsActive: 'MÖ 461 – MÖ 429',
     category: 'ancient',
     subCategory: 'ancient-greece',
-    region: 'mediterranean',
+    region: 'europe',
     defaultScores: {
       military: 81,
       economy: 86,
@@ -1410,4 +1427,6 @@ export const INITIAL_LEADERS: Leader[] = [
   ...OTTOMAN_SULTANS,
   ...MONARCHS_AND_CHANCELLORS,
   ...PARTY_LEADERS_AND_SPAIN,
+  ...EUROPE_USSR_TURKIC_COMMUNIST,
+  ...CHINA_CUBA_AND_TR_MINISTERS,
 ];

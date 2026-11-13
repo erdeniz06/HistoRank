@@ -276,19 +276,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </div>
 
             <div className="flex items-center gap-3.5">
-              <div className="w-16 h-16 rounded-xl overflow-hidden bg-stone-800 border border-amber-500/50 shrink-0">
-                {fighter1.avatarUrl ? (
-                  <img
-                    src={fighter1.avatarUrl}
-                    alt={fighter1.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center font-cinzel text-xl font-bold text-stone-400">
-                    {fighter1.name.charAt(0)}
-                  </div>
-                )}
+              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-amber-500/40 shrink-0 flex items-center justify-center text-2xl">
+                {fighter1.flag}
               </div>
 
               <div className="min-w-0">
@@ -364,19 +353,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </div>
 
             <div className="flex items-center gap-3.5">
-              <div className="w-16 h-16 rounded-xl overflow-hidden bg-stone-800 border border-cyan-500/50 shrink-0">
-                {fighter2.avatarUrl ? (
-                  <img
-                    src={fighter2.avatarUrl}
-                    alt={fighter2.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center font-cinzel text-xl font-bold text-stone-400">
-                    {fighter2.name.charAt(0)}
-                  </div>
-                )}
+              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-cyan-500/40 shrink-0 flex items-center justify-center text-2xl">
+                {fighter2.flag}
               </div>
 
               <div className="min-w-0">
@@ -541,23 +519,12 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   </div>
 
                   {/* Leader Header */}
-                  <div className="flex items-start gap-3.5 mb-3">
+                  <div className="flex items-start gap-3 mb-3">
                     <div
                       onClick={() => onSelectLeader(leader)}
-                      className="w-14 h-14 rounded-xl overflow-hidden bg-stone-800 border border-stone-700 shrink-0 cursor-pointer hover:scale-105 transition-transform"
+                      className="w-11 h-11 rounded-xl bg-stone-950 border border-stone-800 shrink-0 cursor-pointer flex items-center justify-center text-2xl hover:border-amber-500/50 transition-colors"
                     >
-                      {leader.avatarUrl ? (
-                        <img
-                          src={leader.avatarUrl}
-                          alt={leader.name}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover object-top"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center font-cinzel font-bold text-lg text-stone-400">
-                          {leader.name.charAt(0)}
-                        </div>
-                      )}
+                      {leader.flag}
                     </div>
 
                     <div className="flex-1 min-w-0">

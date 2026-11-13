@@ -1,13 +1,40 @@
-import React from 'react';
-import { Plus } from 'lucide-react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { Plus, Search, X } from 'lucide-react';
+import { Leader, UserRating } from '../types';
+import { calculateOverallScore, getEffectiveScores } from '../utils/scoring';
 
-export type NavTab = 'portals' | 'giants' | 'catalog' | 'compare' | 'tierlist' | 'collections';
+export type NavTab = 'portals' | 'giants' | 'compare' | 'tierlist';
 
 interface NavbarProps {
   activeTab: NavTab;
   onSelectTab: (tab: NavTab) => void;
   onOpenAddModal: () => void;
   comparedCount: number;
+  leaders: Leader[];
+  userRatings: Record<string, UserRating>;
+  onSelectLeader: (leader: Leader) => void;
+}
+
+function normalizeSearchText(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/ä/g, 'a')
+    .replace(/ö/g, 'o')
+    .replace(/ü/g, 'u')
+    .replace(/ş/g, 's')
+    .replace(/ç/g, 'c')
+    .replace(/ğ/g, 'g')
+    .replace(/ı/g, 'i')
+    .replace(/İ/g, 'i')
+    .replace(/é|è|ê/g, 'e')
+    .replace(/á|à|â/g, 'a')
+    .replace(/í|ì|î/g, 'i')
+    .replace(/ó|ò|ô/g, 'o')
+    .replace(/ú|ù|û/g, 'u')
+    .replace(/ł/g, 'l')
+    .replace(/ń/g, 'n')
+    .replace(/ś/g, 's')
+    .replace(/ź|ż/g, 'z');
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,62 +42,157 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectTab,
   onOpenAddModal,
   comparedCount,
+  leaders,
+  userRatings,
+  onSelectLeader,
 }) => {
+  const [query, setQuery] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const searchResults = useMemo(() => {
+    const q = normalizeSearchText(query.trim());
+    if (!q) return [];
+    return leaders
+      .filter((l) => {
+        const hay = normalizeSearchText(
+          `${l.name} ${l.originalName || ''} ${l.country} ${l.title} ${l.century}`
+        );
+        return hay.includes(q);
+      })
+      .slice(0, 8);
+  }, [query, leaders]);
+
+  const handlePickLeader = (leader: Leader) => {
+    onSelectLeader(leader);
+    setQuery('');
+    setIsOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-40 bg-stone-950/90 backdrop-blur-md border-b border-stone-800">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-8 px-4 sm:px-6 py-3.5">
-        {/* Zone 1: Brand title, one line wordmark */}
+    <header className="sticky top-0 z-40 bg-stone-950/95 backdrop-blur-md border-b border-stone-800/80">
+      <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap items-center justify-between gap-3 sm:gap-5 px-4 sm:px-6 py-3">
+        {/* Brand Wordmark */}
         <button
           onClick={() => onSelectTab('portals')}
           className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
         >
-          <span className="font-cinzel text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
+          <span className="font-cinzel text-lg sm:text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
             PANTHEON
-          </span>
-          <span className="text-[10px] uppercase font-mono tracking-widest text-amber-500 hidden sm:inline">
-            ARCHIVE
           </span>
         </button>
 
-        {/* Zone 2: Nav links, single-line text links */}
-        <nav className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium overflow-x-auto no-scrollbar py-1">
+        {/* Global Top Search Bar */}
+        <div ref={searchContainerRef} className="relative flex-1 min-w-[200px] max-w-md order-3 md:order-2 w-full md:w-auto">
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 text-stone-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              value={query}
+              onFocus={() => setIsOpen(true)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setIsOpen(true);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  setIsOpen(false);
+                } else if (e.key === 'Enter' && searchResults.length > 0) {
+                  e.preventDefault();
+                  handlePickLeader(searchResults[0]);
+                }
+              }}
+              placeholder="Lider ara... (Atatürk, Merz/März, Lenin, Attila...)"
+              className="w-full pl-8 pr-8 py-1.5 text-xs bg-stone-900/90 border border-stone-800 rounded-lg text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500/80 transition-colors"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery('');
+                  setIsOpen(false);
+                }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-200"
+                title="Temizle"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* Search Autocomplete Dropdown */}
+          {isOpen && query.trim().length > 0 && (
+            <div className="absolute left-0 right-0 top-full mt-1.5 rounded-xl bg-stone-900 border border-stone-800 shadow-2xl overflow-hidden z-50">
+              {searchResults.length === 0 ? (
+                <div className="px-4 py-3 text-xs text-stone-500">
+                  "{query}" ile eşleşen lider bulunamadı.
+                </div>
+              ) : (
+                <div className="divide-y divide-stone-800/70 max-h-80 overflow-y-auto">
+                  {searchResults.map((leader) => {
+                    const score = calculateOverallScore(getEffectiveScores(leader, userRatings));
+                    return (
+                      <button
+                        key={leader.id}
+                        type="button"
+                        onClick={() => handlePickLeader(leader)}
+                        className="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 text-left hover:bg-stone-800/80 transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="text-lg shrink-0">{leader.flag}</span>
+                          <div className="min-w-0">
+                            <div className="text-xs font-semibold text-stone-100 truncate">
+                              {leader.name}
+                            </div>
+                            <div className="text-[11px] text-stone-400 truncate">
+                              {leader.country} · {leader.century}
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-xs font-mono font-bold text-amber-400 shrink-0">
+                          {score}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Clean 4-Tab Nav */}
+        <nav className="flex items-center gap-4 sm:gap-5 text-xs sm:text-sm font-medium overflow-x-auto no-scrollbar py-1 order-2 md:order-3">
           <button
             onClick={() => onSelectTab('portals')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 flex items-center gap-1.5 ${
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
               activeTab === 'portals'
                 ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            <span>Ülke & Dönem Portalları</span>
-            <span className="px-1.5 py-0.2 text-[9px] font-mono bg-emerald-500/20 text-emerald-400 font-bold rounded">
-              Yeni
-            </span>
+            Ülkeler & Tarih
           </button>
 
           <button
             onClick={() => onSelectTab('giants')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 flex items-center gap-1.5 ${
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
               activeTab === 'giants'
                 ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            <span>Tarihin Devleri</span>
-            <span className="px-1.5 py-0.2 text-[9px] font-mono bg-amber-500/20 text-amber-400 font-bold rounded">
-              Canlı
-            </span>
-          </button>
-
-          <button
-            onClick={() => onSelectTab('catalog')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
-              activeTab === 'catalog'
-                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
-          >
-            Tüm Katalog
+            Devler Ligi
           </button>
 
           <button
@@ -81,10 +203,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            <span>Kıyaslama / Düello</span>
+            <span>Kıyaslama</span>
             {comparedCount > 0 && (
-              <span className="px-1.5 py-0.2 text-[10px] font-mono bg-amber-500 text-stone-950 font-bold rounded-full">
-                {comparedCount}
+              <span className="text-[10px] font-mono text-amber-400">
+                ({comparedCount})
               </span>
             )}
           </button>
@@ -99,28 +221,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Tier List
           </button>
-
-          <button
-            onClick={() => onSelectTab('collections')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
-              activeTab === 'collections'
-                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
-          >
-            Özel Koleksiyonlar
-          </button>
         </nav>
 
-        {/* Zone 3: 1 primary action */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Primary Action */}
+        <div className="flex items-center shrink-0 order-4">
           <button
             onClick={onOpenAddModal}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-stone-950 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-sm"
+            className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-stone-950 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors whitespace-nowrap"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span className="hidden sm:inline">Yeni Lider Ekle</span>
-            <span className="sm:hidden">Ekle</span>
+            <span className="hidden sm:inline">Lider Ekle</span>
           </button>
         </div>
       </div>

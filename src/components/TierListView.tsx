@@ -100,15 +100,25 @@ export const TierListView: React.FC<TierListViewProps> = ({
             onChange={(e) => setSelectedFilterCategory(e.target.value)}
             className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-300 focus:outline-none"
           >
-            <option value="all">Tüm Koleksiyonlar</option>
-            <option value="turkey">🇹🇷 Türkiye (Padişahlar, CB & Başbakanlar)</option>
-            <option value="uk">🇬🇧 Birleşik Krallık (İngiltere)</option>
-            <option value="usa">🇺🇸 Amerika Birleşik Devletleri</option>
-            <option value="spain">🇪🇸 İspanya Krallığı & Siyaseti</option>
+            <option value="all">Tüm Milletler & Ülkeler</option>
+            <option value="turkey">🇹🇷 Türkiye & Türk Tarihi</option>
+            <option value="germany">🇩🇪 Almanya</option>
             <option value="france">🇫🇷 Fransa</option>
-            <option value="germany">🇩🇪 Almanya & Prusya</option>
-            <option value="ancient">🏛️ Roma & Antik</option>
-            <option value="world">👑 Diğer Dünya Devleri</option>
+            <option value="uk">🇬🇧 İngiltere</option>
+            <option value="usa">🇺🇸 ABD</option>
+            <option value="russia">🇷🇺 Rusya & SSCB</option>
+            <option value="china">🇨🇳 Çin</option>
+            <option value="spain">🇪🇸 İspanya</option>
+            <option value="italy">🇮🇹 İtalya</option>
+            <option value="poland">🇵🇱 Polonya</option>
+            <option value="belgium">🇧🇪 Belçika</option>
+            <option value="netherlands">🇳🇱 Hollanda</option>
+            <option value="cuba">🇨🇺 Küba</option>
+            <option value="vietnam">🇻🇳 Vietnam</option>
+            <option value="yugoslavia">🇷🇸 Yugoslavya</option>
+            <option value="mongolia">🇲🇳 Moğolistan</option>
+            <option value="egypt">🇪🇬 Mısır & Eyyubiler</option>
+            <option value="ancient">🏛️ Antik Roma & Yunan</option>
           </select>
 
           {/* Era Filter */}
@@ -174,31 +184,17 @@ export const TierListView: React.FC<TierListViewProps> = ({
                         <div
                           key={leader.id}
                           onClick={() => onSelectLeader(leader)}
-                          className="group relative flex items-center gap-2 p-1.5 pr-3 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-all hover:scale-105"
+                          className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
                           title={`${leader.name} - ${overall}/100 Puan (${leader.title})`}
                         >
-                          <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-stone-800 border border-stone-700">
-                            {leader.avatarUrl ? (
-                              <img
-                                src={leader.avatarUrl}
-                                alt={leader.name}
-                                referrerPolicy="no-referrer"
-                                className="w-full h-full object-cover object-top"
-                              />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center font-cinzel font-bold text-stone-400 text-sm">
-                                {leader.name.charAt(0)}
-                              </div>
-                            )}
-                          </div>
+                          <span className="text-lg shrink-0">{leader.flag}</span>
 
-                          <div className="min-w-0 max-w-[130px]">
+                          <div className="min-w-0 max-w-[140px]">
                             <h4 className="text-xs font-semibold text-stone-200 group-hover:text-amber-400 transition-colors truncate">
                               {leader.name}
                             </h4>
-                            <div className="flex items-center gap-1 text-[10px] text-stone-500">
-                              <span>{leader.flag}</span>
-                              <span className="truncate">{leader.country}</span>
+                            <div className="text-[10px] text-stone-500 truncate">
+                              {leader.country}
                             </div>
                           </div>
 

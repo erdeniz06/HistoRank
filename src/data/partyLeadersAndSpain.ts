@@ -25,7 +25,8 @@ export const PARTY_LEADERS_AND_SPAIN: Leader[] = [
     yearsActive: '2023 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-party',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 68, economy: 75, societal: 84, diplomacy: 77, leadership: 86, legacy: 79 },
     summary: '2023 kurultayında değişim hareketiyle genel başkan seçilen, 31 Mart 2024 yerel seçimlerinde CHP’yi 47 yıl sonra Türkiye genelinde 1. parti yapan muhalefet lideri.',
     keyAchievements: [
@@ -54,7 +55,8 @@ export const PARTY_LEADERS_AND_SPAIN: Leader[] = [
     yearsActive: '2023 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-party',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 58, economy: 68, societal: 82, diplomacy: 72, leadership: 76, legacy: 70 },
     summary: 'Türkiye Büyük Millet Meclisi’nin 3. büyük grubu olan DEM Parti’nin eş başkanları; Kürt meselesi, yerel yönetimler ve barış çağrıları ekseninde siyaset yürüten figürler.',
     keyAchievements: [
@@ -82,7 +84,8 @@ export const PARTY_LEADERS_AND_SPAIN: Leader[] = [
     yearsActive: '2024 – Günümüz',
     category: 'turkey',
     subCategory: 'tr-party',
-    region: 'mediterranean',
+    region: 'asia',
+    regions: ['europe', 'asia'],
     defaultScores: { military: 74, economy: 70, societal: 76, diplomacy: 71, leadership: 78, legacy: 72 },
     summary: 'Meral Akşener’in istifası sonrası çekişmeli kurultayda İYİ Parti Genel Başkanı seçilen, milliyetçi ve cumhuriyetçi değerleri sert meclis konuşmalarıyla savunan siyasetçi.',
     keyAchievements: [
@@ -104,8 +107,8 @@ export const PARTY_LEADERS_AND_SPAIN: Leader[] = [
   {
     id: 'friedrich-merz',
     name: 'Friedrich Merz',
-    originalName: 'Friedrich Merz',
-    title: 'CDU Genel Başkanı & Şansölye Adayı (Almanya)',
+    originalName: 'Friedrich Merz (März)',
+    title: 'CDU Genel Başkanı & Almanya Şansölye Adayı / Şansölyesi',
     country: 'Almanya',
     countryCode: 'DE',
     flag: '🇩🇪',
