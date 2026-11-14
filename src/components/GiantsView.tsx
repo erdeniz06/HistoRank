@@ -138,6 +138,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
   const f1Overall = calculateOverallScore(f1Data.scores);
   const f2Overall = calculateOverallScore(f2Data.scores);
+  const f1Tier = getTierForScore(f1Overall);
+  const f2Tier = getTierForScore(f2Overall);
 
   const duelDatasets: RadarDataset[] = [
     {
@@ -287,12 +289,22 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                 <p className="text-xs text-stone-400 line-clamp-1">
                   {fighter1.country} · {fighter1.century}
                 </p>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-2xl font-mono font-extrabold text-amber-400">
+                <div className="flex items-center flex-wrap gap-2 mt-1.5">
+                  <span className="text-2xl font-mono font-extrabold text-amber-400 tabular-nums">
                     {f1Overall}
                   </span>
                   <span className="text-xs text-stone-500">/ 100</span>
-                  <span className="text-[10px] text-stone-500 ml-1">
+                  <span
+                    className="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md border"
+                    style={{
+                      color: f1Tier.color,
+                      backgroundColor: f1Tier.bgColor,
+                      borderColor: f1Tier.borderColor,
+                    }}
+                  >
+                    {f1Tier.tier} TIER
+                  </span>
+                  <span className="text-[10px] text-stone-500">
                     ({f1Data.entryCount > 0 ? `${f1Data.entryCount} Giriş` : 'Sembolik'})
                   </span>
                 </div>
@@ -364,12 +376,22 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                 <p className="text-xs text-stone-400 line-clamp-1">
                   {fighter2.country} · {fighter2.century}
                 </p>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-2xl font-mono font-extrabold text-cyan-400">
+                <div className="flex items-center flex-wrap gap-2 mt-1.5">
+                  <span className="text-2xl font-mono font-extrabold text-cyan-400 tabular-nums">
                     {f2Overall}
                   </span>
                   <span className="text-xs text-stone-500">/ 100</span>
-                  <span className="text-[10px] text-stone-500 ml-1">
+                  <span
+                    className="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md border"
+                    style={{
+                      color: f2Tier.color,
+                      backgroundColor: f2Tier.bgColor,
+                      borderColor: f2Tier.borderColor,
+                    }}
+                  >
+                    {f2Tier.tier} TIER
+                  </span>
+                  <span className="text-[10px] text-stone-500">
                     ({f2Data.entryCount > 0 ? `${f2Data.entryCount} Giriş` : 'Sembolik'})
                   </span>
                 </div>
@@ -538,38 +560,65 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                         {leader.title}
                       </p>
 
-                      <div className="flex items-baseline gap-1.5 mt-1.5">
-                        <span
-                          className="text-2xl font-mono font-extrabold"
-                          style={{ color: tier.color }}
-                        >
-                          {overall}
-                        </span>
-                        <span className="text-xs text-stone-500">/ 100</span>
-                        <span
-                          className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ml-2"
-                          style={{
-                            color: tier.color,
-                            backgroundColor: tier.bgColor,
-                            border: `1px solid ${tier.borderColor}`,
-                          }}
-                        >
-                          {tier.tier}-Kategori
-                        </span>
+                      {/* Prominent Tier + Score Strip */}
+                      <div
+                        className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl border mt-2.5"
+                        style={{
+                          backgroundColor: tier.bgColor,
+                          borderColor: tier.borderColor,
+                        }}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span
+                            className="text-xs uppercase font-extrabold tracking-wider px-2 py-0.5 rounded-md bg-stone-950/70 border shrink-0"
+                            style={{
+                              color: tier.color,
+                              borderColor: tier.borderColor,
+                            }}
+                          >
+                            {tier.tier} TIER
+                          </span>
+                          <span className="text-[11px] font-medium text-stone-200 truncate">
+                            {tier.label}
+                          </span>
+                        </div>
+                        <div className="flex items-baseline gap-0.5 shrink-0">
+                          <span
+                            className="text-2xl font-mono font-black tabular-nums leading-none"
+                            style={{ color: tier.color }}
+                          >
+                            {overall}
+                          </span>
+                          <span className="text-[11px] text-stone-400 font-mono">/100</span>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* 6 Dimension Sparklines */}
-                  <div className="grid grid-cols-3 gap-2 p-2.5 rounded-xl bg-stone-950/60 border border-stone-800/80 mb-4 text-[11px]">
-                    {DIMENSIONS.map((dim) => (
-                      <div key={dim.key} className="flex items-center justify-between">
-                        <span className="text-stone-500 truncate">{dim.shortLabel}</span>
-                        <span className="font-mono font-semibold text-stone-300 ml-1">
-                          {scores[dim.key]}
-                        </span>
-                      </div>
-                    ))}
+                  {/* 6 Dimension Score Tiles */}
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {DIMENSIONS.map((dim) => {
+                      const val = scores[dim.key];
+                      return (
+                        <div
+                          key={dim.key}
+                          className="px-2.5 py-1.5 rounded-xl bg-stone-950/80 border border-stone-800/80"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] text-stone-400 truncate">{dim.shortLabel}</span>
+                            <span className="text-xs font-mono font-extrabold text-stone-100 ml-1 tabular-nums">
+                              {val}
+                            </span>
+                          </div>
+                          <div className="w-full h-1 bg-stone-800 rounded-full overflow-hidden mt-1">
+                            <div
+                              className="h-full rounded-full transition-all duration-300"
+                              style={{ width: `${val}%`, backgroundColor: dim.color }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* En Tartışmalı 3 Konusu (Bilgilendirme Amaçlı) */}

@@ -5,6 +5,11 @@ import { MONARCHS_AND_CHANCELLORS } from './monarchsAndChancellors';
 import { PARTY_LEADERS_AND_SPAIN } from './partyLeadersAndSpain';
 import { EUROPE_USSR_TURKIC_COMMUNIST } from './europeUssrTurkicCommunist';
 import { CHINA_CUBA_AND_TR_MINISTERS } from './chinaCubaAndTrMinisters';
+import { ROME_TURKIC_AFRICA_MIDDLE_EAST } from './romeTurkicAfricaMiddleEast';
+import { ISLAMIC_AZ_OTTOMAN_QUEENS } from './islamicAzerbaijanLateOttomanQueens';
+import { IRAN_MODERN_LEADERS } from './iranModernLeaders';
+import { CAUCASUS_GREECE_BALKANS } from './caucasusGreeceBalkans';
+import { TURKISH_POLITICS_AND_ACTORS } from './turkishPoliticsAndActors';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
@@ -69,11 +74,11 @@ export const ERAS: EraInfo[] = [
 ];
 
 export const TIERS: TierConfig[] = [
-  { tier: 'S', label: 'Tarihsel Efsane & Kurucu Deha', minScore: 90, color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.12)', borderColor: '#b45309' },
-  { tier: 'A', label: 'Büyük Devlet Adamı & Reformcu', minScore: 80, color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: '#047857' },
-  { tier: 'B', label: 'Yetkin & İstikrarlı Yönetici', minScore: 70, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: '#1d4ed8' },
-  { tier: 'C', label: 'Tartışmalı / Sınırlı Dönem', minScore: 55, color: '#eab308', bgColor: 'rgba(234, 179, 8, 0.12)', borderColor: '#a16207' },
-  { tier: 'D', label: 'Yıkıcı & Bunalımlı Miras', minScore: 0, color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.12)', borderColor: '#b91c1c' },
+  { tier: 'S', label: 'Tarihe Yön Veren Zirve Liderler', minScore: 90, color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.12)', borderColor: '#b45309' },
+  { tier: 'A', label: 'Büyük Devlet Adamları & Reformcular', minScore: 80, color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: '#047857' },
+  { tier: 'B', label: 'Yetkin & İstikrarlı Yöneticiler', minScore: 70, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: '#1d4ed8' },
+  { tier: 'C', label: 'Tartışmalı & Sınırlı Dönemler', minScore: 55, color: '#eab308', bgColor: 'rgba(234, 179, 8, 0.12)', borderColor: '#a16207' },
+  { tier: 'D', label: 'Yıkıcı & Bunalımlı Miraslar', minScore: 0, color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.12)', borderColor: '#b91c1c' },
 ];
 
 export const INITIAL_LEADERS: Leader[] = [
@@ -1429,4 +1434,9 @@ export const INITIAL_LEADERS: Leader[] = [
   ...PARTY_LEADERS_AND_SPAIN,
   ...EUROPE_USSR_TURKIC_COMMUNIST,
   ...CHINA_CUBA_AND_TR_MINISTERS,
+  ...ROME_TURKIC_AFRICA_MIDDLE_EAST,
+  ...ISLAMIC_AZ_OTTOMAN_QUEENS,
+  ...IRAN_MODERN_LEADERS,
+  ...CAUCASUS_GREECE_BALKANS,
+  ...TURKISH_POLITICS_AND_ACTORS,
 ];

@@ -51,10 +51,32 @@ export type LeaderCategory =
   | 'yugoslavia'
   | 'mongolia'
   | 'egypt'
+  | 'iraq'
+  | 'libya'
+  | 'syria'
+  | 'iran'
+  | 'palestine'
+  | 'saudi-arabia'
+  | 'ghana'
+  | 'burkina-faso'
+  | 'tanzania'
+  | 'south-africa'
+  | 'botswana'
+  | 'azerbaijan'
+  | 'armenia'
+  | 'georgia'
+  | 'greece'
+  | 'serbia'
+  | 'bosnia'
+  | 'croatia'
+  | 'bulgaria'
+  | 'romania'
+  | 'albania'
+  | 'north-macedonia'
+  | 'islamic'
   | 'ancient';
 
-// Strictly Europe, Asia, Americas as requested
-export type GeographicRegion = 'all' | 'europe' | 'asia' | 'americas';
+export type GeographicRegion = 'all' | 'europe' | 'asia' | 'americas' | 'africa';
 
 export type SubCategoryKey =
   | 'all'
@@ -64,6 +86,8 @@ export type SubCategoryKey =
   | 'tr-pm'
   | 'tr-minister'
   | 'tr-party'
+  | 'tr-actor'
+  | 'ottoman-late'
   | 'uk-monarch'
   | 'uk-pm'
   | 'uk-party'
@@ -87,6 +111,18 @@ export type SubCategoryKey =
   | 'yu-leader'
   | 'mn-leader'
   | 'eg-leader'
+  | 'me-leader'
+  | 'af-leader'
+  | 'az-leader'
+  | 'am-leader'
+  | 'ge-leader'
+  | 'gr-history'
+  | 'gr-current'
+  | 'balkan-leader'
+  | 'rashidun'
+  | 'umayyad'
+  | 'abbasid'
+  | 'islamic-commander'
   | 'ancient-rome'
   | 'ancient-greece';
 
@@ -128,11 +164,34 @@ export interface Leader {
     | 'yugoslavia'
     | 'mongolia'
     | 'egypt'
+    | 'iraq'
+    | 'libya'
+    | 'syria'
+    | 'iran'
+    | 'palestine'
+    | 'saudi-arabia'
+    | 'ghana'
+    | 'burkina-faso'
+    | 'tanzania'
+    | 'south-africa'
+    | 'botswana'
+    | 'azerbaijan'
+    | 'armenia'
+    | 'georgia'
+    | 'greece'
+    | 'serbia'
+    | 'bosnia'
+    | 'croatia'
+    | 'bulgaria'
+    | 'romania'
+    | 'albania'
+    | 'north-macedonia'
+    | 'islamic'
     | 'ancient'
     | 'custom';
   subCategory?: SubCategoryKey;
   region?: GeographicRegion;
-  regions?: ('europe' | 'asia' | 'americas')[];
+  regions?: ('europe' | 'asia' | 'americas' | 'africa')[];
   defaultScores: LeaderScores;
   summary: string;
   keyAchievements: string[];

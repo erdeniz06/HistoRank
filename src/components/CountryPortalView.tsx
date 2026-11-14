@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Leader, UserRating, EraKey, GeographicRegion } from '../types';
 import { calculateOverallScore, getEffectiveScores } from '../utils/scoring';
 import { ERAS } from '../data/leaders';
 import { CultureKey } from '../audio/culturalAudioEngine';
 import { LeaderCard } from './LeaderCard';
-import { ArrowLeft, ChevronRight, Filter, Search } from 'lucide-react';
+import { ArrowLeft, Filter, Search } from 'lucide-react';
 
 interface CountryPortalViewProps {
   allLeaders: Leader[];
@@ -13,7 +13,8 @@ interface CountryPortalViewProps {
   onToggleCompare: (leader: Leader) => void;
   onSelectLeader: (leader: Leader) => void;
   onSelectCulture: (culture: CultureKey) => void;
-  initialCountry?: string;
+  activeCountry?: string | null;
+  onChangeCountry?: (key: string | null) => void;
 }
 
 interface CountryHubDef {
@@ -22,7 +23,7 @@ interface CountryHubDef {
   shortName: string;
   flag: string;
   culture: CultureKey;
-  regions: ('europe' | 'asia' | 'americas')[];
+  regions: ('europe' | 'asia' | 'americas' | 'africa')[];
   subtitle: string;
   subCategories: { key: string; label: string }[];
 }
@@ -35,15 +36,17 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇹🇷',
     culture: 'turkey',
     regions: ['asia', 'europe'],
-    subtitle: 'Eski Türkler, Selçuklu, 36 Padişah, 13 CB, Başbakanlar, Bakanlar ve Partiler',
+    subtitle: 'Eski Türkler, Selçuklu, 36 Padişah, İttihatçılar, 13 CB, Başbakanlar ve Partiler',
     subCategories: [
       { key: 'all', label: 'Tüm Türk Tarihi' },
       { key: 'turkic-seljuk', label: 'Eski Türkler & Selçuklu' },
       { key: 'ottoman-sultan', label: 'Osmanlı Padişahları' },
+      { key: 'ottoman-late', label: 'İttihatçılar & Son Sadrazamlar' },
       { key: 'tr-president', label: 'Cumhurbaşkanları' },
       { key: 'tr-pm', label: 'Başbakanlar' },
       { key: 'tr-minister', label: 'Cumhuriyet Bakanları' },
       { key: 'tr-party', label: 'Parti Liderleri' },
+      { key: 'tr-actor', label: 'Siyasi & Tarihsel Aktörler' },
     ],
   },
   {
@@ -110,7 +113,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇷🇺',
     culture: 'ussr',
     regions: ['europe', 'asia'],
-    subtitle: 'Büyük Petro, Tüm SSCB Liderleri (Lenin–Gorbaçov) ve Putin',
+    subtitle: 'Büyük Petro, Çariçeler (II. Katerina, Yelizaveta), SSCB Liderleri ve Putin',
     subCategories: [
       { key: 'all', label: 'Tümü' },
       { key: 'ussr-leader', label: 'SSCB Dönemi (1917–1991)' },
@@ -227,9 +230,249 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     shortName: 'Mısır & Eyyubi',
     flag: '🇪🇬',
     culture: 'world',
-    regions: ['asia'],
+    regions: ['asia', 'africa'],
     subtitle: 'Selahaddin Eyyubi ve Cemal Abdünnasır',
     subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'iraq',
+    name: 'Irak',
+    shortName: 'Irak',
+    flag: '🇮🇶',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Saddam Hüseyin',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'iran',
+    name: 'İran',
+    shortName: 'İran',
+    flag: '🇮🇷',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Emir Kebir, Rıza Şah, Pehlevi, Musaddık, Humeyni, Hamaney, Hatemi, Ruhani, Süleymani',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'syria',
+    name: 'Suriye',
+    shortName: 'Suriye',
+    flag: '🇸🇾',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Hafız Esad',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'saudi-arabia',
+    name: 'Suudi Arabistan',
+    shortName: 'S. Arabistan',
+    flag: '🇸🇦',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Kral Faysal bin Abdülaziz',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'palestine',
+    name: 'Filistin',
+    shortName: 'Filistin',
+    flag: '🇵🇸',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Yaser Arafat',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'libya',
+    name: 'Libya',
+    shortName: 'Libya',
+    flag: '🇱🇾',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Muammer Kaddafi',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'burkina-faso',
+    name: 'Burkina Faso',
+    shortName: 'Burkina Faso',
+    flag: '🇧🇫',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Thomas Sankara',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'ghana',
+    name: 'Gana',
+    shortName: 'Gana',
+    flag: '🇬🇭',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Kwame Nkrumah',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'tanzania',
+    name: 'Tanzanya',
+    shortName: 'Tanzanya',
+    flag: '🇹🇿',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Julius Nyerere',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'south-africa',
+    name: 'Güney Afrika',
+    shortName: 'Güney Afrika',
+    flag: '🇿🇦',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Nelson Mandela',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'botswana',
+    name: 'Botsvana',
+    shortName: 'Botsvana',
+    flag: '🇧🇼',
+    culture: 'world',
+    regions: ['africa'],
+    subtitle: 'Seretse Khama',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'azerbaijan',
+    name: 'Azerbaycan',
+    shortName: 'Azerbaycan',
+    flag: '🇦🇿',
+    culture: 'turkey',
+    regions: ['asia', 'europe'],
+    subtitle: 'Resulzade, Ebülfez Elçibey, Haydar Aliyev ve İlham Aliyev',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'armenia',
+    name: 'Ermenistan',
+    shortName: 'Ermenistan',
+    flag: '🇦🇲',
+    culture: 'world',
+    regions: ['asia', 'europe'],
+    subtitle: 'Aram Manukyan, Levon Ter-Petrosyan ve Nikol Paşinyan',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'georgia',
+    name: 'Gürcistan',
+    shortName: 'Gürcistan',
+    flag: '🇬🇪',
+    culture: 'world',
+    regions: ['asia', 'europe'],
+    subtitle: 'Gamsakhurdia, Şevardnadze, Saakaşvili, İvanişvili, Zurabişvili',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'greece',
+    name: 'Yunanistan',
+    shortName: 'Yunanistan',
+    flag: '🇬🇷',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Kolokotronis, Kapodistrias, Venizelos, Miçotakis, Çipras, Androulakis',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'gr-history', label: 'Bağımsızlık & Tarih' },
+      { key: 'gr-current', label: 'Güncel Siyasetçiler' },
+    ],
+  },
+  {
+    key: 'serbia',
+    name: 'Sırbistan',
+    shortName: 'Sırbistan',
+    flag: '🇷🇸',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Karayorgi (Karađorđe), Zoran Đinđić, Aleksandar Vučić',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'bosnia',
+    name: 'Bosna-Hersek',
+    shortName: 'Bosna-Hersek',
+    flag: '🇧🇦',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Alija Izetbegović (Bilge Kral) ve Denis Bećirović',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'croatia',
+    name: 'Hırvatistan',
+    shortName: 'Hırvatistan',
+    flag: '🇭🇷',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Franjo Tuđman, Andrej Plenković, Zoran Milanović',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'bulgaria',
+    name: 'Bulgaristan',
+    shortName: 'Bulgaristan',
+    flag: '🇧🇬',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Vasil Levski, Boyko Borisov, Rumen Radev',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'romania',
+    name: 'Romanya',
+    shortName: 'Romanya',
+    flag: '🇷🇴',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Alexandru Ioan Cuza, Çavuşesku, Marcel Ciolacu',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'albania',
+    name: 'Arnavutluk',
+    shortName: 'Arnavutluk',
+    flag: '🇦🇱',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'İskender Bey, İsmail Kemali, Enver Hoca, Edi Rama',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'north-macedonia',
+    name: 'Kuzey Makedonya',
+    shortName: 'K. Makedonya',
+    flag: '🇲🇰',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Kiro Gligorov ve Hristijan Mickoski',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'islamic',
+    name: 'İslam Tarihi & Halifeler',
+    shortName: 'İslam Tarihi',
+    flag: '☪️',
+    culture: 'world',
+    regions: ['asia', 'africa', 'europe'],
+    subtitle: 'Hulefâ-yi Râşidîn (Dört Halife), Emeviler, Endülüs, Abbasiler ve Büyük Komutanlar',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'rashidun', label: 'Dört Halife (Râşidîn)' },
+      { key: 'umayyad', label: 'Emeviler & Endülüs' },
+      { key: 'abbasid', label: 'Abbasiler' },
+      { key: 'islamic-commander', label: 'İslam Komutanları & Memlükler' },
+    ],
   },
   {
     key: 'ancient',
@@ -237,8 +480,8 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     shortName: 'Antik Dünya',
     flag: '🏛️',
     culture: 'ancient',
-    regions: ['europe'],
-    subtitle: 'Sezar, Octavius, Marcus Aurelius, Büyük İskender, Perikles',
+    regions: ['europe', 'asia', 'africa'],
+    subtitle: 'Sezar, Cicero, Mark Antony, Roma İmparatorları, Büyük İskender',
     subCategories: [
       { key: 'all', label: 'Tümü' },
       { key: 'ancient-rome', label: 'Roma' },
@@ -247,12 +490,13 @@ const COUNTRY_HUBS: CountryHubDef[] = [
   },
 ];
 
-// Strictly Europe, Asia, Americas (+ All)
+// Continents (+ All)
 const CONTINENT_OPTIONS: { key: GeographicRegion; label: string }[] = [
   { key: 'all', label: 'Tüm Kıtalar' },
   { key: 'europe', label: 'Avrupa' },
   { key: 'asia', label: 'Asya' },
   { key: 'americas', label: 'Amerika' },
+  { key: 'africa', label: 'Afrika' },
 ];
 
 export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
@@ -262,9 +506,19 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   onToggleCompare,
   onSelectLeader,
   onSelectCulture,
-  initialCountry,
+  activeCountry: controlledCountry,
+  onChangeCountry,
 }) => {
-  const [activeCountry, setActiveCountry] = useState<string | null>(initialCountry || null);
+  const [internalCountry, setInternalCountry] = useState<string | null>(null);
+  const activeCountry = controlledCountry !== undefined ? controlledCountry : internalCountry;
+  const setCountry = (key: string | null) => {
+    if (onChangeCountry) {
+      onChangeCountry(key);
+    } else {
+      setInternalCountry(key);
+    }
+  };
+
   const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [selectedEra, setSelectedEra] = useState<EraKey>('all');
   const [selectedRegion, setSelectedRegion] = useState<GeographicRegion>('all');
@@ -273,10 +527,16 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
     'overall' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership'
   >('overall');
 
+  useEffect(() => {
+    setActiveSubCategory('all');
+    setSelectedEra('all');
+    setSearchQuery('');
+  }, [activeCountry]);
+
   const currentHub = COUNTRY_HUBS.find((h) => h.key === activeCountry) || null;
 
   const handleSelectCountry = (hub: CountryHubDef) => {
-    setActiveCountry(hub.key);
+    setCountry(hub.key);
     setActiveSubCategory('all');
     setSelectedEra('all');
     onSelectCulture(hub.culture);
@@ -284,7 +544,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   };
 
   const handleBackToPortals = () => {
-    setActiveCountry(null);
+    setCountry(null);
     setActiveSubCategory('all');
     setSearchQuery('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -434,8 +694,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
             </div>
           </div>
 
-          {/* Country Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+          {/* Compact Country Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
             {visibleHubs.map((hub) => {
               const count = hubCounts[hub.key] || 0;
               return (
@@ -443,26 +703,18 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                   key={hub.key}
                   type="button"
                   onClick={() => handleSelectCountry(hub)}
-                  className="group text-left p-4 rounded-xl bg-stone-900/60 border border-stone-800/80 hover:border-amber-500/50 hover:bg-stone-900 transition-colors flex flex-col justify-between"
+                  title={hub.subtitle}
+                  className="group text-left px-3.5 py-2.5 rounded-xl bg-stone-900/60 border border-stone-800/80 hover:border-amber-500/50 hover:bg-stone-900 transition-colors flex items-center justify-between gap-2"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-2xl">{hub.flag}</span>
-                      <span className="text-[11px] font-mono text-stone-400">
-                        {count}
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
-                      {hub.name}
-                    </h3>
-                    <p className="text-[11px] text-stone-500 mt-1 line-clamp-2 leading-snug">
-                      {hub.subtitle}
-                    </p>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-lg shrink-0">{hub.flag}</span>
+                    <span className="text-xs font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
+                      {hub.shortName}
+                    </span>
                   </div>
-                  <div className="mt-3 flex items-center gap-1 text-[11px] text-amber-500/80 group-hover:text-amber-400 font-medium">
-                    <span>Aç</span>
-                    <ChevronRight className="w-3 h-3" />
-                  </div>
+                  <span className="text-[11px] font-mono text-stone-500 group-hover:text-stone-300 shrink-0 tabular-nums">
+                    {count}
+                  </span>
                 </button>
               );
             })}
@@ -473,42 +725,60 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
       {/* MODE 2: FOCUSED COUNTRY VIEW */}
       {activeCountry && currentHub && (
         <div className="space-y-5">
+          {/* Top-left High-Contrast Back Button + Breadcrumb */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleBackToPortals}
+                className="flex items-center gap-2 px-4 py-2.5 text-sm font-extrabold rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 shadow-lg shadow-amber-500/20 transition-colors shrink-0"
+              >
+                <ArrowLeft className="w-4 h-4 stroke-[2.75]" />
+                <span>Geri Dön · Tüm Ülkeler</span>
+              </button>
+
+              <div className="hidden sm:flex items-center gap-2 text-xs text-stone-400">
+                <button
+                  type="button"
+                  onClick={handleBackToPortals}
+                  className="hover:text-amber-400 transition-colors"
+                >
+                  Ülkeler
+                </button>
+                <span className="text-stone-600">/</span>
+                <span className="text-stone-200 font-medium">
+                  {currentHub.flag} {currentHub.shortName}
+                </span>
+              </div>
+            </div>
+
+            <select
+              value={activeCountry}
+              onChange={(e) => {
+                const target = COUNTRY_HUBS.find((h) => h.key === e.target.value);
+                if (target) handleSelectCountry(target);
+              }}
+              className="bg-stone-900 border border-stone-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:outline-none focus:border-amber-500"
+            >
+              {COUNTRY_HUBS.map((h) => (
+                <option key={h.key} value={h.key}>
+                  {h.flag} {h.shortName} ({hubCounts[h.key] || 0})
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="p-5 rounded-xl bg-stone-900/70 border border-stone-800">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <button
-                  onClick={handleBackToPortals}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 transition-colors shrink-0"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Tüm Ülkeler</span>
-                </button>
-
-                <div className="flex items-center gap-2.5">
-                  <span className="text-2xl">{currentHub.flag}</span>
-                  <div>
-                    <h1 className="text-xl font-serif font-bold text-stone-100">
-                      {currentHub.name}
-                    </h1>
-                    <p className="text-xs text-stone-400">{currentHub.subtitle}</p>
-                  </div>
+                <span className="text-3xl">{currentHub.flag}</span>
+                <div>
+                  <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100">
+                    {currentHub.name}
+                  </h1>
+                  <p className="text-xs text-stone-400 mt-0.5">{currentHub.subtitle}</p>
                 </div>
               </div>
-
-              <select
-                value={activeCountry}
-                onChange={(e) => {
-                  const target = COUNTRY_HUBS.find((h) => h.key === e.target.value);
-                  if (target) handleSelectCountry(target);
-                }}
-                className="bg-stone-950 border border-stone-800 rounded-lg px-3 py-1.5 text-xs text-stone-200 focus:outline-none focus:border-amber-500"
-              >
-                {COUNTRY_HUBS.map((h) => (
-                  <option key={h.key} value={h.key}>
-                    {h.flag} {h.shortName} ({hubCounts[h.key] || 0})
-                  </option>
-                ))}
-              </select>
             </div>
 
             {currentHub.subCategories.length > 1 && (
@@ -619,6 +889,19 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 onSelect={onSelectLeader}
               />
             ))}
+          </div>
+        )}
+
+        {activeCountry && (
+          <div className="pt-4 flex justify-center">
+            <button
+              type="button"
+              onClick={handleBackToPortals}
+              className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-amber-500/50 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 text-amber-400" />
+              <span>Tüm Ülkelere Geri Dön</span>
+            </button>
           </div>
         )}
       </div>

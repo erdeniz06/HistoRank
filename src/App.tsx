@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Leader, UserRating } from './types';
 import { INITIAL_LEADERS } from './data/leaders';
 import {
@@ -21,7 +21,35 @@ import { Swords } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('portals');
+  const [activeCountry, setActiveCountry] = useState<string | null>(() => {
+    const match = window.location.hash.match(/^#country=([a-z0-9-]+)$/);
+    return match ? match[1] : null;
+  });
   const [currentCulture, setCurrentCulture] = useState<CultureKey>('turkey');
+
+  useEffect(() => {
+    const onPopState = () => {
+      const match = window.location.hash.match(/^#country=([a-z0-9-]+)$/);
+      setActiveCountry(match ? match[1] : null);
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const handleChangeCountry = (countryKey: string | null) => {
+    setActiveCountry(countryKey);
+    const targetHash = countryKey ? `#country=${countryKey}` : '#countries';
+    if (window.location.hash !== targetHash) {
+      window.history.pushState({ country: countryKey }, '', targetHash);
+    }
+  };
+
+  const handleSelectNavTab = (tab: NavTab) => {
+    if (tab === 'portals' && activeCountry !== null) {
+      handleChangeCountry(null);
+    }
+    setActiveTab(tab);
+  };
 
   const [leaders, setLeaders] = useState<Leader[]>(() => {
     const custom = loadCustomLeaders();
@@ -89,7 +117,7 @@ export default function App() {
     setSelectedLeader(leader);
     if (!leader) return;
 
-    if (leader.category === 'turkey' || leader.countryCode === 'TR' || leader.countryCode === 'TR-HIST') {
+    if (leader.category === 'turkey' || leader.category === 'azerbaijan' || leader.countryCode === 'TR' || leader.countryCode === 'TR-HIST' || leader.countryCode === 'AZ') {
       if (leader.subCategory === 'turkic-seljuk') {
         handleSelectCulture('turkic');
       } else {
@@ -107,7 +135,23 @@ export default function App() {
       handleSelectCulture('france');
     } else if (leader.category === 'spain' || leader.countryCode === 'ES') {
       handleSelectCulture('spain');
-    } else if (['belgium', 'netherlands', 'italy', 'poland', 'yugoslavia'].includes(leader.category)) {
+    } else if (
+      [
+        'belgium',
+        'netherlands',
+        'italy',
+        'poland',
+        'yugoslavia',
+        'greece',
+        'serbia',
+        'bosnia',
+        'croatia',
+        'bulgaria',
+        'romania',
+        'albania',
+        'north-macedonia',
+      ].includes(leader.category)
+    ) {
       handleSelectCulture('europe');
     } else if (leader.category === 'ancient' || leader.era === 'ancient') {
       handleSelectCulture('ancient');
@@ -128,12 +172,17 @@ export default function App() {
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
       <Navbar
         activeTab={activeTab}
-        onSelectTab={setActiveTab}
+        onSelectTab={handleSelectNavTab}
         onOpenAddModal={() => setIsAddModalOpen(true)}
         comparedCount={comparedLeaderIds.length}
         leaders={leaders}
         userRatings={userRatings}
         onSelectLeader={(l) => handleSelectLeaderWithCulture(l)}
+        showCountryBackButton={activeTab === 'portals' && activeCountry !== null}
+        onBackFromCountry={() => {
+          handleChangeCountry(null);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       <AudioPlayerBar
@@ -150,6 +199,8 @@ export default function App() {
             onToggleCompare={handleToggleCompare}
             onSelectLeader={handleSelectLeaderWithCulture}
             onSelectCulture={handleSelectCulture}
+            activeCountry={activeCountry}
+            onChangeCountry={handleChangeCountry}
           />
         )}
 

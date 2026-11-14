@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { Plus, Search, X } from 'lucide-react';
+import { ArrowLeft, Plus, Search, X } from 'lucide-react';
 import { Leader, UserRating } from '../types';
-import { calculateOverallScore, getEffectiveScores } from '../utils/scoring';
+import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
 
 export type NavTab = 'portals' | 'giants' | 'compare' | 'tierlist';
 
@@ -13,6 +13,8 @@ interface NavbarProps {
   leaders: Leader[];
   userRatings: Record<string, UserRating>;
   onSelectLeader: (leader: Leader) => void;
+  showCountryBackButton?: boolean;
+  onBackFromCountry?: () => void;
 }
 
 function normalizeSearchText(str: string): string {
@@ -45,6 +47,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   leaders,
   userRatings,
   onSelectLeader,
+  showCountryBackButton,
+  onBackFromCountry,
 }) => {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -82,15 +86,28 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-stone-950/95 backdrop-blur-md border-b border-stone-800/80">
       <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap items-center justify-between gap-3 sm:gap-5 px-4 sm:px-6 py-3">
-        {/* Brand Wordmark */}
-        <button
-          onClick={() => onSelectTab('portals')}
-          className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
-        >
-          <span className="font-cinzel text-lg sm:text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
-            PANTHEON
-          </span>
-        </button>
+        {/* Top-left Back Button (when inside a country) + Brand Wordmark */}
+        <div className="flex items-center gap-3 shrink-0">
+          {showCountryBackButton && onBackFromCountry && (
+            <button
+              type="button"
+              onClick={onBackFromCountry}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs shadow-lg shadow-amber-500/25 transition-colors shrink-0"
+              title="Tüm ülkelere geri dön"
+            >
+              <ArrowLeft className="w-4 h-4 stroke-[2.75]" />
+              <span>Geri</span>
+            </button>
+          )}
+          <button
+            onClick={() => onSelectTab('portals')}
+            className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
+          >
+            <span className="font-cinzel text-lg sm:text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
+              PANTHEON
+            </span>
+          </button>
+        </div>
 
         {/* Global Top Search Bar */}
         <div ref={searchContainerRef} className="relative flex-1 min-w-[200px] max-w-md order-3 md:order-2 w-full md:w-auto">
@@ -141,6 +158,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="divide-y divide-stone-800/70 max-h-80 overflow-y-auto">
                   {searchResults.map((leader) => {
                     const score = calculateOverallScore(getEffectiveScores(leader, userRatings));
+                    const tier = getTierForScore(score);
                     return (
                       <button
                         key={leader.id}
@@ -159,9 +177,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                             </div>
                           </div>
                         </div>
-                        <span className="text-xs font-mono font-bold text-amber-400 shrink-0">
-                          {score}
-                        </span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span
+                            className="text-[10px] font-extrabold px-1.5 py-0.5 rounded border"
+                            style={{
+                              color: tier.color,
+                              backgroundColor: tier.bgColor,
+                              borderColor: tier.borderColor,
+                            }}
+                          >
+                            {tier.tier} TIER
+                          </span>
+                          <span
+                            className="text-sm font-mono font-black tabular-nums"
+                            style={{ color: tier.color }}
+                          >
+                            {score}
+                          </span>
+                        </div>
                       </button>
                     );
                   })}

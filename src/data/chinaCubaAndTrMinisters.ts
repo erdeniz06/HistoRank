@@ -588,6 +588,7 @@ export const CHINA_CUBA_AND_TR_MINISTERS: Leader[] = [
     category: 'egypt',
     subCategory: 'eg-leader',
     region: 'asia',
+    regions: ['africa', 'asia'],
     defaultScores: { military: 74, economy: 78, societal: 84, diplomacy: 88, leadership: 94, legacy: 91 },
     summary: '1952 Hür Subaylar Darbesi ile Mısır monarşisini yıkan, Süveyş Kanalı’nı millileştirerek İngiliz-Fransız sömürgeciliğine meydan okuyan ve Bağlantısızlar Hareketi’nin kurucularından Arap dünyasının en karizmatik lideri.',
     keyAchievements: [

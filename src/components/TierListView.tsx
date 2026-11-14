@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Leader, TierLevel, UserRating } from '../types';
 import { TIERS, ERAS } from '../data/leaders';
-import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
+import { calculateOverallScore, getEffectiveScores, getLeaderTierSubtitle, getTierForScore } from '../utils/scoring';
 import { SlidersHorizontal, Layers, Sparkles } from 'lucide-react';
 
 interface TierListViewProps {
@@ -118,6 +118,29 @@ export const TierListView: React.FC<TierListViewProps> = ({
             <option value="yugoslavia">🇷🇸 Yugoslavya</option>
             <option value="mongolia">🇲🇳 Moğolistan</option>
             <option value="egypt">🇪🇬 Mısır & Eyyubiler</option>
+            <option value="iraq">🇮🇶 Irak</option>
+            <option value="iran">🇮🇷 İran</option>
+            <option value="syria">🇸🇾 Suriye</option>
+            <option value="saudi-arabia">🇸🇦 Suudi Arabistan</option>
+            <option value="palestine">🇵🇸 Filistin</option>
+            <option value="libya">🇱🇾 Libya</option>
+            <option value="burkina-faso">🇧🇫 Burkina Faso</option>
+            <option value="ghana">🇬🇭 Gana</option>
+            <option value="tanzania">🇹🇿 Tanzanya</option>
+            <option value="south-africa">🇿🇦 Güney Afrika</option>
+            <option value="botswana">🇧🇼 Botsvana</option>
+            <option value="azerbaijan">🇦🇿 Azerbaycan</option>
+            <option value="armenia">🇦🇲 Ermenistan</option>
+            <option value="georgia">🇬🇪 Gürcistan</option>
+            <option value="greece">🇬🇷 Yunanistan</option>
+            <option value="serbia">🇷🇸 Sırbistan</option>
+            <option value="bosnia">🇧🇦 Bosna-Hersek</option>
+            <option value="croatia">🇭🇷 Hırvatistan</option>
+            <option value="bulgaria">🇧🇬 Bulgaristan</option>
+            <option value="romania">🇷🇴 Romanya</option>
+            <option value="albania">🇦🇱 Arnavutluk</option>
+            <option value="north-macedonia">🇲🇰 Kuzey Makedonya</option>
+            <option value="islamic">☪️ İslam Tarihi & Halifeler</option>
             <option value="ancient">🏛️ Antik Roma & Yunan</option>
           </select>
 
@@ -151,19 +174,19 @@ export const TierListView: React.FC<TierListViewProps> = ({
             >
               {/* Left Tier Header Banner */}
               <div
-                className="w-full md:w-36 p-4 flex md:flex-col items-center justify-between md:justify-center text-center shrink-0 border-b md:border-b-0 md:border-r border-stone-800"
+                className="w-full md:w-40 p-4 flex md:flex-col items-center justify-between md:justify-center text-center shrink-0 border-b md:border-b-0 md:border-r border-stone-800"
                 style={{ backgroundColor: tierConfig.bgColor }}
               >
                 <div
-                  className="text-4xl font-extrabold font-serif"
+                  className="text-4xl font-extrabold font-serif tracking-tight"
                   style={{ color: tierConfig.color }}
                 >
-                  {tierConfig.tier}
+                  {tierConfig.tier} TIER
                 </div>
-                <div className="text-[11px] font-semibold text-stone-300 uppercase tracking-wider mt-1">
+                <div className="text-xs font-bold text-stone-200 uppercase tracking-wider mt-1">
                   {tierConfig.minScore}+ Puan
                 </div>
-                <div className="text-[10px] text-stone-400 max-w-[100px] hidden md:block mt-1 leading-tight">
+                <div className="text-[11px] text-stone-300 max-w-[120px] hidden md:block mt-1 leading-tight">
                   {tierConfig.label}
                 </div>
               </div>
@@ -175,35 +198,40 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     Bu seviyede henüz lider bulunmuyor (filtrelere göre veya puanlama sonrası güncellenir).
                   </div>
                 ) : (
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {leadersInTier.map((leader) => {
                       const scores = getEffectiveScores(leader, userRatings, useUserRatings);
                       const overall = calculateOverallScore(scores);
+                      const tierSubtitle = getLeaderTierSubtitle(leader, scores, tierConfig.tier);
 
                       return (
                         <div
                           key={leader.id}
                           onClick={() => onSelectLeader(leader)}
-                          className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
-                          title={`${leader.name} - ${overall}/100 Puan (${leader.title})`}
+                          className="group flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
+                          title={`${leader.name} - ${overall}/100 Puan (${tierConfig.tier} Tier · ${tierSubtitle})`}
                         >
                           <span className="text-lg shrink-0">{leader.flag}</span>
 
                           <div className="min-w-0 max-w-[140px]">
-                            <h4 className="text-xs font-semibold text-stone-200 group-hover:text-amber-400 transition-colors truncate">
+                            <h4 className="text-xs font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
                               {leader.name}
                             </h4>
-                            <div className="text-[10px] text-stone-500 truncate">
+                            <div className="text-[10px] text-stone-400 truncate">
                               {leader.country}
                             </div>
                           </div>
 
-                          <span
-                            className="text-xs font-mono font-bold ml-1 tabular-nums"
-                            style={{ color: tierConfig.color }}
+                          <div
+                            className="ml-1 px-2 py-1 rounded-lg font-mono font-extrabold text-xs tabular-nums shrink-0 border"
+                            style={{
+                              color: tierConfig.color,
+                              backgroundColor: tierConfig.bgColor,
+                              borderColor: tierConfig.borderColor,
+                            }}
                           >
                             {overall}
-                          </span>
+                          </div>
                         </div>
                       );
                     })}

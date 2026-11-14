@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Leader, LeaderScores, UserRating } from '../types';
 import { DIMENSIONS } from '../data/leaders';
-import { calculateOverallScore, getEffectiveScores, getTierForScore, removeUserRating, saveUserRating } from '../utils/scoring';
+import { calculateOverallScore, getEffectiveScores, getLeaderTierSubtitle, getTierForScore, removeUserRating, saveUserRating } from '../utils/scoring';
 import { RadarChart } from './RadarChart';
 import {
   X,
@@ -61,6 +61,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
 
   const overallScore = calculateOverallScore(currentScores);
   const tier = getTierForScore(overallScore);
+  const tierSubtitle = getLeaderTierSubtitle(leader, currentScores, tier.tier);
   const defaultOverallScore = calculateOverallScore(leader.defaultScores);
 
   const handleSliderChange = (key: keyof LeaderScores, val: number) => {
@@ -365,10 +366,10 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                       border: `1px solid ${tier.borderColor}`,
                     }}
                   >
-                    {tier.tier} - KATEGORİSİ
+                    {tier.tier} TIER
                   </div>
                   <span className="text-[11px] text-stone-400 block">
-                    {tier.label}
+                    {tierSubtitle}
                   </span>
                 </div>
               </div>

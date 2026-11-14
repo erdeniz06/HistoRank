@@ -1,5 +1,6 @@
 import { Leader, LeaderScores, TierConfig, TierLevel, UserRating } from '../types';
 import { TIERS } from '../data/leaders';
+export { getLeaderTierSubtitle } from './leaderEpithets';
 
 const RATINGS_STORAGE_KEY = 'pantheon_user_ratings_v1';
 const CUSTOM_LEADERS_KEY = 'pantheon_custom_leaders_v1';
