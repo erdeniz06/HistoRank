@@ -1,6 +1,16 @@
 import React from 'react';
 import { Leader, UserRating } from '../types';
-import { calculateOverallScore, getEffectiveScores, getLeaderTierSubtitle, getTierForScore } from '../utils/scoring';
+import {
+  calculateOverallScore,
+  getEffectiveScores,
+  getLeaderPopularityScore,
+  getLeaderPopularityTier,
+  getLeaderPowerRole,
+  getLeaderTierSubtitle,
+  getPopularityLeagueInfo,
+  getPowerRoleLabel,
+  getTierForScore,
+} from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
 import { Check, Plus } from 'lucide-react';
 
@@ -24,6 +34,10 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   const tier = getTierForScore(overallScore);
   const tierSubtitle = getLeaderTierSubtitle(leader, scores, tier.tier);
   const hasUserScore = !!userRating;
+  const powerRole = getLeaderPowerRole(leader);
+  const powerRoleLabel = getPowerRoleLabel(leader);
+  const popScore = getLeaderPopularityScore(leader);
+  const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
 
   return (
     <div
@@ -52,16 +66,35 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
           <p className="text-xs text-stone-400 line-clamp-1 mt-0.5">
             {leader.title}
           </p>
-          {(hasUserScore || leader.isCustom) && (
-            <div className="flex items-center gap-2 text-[11px] mt-1">
-              {hasUserScore && (
-                <span className="text-amber-400 font-semibold">✓ Sizin Puanınız Aktif</span>
-              )}
-              {leader.isCustom && (
-                <span className="text-cyan-400 font-medium">Özel Eklendi</span>
-              )}
-            </div>
-          )}
+          <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] mt-1.5">
+            <span
+              className={`inline-flex items-center gap-1 font-medium ${
+                powerRole === 'ruler' ? 'text-emerald-400/90' : 'text-sky-400/90'
+              }`}
+            >
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  powerRole === 'ruler' ? 'bg-emerald-400' : 'bg-sky-400'
+                }`}
+              />
+              {powerRoleLabel}
+            </span>
+            <span className="text-stone-600" aria-hidden="true">·</span>
+            <span
+              className={`inline-flex items-center gap-1 font-medium ${popLeague.textClass}`}
+              title={`Küresel Tanınırlık / Popülerlik: ${popScore}/100 (${popLeague.label})`}
+            >
+              <span>{popLeague.icon}</span>
+              <span>{popLeague.shortLabel}</span>
+              <span className="font-mono text-[10px] opacity-80">({popScore})</span>
+            </span>
+            {hasUserScore && (
+              <span className="text-amber-400 font-semibold">· ✓ Sizin Puanınız Aktif</span>
+            )}
+            {leader.isCustom && (
+              <span className="text-cyan-400 font-medium">· Özel Eklendi</span>
+            )}
+          </div>
         </div>
 
         {/* High-Visibility Tier & Overall Score Strip */}

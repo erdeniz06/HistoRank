@@ -78,6 +78,10 @@ export type LeaderCategory =
   | 'albania'
   | 'north-macedonia'
   | 'islamic'
+  | 'christianity'
+  | 'india'
+  | 'brazil'
+  | 'ukraine'
   | 'ancient';
 
 export type GeographicRegion = 'all' | 'europe' | 'asia' | 'americas' | 'africa';
@@ -86,6 +90,7 @@ export type SubCategoryKey =
   | 'all'
   | 'turkic-seljuk'
   | 'ottoman-sultan'
+  | 'ottoman-commander'
   | 'tr-president'
   | 'tr-pm'
   | 'tr-minister'
@@ -99,6 +104,7 @@ export type SubCategoryKey =
   | 'us-party'
   | 'de-chancellor'
   | 'de-party'
+  | 'de-thinker'
   | 'fr-leader'
   | 'fr-party'
   | 'es-monarch'
@@ -135,6 +141,11 @@ export type SubCategoryKey =
   | 'umayyad'
   | 'abbasid'
   | 'islamic-commander'
+  | 'christian-thinker'
+  | 'christian-pope'
+  | 'in-leader'
+  | 'br-leader'
+  | 'ua-leader'
   | 'ancient-rome'
   | 'ancient-greece';
 
@@ -146,6 +157,8 @@ export interface LeaderScores {
   leadership: number;
   legacy: number;
 }
+
+export type PopularityTier = 'global-icon' | 'international' | 'national' | 'niche';
 
 export interface Leader {
   id: string;
@@ -203,9 +216,16 @@ export interface Leader {
     | 'albania'
     | 'north-macedonia'
     | 'islamic'
+    | 'christianity'
+    | 'india'
+    | 'brazil'
+    | 'ukraine'
     | 'ancient'
     | 'custom';
   subCategory?: SubCategoryKey;
+  powerRole?: 'ruler' | 'non-ruler';
+  popularityScore?: number;
+  popularityTier?: PopularityTier;
   region?: GeographicRegion;
   regions?: ('europe' | 'asia' | 'americas' | 'africa')[];
   defaultScores: LeaderScores;

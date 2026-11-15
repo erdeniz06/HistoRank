@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Leader, LeaderScores, UserRating } from '../types';
 import { DIMENSIONS } from '../data/leaders';
-import { calculateOverallScore, getEffectiveScores, getLeaderTierSubtitle, getTierForScore, removeUserRating, saveUserRating } from '../utils/scoring';
+import {
+  calculateOverallScore,
+  getEffectiveScores,
+  getLeaderPopularityScore,
+  getLeaderPopularityTier,
+  getLeaderPowerRole,
+  getLeaderTierSubtitle,
+  getPopularityLeagueInfo,
+  getPowerRoleLabel,
+  getTierForScore,
+  removeUserRating,
+  saveUserRating,
+} from '../utils/scoring';
 import { RadarChart } from './RadarChart';
 import {
   X,
@@ -207,9 +219,24 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   </span>
                 )}
               </div>
-              <p className="text-sm font-medium text-amber-500 mb-3">
-                {leader.title}
-              </p>
+              <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                <p className="text-sm font-medium text-amber-500">
+                  {leader.title}
+                </p>
+                <span className="text-stone-600" aria-hidden="true">·</span>
+                <span
+                  className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
+                    getLeaderPowerRole(leader) === 'ruler' ? 'text-emerald-400' : 'text-sky-400'
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      getLeaderPowerRole(leader) === 'ruler' ? 'bg-emerald-400' : 'bg-sky-400'
+                    }`}
+                  />
+                  {getPowerRoleLabel(leader)}
+                </span>
+              </div>
               <p className="text-sm text-stone-300 leading-relaxed max-w-2xl">
                 {leader.summary}
               </p>
@@ -373,6 +400,30 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   </span>
                 </div>
               </div>
+
+              {/* Popularity / Global Recognition Strip (Separate from Merit Score) */}
+              {(() => {
+                const popScore = getLeaderPopularityScore(leader);
+                const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
+                return (
+                  <div className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-stone-900/70 border border-stone-800/80 text-xs">
+                    <div className="min-w-0">
+                      <span className="text-[11px] text-stone-400 block">
+                        Küresel Popülerlik & Tanınırlık Ligi
+                      </span>
+                      <span className={`font-semibold ${popLeague.textClass}`}>
+                        {popLeague.icon} {popLeague.label}
+                      </span>
+                    </div>
+                    <div className="text-right shrink-0 ml-3">
+                      <span className="text-lg font-mono font-extrabold text-stone-100 tabular-nums">
+                        {popScore}
+                      </span>
+                      <span className="text-[11px] text-stone-500 font-mono">/100</span>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Radar Chart */}
               <div className="relative py-2">

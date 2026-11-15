@@ -1,0 +1,505 @@
+import { Leader, PopularityTier } from '../types';
+
+export interface PopularityLeagueInfo {
+  key: PopularityTier;
+  label: string;
+  shortLabel: string;
+  icon: string;
+  minScore: number;
+  description: string;
+  accentColor: string;
+  bgClass: string;
+  borderClass: string;
+  textClass: string;
+}
+
+export const POPULARITY_LEAGUES: PopularityLeagueInfo[] = [
+  {
+    key: 'global-icon',
+    label: 'Küresel İkonlar (Dünya Çapında Efsaneler)',
+    shortLabel: 'Küresel İkon',
+    icon: '🌍',
+    minScore: 90,
+    description:
+      'Dünya tarihinde hemen herkesin bildiği, çağları ve kıtaları aşan küresel şöhrete sahip liderler ve düşünürler.',
+    accentColor: '#f59e0b',
+    bgClass: 'bg-amber-500/10',
+    borderClass: 'border-amber-500/35',
+    textClass: 'text-amber-300',
+  },
+  {
+    key: 'international',
+    label: 'Uluslararası Bilinenler (Geniş Tanınırlık)',
+    shortLabel: 'Uluslararası',
+    icon: '🌐',
+    minScore: 72,
+    description:
+      'Kendi sınırlarının ötesinde dünya kamuoyunda veya genel tarih literatüründe güçlü bilinirliği olan aktörler.',
+    accentColor: '#10b981',
+    bgClass: 'bg-emerald-500/10',
+    borderClass: 'border-emerald-500/35',
+    textClass: 'text-emerald-300',
+  },
+  {
+    key: 'national',
+    label: 'Ulusal & Bölgesel Ölçek',
+    shortLabel: 'Ulusal / Bölgesel',
+    icon: '🏛️',
+    minScore: 52,
+    description:
+      'Kendi ülkesinde veya bölgesinde çok büyük siyasi/tarihi ağırlığı bulunan, ancak küresel popülerliği daha sınırlı figürler.',
+    accentColor: '#38bdf8',
+    bgClass: 'bg-sky-500/10',
+    borderClass: 'border-sky-500/35',
+    textClass: 'text-sky-300',
+  },
+  {
+    key: 'niche',
+    label: 'Niş, Akademik & Yerel Tarih',
+    shortLabel: 'Niş / Yerel',
+    icon: '📜',
+    minScore: 0,
+    description:
+      'Özel tarih araştırmaları, yerel siyaset veya dönemsel makamlar üzerinden tanınan daha dar kapsamlı figürler.',
+    accentColor: '#a8a29e',
+    bgClass: 'bg-stone-800/60',
+    borderClass: 'border-stone-700',
+    textClass: 'text-stone-300',
+  },
+];
+
+/**
+ * Tarihsel ve güncel küresel popülerlik / tanınırlık puanları (0–100).
+ * Devlet yönetimi liyakat puanından BAĞIMSIZDIR:
+ * Örneğin Süleyman Demirel (64) ile Napolyon (99) aynı yönetim bandında olsa dahi
+ * ayrı popülerlik liglerinde listelenir.
+ */
+export const LEADER_POPULARITY_SCORES: Record<string, number> = {
+  // === 1. LİG: KÜRESEL İKONLAR (90 – 100) ===
+  caesar: 99,
+  napoleon: 99,
+  'alexander-the-great': 99,
+  'kleopatra-7': 98,
+  'adolf-hitler': 99,
+  'genghis-khan': 97,
+  'abraham-lincoln': 97,
+  'george-washington': 97,
+  'winston-churchill': 97,
+  'mahatma-gandhi': 97,
+  'nelson-mandela': 97,
+  'josef-stalin': 97,
+  'karl-marx': 96,
+  'vladimir-lenin': 96,
+  'mao-zedong': 96,
+  'donald-trump': 96,
+  'barack-obama': 96,
+  ataturk: 95,
+  'queen-elizabeth-1': 95,
+  'elizabeth-2': 95,
+  'queen-victoria': 95,
+  'vladimir-putin': 95,
+  octavius: 94,
+  'marcus-aurelius': 94,
+  'john-f-kennedy': 94,
+  'franklin-d-roosevelt': 94,
+  'che-guevara': 94,
+  'fidel-castro': 94,
+  nero: 94,
+  tutankhamun: 94,
+  'louis-14': 94,
+  'ramses-2': 93,
+  'fatih-mehmed': 93,
+  'suleiman-the-magnificent': 93,
+  'peter-the-great': 93,
+  'charles-de-gaulle': 93,
+  'thomas-jefferson': 93,
+  'margaret-thatcher': 92,
+  'martin-luther': 92,
+  saladin: 92,
+  attila: 92,
+  'joe-biden': 92,
+  'xi-jinping': 92,
+  'volodymyr-zelenskyy': 92,
+  'leon-trotsky': 91,
+  'otto-von-bismarck': 91,
+  'constantine-the-great': 91,
+  'st-paul': 91,
+  'angela-merkel': 91,
+  'ronald-reagan': 91,
+  'bill-clinton': 91,
+  'george-w-bush': 91,
+  'ii-katerina': 91,
+  'kim-jong-un': 91,
+  'emir-timur': 90,
+  'qin-shi-huang': 90,
+  'kamala-harris': 90,
+  'benjamin-netanyahu': 90,
+  'saddam-hussein': 90,
+  'muammar-gaddafi': 90,
+  'st-augustine': 90,
+  'st-francis-assisi': 90,
+  'st-thomas-aquinas': 90,
+  'frederick-the-great': 90,
+
+  // === 2. LİG: ULUSLARARASI BİLİNENLER (72 – 89) ===
+  'emmanuel-macron': 89,
+  'boris-johnson': 89,
+  'tony-blair': 89,
+  'mikhail-gorbachev': 89,
+  'deng-xiaoping': 89,
+  'recep-tayyip-erdogan': 89,
+  'narendra-modi': 89,
+  'jd-vance': 88,
+  'bernie-sanders': 88,
+  'giorgia-meloni': 88,
+  'yavuz-sultan-selim': 88,
+  'abdulhamid-2': 88,
+  'hz-ebubekir': 88,
+  'hz-omer': 88,
+  'hz-osman': 88,
+  'hz-ali': 88,
+  'ruhollah-khomeini': 88,
+  'shinzo-abe': 88,
+  'jawaharlal-nehru': 88,
+  'lula-da-silva': 87,
+  'jair-bolsonaro': 87,
+  'ho-chi-minh': 87,
+  'josip-broz-tito': 87,
+  'theodore-roosevelt': 87,
+  'harry-truman': 87,
+  'dwight-eisenhower': 87,
+  'friedrich-engels': 87,
+  'rosa-luxemburg': 87,
+  'bertolt-brecht': 87,
+  caligula: 87,
+  trajan: 86,
+  hadrian: 86,
+  'justinian-i': 86,
+  pericles: 86,
+  cicero: 86,
+  'mark-antony': 86,
+  'maximilien-robespierre': 86,
+  'william-the-conqueror': 86,
+  'john-calvin': 86,
+  'harun-resid': 86,
+  'ivan-the-terrible': 85,
+  'nicholas-2': 85,
+  'silvio-berlusconi': 85,
+  'marine-le-pen': 85,
+  'keir-starmer': 85,
+  'rishi-sunak': 85,
+  'alexandria-ocasio-cortez': 85,
+  'marco-rubio': 85,
+  'mike-pence': 85,
+  'dick-cheney': 85,
+  'al-gore': 85,
+  'golda-meir': 85,
+  'yasser-arafat': 85,
+  'pol-pot': 85,
+  'osman-gazi': 85,
+  'barbaros-hayreddin-pasa': 85,
+  'piri-reis': 85,
+  'kubilay-han': 85,
+  'harun-al-rashid': 85,
+  'sun-yat-sen': 84,
+  'chiang-kai-shek': 84,
+  'oda-nobunaga': 84,
+  'tokugawa-ieyasu': 84,
+  'emperor-meiji': 84,
+  'ali-khamenei': 84,
+  'qasem-soleimani': 84,
+  'bashar-al-assad': 84,
+  'yitzhak-rabin': 84,
+  'david-ben-gurion': 84,
+  'khufu-keops': 84,
+  akhenaton: 84,
+  hatshepsut: 83,
+  'isabella-castile': 83,
+  'philip-2-spain': 83,
+  'nikita-khrushchev': 83,
+  'leonid-brezhnev': 83,
+  'willy-brandt': 83,
+  'konrad-adenauer': 83,
+  'helmut-schmidt': 83,
+  'olaf-scholz': 83,
+  'friedrich-merz': 83,
+  'mark-rutte': 83,
+  'mario-draghi': 83,
+  'donald-tusk': 83,
+  'nigel-farage': 83,
+  'jeremy-corbyn': 83,
+  'gavin-newsom': 82,
+  'ron-desantis': 82,
+  'john-adams': 82,
+  'st-benedict': 82,
+  'pope-urban-2': 82,
+  'pope-gregory-1': 81,
+  'theodosius-1': 81,
+  'cemal-abdunnasir': 81,
+  'enver-sedat': 81,
+  'ismail-haniyeh': 81,
+  'yahya-sinwar': 81,
+  'sultan-alparslan': 80,
+  'mete-han': 80,
+  'enver-pasa': 80,
+  'sultan-baybars': 80,
+  'halid-bin-velid': 80,
+  'tarik-bin-ziyad': 80,
+  'kim-il-sung': 80,
+  'kim-jong-il': 80,
+  'clement-attlee': 80,
+  'david-lloyd-george': 80,
+  'theresa-may': 79,
+  'david-cameron': 79,
+  'gordon-brown': 79,
+  'liz-truss': 79,
+  'pedro-sanchez': 79,
+  'geert-wilders': 79,
+  'alice-weidel': 79,
+  'jordan-bardella': 79,
+  'jean-luc-melenchon': 79,
+  'clara-zetkin': 78,
+  'karl-liebknecht': 78,
+  'nikki-haley': 78,
+  'pete-buttigieg': 78,
+  'rand-paul': 78,
+  'paul-ryan': 77,
+  'mike-johnson': 77,
+  'hakeem-jeffries': 77,
+  'robert-habeck': 76,
+  'christian-lindner': 76,
+  'sahra-wagenknecht': 76,
+  'gabriel-attal': 76,
+  'edouard-philippe': 75,
+  'nicola-sturgeon': 75,
+  'john-major': 75,
+  'aleksandar-vucic': 75,
+  'ilham-aliyev': 75,
+  'haydar-aliyev': 75,
+  'hafez-al-assad': 75,
+  'moshe-dayan': 75,
+  'shimon-peres': 75,
+  'ariel-sharon': 75,
+  'menachem-begin': 75,
+  'king-faisal': 75,
+  'mohammad-mosaddegh': 75,
+  'reza-shah-pahlavi': 75,
+  'mohammad-reza-pahlavi': 75,
+  'toyotomi-hideyoshi': 74,
+  'hideki-tojo': 74,
+  'vo-nguyen-giap': 74,
+  'raul-castro': 74,
+  'thomas-sankara': 74,
+  'kwame-nkrumah': 74,
+  'julius-nyerere': 74,
+  'nicolae-ceausescu': 74,
+  'enver-hoxha': 74,
+  'alija-izetbegovic': 74,
+  'mikheil-saakashvili': 73,
+  'eduard-shevardnadze': 73,
+  'kyriakos-mitsotakis': 73,
+  'alexis-tsipras': 73,
+  'matteo-salvini': 73,
+  'giuseppe-conte': 73,
+  'charles-michel': 73,
+  'turgut-reis': 73,
+  'mahmud-2': 73,
+  'murad-4': 73,
+  'bayezid-1': 73,
+  'diocletian': 73,
+  'vespasian': 73,
+  aurelian: 73,
+  heraclius: 73,
+  'pope-gregory-7': 73,
+  'karl-kautsky': 73,
+  'august-bebel': 73,
+  'eduard-bernstein': 73,
+  'friedrich-ebert': 73,
+  'muaviye-bin-ebu-sufyan': 73,
+  'omer-bin-abdulaziz': 73,
+  'el-memun': 73,
+  'el-mansur': 73,
+
+  // === 3. LİG: ULUSAL & BÖLGESEL ÖLÇEK (52 – 71) ===
+  // Türkiye siyasi figürleri & komutanlar (ulusal çapta çok ünlü ama Napolyon/Sezar liginden ayrı!)
+  'ismet-inonu': 70,
+  'turgut-ozal': 69,
+  'bulent-ecevit': 67,
+  'adnan-menderes': 66,
+  'suleyman-demirel': 65,
+  'necmettin-erbakan': 64,
+  'alparslan-turkes': 63,
+  'devlet-bahceli': 63,
+  'ekrem-imamoglu': 66,
+  'kemal-kilicdaroglu': 62,
+  'mansur-yavas': 61,
+  'ozgur-ozel': 60,
+  'meral-aksener': 60,
+  'selahattin-demirtas': 62,
+  'tansu-ciller': 61,
+  'mesut-yilmaz': 59,
+  'celal-bayar': 60,
+  'kenan-evren': 62,
+  'ahmet-davutoglu': 58,
+  'binali-yildirim': 58,
+  'ali-babacan': 57,
+  'umit-ozdag': 57,
+  'muharrem-ince': 57,
+  'fatih-erbakan': 56,
+  'abdullah-ocalan': 65,
+  'sokullu-mehmed-pasa': 70,
+  'pargali-ibrahim-pasa': 69,
+  'koprulu-mehmed-pasa': 66,
+  'gazi-osman-pasa': 68,
+  'kilic-ali-pasa': 65,
+  'cezayirli-gazi-hasan-pasa': 62,
+  'mithat-pasa': 65,
+  'talat-pasa': 67,
+  'cemal-pasa': 64,
+  'orhan-gazi': 69,
+  'murad-1': 69,
+  'murad-2': 66,
+  'bayezid-2': 66,
+  'selim-3': 67,
+  abdulmecid: 65,
+  'mehmed-1': 64,
+  'tugrul-bey': 68,
+  'sultan-meliksah': 68,
+  nizamulmulk: 69,
+  'bilge-kagan': 69,
+  'bumin-kagan': 67,
+  'vezir-tonyukuk': 66,
+  'kul-tigin': 67,
+  'alaeddin-keykubad': 66,
+  'gazneli-mahmud': 68,
+  'celaleddin-harzemsah': 64,
+  'uzun-hasan': 64,
+  'ismail-cem': 59,
+  'kemal-dervis': 60,
+  'hasan-ali-yucel': 60,
+  'mahmut-esat-bozkurt': 57,
+  'fatin-rustu-zorlu': 56,
+  'esref-bitlis': 56,
+  'yair-lapid': 65,
+  'benny-gantz': 64,
+  'petro-poroshenko': 68,
+  'markus-soder': 66,
+  'heidi-reichinnek': 61,
+  'eric-zemmour': 67,
+  'matteo-renzi': 68,
+  'kemi-badenoch': 66,
+  'ed-davey': 58,
+  'rachel-reeves': 66,
+  'antoninus-pius': 70,
+  'septimius-severus': 70,
+  'julian-apostate': 70,
+  tiberius: 70,
+  claudius: 70,
+  'romulus-augustulus': 69,
+  'thutmose-3': 70,
+  'seti-1': 66,
+  'ramses-3': 66,
+  'narmer-menes': 68,
+  zoser: 67,
+  'kavalali-mehmed-ali': 69,
+  'abdurrahman-1': 69,
+  'abdurrahman-3': 69,
+  'abdulmelik-bin-mervan': 68,
+  'ito-hirobumi': 68,
+  'saigo-takamori': 68,
+  'sakamoto-ryoma': 67,
+  'togo-heihachiro': 68,
+  'shigeru-yoshida': 66,
+  'sheikh-ahmed-yassin': 69,
+  'khaled-mashal': 67,
+  'mohammed-deif': 67,
+  'mehmed-emin-resulzade': 66,
+  'ebulfez-elcibey': 65,
+  'skanderbeg': 69,
+  'eleftherios-venizelos': 68,
+  'franjo-tudjman': 65,
+  'nikol-pashinyan': 67,
+  'mohammad-bagheri': 64,
+  'hossein-salami': 64,
+  'amir-ali-hajizadeh': 62,
+  'santiago-abascal': 64,
+  'alberto-feijoo': 64,
+  'yolanda-diaz': 63,
+  'isabel-diaz-ayuso': 66,
+  'elly-schlein': 62,
+  'bart-de-wever': 62,
+  'alexander-de-croo': 62,
+  'frans-timmermans': 66,
+  'dilan-yesilgoz': 61,
+  'dick-schoof': 58,
+  'jaroslaw-kaczynski': 66,
+  'andrzej-duda': 67,
+  'rafal-trzaskowski': 62,
+  'edi-rama': 63,
+  'boyko-borisov': 62,
+  'andrej-plenkovic': 60,
+  'zoran-milanovic': 60,
+  'jose-marti': 69,
+};
+
+/**
+ * Liderin küresel popülerlik / tanınırlık puanını (0-100) döndürür.
+ */
+export function getLeaderPopularityScore(leader: Leader): number {
+  if (typeof leader.popularityScore === 'number') {
+    return leader.popularityScore;
+  }
+  if (LEADER_POPULARITY_SCORES[leader.id] !== undefined) {
+    return LEADER_POPULARITY_SCORES[leader.id];
+  }
+
+  // Fallback akıllı tahmin (veri dosyalarında açıkça yoksa)
+  let base = 52;
+  if (leader.era === 'ancient') base = 64;
+  else if (leader.era === 'early-medieval') base = 55;
+  else if (leader.era === 'medieval') base = 58;
+  else if (leader.era === 'early-modern') base = 60;
+  else if (leader.era === '19th') base = 62;
+  else if (leader.era === '20th') base = 58;
+  else if (leader.era === '21st') base = 54;
+
+  // Büyük güç ülkeleri daha geniş küresel tanınırlık taşır
+  if (['usa', 'uk', 'france', 'germany', 'russia', 'china'].includes(leader.category)) {
+    base += 10;
+  } else if (['italy', 'spain', 'japan', 'india', 'brazil', 'israel', 'iran'].includes(leader.category)) {
+    base += 4;
+  } else if (['north-macedonia', 'bulgaria', 'romania', 'croatia', 'serbia', 'bosnia', 'albania', 'belgium'].includes(leader.category)) {
+    base -= 8;
+  }
+
+  // Niş alt kategoriler
+  if (leader.subCategory === 'tr-actor' || leader.subCategory === 'ottoman-late') {
+    base -= 10;
+  } else if (leader.subCategory === 'tr-minister' || leader.subCategory === 'tr-party') {
+    base -= 8;
+  } else if (leader.subCategory === 'tr-president') {
+    base -= 4;
+  }
+
+  // Miras (legacy) etkisi yüksek figürler biraz daha bilinirdir (ama Süleyman Demirel gibi ulusal isimleri küresel ikona çıkarmaz)
+  if (leader.defaultScores.legacy >= 92) base += 6;
+  else if (leader.defaultScores.legacy < 55) base -= 6;
+
+  return Math.max(25, Math.min(84, base));
+}
+
+export function getLeaderPopularityTier(leader: Leader): PopularityTier {
+  if (leader.popularityTier) return leader.popularityTier;
+  const score = getLeaderPopularityScore(leader);
+  if (score >= 90) return 'global-icon';
+  if (score >= 72) return 'international';
+  if (score >= 52) return 'national';
+  return 'niche';
+}
+
+export function getPopularityLeagueInfo(tier: PopularityTier): PopularityLeagueInfo {
+  return (
+    POPULARITY_LEAGUES.find((l) => l.key === tier) ||
+    POPULARITY_LEAGUES[POPULARITY_LEAGUES.length - 1]
+  );
+}

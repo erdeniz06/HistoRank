@@ -1,6 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Leader, UserRating, EraKey, GeographicRegion } from '../types';
-import { calculateOverallScore, getEffectiveScores } from '../utils/scoring';
+import { Leader, PopularityTier, UserRating, EraKey, GeographicRegion } from '../types';
+import {
+  POPULARITY_LEAGUES,
+  calculateOverallScore,
+  getEffectiveScores,
+  getLeaderPopularityScore,
+  getLeaderPopularityTier,
+  getLeaderPowerRole,
+} from '../utils/scoring';
 import { ERAS } from '../data/leaders';
 import { CultureKey } from '../audio/culturalAudioEngine';
 import { LeaderCard } from './LeaderCard';
@@ -30,51 +37,17 @@ interface CountryHubDef {
 
 const COUNTRY_HUBS: CountryHubDef[] = [
   {
-    key: 'turkey',
-    name: 'Türkiye & Türk Tarihi',
-    shortName: 'Türkiye',
-    flag: '🇹🇷',
-    culture: 'turkey',
-    regions: ['asia', 'europe'],
-    subtitle: 'Eski Türkler, Selçuklu, 36 Padişah, İttihatçılar, 13 CB, Başbakanlar ve Partiler',
-    subCategories: [
-      { key: 'all', label: 'Tüm Türk Tarihi' },
-      { key: 'turkic-seljuk', label: 'Eski Türkler & Selçuklu' },
-      { key: 'ottoman-sultan', label: 'Osmanlı Padişahları' },
-      { key: 'ottoman-late', label: 'İttihatçılar & Son Sadrazamlar' },
-      { key: 'tr-president', label: 'Cumhurbaşkanları' },
-      { key: 'tr-pm', label: 'Başbakanlar' },
-      { key: 'tr-minister', label: 'Cumhuriyet Bakanları' },
-      { key: 'tr-party', label: 'Parti Liderleri' },
-      { key: 'tr-actor', label: 'Siyasi & Tarihsel Aktörler' },
-    ],
-  },
-  {
-    key: 'germany',
-    name: 'Almanya',
-    shortName: 'Almanya',
-    flag: '🇩🇪',
-    culture: 'germany',
-    regions: ['europe'],
-    subtitle: 'Şansölyeler, Prusya ve Güncel Liderler (Merz, Scholz, Weidel...)',
+    key: 'usa',
+    name: 'ABD',
+    shortName: 'ABD',
+    flag: '🇺🇸',
+    culture: 'usa',
+    regions: ['americas'],
+    subtitle: 'Washington, Franklin, Hamilton, Lincoln, FDR, Kennedy, MLK Jr., Malcolm X, Trump, Obama, JD Vance, Harris, Rubio, Sanders',
     subCategories: [
       { key: 'all', label: 'Tümü' },
-      { key: 'de-chancellor', label: 'Şansölyeler & Hükümdarlar' },
-      { key: 'de-party', label: 'Güncel Siyasetçiler' },
-    ],
-  },
-  {
-    key: 'france',
-    name: 'Fransa',
-    shortName: 'Fransa',
-    flag: '🇫🇷',
-    culture: 'france',
-    regions: ['europe'],
-    subtitle: 'Napolyon, İhtilal, De Gaulle ve Güncel Siyasetçiler',
-    subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'fr-leader', label: 'Tarihsel Liderler' },
-      { key: 'fr-party', label: 'Güncel Siyasetçiler' },
+      { key: 'us-president', label: 'ABD Başkanları' },
+      { key: 'us-party', label: 'Kurucu Babalar, VP, Aktivist & Muhalefet' },
     ],
   },
   {
@@ -84,26 +57,41 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇬🇧',
     culture: 'uk',
     regions: ['europe'],
-    subtitle: 'Krallar, Son 25 Yılın Başbakanları ve Güncel Siyasetçiler',
+    subtitle: 'Krallar, Cromwell, Nelson, Wellington, Pitt, Disraeli, Gladstone, Churchill, Thatcher, Attlee, Starmer, Sunak, Farage',
     subCategories: [
       { key: 'all', label: 'Tümü' },
-      { key: 'uk-monarch', label: 'Krallar & Kraliçeler' },
+      { key: 'uk-monarch', label: 'Krallar, Kraliçeler & Komutanlar' },
       { key: 'uk-pm', label: 'Başbakanlar' },
-      { key: 'uk-party', label: 'Güncel Siyasetçiler' },
+      { key: 'uk-party', label: 'Muhalefet & Güncel Siyasetçiler' },
     ],
   },
   {
-    key: 'usa',
-    name: 'ABD',
-    shortName: 'ABD',
-    flag: '🇺🇸',
-    culture: 'usa',
-    regions: ['americas'],
-    subtitle: 'Washington’dan Trump’a Başkanlar ve Kongre Liderleri',
+    key: 'germany',
+    name: 'Almanya',
+    shortName: 'Almanya',
+    flag: '🇩🇪',
+    culture: 'germany',
+    regions: ['europe'],
+    subtitle: 'Barbarossa, Büyük Friedrich, Bismarck, Stresemann, Adenauer, Brandt, Merkel, Merz ve Marx, Luxemburg, Brecht, DDR',
     subCategories: [
       { key: 'all', label: 'Tümü' },
-      { key: 'us-president', label: 'ABD Başkanları' },
-      { key: 'us-party', label: 'Kongre & Parti Liderleri' },
+      { key: 'de-chancellor', label: 'Şansölyeler & Hükümdarlar' },
+      { key: 'de-thinker', label: 'Marksistler, SPD Tarihi & Brecht' },
+      { key: 'de-party', label: 'Güncel & Bölgesel Siyasetçiler' },
+    ],
+  },
+  {
+    key: 'france',
+    name: 'Fransa',
+    shortName: 'Fransa',
+    flag: '🇫🇷',
+    culture: 'france',
+    regions: ['europe'],
+    subtitle: 'Clovis, Şarlman, Jeanne d’Arc, XIV. Louis, Richelieu, I./II./III. Napolyon, De Gaulle, Mitterrand, Chirac, Macron, Le Pen',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'fr-leader', label: 'Krallar, İmparatorlar, Cumhurbaşkanları & Düşünürler' },
+      { key: 'fr-party', label: 'Güncel & Muhalefet Siyasetçiler' },
     ],
   },
   {
@@ -113,7 +101,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇷🇺',
     culture: 'ussr',
     regions: ['europe', 'asia'],
-    subtitle: 'Büyük Petro, Çariçeler (II. Katerina, Yelizaveta), SSCB Liderleri ve Putin',
+    subtitle: 'Nevski, Korkunç İvan, Büyük Petro, II. Katerina, Kutuzov, II. Aleksandr, Lenin, Troçki, Stalin, Jukov, Gorbaçov, Putin, Navalni',
     subCategories: [
       { key: 'all', label: 'Tümü' },
       { key: 'ussr-leader', label: 'SSCB Dönemi (1917–1991)' },
@@ -127,7 +115,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇨🇳',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Qin Shi Huang, Taizong, Sun Yat-sen, Mao, Deng Xiaoping, Xi Jinping',
+    subtitle: 'Qin Shi Huang, Han Wudi, Taizong, Wu Zetian, Zheng He, Hongwu, Kangxi, Qianlong, Sun Yat-sen, Mao, Deng, Xi Jinping',
     subCategories: [{ key: 'all', label: 'Tümü' }],
   },
   {
@@ -137,7 +125,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇯🇵',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Oda Nobunaga, Tokugawa, İmparator Meiji, İtō Hirobumi, Ōkubo, Saigō, Ryōma, Amiral Tōgō, Yoshida, Şinzo Abe',
+    subtitle: 'Minamoto, Nobunaga, Tokugawa, İmparator Meiji, İtō, Saigō, Ryōma, Amiral Tōgō, Hirohito, Yoshida, Koizumi, Şinzo Abe',
     subCategories: [
       { key: 'all', label: 'Tümü' },
       { key: 'jp-meiji', label: 'Şogunluk & Meiji Reformları' },
@@ -145,18 +133,14 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     ],
   },
   {
-    key: 'spain',
-    name: 'İspanya',
-    shortName: 'İspanya',
-    flag: '🇪🇸',
-    culture: 'spain',
-    regions: ['europe'],
-    subtitle: 'İspanya Monarkları ve Önde Gelen Güncel Siyasetçiler',
-    subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'es-monarch', label: 'Monarklar' },
-      { key: 'es-party', label: 'Güncel Siyasetçiler' },
-    ],
+    key: 'india',
+    name: 'Hindistan',
+    shortName: 'Hindistan',
+    flag: '🇮🇳',
+    culture: 'world',
+    regions: ['asia'],
+    subtitle: 'Chandragupta, Büyük Aşoka, Ekber Şah, Evrengzib, Shivaji, Gandhi, Ambedkar, Patel, Nehru, İndira Gandhi, Manmohan Singh, Modi',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
   },
   {
     key: 'italy',
@@ -165,8 +149,107 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇮🇹',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Meloni, Schlein, Salvini, Conte, Mario Draghi',
+    subtitle: 'Medici, Machiavelli, Cavour, Garibaldi, Mazzini, Mussolini, De Gasperi, Gramsci, Berlinguer, Aldo Moro, Draghi, Meloni',
     subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'spain',
+    name: 'İspanya',
+    shortName: 'İspanya',
+    flag: '🇪🇸',
+    culture: 'spain',
+    regions: ['europe'],
+    subtitle: 'El Cid, İsabella & Fernando, V. Karl, II. & V. Felipe, Azaña, Franco, Adolfo Suárez, Felipe González, Pedro Sánchez',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'es-monarch', label: 'Monarklar & Tarihsel Komutanlar' },
+      { key: 'es-party', label: 'Cumhuriyet, Diktatörlük & Güncel Siyaset' },
+    ],
+  },
+  {
+    key: 'ukraine',
+    name: 'Ukrayna',
+    shortName: 'Ukrayna',
+    flag: '🇺🇦',
+    culture: 'europe',
+    regions: ['europe'],
+    subtitle: 'Büyük Volodimir, Bohdan Hmelnitski, Kuçma, Timoşenko, Poroşenko ve Volodimir Zelenski',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'brazil',
+    name: 'Brezilya',
+    shortName: 'Brezilya',
+    flag: '🇧🇷',
+    culture: 'world',
+    regions: ['americas'],
+    subtitle: 'I. & II. Pedro, Getúlio Vargas, Kubitschek, Cardoso, Dilma Rousseff, Bolsonaro ve Lula da Silva',
+    subCategories: [{ key: 'all', label: 'Tümü' }],
+  },
+  {
+    key: 'ancient',
+    name: 'Antik Roma & Yunan',
+    shortName: 'Antik Dünya',
+    flag: '🏛️',
+    culture: 'ancient',
+    regions: ['europe', 'asia', 'africa'],
+    subtitle: 'Sezar, Augustus, Traianus, Konstantin, I. Theodosius, Antoninus Pius, Aurelianus, Herakleios, Büyük İskender',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'ancient-rome', label: 'Roma & Doğu Roma' },
+      { key: 'ancient-greece', label: 'Yunan & Makedonya' },
+    ],
+  },
+  {
+    key: 'christianity',
+    name: 'Hristiyanlık Tarihi & Kilise Önderleri',
+    shortName: 'Hristiyanlık Tarihi',
+    flag: '✝️',
+    culture: 'europe',
+    regions: ['europe', 'asia', 'africa'],
+    subtitle: 'Aziz Pavlus, Aziz Augustinus, Aziz Benediktus, Thomas Aquinas, Aziz Francesco, Papalar, Martin Luther, Jean Calvin',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'christian-thinker', label: 'Azizler, Teologlar & Reformcular' },
+      { key: 'christian-pope', label: 'Papalar & Şehir Yöneticileri' },
+    ],
+  },
+  {
+    key: 'islamic',
+    name: 'İslam Tarihi & Halifeler',
+    shortName: 'İslam Tarihi',
+    flag: '☪️',
+    culture: 'world',
+    regions: ['asia', 'africa', 'europe'],
+    subtitle: 'Hulefâ-yi Râşidîn (4+1 Halife), Emeviler, Endülüs, Abbasiler & Komutanlar',
+    subCategories: [
+      { key: 'all', label: 'Tümü' },
+      { key: 'rashidun', label: 'Râşid Halifeler & Hicaz' },
+      { key: 'umayyad', label: 'Emeviler & Endülüs' },
+      { key: 'abbasid', label: 'Abbasiler' },
+      { key: 'islamic-commander', label: 'İslam Komutanları & Memlükler' },
+    ],
+  },
+  {
+    key: 'turkey',
+    name: 'Türkiye & Türk Tarihi',
+    shortName: 'Türkiye',
+    flag: '🇹🇷',
+    culture: 'turkey',
+    regions: ['asia', 'europe'],
+    subtitle: 'Eski Türkler, Selçuklu, 36 Padişah, Barbaros & Piri Reis, İttihatçılar, CB, Başbakanlar ve Partiler',
+    subCategories: [
+      { key: 'all', label: 'Tüm Türk Tarihi' },
+      { key: 'turkic-seljuk', label: 'Eski Türkler & Selçuklu' },
+      { key: 'ottoman-sultan', label: 'Osmanlı Padişahları' },
+      { key: 'ottoman-commander', label: 'Osmanlı Komutan & Kaptanları' },
+      { key: 'ottoman-late', label: 'İttihatçılar & Son Sadrazamlar' },
+      { key: 'tr-president', label: 'Cumhurbaşkanları' },
+      { key: 'tr-pm', label: 'Başbakanlar' },
+      { key: 'tr-minister', label: 'Cumhuriyet Bakanları' },
+      { key: 'tr-party', label: 'Parti Liderleri' },
+      { key: 'tr-actor', label: 'Siyasi & Tarihsel Aktörler' },
+    ],
   },
   {
     key: 'poland',
@@ -175,7 +258,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇵🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Tusk, Kaczyński, Duda, Trzaskowski, Hołownia',
+    subtitle: 'Büyük Kazimierz, Kral Sobieski, Mareşal Piłsudski, Lech Wałęsa, Tusk, Kaczyński, Duda, Trzaskowski',
     subCategories: [{ key: 'all', label: 'Tümü' }],
   },
   {
@@ -195,7 +278,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇳🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Wilders, Schoof, Rutte, Timmermans, Omtzigt, Yeşilgöz',
+    subtitle: 'Sessiz Willem, Johan de Witt, Thorbecke, Rutte, Wilders, Schoof, Timmermans, Yeşilgöz',
     subCategories: [{ key: 'all', label: 'Tümü' }],
   },
   {
@@ -514,36 +597,6 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     subtitle: 'Kiro Gligorov ve Hristijan Mickoski',
     subCategories: [{ key: 'all', label: 'Tümü' }],
   },
-  {
-    key: 'islamic',
-    name: 'İslam Tarihi & Halifeler',
-    shortName: 'İslam Tarihi',
-    flag: '☪️',
-    culture: 'world',
-    regions: ['asia', 'africa', 'europe'],
-    subtitle: 'Hulefâ-yi Râşidîn (4+1 Halife), Emeviler (I. Velid, Hişam...), Endülüs, Abbasiler (Seffah, Mansur, Harun Reşid, Memun, Mu’tasım...) & Komutanlar',
-    subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'rashidun', label: 'Râşid Halifeler & Hicaz' },
-      { key: 'umayyad', label: 'Emeviler & Endülüs' },
-      { key: 'abbasid', label: 'Abbasiler' },
-      { key: 'islamic-commander', label: 'İslam Komutanları & Memlükler' },
-    ],
-  },
-  {
-    key: 'ancient',
-    name: 'Antik Roma & Yunan',
-    shortName: 'Antik Dünya',
-    flag: '🏛️',
-    culture: 'ancient',
-    regions: ['europe', 'asia', 'africa'],
-    subtitle: 'Sezar, Cicero, Mark Antony, Roma İmparatorları, Büyük İskender',
-    subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'ancient-rome', label: 'Roma' },
-      { key: 'ancient-greece', label: 'Yunan & Makedonya' },
-    ],
-  },
 ];
 
 // Continents (+ All)
@@ -578,14 +631,18 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [selectedEra, setSelectedEra] = useState<EraKey>('all');
   const [selectedRegion, setSelectedRegion] = useState<GeographicRegion>('all');
+  const [powerFilter, setPowerFilter] = useState<'all' | 'ruler' | 'non-ruler'>('all');
+  const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<
-    'overall' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership'
+    'overall' | 'popularity' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership'
   >('overall');
 
   useEffect(() => {
     setActiveSubCategory('all');
     setSelectedEra('all');
+    setPowerFilter('all');
+    setPopularityFilter('all');
     setSearchQuery('');
   }, [activeCountry]);
 
@@ -595,6 +652,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
     setCountry(hub.key);
     setActiveSubCategory('all');
     setSelectedEra('all');
+    setPowerFilter('all');
+    setPopularityFilter('all');
     onSelectCulture(hub.culture);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -602,6 +661,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const handleBackToPortals = () => {
     setCountry(null);
     setActiveSubCategory('all');
+    setPowerFilter('all');
+    setPopularityFilter('all');
     setSearchQuery('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -611,7 +672,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
     return COUNTRY_HUBS.filter((hub) => hub.regions.includes(selectedRegion));
   }, [selectedRegion]);
 
-  const filteredLeaders = useMemo(() => {
+  // Base filtered list BEFORE powerFilter, so we can show ruler vs non-ruler split counts
+  const baseFilteredLeaders = useMemo(() => {
     return allLeaders.filter((leader) => {
       if (activeCountry && leader.category !== activeCountry) {
         return false;
@@ -651,11 +713,50 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
     });
   }, [allLeaders, activeCountry, activeSubCategory, selectedEra, selectedRegion, searchQuery]);
 
+  const powerCounts = useMemo(() => {
+    let ruler = 0;
+    let nonRuler = 0;
+    for (const l of baseFilteredLeaders) {
+      if (getLeaderPowerRole(l) === 'ruler') ruler++;
+      else nonRuler++;
+    }
+    return { all: baseFilteredLeaders.length, ruler, nonRuler };
+  }, [baseFilteredLeaders]);
+
+  const powerFilteredLeaders = useMemo(() => {
+    if (powerFilter === 'all') return baseFilteredLeaders;
+    return baseFilteredLeaders.filter((l) => getLeaderPowerRole(l) === powerFilter);
+  }, [baseFilteredLeaders, powerFilter]);
+
+  const popCounts = useMemo(() => {
+    const counts: Record<'all' | PopularityTier, number> = {
+      all: powerFilteredLeaders.length,
+      'global-icon': 0,
+      international: 0,
+      national: 0,
+      niche: 0,
+    };
+    for (const l of powerFilteredLeaders) {
+      counts[getLeaderPopularityTier(l)]++;
+    }
+    return counts;
+  }, [powerFilteredLeaders]);
+
+  const filteredLeaders = useMemo(() => {
+    if (popularityFilter === 'all') return powerFilteredLeaders;
+    return powerFilteredLeaders.filter((l) => getLeaderPopularityTier(l) === popularityFilter);
+  }, [powerFilteredLeaders, popularityFilter]);
+
   const sortedLeaders = useMemo(() => {
     return [...filteredLeaders].sort((a, b) => {
       const scoresA = getEffectiveScores(a, userRatings);
       const scoresB = getEffectiveScores(b, userRatings);
 
+      if (sortBy === 'popularity') {
+        const diff = getLeaderPopularityScore(b) - getLeaderPopularityScore(a);
+        if (diff !== 0) return diff;
+        return calculateOverallScore(scoresB) - calculateOverallScore(scoresA);
+      }
       if (sortBy === 'chronological') {
         return (a.yearsActive || '').localeCompare(b.yearsActive || '');
       }
@@ -719,8 +820,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
               ))}
             </div>
 
-            {/* Era Selector */}
-            <div className="flex items-center gap-2">
+            {/* Era + Sort Selectors */}
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs text-stone-500 shrink-0">Dönem:</span>
               <select
                 value={selectedEra}
@@ -740,6 +841,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 className="px-3 py-1.5 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
               >
                 <option value="overall">En Yüksek Puan</option>
+                <option value="popularity">En Popüler (Küresel Şöhret)</option>
                 <option value="chronological">Kronolojik</option>
                 <option value="military">Askeri</option>
                 <option value="economy">Ekonomi</option>
@@ -747,6 +849,74 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 <option value="diplomacy">Diplomasi</option>
                 <option value="leadership">Liderlik</option>
               </select>
+            </div>
+          </div>
+
+          {/* Power Role & Popularity League Separation Bars (Mode 1) */}
+          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-2.5 pt-1">
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
+              <button
+                type="button"
+                onClick={() => setPowerFilter('all')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'all'
+                    ? 'bg-amber-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                Tümü ({powerCounts.all})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('ruler')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'ruler'
+                    ? 'bg-emerald-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-emerald-300'
+                }`}
+              >
+                İktidar & Devleti Yönetenler ({powerCounts.ruler})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('non-ruler')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'non-ruler'
+                    ? 'bg-sky-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-sky-300'
+                }`}
+              >
+                Muhalefet, Düşünür & Dini Önderler ({powerCounts.nonRuler})
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
+              <button
+                type="button"
+                onClick={() => setPopularityFilter('all')}
+                className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors ${
+                  popularityFilter === 'all'
+                    ? 'bg-stone-700 text-white font-semibold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                Tüm Çaplar ({popCounts.all})
+              </button>
+              {POPULARITY_LEAGUES.map((league) => (
+                <button
+                  key={league.key}
+                  type="button"
+                  onClick={() => setPopularityFilter(league.key)}
+                  title={league.description}
+                  className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors border ${
+                    popularityFilter === league.key
+                      ? `${league.bgClass} ${league.textClass} ${league.borderClass} font-semibold`
+                      : 'border-transparent text-stone-400 hover:text-stone-200'
+                  }`}
+                >
+                  {league.icon} {league.shortLabel} ({popCounts[league.key]})
+                </button>
+              ))}
             </div>
           </div>
 
@@ -896,6 +1066,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 className="bg-stone-900 border border-stone-800 rounded-lg px-2.5 py-1.5 text-xs text-stone-300 focus:outline-none"
               >
                 <option value="overall">Genel Puan</option>
+                <option value="popularity">En Popüler (Küresel Şöhret)</option>
                 <option value="chronological">Kronolojik</option>
                 <option value="military">Askeri</option>
                 <option value="economy">Ekonomi</option>
@@ -903,6 +1074,74 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 <option value="diplomacy">Diplomasi</option>
                 <option value="leadership">Liderlik</option>
               </select>
+            </div>
+          </div>
+
+          {/* Power Role & Popularity League Separation Bars (Mode 2 - Focused Country) */}
+          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
+              <button
+                type="button"
+                onClick={() => setPowerFilter('all')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'all'
+                    ? 'bg-amber-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                Tümü ({powerCounts.all})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('ruler')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'ruler'
+                    ? 'bg-emerald-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-emerald-300'
+                }`}
+              >
+                İktidar & Devleti Yönetenler ({powerCounts.ruler})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('non-ruler')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'non-ruler'
+                    ? 'bg-sky-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-sky-300'
+                }`}
+              >
+                Muhalefet, Düşünür & Dini ({powerCounts.nonRuler})
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
+              <button
+                type="button"
+                onClick={() => setPopularityFilter('all')}
+                className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors ${
+                  popularityFilter === 'all'
+                    ? 'bg-stone-700 text-white font-semibold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                Tüm Çaplar ({popCounts.all})
+              </button>
+              {POPULARITY_LEAGUES.map((league) => (
+                <button
+                  key={league.key}
+                  type="button"
+                  onClick={() => setPopularityFilter(league.key)}
+                  title={league.description}
+                  className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors border ${
+                    popularityFilter === league.key
+                      ? `${league.bgClass} ${league.textClass} ${league.borderClass} font-semibold`
+                      : 'border-transparent text-stone-400 hover:text-stone-200'
+                  }`}
+                >
+                  {league.icon} {league.shortLabel} ({popCounts[league.key]})
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -927,6 +1166,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 setSelectedEra('all');
                 setActiveSubCategory('all');
                 setSelectedRegion('all');
+                setPowerFilter('all');
+                setPopularityFilter('all');
               }}
               className="px-3 py-1.5 text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-lg transition-colors"
             >

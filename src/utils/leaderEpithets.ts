@@ -222,6 +222,174 @@ export const LEADER_TIER_EPITHETS: Record<string, string> = {
   'hafez-al-assad': 'Şam’ın Sfenksi & Demir Yumruk Cumhurbaşkanı',
   'bashar-al-assad': 'Baas Rejiminin Son Lideri & İç Savaş Bilançosu',
   'shukri-al-quwatli': 'Bağımsız Suriye’nin İlk Cumhurbaşkanı',
+
+  // --- HRİSTİYANLIK TARİHİ & ROMA İMPARATORLARI ---
+  'st-paul': 'Milletlerin Havarisi & Hristiyan Teolojisi Mimarı',
+  'st-augustine': 'Kilise Doktoru & Tanrı Devleti Filozofu',
+  'st-benedict': 'Batı Manastır Sistemi Kurucusu',
+  'pope-gregory-1': 'Orta Çağ Papalığının Kurucusu & Büyük Papa',
+  'pope-gregory-7': 'Gregoryen Reformları & Canossa Galibi Papa',
+  'pope-urban-2': 'Birinci Haçlı Seferi Başlatıcısı Papa',
+  'st-francis-assisi': 'Fransisken Önderi & Yoksulluk/Barış Aziz’i',
+  'st-thomas-aquinas': 'Skolastik Zirve & Doğal Hukuk Filozofu',
+  'martin-luther': 'Protestan Reformu Başlatıcısı & 95 Tez Yazarı',
+  'john-calvin': 'Kalvinizm Kurucusu & Cenevre Reformcusu',
+  'theodosius-1': 'Hristiyanlığı Devlet Dini Yapan Son Tek Roma İmparatoru',
+  'antoninus-pius': 'Altın Pax Romana & Hazine İmparatoru',
+  'septimius-severus': 'Severus Hanedanı Kurucusu & Afrikalı İmparator',
+  aurelian: 'Dünyanın Onarıcısı & İmparatorluğu Birleştiren',
+  'julian-apostate': 'Filozof İmparator & Pagan Restorasyon Girişimi',
+  'romulus-augustulus': 'Batı Roma’nın Son Sembolik İmparatoru',
+  heraclius: 'Sasani Fatihi & Doğu Roma Reformcusu',
+
+  // --- TROÇKİ, RUSYA, MARKSİSTLER, SPD & BRECHT ---
+  'leon-trotsky': 'Kızıl Ordu Kurucusu & Sürekli Devrim Teorisyeni',
+  'ivan-the-terrible': 'İlk Tüm Rusya Çarı & Opriçnina Hükümdarı',
+  'nicholas-2': 'Son Romanov Çarı & 1917 Çöküşü',
+  'karl-marx': 'Bilimsel Sosyalizm Kurucusu & Das Kapital Yazarı',
+  'friedrich-engels': 'Marksizmin Eş Kurucusu & Sosyal Teorisyen',
+  'rosa-luxemburg': 'Spartaküs Lideri & Özgürlükçü Marksist Kuramcı',
+  'karl-liebknecht': 'Savaş Karşıtı Vekil & Spartaküs Eş Kurucusu',
+  'august-bebel': 'SPD Kurucusu & Reichstag Muhalefet Duayeni',
+  'karl-kautsky': 'II. Enternasyonal & Erfurt Programı Teorisyeni',
+  'eduard-bernstein': 'Demokratik Sosyalizm & Refah Devleti Kuramcısı',
+  'clara-zetkin': '8 Mart Öncüsü & Anti-Faşist Kadın Lideri',
+  'friedrich-ebert': 'Weimar Cumhuriyeti’nin İlk Cumhurbaşkanı',
+  'philipp-scheidemann': 'Alman Cumhuriyeti’ni İlan Eden İlk Şansölye',
+  'bertolt-brecht': 'Epik Tiyatro Kurucusu & Politik Oyun Yazarı',
+  'christian-lindner': 'Borç Freni Savunucusu & FDP Eski Maliye Bakanı',
+  'markus-soder': 'Bavyera Başbakanı & CSU Güç Merkezi',
+  'heidi-reichinnek': 'Die Linke Meclis Eş Başkanı & Genç Sol Muhalefet',
+
+  // --- ABD, İNGİLTERE, AVRUPA & KÜRESEL DENGE ---
+  'jd-vance': '50. ABD Başkan Yardımcısı & Ekonomik Milliyetçi',
+  'kamala-harris': 'ABD Tarihinin İlk Kadın Başkan Yardımcısı',
+  'mike-pence': '48. ABD Başkan Yardımcısı & 6 Ocak Anayasa Savunucusu',
+  'marco-rubio': '72. ABD Dışişleri Bakanı & İlk Latin Başdiplomat',
+  'dick-cheney': '46. ABD Başkan Yardımcısı & Irak Savaşı Mimarı',
+  'al-gore': '45. ABD Başkan Yardımcısı & Nobel İklim Lideri',
+  'paul-ryan': '54. Temsilciler Meclisi Başkanı & Vergi Reformcusu',
+  'gavin-newsom': 'Kaliforniya Valisi & Ulusal Demokrat Sözcü',
+  'bernie-sanders': 'Demokratik Sosyalist Senatör & İlerici Lider',
+  'alexandria-ocasio-cortez': 'Yeşil Yeni Düzen Mimarı & Genç Sol Sözcü',
+  'rand-paul': 'Liberteryen Senatör & Savaş/Gözetim Karşıtı',
+  'nikki-haley': 'Eski BM Büyükelçisi & Parti İçi Rakip',
+  'ron-desantis': 'Florida Valisi & Muhafazakâr Eyalet Lideri',
+  'pete-buttigieg': 'Eski Ulaştırma Bakanı & Altyapı Yatırım Mimarı',
+  'john-adams': 'ABD 2. Başkanı & İlk Başkan Yardımcısı',
+  'clement-attlee': 'NHS & İngiliz Refah Devleti Kurucusu Başbakan',
+  'jeremy-corbyn': 'İşçi Partisi Eski Ana Muhalefet Lideri',
+  'nicola-sturgeon': 'İskoçya Eski Başbakanı & SNP Lideri',
+  'john-major': 'Kuzey İrlanda Barış Süreci Başlatıcısı Başbakan',
+  'david-lloyd-george': 'I. Dünya Savaşı Başbakanı & Sosyal Bütçe Reformcusu',
+  'louis-14': 'Güneş Kral & Versay Mutlakiyetçiliği Zirvesi',
+  'edouard-philippe': 'Fransa Eski Başbakanı & Horizons Lideri',
+  'eric-zemmour': 'Reconquête! Kurucusu & Aşırı Sağ İdeolog',
+  'silvio-berlusconi': '4 Dönem İtalya Başbakanı & Medya İmparatoru',
+  'matteo-renzi': 'En Genç İtalya Başbakanı & Italia Viva Lideri',
+  'mahatma-gandhi': 'Şiddetsiz Direniş Önderi & Bağımsızlık Sembolü',
+  'jawaharlal-nehru': 'Bağımsız Hindistan Kurucu İlk Başbakanı',
+  'narendra-modi': 'Dijital Hindistan & Hindu Milliyetçi Başbakan',
+  'lula-da-silva': 'Sosyal Refah Lideri & 3 Dönem Brezilya Başkanı',
+  'jair-bolsonaro': 'Sağ Popülist Eski Brezilya Devlet Başkanı',
+  'volodymyr-zelenskyy': 'Kiev Savunması & Savaş Zamanı Ukrayna Başkanı',
+  'petro-poroshenko': 'AB Yönelimi & Tomos Mimarı Eski Başkan',
+
+  // --- OSMANLI KOMUTANLARI & KAPTAN-I DERYALARI ---
+  'barbaros-hayreddin-pasa': 'Preveze Fatihi & Akdeniz Kaptan-ı Deryası',
+  'piri-reis': 'Dünya Haritacısı & Kitab-ı Bahriye Amirali',
+  'turgut-reis': 'Trablusgarp Fatihi & Cerbe Galibi Amiral',
+  'kilic-ali-pasa': 'İnebahtı Sonrası Donanmayı Dirilten Kaptan-ı Derya',
+  'sokullu-mehmed-pasa': 'Üç Padişahın Başveziri & İmparatorluk Diplomatı',
+  'pargali-ibrahim-pasa': 'Mohaç Seraskeri & Kanuni Dönemi Başveziri',
+  'koprulu-mehmed-pasa': 'Devleti Buhrandan Kurtaran Köprülüler Kurucusu',
+  'cezayirli-gazi-hasan-pasa': 'Mühendishane Banisi & Bahriye Islahatçısı Paşa',
+  'gazi-osman-pasa': '1877 Plevne Müdafii & Efsanevi Mareşal',
+
+  // --- FRANSA (II. & III. NAPOLYON + DERİN TARİH) ---
+  'napoleon-2': 'Roma Kralı & Trajik Bonapart Varisi',
+  'napoleon-3': 'İkinci İmparatorluk İmparatoru & Paris Mimarı',
+  'clovis-1': 'Frankların İlk Kralı & Merovenj Kurucusu',
+  charlemagne: 'Avrupa’nın Babası & Karolenj İmparatoru',
+  'philip-2-augustus': 'Bouvines Galibi & Merkezi Fransa Mimarı',
+  'louis-9': 'Adalet Kralı & Orta Çağ Reformcusu',
+  'joan-of-arc': 'Orléans Bakiresi & Ulusal Direniş Azizesi',
+  'francis-1-france': 'Fransız Rönesansı Kralı & Osmanlı Müttefiki',
+  'henry-4-france': 'Nantes Fermanı Kralı & Bourbon Kurucusu',
+  'cardinal-richelieu': 'Devlet Aklı (Raison d’État) Mimarı Başbakan',
+  'louis-16': 'Son Mutlakiyetçi Bourbon Kralı',
+  'marquis-de-lafayette': 'İki Dünyanın Kahramanı & Haklar Bildirgesi Yazarı',
+  'georges-clemenceau': 'Zafer Başbakanı ("Kaplan") & Laiklik Savunucusu',
+  'leon-blum': 'Ücretli Tatil & Halk Cephesi Reformcusu',
+  'philippe-petain': 'Verdun Kahramanı & Vichy İşbirlikçi Şefi',
+  'francois-mitterrand': 'İdamı Kaldıran & AB Kurucu Cumhurbaşkanı',
+  'jacques-chirac': '2003 Irak Karşıtı & Denge Cumhurbaşkanı',
+  'charles-montesquieu': 'Kuvvetler Ayrılığı Kuramcısı & Hukuk Filozofu',
+  'jean-jacques-rousseau': 'Toplum Sözleşmesi & Halk Egemenliği Filozofu',
+
+  // --- İTALYA, İSPANYA, RUSYA, ÇİN, HİNDİSTAN, ABD, İNGİLTERE, ALMANYA & DİĞER ---
+  'lorenzo-de-medici': 'Rönesans Hamisi & Floransa Diplomatı',
+  'niccolo-machiavelli': 'Modern Siyaset Bilimi Kurucusu & "Prens" Yazarı',
+  'camillo-di-cavour': 'İtalyan Birliği’nin Diplomatik Beyni',
+  'giuseppe-garibaldi': 'Kırmızı Gömlekliler Başkomutanı & İtalya Kılıcı',
+  'giuseppe-mazzini': 'Genç İtalya Kurucusu & Cumhuriyet Filozofu',
+  'victor-emmanuel-2': 'Birleşik İtalya’nın İlk Kralı (Padre della Patria)',
+  'benito-mussolini': 'Faşist Diktatör & Yıkıcı Mihver Lideri',
+  'alcide-de-gasperi': 'İtalyan Cumhuriyeti & AB Kurucu Babası',
+  'antonio-gramsci': 'Kültürel Hegemonya Kuramcısı & Düşünür',
+  'enrico-berlinguer': 'Avrokomünizm & Tarihsel Uzlaşma Lideri',
+  'aldo-moro': 'Kızıl Tugaylar Kurbanı Uzlaşı Başbakanı',
+  'el-cid': 'Yenilmez Reconquista Şövalyesi & Valencia Beyi',
+  'ferdinand-2-aragon': 'Katolik İspanya Eş Kurucusu & Diplomat',
+  'charles-5-spain': 'Güneş Batmayan Habsburg İmparatoru',
+  'francisco-franco': 'İç Savaş Galibi & 36 Yıllık Askeri Diktatör',
+  'adolfo-suarez': 'Franco Sonrası Demokratik Geçiş Mimarı',
+  'felipe-gonzalez': 'AB Entegrasyonu & Modern Sosyalist Başbakan',
+  'alexander-nevsky': 'Buz Savaşı Galibi & Novgorod Prensi',
+  'mikhail-kutuzov': '1812 Napolyon Seferi Zafer Mareşali',
+  'alexander-2-russia': 'Serfliği Kaldıran Kurtarıcı Reformcu Çar',
+  'sergei-witte': 'Trans-Sibirya & Rus Sanayileşme Mimarı',
+  'georgy-zhukov': 'Stalingrad ve Berlin Fatihi SSCB Mareşali',
+  'lavrentiy-beria': 'NKVD Şefi & Sürgünler Yöneticisi',
+  'alexei-navalny': 'Yolsuzluk Karşıtı Baş Muhalif & Hapishane Kurbanı',
+  'emperor-wu-han': 'İpek Yolu’nu Açan Büyük Han İmparatoru',
+  'wu-zetian': 'Çin Tarihinin Tek Resmi Kadın İmparatoru',
+  'zheng-he': '7 Okyanus Seferi Ming Hazine Amirali',
+  'kangxi-emperor': '61 Yıllık Yüksek Qing Altın Çağ İmparatoru',
+  'chandragupta-maurya': 'Maurya Kurucusu & Alt Kıta Birleştiricisi',
+  'ashoka-the-great': 'Dharma Hükümdarı & Şiddetsizlik İmparatoru',
+  'akbar-the-great': 'Sulh-i Kull & Babür Altın Çağı İmparatoru',
+  'shivaji-maharaj': 'Maratha İmparatorluğu Kurucusu & Gerilla Ustası',
+  'bhimrao-ambedkar': 'Hindistan Anayasası Mimarı & Kast Karşıtı Önder',
+  'sardar-patel': '565 Prensliği Birleştiren Demir Adam',
+  'indira-gandhi': '1971 Zaferi & Olağanüstü Hal Demir Leydisi',
+  'manmohan-singh': '1991 Piyasa Reformları Ekonomist Başbakanı',
+  'benjamin-franklin': 'Kurucu Baba, Başdiplomat & Bilim İnsanı',
+  'alexander-hamilton': 'ABD Finansal Sistem Kurucusu & İlk Hazine Bakanı',
+  'james-madison': 'ABD Anayasası’nın Babası & 4. Başkan',
+  'ulysses-s-grant': 'İç Savaş Birliği Başkomutanı & 18. Başkan',
+  'martin-luther-king': 'Medeni Haklar Önderi & Nobel Barış Sembolü',
+  'malcolm-x': 'Siyahi Özgürlük Hareketi Devrimci Hatibi',
+  'oliver-cromwell': 'İngiltere Topluluğu Lord Koruyucusu & Mareşal',
+  'william-pitt-younger': '24 Yaşında Seçilen Napolyon Karşıtı Başbakan',
+  'duke-of-wellington': 'Waterloo Galibi Demir Dük & Başbakan',
+  'horatio-nelson': 'Trafalgar Zaferi Efsanevi İngiliz Amirali',
+  'benjamin-disraeli': 'Tek Ulus Muhafazakârlığı & Süveyş Başbakanı',
+  'william-gladstone': '4 Dönem Liberal Reform & Gizli Oy Başbakanı',
+  'frederick-barbarossa': 'Kutsal Roma İmparatoru & Haçlı Komutanı',
+  'gustav-stresemann': 'Hiperenflasyonu Bitiren Nobel Barış Şansölyesi',
+  'paul-von-hindenburg': 'Tannenberg Mareşali & Weimar Son Cumhurbaşkanı',
+  'joschka-fischer': '2003 Irak Karşıtı Yeşil Dışişleri Bakanı',
+  'dom-pedro-2': 'Brezilya’da Köleliği Kaldıran Aydın İmparator',
+  'getulio-vargas': 'Modern Brezilya Kurucusu & İş Kanunu Başkanı',
+  'volodymyr-the-great': 'Kiev Rus Kurucu Prensi & Tryzub Hükümdarı',
+  'casimir-3-great': 'Polonya’yı Taştan İnşa Eden Reformcu Kral',
+  'jan-3-sobieski': '1683 Viyana Meydanı Süvari Kralı',
+  'jozef-pilsudski': 'Polonya Kurucusu & Vistül Zaferi Mareşali',
+  'lech-walesa': 'Solidarność Kurucusu & Nobel Barış Cumhurbaşkanı',
+  'william-of-orange': 'Hollanda Bağımsızlık Kurucusu (Sessiz Willem)',
+  'minamoto-yoritomo': 'Japonya’nın İlk Şogunu & Kamakura Kurucusu',
+  'emperor-hirohito': 'Shōwa Çağı & Savaş Sonrası Anayasal İmparator',
 };
 
 type RoleArchetype =
@@ -230,6 +398,7 @@ type RoleArchetype =
   | 'commander'
   | 'caliph'
   | 'minister'
+  | 'thinker'
   | 'executive'
   | 'party';
 
@@ -240,12 +409,19 @@ function detectRoleArchetype(leader: Leader): RoleArchetype {
   if (sub === 'rashidun' || sub === 'umayyad' || sub === 'abbasid' || titleLower.includes('halife')) {
     return 'caliph';
   }
+  if (sub === 'christian-thinker' || sub === 'de-thinker') {
+    return 'thinker';
+  }
   if (
     sub === 'islamic-commander' ||
     sub === 'ir-commander' ||
+    sub === 'ottoman-commander' ||
     (sub === 'tr-actor' && (titleLower.includes('orgeneral') || titleLower.includes('paşa') || titleLower.includes('komutan'))) ||
     titleLower.includes('komutan') ||
     titleLower.includes('başkomutan') ||
+    titleLower.includes('amiral') ||
+    titleLower.includes('kaptan-ı derya') ||
+    titleLower.includes('mareşal') ||
     titleLower.includes('general')
   ) {
     return 'commander';
@@ -259,6 +435,7 @@ function detectRoleArchetype(leader: Leader): RoleArchetype {
     sub === 'ancient-rome' ||
     sub === 'ancient-greece' ||
     sub === 'mn-leader' ||
+    sub === 'christian-pope' ||
     titleLower.includes('padişah') ||
     titleLower.includes('sultan') ||
     titleLower.includes('kral') ||
@@ -267,6 +444,7 @@ function detectRoleArchetype(leader: Leader): RoleArchetype {
     titleLower.includes('çar') ||
     titleLower.includes('kağan') ||
     titleLower.includes('şah') ||
+    titleLower.includes('papa') ||
     titleLower.includes('han')
   ) {
     return 'monarch';

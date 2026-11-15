@@ -15,6 +15,16 @@ import { NORTH_KOREA_AND_CAMBODIA } from './northKoreaAndCambodia';
 import { ISRAEL_LEADERS } from './israelLeaders';
 import { IRAN_COMMANDERS_AND_HAMAS } from './iranCommandersAndHamas';
 import { JAPAN_AND_SYRIA } from './japanAndSyria';
+import { CHRISTIANITY_AND_ROME } from './christianityAndRome';
+import { TROTSKY_MARXISTS_AND_SPD } from './trotskyMarxistsAndSpd';
+import { USA_UK_EUROPE_CONTEMPORARY } from './usaUkEuropeContemporary';
+import { OTTOMAN_COMMANDERS } from './ottomanCommanders';
+import { FRANCE_DEEP_LEADERS } from './franceDeepHistoryAndModern';
+import { ITALY_AND_SPAIN_DEEP } from './italyAndSpainDeep';
+import { RUSSIA_DEEP_LEADERS } from './russiaDeep';
+import { CHINA_AND_INDIA_DEEP } from './chinaAndIndiaDeep';
+import { USA_UK_GERMANY_DEEP } from './usaUkGermanyDeep';
+import { BRAZIL_UKRAINE_POLAND_NL_JP_DEEP } from './brazilUkrainePolandNlJpDeep';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
@@ -1449,4 +1459,14 @@ export const INITIAL_LEADERS: Leader[] = [
   ...ISRAEL_LEADERS,
   ...IRAN_COMMANDERS_AND_HAMAS,
   ...JAPAN_AND_SYRIA,
+  ...CHRISTIANITY_AND_ROME,
+  ...TROTSKY_MARXISTS_AND_SPD,
+  ...USA_UK_EUROPE_CONTEMPORARY,
+  ...OTTOMAN_COMMANDERS,
+  ...FRANCE_DEEP_LEADERS,
+  ...ITALY_AND_SPAIN_DEEP,
+  ...RUSSIA_DEEP_LEADERS,
+  ...CHINA_AND_INDIA_DEEP,
+  ...USA_UK_GERMANY_DEEP,
+  ...BRAZIL_UKRAINE_POLAND_NL_JP_DEEP,
 ];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Leader, LeaderScores } from '../types';
+import { Leader, LeaderScores, PopularityTier } from '../types';
 import { DIMENSIONS } from '../data/leaders';
 import {
   GIANTS_IDS,
@@ -8,7 +8,16 @@ import {
   submitCommunityEntry,
   resetCommunityData,
 } from '../utils/communityScoring';
-import { calculateOverallScore, getTierForScore } from '../utils/scoring';
+import {
+  POPULARITY_LEAGUES,
+  calculateOverallScore,
+  getLeaderPopularityScore,
+  getLeaderPopularityTier,
+  getLeaderPowerRole,
+  getPopularityLeagueInfo,
+  getPowerRoleLabel,
+  getTierForScore,
+} from '../utils/scoring';
 import { RadarChart, RadarDataset } from './RadarChart';
 import {
   Flame,
@@ -59,6 +68,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   const [votingScores, setVotingScores] = useState<LeaderScores | null>(null);
   const [voterName, setVoterName] = useState<string>('');
   const [successNotice, setSuccessNotice] = useState<string | null>(null);
+  const [powerFilter, setPowerFilter] = useState<'all' | 'ruler' | 'non-ruler'>('all');
+  const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
 
   // Helper to get effective live community scores
   const getLeaderLiveScores = (leader: Leader): { scores: LeaderScores; entryCount: number; lastUpdated: number } => {
@@ -78,11 +89,14 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   };
 
   // Sort giants by live crowdsourced overall score
-  const sortedGiants = [...giants].sort((a, b) => {
-    const scoreA = calculateOverallScore(getLeaderLiveScores(a).scores);
-    const scoreB = calculateOverallScore(getLeaderLiveScores(b).scores);
-    return scoreB - scoreA;
-  });
+  const sortedGiants = [...giants]
+    .filter((l) => powerFilter === 'all' || getLeaderPowerRole(l) === powerFilter)
+    .filter((l) => popularityFilter === 'all' || getLeaderPopularityTier(l) === popularityFilter)
+    .sort((a, b) => {
+      const scoreA = calculateOverallScore(getLeaderLiveScores(a).scores);
+      const scoreB = calculateOverallScore(getLeaderLiveScores(b).scores);
+      return scoreB - scoreA;
+    });
 
   // Open Vote modal
   const handleOpenVote = (leader: Leader) => {
@@ -140,6 +154,10 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   const f2Overall = calculateOverallScore(f2Data.scores);
   const f1Tier = getTierForScore(f1Overall);
   const f2Tier = getTierForScore(f2Overall);
+  const f1PopScore = getLeaderPopularityScore(fighter1);
+  const f1PopLeague = getPopularityLeagueInfo(getLeaderPopularityTier(fighter1));
+  const f2PopScore = getLeaderPopularityScore(fighter2);
+  const f2PopLeague = getPopularityLeagueInfo(getLeaderPopularityTier(fighter2));
 
   const duelDatasets: RadarDataset[] = [
     {
@@ -308,6 +326,9 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     ({f1Data.entryCount > 0 ? `${f1Data.entryCount} Giriş` : 'Sembolik'})
                   </span>
                 </div>
+                <div className={`text-[10px] font-medium mt-1 ${f1PopLeague.textClass}`}>
+                  {f1PopLeague.icon} {f1PopLeague.shortLabel} ({f1PopScore}/100)
+                </div>
               </div>
             </div>
 
@@ -395,6 +416,9 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     ({f2Data.entryCount > 0 ? `${f2Data.entryCount} Giriş` : 'Sembolik'})
                   </span>
                 </div>
+                <div className={`text-[10px] font-medium mt-1 ${f2PopLeague.textClass}`}>
+                  {f2PopLeague.icon} {f2PopLeague.shortLabel} ({f2PopScore}/100)
+                </div>
               </div>
             </div>
 
@@ -474,7 +498,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
       {/* DEVLER LİGİ SIRALAMASI (Leaderboard Table & Cards) */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-xl font-serif font-bold text-stone-100">
               Devler Sıralaması (Canlı Halk Ortalaması)
@@ -483,9 +507,68 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               1 entry girildiği an o değer yeni ortalama olur; sonraki girişler aritmetik ortalamaya katılır.
             </p>
           </div>
-          <span className="text-xs text-stone-500 font-mono">
-            {sortedGiants.length} Lider
-          </span>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
+              <button
+                type="button"
+                onClick={() => setPowerFilter('all')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  powerFilter === 'all' ? 'bg-stone-700 text-white' : 'text-stone-400 hover:text-white'
+                }`}
+              >
+                Tümü
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('ruler')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  powerFilter === 'ruler' ? 'bg-emerald-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-emerald-300'
+                }`}
+              >
+                İktidar
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('non-ruler')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  powerFilter === 'non-ruler' ? 'bg-sky-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-sky-300'
+                }`}
+              >
+                Muhalefet & Düşünür
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
+              <button
+                type="button"
+                onClick={() => setPopularityFilter('all')}
+                className={`px-2 py-1 rounded-md font-medium transition-colors ${
+                  popularityFilter === 'all' ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
+                }`}
+              >
+                Tüm Ligler
+              </button>
+              {POPULARITY_LEAGUES.map((league) => (
+                <button
+                  key={league.key}
+                  type="button"
+                  onClick={() => setPopularityFilter(league.key)}
+                  title={league.description}
+                  className={`px-2 py-1 rounded-md font-medium transition-colors ${
+                    popularityFilter === league.key
+                      ? `${league.bgClass} ${league.textClass} font-semibold`
+                      : 'text-stone-400 hover:text-white'
+                  }`}
+                >
+                  {league.icon} {league.shortLabel}
+                </button>
+              ))}
+            </div>
+
+            <span className="text-xs text-stone-500 font-mono">
+              {sortedGiants.length} Lider
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -494,6 +577,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             const overall = calculateOverallScore(scores);
             const tier = getTierForScore(overall);
             const isFirstEntry = entryCount === 1;
+            const popScore = getLeaderPopularityScore(leader);
+            const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
 
             return (
               <div
@@ -559,6 +644,15 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                       <p className="text-xs text-stone-400 line-clamp-1 mt-0.5">
                         {leader.title}
                       </p>
+                      <div className="text-[10px] font-medium mt-0.5 flex flex-wrap items-center gap-2">
+                        <span className={getLeaderPowerRole(leader) === 'ruler' ? 'text-emerald-400/90' : 'text-sky-400/90'}>
+                          ● {getPowerRoleLabel(leader)}
+                        </span>
+                        <span className="text-stone-600">·</span>
+                        <span className={popLeague.textClass}>
+                          {popLeague.icon} {popLeague.shortLabel} ({popScore})
+                        </span>
+                      </div>
 
                       {/* Prominent Tier + Score Strip */}
                       <div

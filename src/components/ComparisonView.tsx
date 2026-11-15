@@ -1,7 +1,14 @@
 import React from 'react';
 import { Leader, UserRating } from '../types';
 import { DIMENSIONS } from '../data/leaders';
-import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
+import {
+  calculateOverallScore,
+  getEffectiveScores,
+  getLeaderPopularityScore,
+  getLeaderPopularityTier,
+  getPopularityLeagueInfo,
+  getTierForScore,
+} from '../utils/scoring';
 import { RadarChart, RadarDataset } from './RadarChart';
 import { Swords, X, Trophy, Plus, Sparkles } from 'lucide-react';
 
@@ -265,6 +272,8 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                     const scores = getEffectiveScores(leader, userRatings);
                     const overall = calculateOverallScore(scores);
                     const tier = getTierForScore(overall);
+                    const popScore = getLeaderPopularityScore(leader);
+                    const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
 
                     return (
                       <div
@@ -284,8 +293,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                           <h5 className="font-semibold text-sm text-stone-200">
                             {leader.name}
                           </h5>
-                          <span className="text-[11px] text-stone-400">
+                          <span className="text-[11px] text-stone-400 block">
                             {leader.country}
+                          </span>
+                          <span className={`text-[10px] font-medium block mt-1 ${popLeague.textClass}`}>
+                            {popLeague.icon} {popLeague.shortLabel} ({popScore})
                           </span>
                         </div>
 

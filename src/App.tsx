@@ -25,7 +25,7 @@ export default function App() {
     const match = window.location.hash.match(/^#country=([a-z0-9-]+)$/);
     return match ? match[1] : null;
   });
-  const [currentCulture, setCurrentCulture] = useState<CultureKey>('turkey');
+  const [currentCulture, setCurrentCulture] = useState<CultureKey>('world');
 
   useEffect(() => {
     const onPopState = () => {
@@ -150,6 +150,8 @@ export default function App() {
         'romania',
         'albania',
         'north-macedonia',
+        'ukraine',
+        'christianity',
       ].includes(leader.category)
     ) {
       handleSelectCulture('europe');
