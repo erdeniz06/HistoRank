@@ -241,7 +241,7 @@ export const IRAN_MODERN_LEADERS: Leader[] = [
     era: '21st',
     yearsActive: '1998 – 2020',
     category: 'iran',
-    subCategory: 'me-leader',
+    subCategory: 'ir-commander',
     region: 'asia',
     defaultScores: { military: 90, economy: 55, societal: 48, diplomacy: 82, leadership: 91, legacy: 84 },
     summary: '22 yıl boyunca İran’ın yurtdışı askeri ve istihbarat operasyonlarını (Kudüs Gücü) yöneten komutan. Irak’ta IŞİD’e karşı kara savaşını ve Suriye’de Esad rejiminin ayakta kalmasını koordine etti; Ocak 2020’de Bağdat’ta ABD insansız hava aracı saldırısıyla öldürüldü.',

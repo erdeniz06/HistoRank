@@ -74,12 +74,43 @@ export const LEADER_TIER_EPITHETS: Record<string, string> = {
   saladin: 'Kudüs Fatihi & Şövalye Sultan',
   'hz-ebubekir': 'İlk Halife & Birlik Koruyucusu',
   'hz-omer': 'Adalet Timsali & Devlet Teşkilatçısı',
+  'hz-osman': 'Kur’an Çoğaltıcısı & İlk Donanma Banisi',
+  'hz-ali': 'İlmin Kapısı & Adalet Halifesi',
+  'hz-hasan': 'Barış Halifesi & Ümmeti Birleştiren',
+  'abdullah-bin-zubeyr': 'Mekke Halifesi & Şûra Savunucusu',
+  'yezid-1': 'Saltanat Başlatıcısı & Kerbela Müsebbibi',
+  'velid-1': 'Emevi Zirvesi & İlk Devlet Hastaneleri Banisi',
+  'hisam-bin-abdulmelik': 'Son Büyük Şam Halifesi & Maliye Ustası',
+  'mervan-2': 'Son Şam Emevi Halifesi & Cephe Komutanı',
+  'abdurrahman-1': 'Kureyş Şahini & Endülüs Emevi Kurucusu',
+  'hakem-2': 'Kurtuba Kütüphanesi & Bilim Hamisi Halife',
   'omer-bin-abdulaziz': 'Adil Halife & Islahatçı Hükümdar',
   'abdurrahman-3': 'Kurtuba Altın Çağı & Bilim Hamisi',
+  'ebul-abbas-seffah': 'Abbasi Hanedanı Kurucusu & İlk Halife',
   'el-mansur': 'Bağdat Banisi & Teşkilatçı Halife',
+  'muhammed-el-mehdi': 'İmar & Hac Yolu Halifesi',
   'harun-resid': 'İslam Altın Çağı & İhtişam Halifesi',
   'el-memun': 'Bilim Devrimi & Beytü’l-Hikme Hamisi',
+  'el-mutasim': 'Samarra Banisi & Ammoriye Fatihi Halife',
+  'el-mutevekkil': 'Mihne Bitiricisi & Sünni Restorasyon Halifesi',
+  'el-mutazid': 'İkinci Mansur & Hilafet Toparlayıcısı',
+  'en-nasir-lidinillah': 'Fütüvvet Kurucusu & Geç Abbasi Gücü',
+  'el-mustasim': 'Son Bağdat Halifesi & 1258 Trajedisi',
   'sultan-baybars': 'Ayn Calut Galibi & Memlük Kudreti',
+
+  'narmer-menes': 'Mısır’ı Birleştiren İlk Firavun',
+  zoser: 'İlk Basamaklı Piramit & Eski Krallık Öncüsü',
+  'khufu-keops': 'Büyük Gize Piramidi Banisi Firavun',
+  hatshepsut: 'Punt Ticareti & Altın Çağ Kadın Firavunu',
+  'thutmose-3': 'Mısır’ın Napolyon’u & Megiddo Fatihi',
+  akhenaton: 'Amarna Devrimi & Aten İnancı Firavunu',
+  tutankhamun: 'Restorasyon Dönemi Altın Firavunu',
+  'seti-1': '19. Hanedan Komutanı & Karnak Mimarı',
+  'ramses-2': 'Kadeş Barışı İmparatoru & Büyük Ramses',
+  'ramses-3': 'Deniz Kavimlerini Durduran Son Büyük Firavun',
+  'kleopatra-7': 'Son Aktif Firavun & Stratejist Kraliçe',
+  'kavalali-mehmed-ali': 'Modern Mısır Kurucusu & Reformcu Vali',
+  'enver-sedat': 'Ekim Savaşı & Camp David Barış Lideri',
 
   'thomas-sankara': 'Onurlu Kalkınma & Devrimci Lider',
   'nelson-mandela': 'Özgürlük Sembolü & Uzlaşı Başkanı',
@@ -107,6 +138,7 @@ export const LEADER_TIER_EPITHETS: Record<string, string> = {
   'refik-saydam': 'Halk Sağlığı & Hıfzıssıhha Mimarı',
   'hasan-ali-yucel': 'Köy Enstitüleri & Tercüme Devrimcisi',
   'mahmut-esat-bozkurt': 'Medeni Kanun & Hukuk Devrimcisi',
+  'ismail-cem': 'Çok Boyutlu Diplomasi & AB Adaylığı Mimarı',
   'mithat-pasa': 'Kanun-i Esasi & Meşrutiyet Öncüsü',
   'esref-bitlis': 'Terörle Mücadelede Strateji & Barış Komutanı',
 
@@ -146,6 +178,50 @@ export const LEADER_TIER_EPITHETS: Record<string, string> = {
   'nicolae-ceausescu': 'Baskıcı Rejim & Ekonomik Yıkım Diktatörü',
   'enver-hoxha': 'Aşırı İzolasyonist & Sığınak Rejimi Lideri',
   'abdullah-ocalan': 'Şiddet & Terör Örgütü Elebaşı',
+  'kim-il-sung': 'Juche Kurucusu & Kuzey Kore Hanedan Başlatıcısı',
+  'kim-jong-il': 'Önce Ordu Rejimi & Kıtlık Dönemi Lideri',
+  'kim-jong-un': 'Nükleer Caydırıcılık & Mutlak Rejim Lideri',
+  'pol-pot': 'Sıfır Yılı Yıkımı & Ölüm Tarlaları Faili',
+  'david-ben-gurion': 'İsrail Devleti Kurucusu & İlk Başbakan',
+  'golda-meir': 'Yom Kippur Krizi & Demir Leydi Başbakan',
+  'moshe-dayan': 'Altı Gün Savaşı Komutanı & Camp David Diplomatı',
+  'yitzhak-rabin': 'Oslo Barış Mimarı & Suikast Kurbanı Lider',
+  'menachem-begin': 'Likud Kurucusu & Camp David Barış Başbakanı',
+  'shimon-peres': 'Ekonomik İstikrar & Oslo Nobel Devlet Adamı',
+  'ariel-sharon': 'Süveyş Komutanı & Gazze Çekilmesi Başbakanı',
+  'benjamin-netanyahu': 'En Uzun Süreli Başbakan & Kutuplaştırıcı Lider',
+  'yair-lapid': 'Değişim Koalisyonu & Merkez Muhalefet Lideri',
+  'benny-gantz': 'Eski Genelkurmay Başkanı & Merkez Siyaset Lideri',
+  'qasem-soleimani': 'Kudüs Gücü Mimarı & Bölgesel Stratejist',
+  'mohammad-bagheri': 'İran Genelkurmay Başkanı & Savunma Doktrini Lideri',
+  'hossein-salami': 'Devrim Muhafızları Başkomutanı & Asimetrik Stratejist',
+  'amir-ali-hajizadeh': 'Füze, İHA & Hava-Uzay Kuvvetleri Komutanı',
+  'mohammad-reza-zahedi': 'Kudüs Gücü Şam-Lübnan Saha Komutanı',
+  'ali-sayyad-shirazi': 'Ortak Cephe Stratejisti & Kara Kuvvetleri Komutanı',
+  'hassan-tehrani-moghaddam': 'İran Balistik Füze Programının Kurucusu',
+  'mostafa-chamran': 'Fizikçi Savunma Bakanı & Düzensiz Harp Komutanı',
+  'sheikh-ahmed-yassin': 'Hamas Kurucusu & Gazze Ruhani Lideri',
+  'abdel-aziz-al-rantisi': 'Hamas Kurucu Ortağı & Gazze Sözcüsü',
+  'khaled-mashal': 'Hamas Dış Lideri & Siyasi Büro Eski Başkanı',
+  'ismail-haniyeh': 'Filistin Eski Başbakanı & Hamas Siyasi Lideri',
+  'yahya-sinwar': 'Gazze Hamas Lideri & 7 Ekim Planlayıcısı',
+  'mohammed-deif': 'Kassam Tugayları Başkomutanı & Tünel Mimarı',
+  'oda-nobunaga': 'Ateşli Silah Devrimcisi & İlk Birleştirici',
+  'toyotomi-hideyoshi': 'Japonya Birleştiricisi & Taikō Reformcusu',
+  'tokugawa-ieyasu': 'Tokugawa Şogunluğu Kurucusu & Edo Barışı',
+  'emperor-meiji': 'Meiji Restorasyonu & Sanayileşme Sembolü',
+  'ito-hirobumi': 'İlk Japon Başbakanı & Meiji Anayasası Mimarı',
+  'okubo-toshimichi': 'Meiji Sanayileşme & Devlet Kurucusu',
+  'saigo-takamori': 'Restorasyon Başkomutanı & Son Samuray',
+  'sakamoto-ryoma': 'Meiji Geçiş Vizyoneri & Deniz Ticareti Öncüsü',
+  'togo-heihachiro': 'Tsushima Deniz Zaferi Komutanı ("Doğu’nun Nelson’u")',
+  'hideki-tojo': 'II. Dünya Savaşı Militarist Başbakanı',
+  'shigeru-yoshida': 'Yoshida Doktrini & Japon Ekonomik Mucizesi',
+  'shinzo-abe': 'Abenomics Mimarı & En Uzun Süreli Başbakan',
+  'shigeru-ishiba': 'Savunma Uzmanı & Azınlık Hükümeti Başbakanı',
+  'hafez-al-assad': 'Şam’ın Sfenksi & Demir Yumruk Cumhurbaşkanı',
+  'bashar-al-assad': 'Baas Rejiminin Son Lideri & İç Savaş Bilançosu',
+  'shukri-al-quwatli': 'Bağımsız Suriye’nin İlk Cumhurbaşkanı',
 };
 
 type RoleArchetype =
@@ -166,7 +242,8 @@ function detectRoleArchetype(leader: Leader): RoleArchetype {
   }
   if (
     sub === 'islamic-commander' ||
-    sub === 'tr-actor' && (titleLower.includes('orgeneral') || titleLower.includes('paşa') || titleLower.includes('komutan')) ||
+    sub === 'ir-commander' ||
+    (sub === 'tr-actor' && (titleLower.includes('orgeneral') || titleLower.includes('paşa') || titleLower.includes('komutan'))) ||
     titleLower.includes('komutan') ||
     titleLower.includes('başkomutan') ||
     titleLower.includes('general')
@@ -177,6 +254,7 @@ function detectRoleArchetype(leader: Leader): RoleArchetype {
     sub === 'ottoman-sultan' ||
     sub === 'uk-monarch' ||
     sub === 'es-monarch' ||
+    sub === 'eg-pharaoh' ||
     sub === 'turkic-seljuk' ||
     sub === 'ancient-rome' ||
     sub === 'ancient-greece' ||

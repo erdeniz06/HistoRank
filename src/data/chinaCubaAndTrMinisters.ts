@@ -266,6 +266,34 @@ export const CHINA_CUBA_AND_TR_MINISTERS: Leader[] = [
       'Özelleştirme ve piyasa serbestleşmesi politikalarının sosyal devletçi çevrelerce eleştirilmesi',
     ],
   },
+  {
+    id: 'ismail-cem',
+    name: 'İsmail Cem',
+    originalName: 'İsmail Cem İpekçi',
+    title: 'T.C. Dışişleri Bakanı (1997 – 2002), Kültür Bakanı & Gazeteci',
+    country: 'Türkiye',
+    countryCode: 'TR',
+    flag: '🇹🇷',
+    century: '20. yy / 21. yy',
+    era: '20th',
+    yearsActive: '1997 – 2002 (Dışişleri)',
+    category: 'turkey',
+    subCategory: 'tr-minister',
+    region: 'asia',
+    regions: ['europe', 'asia'],
+    defaultScores: { military: 66, economy: 76, societal: 86, diplomacy: 96, leadership: 86, legacy: 90 },
+    summary: '1997–2002 yılları arasında kesintisiz Dışişleri Bakanlığı yaparak Türk dış politikasına çok boyutlu diplomasi ve diyalog vizyonu getiren; 1999 Helsinki Zirvesi’nde Türkiye’nin AB adaylığını tescilleten, Yorgo Papandreu ile Türk-Yunan yakınlaşmasını başlatan ve AB–İKÖ zirvesine öncülük eden devlet adamı.',
+    keyAchievements: [
+      '1999 Helsinki Zirvesi’nde Türkiye’nin Avrupa Birliği resmî aday ülke statüsünü almasını sağlayan diplomatik süreci yönetmesi',
+      '1999 depremi sonrası Yunan mevkidaşı Yorgo Papandreu ile "Deprem Diplomasisi"ni başlatarak Ege’de tarihi yumuşama sağlaması',
+      '2002’de İstanbul’da AB ile İslam Konferansı Örgütü’nü (İKÖ) ilk kez bir araya getiren medeniyetler diyaloğu forumuna öncülük etmesi',
+    ],
+    controversies: [
+      '2002’de Bülent Ecevit’in hastalığı döneminde DSP’den ayrılıp Yeni Türkiye Partisi’ni (YTP) kurmasının merkez solu böldüğü ve %1.15 oyla baraj altında kaldığı eleştirileri',
+      '1974–1975 TRT Genel Müdürlüğü döneminde yayıncılık çizgisi üzerinden milliyetçi-muhafazakâr muhalefetle yaşadığı sert tartışmalar',
+      'AB uyum ve Kıbrıs açılımlarının bazı ulusalcı çevrelerce fazla tavizkâr bulunması',
+    ],
+  },
 
   // ====================================================
   // ÇİN TARİHİ & MODERN LİDERLERİ

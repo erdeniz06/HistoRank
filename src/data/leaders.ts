@@ -10,6 +10,11 @@ import { ISLAMIC_AZ_OTTOMAN_QUEENS } from './islamicAzerbaijanLateOttomanQueens'
 import { IRAN_MODERN_LEADERS } from './iranModernLeaders';
 import { CAUCASUS_GREECE_BALKANS } from './caucasusGreeceBalkans';
 import { TURKISH_POLITICS_AND_ACTORS } from './turkishPoliticsAndActors';
+import { CALIPHS_AND_PHARAOHS } from './caliphsAndPharaohs';
+import { NORTH_KOREA_AND_CAMBODIA } from './northKoreaAndCambodia';
+import { ISRAEL_LEADERS } from './israelLeaders';
+import { IRAN_COMMANDERS_AND_HAMAS } from './iranCommandersAndHamas';
+import { JAPAN_AND_SYRIA } from './japanAndSyria';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
@@ -1439,4 +1444,9 @@ export const INITIAL_LEADERS: Leader[] = [
   ...IRAN_MODERN_LEADERS,
   ...CAUCASUS_GREECE_BALKANS,
   ...TURKISH_POLITICS_AND_ACTORS,
+  ...CALIPHS_AND_PHARAOHS,
+  ...NORTH_KOREA_AND_CAMBODIA,
+  ...ISRAEL_LEADERS,
+  ...IRAN_COMMANDERS_AND_HAMAS,
+  ...JAPAN_AND_SYRIA,
 ];
