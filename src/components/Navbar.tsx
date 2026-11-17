@@ -93,10 +93,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               onClick={onBackFromCountry}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs shadow-lg shadow-amber-500/25 transition-colors shrink-0"
-              title="Tüm ülkelere geri dön"
+              title="Back to all countries"
             >
               <ArrowLeft className="w-4 h-4 stroke-[2.75]" />
-              <span>Geri</span>
+              <span>Back</span>
             </button>
           )}
           <button
@@ -104,7 +104,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
           >
             <span className="font-cinzel text-lg sm:text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
-              PANTHEON
+              HISTORANK
             </span>
           </button>
         </div>
@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   handlePickLeader(searchResults[0]);
                 }
               }}
-              placeholder="Lider ara... (Atatürk, Merz/März, Lenin, Attila...)"
+              placeholder="Search leaders... (Caesar, Napoleon, Lincoln, Atatürk...)"
               className="w-full pl-8 pr-8 py-1.5 text-xs bg-stone-900/90 border border-stone-800 rounded-lg text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500/80 transition-colors"
             />
             {query && (
@@ -140,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setIsOpen(false);
                 }}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-200"
-                title="Temizle"
+                title="Clear"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="absolute left-0 right-0 top-full mt-1.5 rounded-xl bg-stone-900 border border-stone-800 shadow-2xl overflow-hidden z-50">
               {searchResults.length === 0 ? (
                 <div className="px-4 py-3 text-xs text-stone-500">
-                  "{query}" ile eşleşen lider bulunamadı.
+                  No figures found matching "{query}".
                 </div>
               ) : (
                 <div className="divide-y divide-stone-800/70 max-h-80 overflow-y-auto">
@@ -214,7 +214,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            Ülkeler & Tarih
+            Nations & History
           </button>
 
           <button
@@ -225,7 +225,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            Devler Ligi
+            League of Giants
           </button>
 
           <button
@@ -236,7 +236,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            <span>Kıyaslama</span>
+            <span>Compare</span>
             {comparedCount > 0 && (
               <span className="text-[10px] font-mono text-amber-400">
                 ({comparedCount})
@@ -263,7 +263,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-stone-950 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors whitespace-nowrap"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span className="hidden sm:inline">Lider Ekle</span>
+            <span className="hidden sm:inline">Add Figure</span>
           </button>
         </div>
       </div>

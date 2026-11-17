@@ -119,7 +119,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                 {tierConfig.tier} TIER
               </div>
               <div className="text-xs font-bold text-stone-200 uppercase tracking-wider mt-1">
-                {tierConfig.minScore}+ Puan
+                {tierConfig.minScore}+ Pts
               </div>
               <div className="text-[11px] text-stone-300 max-w-[120px] hidden md:block mt-1 leading-tight">
                 {tierConfig.label}
@@ -130,7 +130,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
             <div className="flex-1 p-4 min-h-[92px] flex items-center">
               {leadersInTier.length === 0 ? (
                 <div className="text-xs text-stone-600 italic py-2">
-                  Bu seviyede henüz lider bulunmuyor (filtrelere göre veya puanlama sonrası güncellenir).
+                  No figures in this tier yet under current filters.
                 </div>
               ) : (
                 <div className="flex flex-wrap gap-2.5">
@@ -146,7 +146,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                         key={leader.id}
                         onClick={() => onSelectLeader(leader)}
                         className="group flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
-                        title={`${leader.name} — ${overall}/100 Puan (${tierConfig.tier} Tier · ${tierSubtitle}) · Popülerlik: ${popScore}/100 (${popLeague.shortLabel})`}
+                        title={`${leader.name} — ${overall}/100 (${tierConfig.tier} Tier · ${tierSubtitle}) · Recognition: ${popScore}/100 (${popLeague.shortLabel})`}
                       >
                         <span className="text-lg shrink-0">{leader.flag}</span>
 
@@ -194,10 +194,10 @@ export const TierListView: React.FC<TierListViewProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-serif font-bold text-stone-100">
-              Tarihsel Seviye Tablosu (Tier List)
+              Historical Tier List
             </h2>
             <p className="text-xs text-stone-400 mt-0.5">
-              Liderler 6 yönetim ekseni puanına göre S–D kademelerine, küresel popülerlik çapına göre ayrı liglere ayrılır.
+              Ranked S–D by 6 governance dimensions and separated into distinct Global Recognition leagues.
             </p>
           </div>
 
@@ -213,7 +213,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-white'
                 }`}
               >
-                Benim Puanlarım
+                My Ratings
               </button>
               <button
                 onClick={() => setUseUserRatings(false)}
@@ -223,11 +223,11 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-white'
                 }`}
               >
-                Konsensüs Puanları
+                Consensus Scores
               </button>
             </div>
 
-            {/* Power Role Filter: İktidar vs Muhalefet/Düşünür */}
+            {/* Power Role Filter */}
             <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
               <button
                 type="button"
@@ -238,7 +238,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-white'
                 }`}
               >
-                Tümü
+                All
               </button>
               <button
                 type="button"
@@ -249,7 +249,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                İktidar
+                Rulers & Executives
               </button>
               <button
                 type="button"
@@ -260,7 +260,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Muhalefet & Düşünür
+                Opposition & Thinkers
               </button>
             </div>
 
@@ -270,56 +270,56 @@ export const TierListView: React.FC<TierListViewProps> = ({
               onChange={(e) => setSelectedFilterCategory(e.target.value)}
               className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-300 focus:outline-none"
             >
-              <option value="all">Tüm Milletler & Ülkeler</option>
-              <option value="usa">🇺🇸 ABD</option>
-              <option value="uk">🇬🇧 İngiltere</option>
-              <option value="germany">🇩🇪 Almanya</option>
-              <option value="france">🇫🇷 Fransa</option>
-              <option value="russia">🇷🇺 Rusya & SSCB</option>
-              <option value="china">🇨🇳 Çin</option>
-              <option value="japan">🇯🇵 Japonya</option>
-              <option value="india">🇮🇳 Hindistan</option>
-              <option value="italy">🇮🇹 İtalya</option>
-              <option value="spain">🇪🇸 İspanya</option>
-              <option value="ukraine">🇺🇦 Ukrayna</option>
-              <option value="brazil">🇧🇷 Brezilya</option>
-              <option value="ancient">🏛️ Antik Roma & Yunan</option>
-              <option value="christianity">✝️ Hristiyanlık Tarihi</option>
-              <option value="islamic">☪️ İslam Tarihi & Halifeler</option>
-              <option value="turkey">🇹🇷 Türkiye & Türk Tarihi</option>
-              <option value="poland">🇵🇱 Polonya</option>
-              <option value="belgium">🇧🇪 Belçika</option>
-              <option value="netherlands">🇳🇱 Hollanda</option>
-              <option value="cuba">🇨🇺 Küba</option>
+              <option value="all">All Nations & Categories</option>
+              <option value="usa">🇺🇸 United States</option>
+              <option value="uk">🇬🇧 United Kingdom</option>
+              <option value="germany">🇩🇪 Germany</option>
+              <option value="france">🇫🇷 France</option>
+              <option value="russia">🇷🇺 Russia & USSR</option>
+              <option value="china">🇨🇳 China</option>
+              <option value="japan">🇯🇵 Japan</option>
+              <option value="india">🇮🇳 India</option>
+              <option value="italy">🇮🇹 Italy</option>
+              <option value="spain">🇪🇸 Spain</option>
+              <option value="ukraine">🇺🇦 Ukraine</option>
+              <option value="brazil">🇧🇷 Brazil</option>
+              <option value="ancient">🏛️ Ancient Rome & Greece</option>
+              <option value="christianity">✝️ Christian History</option>
+              <option value="islamic">☪️ Islamic History & Caliphs</option>
+              <option value="turkey">🇹🇷 Turkey & Turkic History</option>
+              <option value="poland">🇵🇱 Poland</option>
+              <option value="belgium">🇧🇪 Belgium</option>
+              <option value="netherlands">🇳🇱 Netherlands</option>
+              <option value="cuba">🇨🇺 Cuba</option>
               <option value="vietnam">🇻🇳 Vietnam</option>
-              <option value="north-korea">🇰🇵 Kuzey Kore</option>
-              <option value="cambodia">🇰🇭 Kamboçya</option>
-              <option value="yugoslavia">🇷🇸 Yugoslavya</option>
-              <option value="mongolia">🇲🇳 Moğolistan</option>
-              <option value="egypt">🇪🇬 Mısır & Eyyubiler</option>
-              <option value="iraq">🇮🇶 Irak</option>
-              <option value="iran">🇮🇷 İran</option>
-              <option value="syria">🇸🇾 Suriye</option>
-              <option value="saudi-arabia">🇸🇦 Suudi Arabistan</option>
-              <option value="palestine">🇵🇸 Filistin</option>
-              <option value="israel">🇮🇱 İsrail</option>
+              <option value="north-korea">🇰🇵 North Korea</option>
+              <option value="cambodia">🇰🇭 Cambodia</option>
+              <option value="yugoslavia">🇷🇸 Yugoslavia</option>
+              <option value="mongolia">🇲🇳 Mongolia</option>
+              <option value="egypt">🇪🇬 Egypt & Pharaohs</option>
+              <option value="iraq">🇮🇶 Iraq</option>
+              <option value="iran">🇮🇷 Iran</option>
+              <option value="syria">🇸🇾 Syria</option>
+              <option value="saudi-arabia">🇸🇦 Saudi Arabia</option>
+              <option value="palestine">🇵🇸 Palestine</option>
+              <option value="israel">🇮🇱 Israel</option>
               <option value="libya">🇱🇾 Libya</option>
               <option value="burkina-faso">🇧🇫 Burkina Faso</option>
-              <option value="ghana">🇬🇭 Gana</option>
-              <option value="tanzania">🇹🇿 Tanzanya</option>
-              <option value="south-africa">🇿🇦 Güney Afrika</option>
-              <option value="botswana">🇧🇼 Botsvana</option>
-              <option value="azerbaijan">🇦🇿 Azerbaycan</option>
-              <option value="armenia">🇦🇲 Ermenistan</option>
-              <option value="georgia">🇬🇪 Gürcistan</option>
-              <option value="greece">🇬🇷 Yunanistan</option>
-              <option value="serbia">🇷🇸 Sırbistan</option>
-              <option value="bosnia">🇧🇦 Bosna-Hersek</option>
-              <option value="croatia">🇭🇷 Hırvatistan</option>
-              <option value="bulgaria">🇧🇬 Bulgaristan</option>
-              <option value="romania">🇷🇴 Romanya</option>
-              <option value="albania">🇦🇱 Arnavutluk</option>
-              <option value="north-macedonia">🇲🇰 Kuzey Makedonya</option>
+              <option value="ghana">🇬🇭 Ghana</option>
+              <option value="tanzania">🇹🇿 Tanzania</option>
+              <option value="south-africa">🇿🇦 South Africa</option>
+              <option value="botswana">🇧🇼 Botswana</option>
+              <option value="azerbaijan">🇦🇿 Azerbaijan</option>
+              <option value="armenia">🇦🇲 Armenia</option>
+              <option value="georgia">🇬🇪 Georgia</option>
+              <option value="greece">🇬🇷 Greece</option>
+              <option value="serbia">🇷🇸 Serbia</option>
+              <option value="bosnia">🇧🇦 Bosnia & Herzegovina</option>
+              <option value="croatia">🇭🇷 Croatia</option>
+              <option value="bulgaria">🇧🇬 Bulgaria</option>
+              <option value="romania">🇷🇴 Romania</option>
+              <option value="albania">🇦🇱 Albania</option>
+              <option value="north-macedonia">🇲🇰 North Macedonia</option>
             </select>
 
             {/* Era Filter */}
@@ -328,14 +328,14 @@ export const TierListView: React.FC<TierListViewProps> = ({
               onChange={(e) => setSelectedFilterEra(e.target.value)}
               className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-300 focus:outline-none"
             >
-              <option value="all">Tüm Yüzyıllar / Dönemler</option>
-              <option value="ancient">Antik Çağ</option>
-              <option value="early-medieval">Erken Orta Çağ (MS 5.-10. yy)</option>
-              <option value="medieval">Yüksek & Geç Orta Çağ</option>
-              <option value="early-modern">Yeni Çağ</option>
-              <option value="19th">19. Yüzyıl</option>
-              <option value="20th">20. Yüzyıl</option>
-              <option value="21st">21. Yüzyıl</option>
+              <option value="all">All Eras & Centuries</option>
+              <option value="ancient">Ancient Era</option>
+              <option value="early-medieval">Early Middle Ages (5th–10th c.)</option>
+              <option value="medieval">High & Late Middle Ages</option>
+              <option value="early-modern">Early Modern (16th–18th c.)</option>
+              <option value="19th">19th Century</option>
+              <option value="20th">20th Century</option>
+              <option value="21st">21st Century</option>
             </select>
           </div>
         </div>
@@ -344,7 +344,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
         <div className="pt-3.5 border-t border-stone-800/80 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-[11px] font-semibold text-stone-400 mr-1">
-              Popülerlik Ligi:
+              Recognition League:
             </span>
             <button
               type="button"
@@ -355,7 +355,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                   : 'bg-stone-950 text-stone-300 border-stone-800 hover:border-stone-700'
               }`}
             >
-              Tüm Ligler ({popularityCounts.all})
+              All Leagues ({popularityCounts.all})
             </button>
             {POPULARITY_LEAGUES.map((league) => (
               <button
@@ -386,7 +386,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Popülerliğe Göre Ayrı Ligler
+                Separate by Recognition
               </button>
               <button
                 type="button"
@@ -397,7 +397,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Tek Birleşik Liste
+                Unified Table
               </button>
             </div>
           )}
@@ -427,7 +427,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     <p className="text-xs text-stone-300/90 mt-0.5">{league.description}</p>
                   </div>
                   <div className="text-xs font-mono text-stone-200 bg-stone-950/70 px-3 py-1.5 rounded-lg border border-stone-800 shrink-0 self-start sm:self-center">
-                    {leagueLeaders.length} Lider · {league.minScore}+ Popülerlik
+                    {leagueLeaders.length} Figures · {league.minScore}+ Fame
                   </div>
                 </div>
 
@@ -438,7 +438,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
 
           {filteredLeaders.length === 0 && (
             <div className="p-10 text-center rounded-2xl bg-stone-900 border border-stone-800 text-xs text-stone-400">
-              Seçilen filtrelere uygun lider bulunamadı.
+              No figures matched the selected filters.
             </div>
           )}
         </div>
@@ -458,7 +458,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
                   <p className="text-xs text-stone-300/90 mt-0.5">{activeLeague.description}</p>
                 </div>
                 <span className="text-xs font-mono text-stone-200 bg-stone-950/70 px-3 py-1.5 rounded-lg border border-stone-800 shrink-0">
-                  {filteredLeaders.length} Lider
+                  {filteredLeaders.length} Figures
                 </span>
               </div>
             );

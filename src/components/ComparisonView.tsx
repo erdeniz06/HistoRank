@@ -37,11 +37,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
 }) => {
   // Preset duels for quick inspiration
   const presets = [
-    { label: 'Antik Çağ Devleri', ids: ['caesar', 'alexander-the-great', 'octavius'] },
-    { label: 'Avrupa’nın Mimarları', ids: ['napoleon', 'otto-von-bismarck', 'frederick-the-great'] },
-    { label: '20. Yüzyıl Devlet Adamları', ids: ['ataturk', 'charles-de-gaulle', 'winston-churchill'] },
-    { label: 'Fransız İhtilali & Güç', ids: ['maximilien-robespierre', 'georges-danton', 'napoleon'] },
-    { label: 'Türkiye CB Dönüşümü', ids: ['ataturk', 'ismet-inonu', 'turgut-ozal'] },
+    { label: 'Ancient Giants', ids: ['caesar', 'alexander-the-great', 'octavius'] },
+    { label: 'Architects of Europe', ids: ['napoleon', 'otto-von-bismarck', 'frederick-the-great'] },
+    { label: '20th-Century Statesmen', ids: ['ataturk', 'charles-de-gaulle', 'winston-churchill'] },
+    { label: 'French Revolution & Power', ids: ['maximilien-robespierre', 'georges-danton', 'napoleon'] },
+    { label: 'Modern US Presidencies', ids: ['franklin-d-roosevelt', 'ronald-reagan', 'barack-obama'] },
   ];
 
   const datasets: RadarDataset[] = comparedLeaders.map((leader, idx) => {
@@ -64,19 +64,19 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
           <div>
             <div className="flex items-center gap-2 text-amber-500 text-xs font-semibold uppercase tracking-wider mb-1">
               <Swords className="w-4 h-4" />
-              <span>Tarihsel Düello & Kıyaslama Laboratuvarı</span>
+              <span>Historical Duel & Comparison Lab</span>
             </div>
             <h2 className="text-2xl font-serif font-bold text-stone-100">
-              Liderleri Karşılaştırın
+              Compare Leaders
             </h2>
             <p className="text-xs text-stone-400 mt-1">
-              En fazla 3 lider seçerek 6 boyuttaki skorlarını radar diyagramı ve kıyaslama matrisinde inceleyin.
+              Select up to 3 historical figures to analyze their 6-dimension scores via overlaid radar charts and side-by-side metrics.
             </p>
           </div>
 
           {/* Quick Duel Presets */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-stone-500">Örnek Düellolar:</span>
+            <span className="text-xs text-stone-500">Quick Matchups:</span>
             {presets.map((preset, idx) => (
               <button
                 key={idx}
@@ -113,7 +113,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                 <button
                   onClick={() => onRemoveLeader(leader.id)}
                   className="p-1 text-stone-500 hover:text-stone-300 transition-colors"
-                  title="Kaldır"
+                  title="Remove"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -133,7 +133,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                 className="px-3 py-1.5 text-xs bg-stone-800 hover:bg-stone-750 text-stone-300 rounded-lg border border-stone-700 focus:outline-none cursor-pointer"
               >
                 <option value="" disabled>
-                  + Lider Ekle ({3 - comparedLeaders.length} boş yer)...
+                  + Add Figure ({3 - comparedLeaders.length} slot{3 - comparedLeaders.length > 1 ? 's' : ''} left)...
                 </option>
                 {allLeaders
                   .filter((l) => !comparedLeaders.some((cl) => cl.id === l.id))
@@ -152,10 +152,10 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
         <div className="p-12 text-center rounded-2xl bg-stone-900/50 border border-dashed border-stone-800">
           <Swords className="w-10 h-10 text-stone-600 mx-auto mb-3" />
           <h3 className="text-base font-semibold text-stone-300">
-            Kıyaslama İçin Henüz Lider Seçilmedi
+            No Figures Selected for Comparison
           </h3>
           <p className="text-xs text-stone-500 max-w-md mx-auto mt-1 mb-4">
-            Katalogdan lider kartlarındaki "Kıyasla" butonuna tıklayarak veya yukarıdaki hazır düellolardan birini seçerek başlayabilirsiniz.
+            Click "Compare" on any leader card or choose a preset matchup above to get started.
           </p>
           <button
             onClick={() =>
@@ -163,7 +163,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
             }
             className="px-4 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-stone-950 rounded-lg transition-colors"
           >
-            Örnek Düelloyu Başlat (Sezar vs İskender vs Octavius)
+            Start Sample Duel (Caesar vs Alexander vs Augustus)
           </button>
         </div>
       ) : (
@@ -171,10 +171,10 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
           {/* Overlay Radar Chart Box */}
           <div className="lg:col-span-5 p-6 rounded-2xl bg-stone-900 border border-stone-800 flex flex-col items-center">
             <h3 className="text-sm font-semibold text-stone-300 mb-2">
-              Ortak Radar Profili
+              Combined Radar Profile
             </h3>
             <p className="text-xs text-stone-500 mb-4 text-center">
-              Farklı liderlerin yönetim stillerinin örtüşen ve ayrışan eksenleri
+              Overlapping and diverging governance axes across selected figures
             </p>
             <RadarChart datasets={datasets} size={320} showLabels={true} />
           </div>
@@ -183,7 +183,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
           <div className="lg:col-span-7 space-y-4">
             <div className="p-5 rounded-2xl bg-stone-900 border border-stone-800 space-y-5">
               <h3 className="text-base font-semibold text-stone-200">
-                Boyut Bazında Kafa Kafaya Karşılaştırma
+                Head-to-Head Dimension Breakdown
               </h3>
 
               {DIMENSIONS.map((dim) => {
@@ -259,7 +259,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
             {/* Overall Verdict Banner */}
             <div className="p-5 rounded-2xl bg-stone-900 border border-stone-800">
               <h4 className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">
-                Genel Skor Sıralaması
+                Overall Score Ranking
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[...comparedLeaders]
@@ -282,7 +282,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                       >
                         <div>
                           <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
-                            <span>#{rank + 1} Sıra</span>
+                            <span>Rank #{rank + 1}</span>
                             <span
                               className="font-bold font-mono px-1.5 py-0.5 rounded text-[10px]"
                               style={{ color: tier.color, backgroundColor: tier.bgColor }}

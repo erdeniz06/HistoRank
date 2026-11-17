@@ -244,13 +244,13 @@ export default function App() {
         <div className="fixed bottom-4 right-4 z-40 flex items-center gap-3 p-2.5 pl-4 rounded-xl bg-stone-900 border border-amber-600/60 shadow-2xl backdrop-blur-md">
           <div className="flex items-center gap-2 text-xs font-semibold text-stone-200">
             <Swords className="w-4 h-4 text-amber-500" />
-            <span>{comparedLeaderIds.length} Lider Seçildi</span>
+            <span>{comparedLeaderIds.length} Selected</span>
           </div>
           <button
             onClick={() => setActiveTab('compare')}
             className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs rounded-lg transition-colors"
           >
-            Kıyaslamaya Git
+            Compare Now
           </button>
         </div>
       )}
@@ -276,16 +276,16 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="font-cinzel font-bold text-stone-400 tracking-wider">
-              PANTHEON
+              HISTORANK
             </span>
             <span aria-hidden="true">·</span>
-            <span>Tarihsel Liderlik & Devlet İdaresi Puanlama Arşivi</span>
+            <span>Historical Leadership & Statecraft Rating Archive</span>
           </div>
 
           <div className="flex items-center gap-3 text-stone-400">
-            <span>6 Değerlendirme Boyutu</span>
+            <span>6 Evaluation Dimensions</span>
             <span aria-hidden="true">·</span>
-            <span>{leaders.length} Lider</span>
+            <span>{leaders.length} Figures</span>
           </div>
         </div>
       </footer>

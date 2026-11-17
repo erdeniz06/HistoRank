@@ -1,0 +1,358 @@
+import { LeaderEnTranslation } from './helpers';
+
+export const EN_PART_22: Record<string, LeaderEnTranslation> = {
+  'frank-walter-steinmeier': {
+    name: 'Frank-Walter Steinmeier',
+    title: '12th President of Germany (2017 – Present) & Former Foreign Minister',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2005 – Present',
+    summary: 'Social Democratic statesman who served as Schröder’s Chief of Staff coordinating the Hartz reforms and twice as Merkel’s Foreign Minister before becoming Federal President in 2017. In 2022 he openly acknowledged misjudging Russia’s "change through trade" policy.',
+    keyAchievements: [
+      'Guided Normandy Format diplomacy for the 2014–2016 Minsk Ukraine ceasefires and the Iran nuclear negotiations',
+      'Acted as a constitutional anchor and voice of democratic consensus during periods of sharp polarization',
+    ],
+    controversies: [
+      'Backing for Nord Stream 2 and Russian energy integration came to be viewed as a major strategic error after 2022',
+      'Behind-the-scenes architect of the controversial Hartz IV welfare-reduction reforms under Gerhard Schröder',
+    ],
+  },
+  'richard-von-weizsacker': {
+    name: 'Richard von Weizsäcker',
+    title: '6th President of Germany (1984 – 1994) & Governing Mayor of West Berlin',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1981 – 1994',
+    summary: 'Venerated statesman who served as Mayor of West Berlin and the first President of reunified Germany. His historic May 8, 1985 Bundestag speech declared the end of WWII a "day of liberation from Nazi tyranny," institutionalizing German historical reckoning.',
+    keyAchievements: [
+      'Transformed Germany’s moral reckoning with its Nazi past through his landmark May 8, 1985 Bundestag address',
+      'Served as the unifying non-partisan symbol of constitutional trust during the 1990 East-West German reunification',
+    ],
+    controversies: [
+      'Scrutiny over defending his father Ernst von Weizsäcker, a Nazi-era diplomat convicted at Nuremberg, in his youth',
+      'Drew sharp ire from party bosses in 1992 after criticizing professional politicians as overly power-obsessed',
+    ],
+    famousQuote: 'May 8th was a day of liberation. It liberated all of us from the inhumanity and tyranny of the National Socialist regime.',
+  },
+  'wolfgang-schauble': {
+    name: 'Wolfgang Schäuble',
+    title: 'German Finance Minister, Interior Minister & Bundestag President',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '1972 – 2023',
+    summary: 'Giant of German parliamentary history who served 51 uninterrupted years in the Bundestag. Negotiated the 1990 German Unification Treaty before being paralyzed in an assassination attempt, later leading Merkel’s "Black Zero" balanced-budget policy through the Eurozone crisis.',
+    keyAchievements: [
+      'Principal negotiator of the 1990 Unification Treaty (Einigungsvertrag) legally uniting East and West Germany',
+      'Steered German fiscal policy during the 2009–2017 Eurozone debt crisis and eliminated federal budget deficits',
+    ],
+    controversies: [
+      'Widely criticized across Southern Europe as an unyielding enforcer of harsh austerity on Greece and debtor states',
+      'Forced to resign as CDU leader in 2000 over accepting an undisclosed 100,000-mark cash donation during the party-finance scandal',
+    ],
+  },
+  'hans-dietrich-genscher': {
+    name: 'Hans-Dietrich Genscher',
+    title: 'German Foreign Minister & Vice Chancellor (1974 – 1992)',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1969 – 1992',
+    summary: 'Free Democratic (FDP) diplomat who served continuously for 18 years as Foreign Minister under both Helmut Schmidt and Helmut Kohl—delivering freedom news to East German refugees from the Prague embassy balcony and completing the 1990 Two Plus Four Treaty.',
+    keyAchievements: [
+      'Announced safe passage to the West from the Prague embassy balcony on September 30, 1989, accelerating the fall of the Berlin Wall',
+      'Chief diplomat behind the 1990 Two Plus Four (2+4) Treaty securing Allied consent for German reunification',
+    ],
+    controversies: [
+      'Accused of betrayal by center-left voters after shifting the FDP from Helmut Schmidt’s SPD coalition to Helmut Kohl in 1982',
+      'Criticized for prematurely recognizing Croatia and Slovenia in 1991, allegedly accelerating the Yugoslav wars',
+    ],
+  },
+  'walter-scheel': {
+    name: 'Walter Scheel',
+    title: '4th President of Germany (1974 – 1979) & Ostpolitik Foreign Minister',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1961 – 1979',
+    summary: 'FDP leader who formed West Germany’s first social-liberal reform coalition with Willy Brandt in 1969, signed the Moscow and Warsaw Ostpolitik treaties as Foreign Minister, and later served as Federal President.',
+    keyAchievements: [
+      'Co-signed the Moscow, Warsaw, and Basic Treaties alongside Willy Brandt to normalize ties with the Eastern Bloc',
+      'Managed the constitutional transition as Acting Chancellor after Brandt’s 1974 resignation before becoming President',
+    ],
+    controversies: [
+      'Pivoting the FDP away from the CDU into an SPD coalition sparked severe internal party defections',
+      'Like many post-war contemporaries, faced scrutiny decades later over early wartime NSDAP membership records',
+    ],
+  },
+  'ursula-von-der-leyen': {
+    name: 'Ursula von der Leyen',
+    title: 'President of the European Commission (2019 – Present) & Former German Defence Minister',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2005 – Present',
+    summary: 'Served in all four Angela Merkel cabinets—including as Germany’s first female Defence Minister—before becoming the first woman President of the European Commission, steering the European Green Deal, joint EU pandemic debt, and Russia sanctions.',
+    keyAchievements: [
+      'Orchestrated the €750 billion NextGenerationEU recovery fund and joint European COVID-19 vaccine procurement',
+      'Spearheaded the European Green Deal and coordinated EU energy decoupling from Russia alongside Ukraine support after 2022',
+    ],
+    controversies: [
+      'Plagued by Bundeswehr equipment shortages and multi-million-euro external consultancy scandals as German Defence Minister',
+      'Faced EU scrutiny over undisclosed Pfizer vaccine text messages ("Pfizergate") and unilateral early stances during the 2023 Gaza war',
+    ],
+  },
+  'egon-bahr': {
+    name: 'Egon Bahr',
+    title: 'Ostpolitik Architect & Federal Minister for Special Affairs',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1960 – 1990',
+    summary: 'Willy Brandt’s chief strategist and author of the "Change through Rapprochement" (Wandel durch Annäherung) doctrine. Personally drafted and negotiated the 1970 Moscow, Warsaw, and 1972 Intra-German Basic Treaties that thawed Cold War Europe.',
+    keyAchievements: [
+      'Lead negotiator of all foundational 1970–1972 Ostpolitik treaties with Moscow and East Berlin',
+      'Shaped the concept of "Common Security," laying the intellectual groundwork for arms control and the Helsinki Final Act',
+    ],
+    controversies: [
+      'Accused by Cold War conservatives of legitimizing Soviet domination and East German dictatorship',
+      'Criticized for keeping distance from Poland’s Solidarity movement during the 1981 martial law crackdown to preserve détente',
+    ],
+  },
+  'cem-ozdemir': {
+    name: 'Cem Özdemir',
+    title: 'German Minister of Agriculture & Education, Former Greens Co-Leader',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '1994 – Present',
+    summary: 'One of the first lawmakers of Turkish heritage elected to the Bundestag, former long-serving Co-Chair of the Greens, and Agriculture (later Education) Minister under Olaf Scholz—a defining figure in German integration and green politics.',
+    keyAchievements: [
+      'Transformed the Greens from a protest party into a governing coalition force during his 2008–2018 co-leadership',
+      'Became the first Federal Cabinet Minister of Turkish descent in German history in the Traffic Light coalition',
+    ],
+    controversies: [
+      'Stepped down from the Bundestag in 2002 following the "Miles & More" frequent-flyer bonus miles and private loan scandal',
+      'Frequent political clashes with Ankara after championing the 2016 Bundestag resolution on 1915',
+    ],
+  },
+  'karl-lauterbach': {
+    name: 'Karl Lauterbach',
+    title: 'German Federal Minister of Health (2021 – 2025)',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2005 – Present',
+    summary: 'Harvard-trained epidemiologist and SPD Health Minister who became Germany’s most visible science-policy communicator during COVID-19 before pushing through major hospital financing reform and partial cannabis legalization.',
+    keyAchievements: [
+      'Enacted Germany’s sweeping Hospital Reform (Krankenhausreform) aimed at reducing profit-driven distortions in patient care',
+      'Built strong public trust during the pandemic through data-driven public communication',
+    ],
+    controversies: [
+      'Criticized by physicians and opposition parties for overly alarmist pandemic warnings, vaccine mandate advocacy, and limited cannabis reform',
+      'Faced nationwide protests and strikes from pharmacists and general practitioners over budgets and digitalization',
+    ],
+  },
+  'nancy-faeser': {
+    name: 'Nancy Faeser',
+    title: 'First Female Federal Minister of the Interior of Germany (2021 – 2025)',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2019 – 2025',
+    summary: 'Germany’s first female Federal Interior Minister. Led raids dismantling the far-right Reichsbürger coup network, passed dual-citizenship naturalization reform, and oversaw EURO 2024 security amid mounting migration and electoral setbacks.',
+    keyAchievements: [
+      'Passed the 2024 German Citizenship Reform allowing dual nationality and shortening residency paths to naturalization',
+      'Directed sweeping federal security operations dismantling the far-right "Reichsbürger" coup conspiracy',
+    ],
+    controversies: [
+      'Ran as Hesse’s state premier candidate in 2023 while remaining Interior Minister, suffering a historic SPD defeat',
+      'Faced scrutiny over the dismissal of cybersecurity chief Arne Schönbohm and internal security after irregular migration attacks',
+    ],
+  },
+  'lars-klingbeil': {
+    name: 'Lars Klingbeil',
+    title: 'SPD Co-Leader & Vice Chancellor / Finance Minister Axis',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2017 – Present',
+    summary: 'Managed the SPD’s victorious 2021 campaign as General Secretary before rising to SPD Co-Chair and positioning himself as the party’s central powerbroker—and Vice Chancellor/Finance Minister—in the 2025 CDU-SPD Grand Coalition.',
+    keyAchievements: [
+      'Orchestrated the 2021 federal campaign that returned the SPD to first place and the Chancellery after 16 years',
+      'Kept the SPD at the center of federal coalition governance despite heavy losses in the 2025 snap election',
+    ],
+    controversies: [
+      'Criticized for his early ties to the conservative "Seeheimer" SPD wing and delayed self-criticism on past Russia-Gazprom policy',
+      'Faced left-wing party backlash after the SPD’s historic low vote share in 2025',
+    ],
+  },
+  'tino-chrupalla': {
+    name: 'Tino Chrupalla',
+    title: 'Co-Leader of Alternative for Germany (AfD, 2019 – Present)',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2017 – Present',
+    summary: 'Saxony-born master painter who rose alongside Alice Weidel to co-lead the AfD, helping drive its surge past 30% in eastern states while drawing fierce criticism for pro-Russia outreach and ties to the party’s far-right flank.',
+    keyAchievements: [
+      'Expanded the AfD’s working-class and small-trades voter base across eastern Germany to make it a major parliamentary force',
+      'Co-led the AfD above 20% nationally in the 2025 Bundestag elections',
+    ],
+    controversies: [
+      'Attended a May 9 Victory Day reception at the Russian Embassy in Berlin while opposing EU sanctions on Moscow',
+      'Allied with the extremist "Flügel" faction, contributing to domestic intelligence surveillance of the party',
+    ],
+  },
+  'armin-laschet': {
+    name: 'Armin Laschet',
+    title: 'Former Minister-President of North Rhine-Westphalia & 2021 CDU Chancellor Candidate',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2017 – Present',
+    summary: 'Former premier of Germany’s most populous state (NRW) and the CDU/CSU’s 2021 Chancellor nominee to succeed Angela Merkel—whose campaign imploded after he was caught laughing on camera during a visit to the Ahr Valley flood disaster.',
+    keyAchievements: [
+      'Governed Germany’s 18-million industrial heartland (NRW, 2017–2021), managing coal-phaseout and integration policies',
+      'Represented the consensus-oriented, centrist, and pro-European wing of Angela Merkel’s CDU legacy',
+    ],
+    controversies: [
+      'Lost decisive voter trust in 2021 after being filmed laughing in the background during a memorial in flood-devastated Ahrtal',
+      'Earlier conciliatory statements on Syria and Russia came under severe criticism after the 2022 invasion of Ukraine',
+    ],
+  },
+  'hendrik-wust': {
+    name: 'Hendrik Wüst',
+    title: 'Minister-President of North Rhine-Westphalia (2021 – Present)',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '2017 – Present',
+    summary: 'Minister-President of North Rhine-Westphalia and architect of a stable "black-green" (CDU-Greens) coalition in Germany’s largest state—representing a moderate, modern conservative alternative to Friedrich Merz.',
+    keyAchievements: [
+      'Led the CDU to victory in the 2022 state election and built a stable CDU-Greens government in Germany’s largest state',
+      'Oversaw industrial decarbonization and green steel investments across the Rhineland coal basin',
+    ],
+    controversies: [
+      'Implicated in the 2020 "Rüttgers Sponsorship Scandal" involving CDU party access fees while serving as state transport minister',
+      'Criticized by the CDU’s conservative right wing for making excessive policy concessions to the Greens',
+    ],
+  },
+  'martin-schulz': {
+    name: 'Martin Schulz',
+    title: 'Former President of the European Parliament & 2017 SPD Chancellor Candidate',
+    country: 'Germany',
+    century: '21st c.',
+    yearsActive: '1994 – 2021',
+    summary: 'Rose from Mayor of Würselen to President of the European Parliament before sparking the brief 2017 "Schulz Train" surge as SPD Chancellor candidate—only to step down after election defeat and a bitter party backlash over joining Merkel’s Grand Coalition.',
+    keyAchievements: [
+      'Expanded European Parliament oversight over EU budgets and democratic accountability during the Eurozone crisis',
+      'Won 100% delegate backing as SPD leader in early 2017, briefly revitalizing social-justice campaigning',
+    ],
+    controversies: [
+      'Suffered a severe loss of credibility after vowing on election night 2017 never to join Merkel, then seeking the Foreign Ministry in a Grand Coalition',
+      'Faced scrutiny over senior staff promotion practices during his European Parliament presidency',
+    ],
+  },
+  'hans-jochen-vogel': {
+    name: 'Hans-Jochen Vogel',
+    title: 'Mayor of Munich & West Berlin, Justice Minister & SPD Chairman',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1960 – 1991',
+    summary: 'Elected Mayor of Munich at 34—bringing the 1972 Summer Olympics to the city—before serving as Governing Mayor of West Berlin, Federal Justice Minister, and SPD Chairman (1987–1991); widely revered as a model of civic integrity.',
+    keyAchievements: [
+      'Modernized Munich into a world city with its U-Bahn subway network, pedestrian core, and 1972 Olympic Park',
+      'Defended constitutional rule-of-law boundaries as Federal Justice Minister during the 1977 "German Autumn" RAF terrorism crisis',
+    ],
+    controversies: [
+      'Unable to prevent the SPD’s heavy federal election defeat against Helmut Kohl in 1983',
+      'Strict, bureaucratic administrative style provoked friction with young socialists ("Jusos") in Munich',
+    ],
+  },
+  'matthias-erzberger': {
+    name: 'Matthias Erzberger',
+    title: 'Signatory of the 1918 Armistice & Weimar Finance Minister (Assassinated)',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1903 – 1921',
+    summary: 'Catholic Centre Party leader and champion of the 1917 Reichstag Peace Resolution. While generals fled responsibility, he courageously signed the November 11, 1918 Compiègne Armistice to end the bloodshed and built Weimar’s centralized federal tax system before being assassinated by far-right extremists in 1921.',
+    keyAchievements: [
+      'Signed the 1918 Armistice with civic courage, halting futile bloodshed and military collapse',
+      'Created modern Germany’s unified federal fiscal system through the landmark 1919–1920 Erzberger Tax Reform',
+    ],
+    controversies: [
+      'Falsely vilified by the German far right as the chief traitor behind the "stab-in-the-back" myth',
+      'Supported annexationist war aims early in WWI before pivoting toward a negotiated peace in 1917',
+    ],
+  },
+  'walther-rathenau': {
+    name: 'Walther Rathenau',
+    title: 'Weimar Foreign Minister & Rapallo Architect (Assassinated)',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1914 – 1922',
+    summary: 'Philosopher-industrialist from the AEG founding family and Jewish Foreign Minister of the Weimar Republic who broke Germany’s diplomatic isolation through the 1922 Treaty of Rapallo—only to be assassinated two months later by ultra-nationalist terrorists.',
+    keyAchievements: [
+      'Signed the 1922 Treaty of Rapallo with Soviet Russia, breaking Versailles diplomatic encirclement',
+      'Organized Germany’s War Raw Materials Department in 1914, sustaining industrial supply under Allied blockade',
+    ],
+    controversies: [
+      'Targeted by far-right hatred for pursuing the "Policy of Fulfillment" on Versailles reparations to rebuild trust',
+      'Centralized wartime economic planning drew criticism from laissez-faire business circles',
+    ],
+  },
+  'kurt-schumacher': {
+    name: 'Kurt Schumacher',
+    title: 'Post-WWII Founding Chairman of the SPD (1946 – 1952)',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1945 – 1952',
+    summary: 'World War I amputee who survived 10 years in Nazi concentration camps (including Dachau) and rebuilt the democratic SPD in West Germany after 1945—defying forced merger with the East’s Communist KPD to become Adenauer’s first great opposition rival.',
+    keyAchievements: [
+      'Blocked the Soviet-pressured forced merger of the SPD and Communists (SED) in Western zones in 1946, safeguarding democratic socialism',
+      'Built West Germany’s constitutional parliamentary opposition tradition as Konrad Adenauer’s foremost rival',
+    ],
+    controversies: [
+      'Temporarily suspended from the Bundestag for famously calling Adenauer the "Chancellor of the Allies"',
+      'Uncompromising priority on immediate German reunification over Western integration contributed to losing the 1949 election',
+    ],
+  },
+  'claus-von-stauffenberg': {
+    name: 'Claus von Stauffenberg',
+    title: 'Colonel of the July 20 Resistance & Leader of the Operation Valkyrie Plot',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1943 – 1944',
+    summary: 'Staff colonel who lost an eye and his right hand in North Africa before becoming the driving force behind military resistance in Berlin. Planted the bomb against Hitler at the Wolf’s Lair on July 20, 1944 and triggered the Operation Valkyrie coup; executed by firing squad that night.',
+    keyAchievements: [
+      'Organized the July 20, 1944 assassination and coup attempt aimed at assassinating Hitler and toppling the Nazi regime',
+      'Left an enduring moral legacy proving that active resistance existed within Germany against Nazi tyranny',
+    ],
+    controversies: [
+      'Served as a Wehrmacht staff officer during the 1939–1942 Polish and Soviet campaigns before turning to active resistance',
+      'The Valkyrie plotters’ foreign-policy expectations clashed unrealistically with the Allies’ unconditional surrender demand',
+    ],
+    famousQuote: 'Long live our sacred Germany!',
+  },
+  'sophie-scholl': {
+    name: 'Sophie Scholl',
+    title: 'Co-Leader of the "White Rose" Anti-Nazi Resistance Movement',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1942 – 1943',
+    summary: 'University of Munich student who co-founded the non-violent "White Rose" (Weiße Rose) resistance group alongside her brother Hans, distributing leaflets exposing Nazi crimes and wartime madness; tried before the People’s Court and guillotined at age 21.',
+    keyAchievements: [
+      'Published and distributed leaflets in Munich at the height of Nazi terror calling for conscience, freedom, and passive resistance',
+      'Became modern Germany’s foremost emblem of moral courage through her fearless courtroom defiance before execution',
+    ],
+    controversies: [
+      'Briefly participated in the compulsory League of German Girls (BDM) in early youth before radically awakening against the regime',
+    ],
+    famousQuote: 'How can we expect righteousness to prevail when there is hardly anyone willing to give himself up individually to a righteous cause? Such a fine, sunny day, and I have to go.',
+  },
+  'heinrich-bruning': {
+    name: 'Heinrich Brüning',
+    title: 'Chancellor of Weimar Germany (1930 – 1932)',
+    country: 'Germany',
+    century: '20th c.',
+    yearsActive: '1930 – 1932',
+    summary: 'Chancellor who bypassed Parliament during the Great Depression by ruling through Hindenburg’s Article 48 emergency decrees. His severe deflation and austerity policies—intended to prove Germany could not pay war reparations—drove unemployment to 6 million and accelerated the Nazi surge.',
+    keyAchievements: [
+      'Prepared the diplomatic groundwork for the Allied suspension of German WWI reparations at Lausanne in 1932',
+      'Later went into exile opposing the Nazi regime and became a political science professor at Harvard University',
+    ],
+    controversies: [
+      'Harsh deflation and welfare cuts ("Hunger Chancellor") deepened the economic collapse and pushed desperate voters toward the NSDAP',
+      'Normalized governing by presidential Article 48 decrees, fatally eroding Weimar parliamentary democracy',
+    ],
+  },
+};

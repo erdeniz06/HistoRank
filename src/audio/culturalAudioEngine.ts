@@ -40,86 +40,86 @@ export interface TrackDefinition {
 export const CULTURES: CultureAudioProfile[] = [
   {
     key: 'turkey',
-    name: 'Türk & Osmanlı Tınıları',
-    instruments: 'Ney Nefesi, Ud Mızrabı, Santur & Kudüm',
-    scaleDescription: 'Hicaz, Nihavend & Segâh Makamı',
+    name: 'Turkish & Ottoman Resonance',
+    instruments: 'Ney Flute, Oud, Santur & Kudüm',
+    scaleDescription: 'Hijaz, Nihavend & Segah Maqam',
     flag: '🇹🇷',
   },
   {
     key: 'uk',
-    name: 'Britanya & İngiltere',
-    instruments: 'Westminster Çanları, Kelt Flütü & Kraliyet Pirinçleri',
-    scaleDescription: 'İngiliz Saray İlahisi & Kelt Modu',
+    name: 'Britain & United Kingdom',
+    instruments: 'Westminster Bells, Celtic Flute & Royal Brass',
+    scaleDescription: 'English Court Anthem & Celtic Mode',
     flag: '🇬🇧',
   },
   {
     key: 'usa',
-    name: 'Amerikan Senfonisi & Folk',
-    instruments: 'Appalachian Yaylısı, Delta Blues & Pirinç Nefesliler',
-    scaleDescription: 'Americana & Dvořák Yeni Dünya',
+    name: 'American Symphony & Folk',
+    instruments: 'Appalachian Fiddle, Delta Blues & Brass',
+    scaleDescription: 'Americana & Dvořák New World',
     flag: '🇺🇸',
   },
   {
     key: 'germany',
-    name: 'Alman Barok & Klasik',
-    instruments: 'Barok Kilise Orgu, Çello & Wagner Nefeslileri',
-    scaleDescription: 'Bach Kontrpuanı & Beethoven Dramı',
+    name: 'German Baroque & Classical',
+    instruments: 'Baroque Pipe Organ, Cello & Wagner Brass',
+    scaleDescription: 'Bach Counterpoint & Beethoven Drama',
     flag: '🇩🇪',
   },
   {
     key: 'spain',
-    name: 'İspanyol Flamenko & Rönesans',
-    instruments: 'İspanyol Klasik Gitarı & Kastanyet',
-    scaleDescription: 'Endülüs Frigya Modu & Conquistador',
+    name: 'Spanish Flamenco & Renaissance',
+    instruments: 'Spanish Classical Guitar & Castanets',
+    scaleDescription: 'Andalusian Phrygian Mode & Conquistador',
     flag: '🇪🇸',
   },
   {
     key: 'france',
-    name: 'Fransız Romantizm & İhtilal',
-    instruments: 'Paris Akordeonu, Pastoral Flüt & Arp Tınıları',
-    scaleDescription: 'Debussy & Satie Empresyonizmi',
+    name: 'French Romanticism & Revolution',
+    instruments: 'Parisian Accordion, Pastoral Flute & Harp',
+    scaleDescription: 'Debussy & Satie Impressionism',
     flag: '🇫🇷',
   },
   {
     key: 'ancient',
-    name: 'Roma & Antik Lir',
-    instruments: 'Antik Kithara, Aulos Flütü & Bronz Savaş Gongu',
-    scaleDescription: 'Arkaik Dorik & Frig Modu',
+    name: 'Rome & Ancient Lyre',
+    instruments: 'Ancient Kithara, Aulos Flute & Bronze Gong',
+    scaleDescription: 'Archaic Dorian & Phrygian Mode',
     flag: '🏛️',
   },
   {
     key: 'mongolia',
-    name: 'Bozkır & Moğol Destanı',
-    instruments: 'Hömey (Gırtlak Müziği) & Morin Khuur (At Başlı Keman)',
-    scaleDescription: 'Pentatonik Bozkır Ezgisi & Doğan Ton',
+    name: 'Steppe & Mongol Epic',
+    instruments: 'Khoomei (Throat Singing) & Morin Khuur',
+    scaleDescription: 'Pentatonic Steppe Melody & Harmonic Overtones',
     flag: '🇲🇳',
   },
   {
     key: 'ussr',
-    name: 'SSCB Koral Marş & Senfoni',
-    instruments: 'Kızıl Ordu Pirinçleri, Bas Koro & Minör Yaylılar',
-    scaleDescription: 'Rus Romantik Minör & Törensel Marş',
+    name: 'USSR Choral March & Symphony',
+    instruments: 'Red Army Brass, Bass Choir & Minor Strings',
+    scaleDescription: 'Russian Romantic Minor & Ceremonial March',
     flag: '☭',
   },
   {
     key: 'turkic',
-    name: 'Eski Türk & Selçuklu Bozkırı',
-    instruments: 'Kopuz Mızrabı, Kaval & Savaş Davulu',
-    scaleDescription: 'Orta Asya Pentatonik & Selçuklu Segâh',
+    name: 'Ancient Turkic & Seljuk Steppe',
+    instruments: 'Kopuz Lute, Kaval Flute & War Drum',
+    scaleDescription: 'Central Asian Pentatonic & Seljuk Segah',
     flag: '🐺',
   },
   {
     key: 'europe',
-    name: 'Avrupa Oda Müziği & Rönesans',
-    instruments: 'Venedik Yaylıları, Flaman Org & Leh Polonezi',
-    scaleDescription: 'Klasik Kıta Avrupası Kontrpuanı',
+    name: 'European Chamber & Renaissance',
+    instruments: 'Venetian Strings, Flemish Organ & Polonaise',
+    scaleDescription: 'Classical Continental Counterpoint',
     flag: '🇪🇺',
   },
   {
     key: 'world',
-    name: 'Evrensel Tarihsel Senfoni',
-    instruments: 'Büyük Yaylı Sazlar & Anıtsal Katedral Çanları',
-    scaleDescription: 'Epik Senfonik Armoni & Kronos',
+    name: 'Universal Historical Symphony',
+    instruments: 'Grand String Ensemble & Cathedral Bells',
+    scaleDescription: 'Epic Symphonic Harmony & Chronos',
     flag: '🌍',
   },
 ];
@@ -140,9 +140,9 @@ const N: Record<string, number> = {
 const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
   turkey: [
     {
-      title: 'Hicaz Gece Taksimi',
-      subTitle: 'Ney & Ud ile Derin Melankoli',
-      mood: 'Duygusal & Meditatif',
+      title: 'Hijaz Night Taksim',
+      subTitle: 'Deep Melancholy with Ney & Oud',
+      mood: 'Soulful & Meditative',
       tempoBpm: 66,
       scale: [N.D4, N.Eb4, N['F#4'], N.G4, N.A4, N.Bb4, N.C5, N.D5],
       chords: [
@@ -154,9 +154,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'wind',
     },
     {
-      title: 'Nihavend Saray Peşrevi',
-      subTitle: 'Santur & Kudüm Ritimli Klasik Saray Formu',
-      mood: 'Zarif & Asil',
+      title: 'Nihavend Imperial Peshrev',
+      subTitle: 'Classical Court Form with Santur & Kudüm',
+      mood: 'Graceful & Noble',
       tempoBpm: 84,
       scale: [N.D4, N.E4, N.F4, N.G4, N.A4, N.Bb4, N['C#5'], N.D5],
       chords: [
@@ -168,9 +168,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Segâh & Rast Bozkır Rüzgarı',
-      subTitle: 'Bağlama & Kaval ile Anadolu Tınısı',
-      mood: 'Dingin & Destansı',
+      title: 'Segah & Rast Steppe Breeze',
+      subTitle: 'Anatolian Resonance with Bağlama & Kaval',
+      mood: 'Serene & Epic',
       tempoBpm: 72,
       scale: [N.G3, N.A3, N.B3, N.C4, N.D4, N.E4, N.G4, N.A4],
       chords: [
@@ -182,9 +182,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Zafer & Kahramanlık Marşı',
-      subTitle: 'Nefir & Zurna Çeşitlemesiyle Akıncı Ritmi',
-      mood: 'Coşkulu & Epik',
+      title: 'Victory & Heroic March',
+      subTitle: 'Ottoman Horn & Zurna Raider Cadence',
+      mood: 'Exuberant & Epic',
       tempoBpm: 98,
       scale: [N.D4, N.Eb4, N.F4, N.G4, N.A4, N.C5, N.D5],
       chords: [
@@ -199,9 +199,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   uk: [
     {
-      title: 'Westminster Katedral Çanları',
-      subTitle: 'Kraliyet Töreni & Çan Harmonisi',
-      mood: 'Görkemli & Resmi',
+      title: 'Westminster Cathedral Chimes',
+      subTitle: 'Royal Ceremony & Carillon Harmony',
+      mood: 'Majestic & Formal',
       tempoBpm: 68,
       scale: [N.D4, N.E4, N['F#4'], N.G4, N.A4, N.B4, N['C#5'], N.D5],
       chords: [
@@ -213,9 +213,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'bell',
     },
     {
-      title: 'Kelt Sisleri & İskoç Yaylası',
-      subTitle: 'Highland Flütü & Pastoral Melodi',
-      mood: 'Melankolik & Masalsı',
+      title: 'Celtic Mists & Scottish Highlands',
+      subTitle: 'Highland Flute & Pastoral Air',
+      mood: 'Melancholic & Mythic',
       tempoBpm: 76,
       scale: [N.D4, N.E4, N.G4, N.A4, N.B4, N.D5, N.E5],
       chords: [
@@ -227,9 +227,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'wind',
     },
     {
-      title: 'Londra Sisleri & Greensleeves Teması',
-      subTitle: 'Rönesans Lavtası & Melankolik Yaylılar',
-      mood: 'Hüzünlü & Asil',
+      title: 'London Fog & Greensleeves Theme',
+      subTitle: 'Renaissance Lute & Melancholic Strings',
+      mood: 'Wistful & Noble',
       tempoBpm: 60,
       scale: [N.D4, N.F4, N.G4, N.A4, N.B4, N.C5, N['C#5'], N.D5],
       chords: [
@@ -241,9 +241,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Kraliyet Fanfarı (Rule Britannia Tınısı)',
-      subTitle: 'Kraliyet Muhafızları Pirinç Korosu',
-      mood: 'Muzaffer & Güçlü',
+      title: 'Royal Fanfare (Rule Britannia Echo)',
+      subTitle: 'Royal Guards Brass Ensemble',
+      mood: 'Triumphant & Commanding',
       tempoBpm: 94,
       scale: [N.D4, N['F#4'], N.A4, N.B4, N['C#5'], N.D5],
       chords: [
@@ -259,8 +259,8 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
   usa: [
     {
       title: 'Appalachian Dawn & Folk Fiddle',
-      subTitle: 'Akustik Dağ Kemanı & Pastoral Yaylı',
-      mood: 'Sıcak & Dingin',
+      subTitle: 'Acoustic Mountain Violin & Pastoral Strings',
+      mood: 'Warm & Serene',
       tempoBpm: 74,
       scale: [N.G3, N.A3, N.B3, N.D4, N.E4, N.G4, N.A4, N.B4],
       chords: [
@@ -272,9 +272,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'strings',
     },
     {
-      title: "Dvořák 'Yeni Dünya' Senfonisi",
-      subTitle: 'Geniş Ufuklar & Korno Melodisi',
-      mood: 'Umut Dolu & Destansı',
+      title: "Dvořák 'New World' Symphony",
+      subTitle: 'Open Horizons & French Horn Melody',
+      mood: 'Hopeful & Epic',
       tempoBpm: 64,
       scale: [N.E4, N.G4, N.A4, N.B4, N.D5, N.E5],
       chords: [
@@ -286,9 +286,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'brass',
     },
     {
-      title: 'Delta Blues & Gece Treni',
-      subTitle: 'Mavi Notalar & Yavaş Akustik Solo',
-      mood: 'Ruhani & Düşünceli',
+      title: 'Delta Blues & Night Train',
+      subTitle: 'Blue Notes & Slow Acoustic Solo',
+      mood: 'Soulful & Reflective',
       tempoBpm: 80,
       scale: [N.G3, N.Bb3, N.C4, N['C#4'], N.D4, N.F4, N.G4],
       chords: [
@@ -300,9 +300,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Copland Fanfare & Oval Ofis',
-      subTitle: 'Modern Cumhuriyet & Açık Beşliler',
-      mood: 'Vakur & Görkemli',
+      title: 'Copland Fanfare & Oval Office',
+      subTitle: 'Modern Republic & Open Fifths',
+      mood: 'Dignified & Grand',
       tempoBpm: 88,
       scale: [N.C4, N.D4, N.E4, N.G4, N.A4, N.C5],
       chords: [
@@ -317,9 +317,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   germany: [
     {
-      title: 'Bach Tarzı Toccata & Füg Kontrpuani',
-      subTitle: 'Barok Kilise Orgu & Çift Hat Polifonisi',
-      mood: 'Dramatik & Kusursuz',
+      title: 'Bach-Style Toccata & Fugue Counterpoint',
+      subTitle: 'Baroque Pipe Organ & Dual-Line Polyphony',
+      mood: 'Dramatic & Intricate',
       tempoBpm: 86,
       scale: [N.D4, N.E4, N.F4, N.G4, N.A4, N.Bb4, N['C#5'], N.D5],
       chords: [
@@ -331,9 +331,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'organ',
     },
     {
-      title: 'Beethoven 5. ve 9. Senfoni Modifi',
-      subTitle: 'Kader Motifi & Güçlü Çello Basları',
-      mood: 'Ateşli & Yoğun',
+      title: 'Beethoven 5th & 9th Symphony Motif',
+      subTitle: 'Fate Motif & Deep Cello Basslines',
+      mood: 'Fiery & Intense',
       tempoBpm: 92,
       scale: [N.C4, N.Eb4, N.G4, N.Ab4, N.B4, N.C5],
       chords: [
@@ -345,9 +345,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'strings',
     },
     {
-      title: 'Wagner Valhalla Pirinçleri',
-      subTitle: 'Cermen Mitolojisi & Derin Korno Akorları',
-      mood: 'Epik & Ağırbaşlı',
+      title: 'Wagner Valhalla Brass',
+      subTitle: 'Germanic Mythos & Deep Horn Chords',
+      mood: 'Epic & Solemn',
       tempoBpm: 62,
       scale: [N.Eb4, N.F4, N.G4, N.Ab4, N.Bb4, N.C5, N.Eb5],
       chords: [
@@ -359,9 +359,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'brass',
     },
     {
-      title: 'Prusya Barok Yürüyüşü',
-      subTitle: 'Büyük Friedrich Flüt Konçertosu Esinlenmesi',
-      mood: 'Disiplinli & Zarif',
+      title: 'Prussian Baroque Procession',
+      subTitle: 'Inspired by Frederick the Great’s Flute Concertos',
+      mood: 'Disciplined & Refined',
       tempoBpm: 80,
       scale: [N.D4, N.E4, N['F#4'], N.G4, N.A4, N.B4, N.D5],
       chords: [
@@ -376,9 +376,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   spain: [
     {
-      title: 'Endülüs Bahçeleri & Flamenko Gitarı',
-      subTitle: 'İspanyol Klasik Gitarı & Melankolik Frigya Modu',
-      mood: 'Ateşli & Derin',
+      title: 'Andalusian Gardens & Flamenco Guitar',
+      subTitle: 'Spanish Classical Guitar & Phrygian Melancholy',
+      mood: 'Passionate & Deep',
       tempoBpm: 86,
       scale: [N.E4, N.F4, N.G4, N.Ab4, N.B4, N.C5, N.D5, N.E5],
       chords: [
@@ -390,9 +390,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Conquistador & İmparatorluk Fanfarı',
-      subTitle: 'Kastilya Kraliyet Töreni & Zafer Nefeslileri',
-      mood: 'Görkemli & Kudretli',
+      title: 'Conquistador & Imperial Fanfare',
+      subTitle: 'Castilian Royal Court & Triumphal Brass',
+      mood: 'Grand & Commanding',
       tempoBpm: 92,
       scale: [N.D4, N.F4, N.G4, N.A4, N.Bb4, N.C5, N.D5],
       chords: [
@@ -407,9 +407,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   france: [
     {
-      title: 'Debussy Clair de Lune Empresyonizmi',
-      subTitle: 'Ay Işığı & Rüyamsı Arp Dokunuşları',
-      mood: 'Şiirsel & Rüyamsı',
+      title: 'Debussy Clair de Lune Impressionism',
+      subTitle: 'Moonlight & Dreamy Harp Resonance',
+      mood: 'Poetic & Dreamlike',
       tempoBpm: 54,
       scale: [N.Db4, N.Eb4, N.F4, N.Ab4, N.Bb4, N.C5, N.Db5],
       chords: [
@@ -421,9 +421,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Erik Satie Gymnopedie Melankolisi',
-      subTitle: 'Yavaş 3/4 Valsi & Minimalist Piyano Çanları',
-      mood: 'Dingin & Düşünceli',
+      title: 'Erik Satie Gymnopédie Melancholy',
+      subTitle: 'Slow 3/4 Waltz & Minimalist Bell Tones',
+      mood: 'Calm & Contemplative',
       tempoBpm: 58,
       scale: [N.G4, N.A4, N.B4, N['C#5'], N.D5, N['F#5']],
       chords: [
@@ -435,9 +435,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'bell',
     },
     {
-      title: 'Montmartre Akordeon Valsi',
-      subTitle: 'Paris Sokakları & Fransız Musette Salınımı',
-      mood: 'Nostaljik & Canlı',
+      title: 'Montmartre Accordion Waltz',
+      subTitle: 'Parisian Streets & French Musette Sway',
+      mood: 'Nostalgic & Lively',
       tempoBpm: 104,
       scale: [N.A4, N.B4, N.C5, N.D5, N.E5, N.F5, N['G#5'], N.A5],
       chords: [
@@ -449,9 +449,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'accordion',
     },
     {
-      title: 'Bastille İhtilal Marşı',
-      subTitle: 'La Marseillaise & Cumhuriyet Heyecanı',
-      mood: 'Devrimci & Cesur',
+      title: 'Bastille Revolutionary March',
+      subTitle: 'La Marseillaise & Republican Fervor',
+      mood: 'Revolutionary & Bold',
       tempoBpm: 96,
       scale: [N.G4, N.A4, N.B4, N.C5, N.D5, N.E5, N['F#5'], N.G5],
       chords: [
@@ -466,9 +466,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   ancient: [
     {
-      title: 'Sezar Lejyonları & Roma Forumu',
-      subTitle: 'Arkaik Dorik Aulos & Bronz Savaş Zili',
-      mood: 'Kudretli & Törensel',
+      title: 'Caesar’s Legions & Roman Forum',
+      subTitle: 'Archaic Dorian Aulos & Bronze War Chime',
+      mood: 'Mighty & Ceremonial',
       tempoBpm: 72,
       scale: [N.D4, N.E4, N.F4, N.G4, N.A4, N.B4, N.C5, N.D5],
       chords: [
@@ -480,9 +480,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'wind',
     },
     {
-      title: 'Delphi Tapınağı & Kehanet Liri',
-      subTitle: 'Antik Kithara Parmak Vuruşları',
-      mood: 'Gizemli & Uhrevi',
+      title: 'Temple of Delphi & Oracle Lyre',
+      subTitle: 'Ancient Kithara Plucked Harmonies',
+      mood: 'Mysterious & Ethereal',
       tempoBpm: 60,
       scale: [N.D4, N.Eb4, N.F4, N.G4, N.A4, N.Bb4, N.C5],
       chords: [
@@ -494,9 +494,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Kolezyum Gladyatör Girişi',
-      subTitle: 'Ritmik Bronz Çekiç & Düşük Trompetler',
-      mood: 'Gerilimli & Meydan Okuyan',
+      title: 'Colosseum Gladiator Entrance',
+      subTitle: 'Rhythmic Bronze Hammer & Low Trumpets',
+      mood: 'Tense & Defiant',
       tempoBpm: 92,
       scale: [N.D3, N.F3, N.G3, N.Ab3, N.A3, N.C4, N.D4],
       chords: [
@@ -511,9 +511,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   mongolia: [
     {
-      title: 'Cengiz Han Bozkır Akını',
-      subTitle: 'Hömey Gırtlak Overtone & Dörtnal Ritim',
-      mood: 'Vahşi & Sürükleyici',
+      title: 'Genghis Khan Steppe Raid',
+      subTitle: 'Khoomei Throat Overtones & Galloping Rhythm',
+      mood: 'Fierce & Driving',
       tempoBpm: 108,
       scale: [N.D3, N.F3, N.G3, N.A3, N.C4, N.D4, N.F4, N.G4],
       chords: [
@@ -525,9 +525,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'throat',
     },
     {
-      title: 'Altay Dağları Göçebe Ağıtı',
-      subTitle: 'Morin Khuur (At Başlı Keman) Titreşimi',
-      mood: 'Geniş & Hüzünlü',
+      title: 'Altai Mountains Nomadic Elegy',
+      subTitle: 'Morin Khuur (Horsehead Fiddle) Resonance',
+      mood: 'Vast & Wistful',
       tempoBpm: 64,
       scale: [N.D4, N.F4, N.G4, N.A4, N.C5, N.D5],
       chords: [
@@ -542,9 +542,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   ussr: [
     {
-      title: 'Kızıl Meydan Kış Marşı',
-      subTitle: 'Pirinç Nefesliler & Dramatik Rus Minör Armonisi',
-      mood: 'Anıtsal & Kararlı',
+      title: 'Red Square Winter March',
+      subTitle: 'Brass Choir & Dramatic Russian Minor Harmony',
+      mood: 'Monumental & Resolute',
       tempoBpm: 76,
       scale: [N.C4, N.D4, N.Eb4, N.F4, N.G4, N.Ab4, N.B4, N.C5],
       chords: [
@@ -556,9 +556,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'brass',
     },
     {
-      title: 'Şostakoviç & Leningrad Ağıtı',
-      subTitle: 'Derin Yaylılar & Soğuk Savaş Gerilimi',
-      mood: 'Ciddi & Trajik',
+      title: 'Shostakovich & Leningrad Elegy',
+      subTitle: 'Deep Strings & Cold War Tension',
+      mood: 'Somber & Tragic',
       tempoBpm: 62,
       scale: [N.D4, N.E4, N.F4, N.G4, N.A4, N.Bb4, N['C#5'], N.D5],
       chords: [
@@ -573,9 +573,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   turkic: [
     {
-      title: 'Ötüken Bozkır Kopuzu',
-      subTitle: 'Pentatonik Dombra & Bozkır Rüzgarı',
-      mood: 'Destansı & Kadim',
+      title: 'Ötüken Steppe Kopuz',
+      subTitle: 'Pentatonic Dombra & Steppe Winds',
+      mood: 'Epic & Ancient',
       tempoBpm: 80,
       scale: [N.D4, N.E4, N.G4, N.A4, N.C5, N.D5, N.E5],
       chords: [
@@ -587,9 +587,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'pluck',
     },
     {
-      title: 'Malazgirt & Selçuklu Çevganı',
-      subTitle: 'Atlı Akın Nefeslisi & Tören Ritimleri',
-      mood: 'Coşkulu & Fatih',
+      title: 'Manzikert & Seljuk Cavalry',
+      subTitle: 'Mounted Wind Horn & Ceremonial Drums',
+      mood: 'Exuberant & Conquering',
       tempoBpm: 92,
       scale: [N.G3, N.A3, N.Bb3, N.C4, N.D4, N.F4, N.G4],
       chords: [
@@ -604,9 +604,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   europe: [
     {
-      title: 'Venedik & Brüksel Oda Konçertosu',
-      subTitle: 'Klasik Kıta Yaylıları & Zarif Kontrpuan',
-      mood: 'Entelektüel & Parlak',
+      title: 'Venice & Brussels Chamber Concerto',
+      subTitle: 'Classical Continental Strings & Refined Counterpoint',
+      mood: 'Intellectual & Luminous',
       tempoBpm: 78,
       scale: [N.G3, N.A3, N.B3, N.C4, N.D4, N.E4, N['F#4'], N.G4],
       chords: [
@@ -618,9 +618,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'strings',
     },
     {
-      title: 'Varşova & Amsterdam Katedral Orgu',
-      subTitle: 'Barok Org & Sivil Toplum Harmonisi',
-      mood: 'Asil & Dengeli',
+      title: 'Warsaw & Amsterdam Cathedral Organ',
+      subTitle: 'Baroque Organ & Civic Polyphony',
+      mood: 'Noble & Balanced',
       tempoBpm: 72,
       scale: [N.C4, N.D4, N.E4, N.F4, N.G4, N.A4, N.B4, N.C5],
       chords: [
@@ -635,9 +635,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 
   world: [
     {
-      title: 'Kronos & Tarihin Çağrısı',
-      subTitle: 'Büyük Senfonik Yaylılar & Çağlar Arası Yankı',
-      mood: 'Anıtsal & Zamansız',
+      title: 'Chronos & Call of History',
+      subTitle: 'Grand Symphonic Strings & Echoes Across Ages',
+      mood: 'Monumental & Timeless',
       tempoBpm: 70,
       scale: [N.D4, N.F4, N.G4, N.A4, N.C5, N.D5, N.F5],
       chords: [
@@ -649,9 +649,9 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
       instrumentType: 'strings',
     },
     {
-      title: 'İmparatorlukların Yükselişi',
-      subTitle: 'Pirinç Nefesliler & Törensel Yürüyüş',
-      mood: 'Epik & Gururlu',
+      title: 'Rise of Empires',
+      subTitle: 'Grand Brass & Ceremonial Procession',
+      mood: 'Epic & Proud',
       tempoBpm: 84,
       scale: [N.G3, N.B3, N.D4, N.E4, N.G4, N.A4, N.B4],
       chords: [
@@ -668,7 +668,7 @@ const CULTURE_TRACKS: Record<CultureKey, TrackDefinition[]> = {
 class CulturalAudioEngine {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
-  private currentCulture: CultureKey = 'turkey';
+  private currentCulture: CultureKey = 'world';
   private currentTrackIndex: number = 0;
   private isPlaying: boolean = false;
   private volume: number = 0.55;

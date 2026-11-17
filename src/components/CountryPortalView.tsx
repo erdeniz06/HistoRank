@@ -38,258 +38,258 @@ interface CountryHubDef {
 const COUNTRY_HUBS: CountryHubDef[] = [
   {
     key: 'usa',
-    name: 'ABD',
-    shortName: 'ABD',
+    name: 'United States',
+    shortName: 'USA',
     flag: '🇺🇸',
     culture: 'usa',
     regions: ['americas'],
-    subtitle: 'Washington, Franklin, Hamilton, Lincoln, FDR, Kennedy, MLK Jr., Malcolm X, Trump, Obama, JD Vance, Harris, Rubio, Sanders',
+    subtitle: 'Washington, Lincoln, FDR, Kennedy, Kissinger, Marshall, Hillary Clinton, Colin Powell, Jerome Powell, McCain, Sanders, JD Vance, Rubio',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'us-president', label: 'ABD Başkanları' },
-      { key: 'us-party', label: 'Kurucu Babalar, VP, Aktivist & Muhalefet' },
+      { key: 'all', label: 'All' },
+      { key: 'us-president', label: 'US Presidents' },
+      { key: 'us-party', label: 'Cabinet, Congress, Judiciary, Governors & Opposition' },
     ],
   },
   {
     key: 'uk',
-    name: 'İngiltere (Birleşik Krallık)',
-    shortName: 'İngiltere',
+    name: 'United Kingdom',
+    shortName: 'UK',
     flag: '🇬🇧',
     culture: 'uk',
     regions: ['europe'],
-    subtitle: 'Krallar, Cromwell, Nelson, Wellington, Pitt, Disraeli, Gladstone, Churchill, Thatcher, Attlee, Starmer, Sunak, Farage',
+    subtitle: 'Monarchs, Churchill, Thatcher, Attlee, Chamberlain, Bevan, Bevin, Cook, Pankhurst, Wilberforce, Osborne, Starmer, Sunak, Farage',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'uk-monarch', label: 'Krallar, Kraliçeler & Komutanlar' },
-      { key: 'uk-pm', label: 'Başbakanlar' },
-      { key: 'uk-party', label: 'Muhalefet & Güncel Siyasetçiler' },
+      { key: 'all', label: 'All' },
+      { key: 'uk-monarch', label: 'Kings, Queens & Commanders' },
+      { key: 'uk-pm', label: 'Prime Ministers' },
+      { key: 'uk-party', label: 'Cabinet Ministers, Opposition & Reformers' },
     ],
   },
   {
     key: 'germany',
-    name: 'Almanya',
-    shortName: 'Almanya',
+    name: 'Germany',
+    shortName: 'Germany',
     flag: '🇩🇪',
     culture: 'germany',
     regions: ['europe'],
-    subtitle: 'Barbarossa, Büyük Friedrich, Bismarck, Stresemann, Adenauer, Brandt, Merkel, Merz ve Marx, Luxemburg, Brecht, DDR',
+    subtitle: 'Frederick the Great, Bismarck, Adenauer, Brandt, Schmidt, Merkel, Schäuble, Genscher, Von der Leyen, Steinmeier, Weizsäcker, Cem Özdemir, Scholl',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'de-chancellor', label: 'Şansölyeler & Hükümdarlar' },
-      { key: 'de-thinker', label: 'Marksistler, SPD Tarihi & Brecht' },
-      { key: 'de-party', label: 'Güncel & Bölgesel Siyasetçiler' },
+      { key: 'all', label: 'All' },
+      { key: 'de-chancellor', label: 'Chancellors, Presidents & Monarchs' },
+      { key: 'de-thinker', label: 'Marxists, SPD Pioneers, Resistance & Brecht' },
+      { key: 'de-party', label: 'Cabinet Ministers, State & Opposition Leaders' },
     ],
   },
   {
     key: 'france',
-    name: 'Fransa',
-    shortName: 'Fransa',
+    name: 'France',
+    shortName: 'France',
     flag: '🇫🇷',
     culture: 'france',
     regions: ['europe'],
-    subtitle: 'Clovis, Şarlman, Jeanne d’Arc, XIV. Louis, Richelieu, I./II./III. Napolyon, De Gaulle, Mitterrand, Chirac, Macron, Le Pen',
+    subtitle: 'Clovis, Charlemagne, Joan of Arc, Louis XIV, Louis XVI, Marie Antoinette, Napoleon I/II/III, De Gaulle, Mitterrand, Macron, Le Pen',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'fr-leader', label: 'Krallar, İmparatorlar, Cumhurbaşkanları & Düşünürler' },
-      { key: 'fr-party', label: 'Güncel & Muhalefet Siyasetçiler' },
+      { key: 'all', label: 'All' },
+      { key: 'fr-leader', label: 'Kings, Queens, Emperors & Presidents' },
+      { key: 'fr-party', label: 'Contemporary & Opposition Politicians' },
     ],
   },
   {
     key: 'russia',
-    name: 'Rusya & SSCB',
-    shortName: 'Rusya & SSCB',
+    name: 'Russia & USSR',
+    shortName: 'Russia & USSR',
     flag: '🇷🇺',
     culture: 'ussr',
     regions: ['europe', 'asia'],
-    subtitle: 'Nevski, Korkunç İvan, Büyük Petro, II. Katerina, Kutuzov, II. Aleksandr, Lenin, Troçki, Stalin, Jukov, Gorbaçov, Putin, Navalni',
+    subtitle: 'Nevsky, Ivan the Terrible, Peter the Great, Catherine the Great, Kutuzov, Alexander II, Lenin, Trotsky, Stalin, Zhukov, Gorbachev, Putin, Navalny',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'ussr-leader', label: 'SSCB Dönemi (1917–1991)' },
-      { key: 'ru-leader', label: 'Rusya Çarlığı & Federasyonu' },
+      { key: 'all', label: 'All' },
+      { key: 'ussr-leader', label: 'Soviet Era (1917–1991)' },
+      { key: 'ru-leader', label: 'Tsardom, Empire & Federation' },
     ],
   },
   {
     key: 'china',
-    name: 'Çin',
-    shortName: 'Çin',
+    name: 'China',
+    shortName: 'China',
     flag: '🇨🇳',
     culture: 'world',
     regions: ['asia'],
     subtitle: 'Qin Shi Huang, Han Wudi, Taizong, Wu Zetian, Zheng He, Hongwu, Kangxi, Qianlong, Sun Yat-sen, Mao, Deng, Xi Jinping',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'japan',
-    name: 'Japonya',
-    shortName: 'Japonya',
+    name: 'Japan',
+    shortName: 'Japan',
     flag: '🇯🇵',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Minamoto, Nobunaga, Tokugawa, İmparator Meiji, İtō, Saigō, Ryōma, Amiral Tōgō, Hirohito, Yoshida, Koizumi, Şinzo Abe',
+    subtitle: 'Minamoto, Nobunaga, Tokugawa, Emperor Meiji, Itō, Saigō, Ryōma, Admiral Tōgō, Hirohito, Yoshida, Koizumi, Shinzo Abe',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'jp-meiji', label: 'Şogunluk & Meiji Reformları' },
-      { key: 'jp-modern', label: '20. yy – Güncel Başbakanlar' },
+      { key: 'all', label: 'All' },
+      { key: 'jp-meiji', label: 'Shogunate & Meiji Reforms' },
+      { key: 'jp-modern', label: '20th c. – Modern Prime Ministers' },
     ],
   },
   {
     key: 'india',
-    name: 'Hindistan',
-    shortName: 'Hindistan',
+    name: 'India',
+    shortName: 'India',
     flag: '🇮🇳',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Chandragupta, Büyük Aşoka, Ekber Şah, Evrengzib, Shivaji, Gandhi, Ambedkar, Patel, Nehru, İndira Gandhi, Manmohan Singh, Modi',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Chandragupta, Ashoka the Great, Akbar, Aurangzeb, Shivaji, Gandhi, Ambedkar, Patel, Nehru, Indira Gandhi, Manmohan Singh, Modi',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'italy',
-    name: 'İtalya',
-    shortName: 'İtalya',
+    name: 'Italy',
+    shortName: 'Italy',
     flag: '🇮🇹',
     culture: 'europe',
     regions: ['europe'],
     subtitle: 'Medici, Machiavelli, Cavour, Garibaldi, Mazzini, Mussolini, De Gasperi, Gramsci, Berlinguer, Aldo Moro, Draghi, Meloni',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'spain',
-    name: 'İspanya',
-    shortName: 'İspanya',
+    name: 'Spain',
+    shortName: 'Spain',
     flag: '🇪🇸',
     culture: 'spain',
     regions: ['europe'],
-    subtitle: 'El Cid, İsabella & Fernando, V. Karl, II. & V. Felipe, Azaña, Franco, Adolfo Suárez, Felipe González, Pedro Sánchez',
+    subtitle: 'El Cid, Isabella & Ferdinand, Charles V, Philip II & V, Azaña, Franco, Adolfo Suárez, Felipe González, Pedro Sánchez',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'es-monarch', label: 'Monarklar & Tarihsel Komutanlar' },
-      { key: 'es-party', label: 'Cumhuriyet, Diktatörlük & Güncel Siyaset' },
+      { key: 'all', label: 'All' },
+      { key: 'es-monarch', label: 'Monarchs & Historical Commanders' },
+      { key: 'es-party', label: 'Republic, Dictatorship & Modern Politics' },
     ],
   },
   {
     key: 'ukraine',
-    name: 'Ukrayna',
-    shortName: 'Ukrayna',
+    name: 'Ukraine',
+    shortName: 'Ukraine',
     flag: '🇺🇦',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Büyük Volodimir, Bohdan Hmelnitski, Kuçma, Timoşenko, Poroşenko ve Volodimir Zelenski',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Volodymyr the Great, Bohdan Khmelnytsky, Kuchma, Tymoshenko, Poroshenko, and Volodymyr Zelenskyy',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'brazil',
-    name: 'Brezilya',
-    shortName: 'Brezilya',
+    name: 'Brazil',
+    shortName: 'Brazil',
     flag: '🇧🇷',
     culture: 'world',
     regions: ['americas'],
-    subtitle: 'I. & II. Pedro, Getúlio Vargas, Kubitschek, Cardoso, Dilma Rousseff, Bolsonaro ve Lula da Silva',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Pedro I & II, Getúlio Vargas, Kubitschek, Cardoso, Dilma Rousseff, Bolsonaro, and Lula da Silva',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'ancient',
-    name: 'Antik Roma & Yunan',
-    shortName: 'Antik Dünya',
+    name: 'Ancient Rome & Greece',
+    shortName: 'Ancient World',
     flag: '🏛️',
     culture: 'ancient',
     regions: ['europe', 'asia', 'africa'],
-    subtitle: 'Sezar, Augustus, Traianus, Konstantin, I. Theodosius, Antoninus Pius, Aurelianus, Herakleios, Büyük İskender',
+    subtitle: 'Caesar, Augustus, Trajan, Constantine, Theodosius I, Antoninus Pius, Aurelian, Heraclius, Alexander the Great',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'ancient-rome', label: 'Roma & Doğu Roma' },
-      { key: 'ancient-greece', label: 'Yunan & Makedonya' },
+      { key: 'all', label: 'All' },
+      { key: 'ancient-rome', label: 'Rome & Eastern Rome' },
+      { key: 'ancient-greece', label: 'Greece & Macedonia' },
     ],
   },
   {
     key: 'christianity',
-    name: 'Hristiyanlık Tarihi & Kilise Önderleri',
-    shortName: 'Hristiyanlık Tarihi',
+    name: 'Christian History & Church Leaders',
+    shortName: 'Christian History',
     flag: '✝️',
     culture: 'europe',
     regions: ['europe', 'asia', 'africa'],
-    subtitle: 'Aziz Pavlus, Aziz Augustinus, Aziz Benediktus, Thomas Aquinas, Aziz Francesco, Papalar, Martin Luther, Jean Calvin',
+    subtitle: 'St. Paul, St. Augustine, St. Benedict, Thomas Aquinas, St. Francis, Popes, Martin Luther, John Calvin',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'christian-thinker', label: 'Azizler, Teologlar & Reformcular' },
-      { key: 'christian-pope', label: 'Papalar & Şehir Yöneticileri' },
+      { key: 'all', label: 'All' },
+      { key: 'christian-thinker', label: 'Saints, Theologians & Reformers' },
+      { key: 'christian-pope', label: 'Popes & Ecclesiastical Rulers' },
     ],
   },
   {
     key: 'islamic',
-    name: 'İslam Tarihi & Halifeler',
-    shortName: 'İslam Tarihi',
+    name: 'Islamic History & Caliphs',
+    shortName: 'Islamic History',
     flag: '☪️',
     culture: 'world',
     regions: ['asia', 'africa', 'europe'],
-    subtitle: 'Hulefâ-yi Râşidîn (4+1 Halife), Emeviler, Endülüs, Abbasiler & Komutanlar',
+    subtitle: 'Rashidun Caliphate (4+1 Caliphs), Umayyads, Al-Andalus, Abbasids & Commanders',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'rashidun', label: 'Râşid Halifeler & Hicaz' },
-      { key: 'umayyad', label: 'Emeviler & Endülüs' },
-      { key: 'abbasid', label: 'Abbasiler' },
-      { key: 'islamic-commander', label: 'İslam Komutanları & Memlükler' },
+      { key: 'all', label: 'All' },
+      { key: 'rashidun', label: 'Rashidun Caliphs & Hejaz' },
+      { key: 'umayyad', label: 'Umayyads & Al-Andalus' },
+      { key: 'abbasid', label: 'Abbasids' },
+      { key: 'islamic-commander', label: 'Islamic Commanders & Mamluks' },
     ],
   },
   {
     key: 'turkey',
-    name: 'Türkiye & Türk Tarihi',
-    shortName: 'Türkiye',
+    name: 'Turkey & Turkic History',
+    shortName: 'Turkey',
     flag: '🇹🇷',
     culture: 'turkey',
     regions: ['asia', 'europe'],
-    subtitle: 'Eski Türkler, Selçuklu, 36 Padişah, Barbaros & Piri Reis, İttihatçılar, CB, Başbakanlar ve Partiler',
+    subtitle: 'Ancient Turks, Seljuks, Ottoman Sultans & Admirals, Independence Pashas (Karabekir, Cebesoy, Rauf, Refet, Fevzi Çakmak), Presidents & PMs',
     subCategories: [
-      { key: 'all', label: 'Tüm Türk Tarihi' },
-      { key: 'turkic-seljuk', label: 'Eski Türkler & Selçuklu' },
-      { key: 'ottoman-sultan', label: 'Osmanlı Padişahları' },
-      { key: 'ottoman-commander', label: 'Osmanlı Komutan & Kaptanları' },
-      { key: 'ottoman-late', label: 'İttihatçılar & Son Sadrazamlar' },
-      { key: 'tr-president', label: 'Cumhurbaşkanları' },
-      { key: 'tr-pm', label: 'Başbakanlar' },
-      { key: 'tr-minister', label: 'Cumhuriyet Bakanları' },
-      { key: 'tr-party', label: 'Parti Liderleri' },
-      { key: 'tr-actor', label: 'Siyasi & Tarihsel Aktörler' },
+      { key: 'all', label: 'All Turkish History' },
+      { key: 'turkic-seljuk', label: 'Ancient Turks & Seljuks' },
+      { key: 'ottoman-sultan', label: 'Ottoman Sultans' },
+      { key: 'ottoman-commander', label: 'Ottoman Commanders & Admirals' },
+      { key: 'ottoman-late', label: 'CUP & Late Grand Viziers' },
+      { key: 'tr-president', label: 'Presidents' },
+      { key: 'tr-pm', label: 'Prime Ministers' },
+      { key: 'tr-minister', label: 'Republican Ministers' },
+      { key: 'tr-party', label: 'Party Leaders' },
+      { key: 'tr-actor', label: 'Commanders, Pashas & Historical Actors' },
     ],
   },
   {
     key: 'poland',
-    name: 'Polonya',
-    shortName: 'Polonya',
+    name: 'Poland',
+    shortName: 'Poland',
     flag: '🇵🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Büyük Kazimierz, Kral Sobieski, Mareşal Piłsudski, Lech Wałęsa, Tusk, Kaczyński, Duda, Trzaskowski',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Casimir the Great, King Sobieski, Marshal Piłsudski, Lech Wałęsa, Tusk, Kaczyński, Duda, Trzaskowski',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'belgium',
-    name: 'Belçika',
-    shortName: 'Belçika',
+    name: 'Belgium',
+    shortName: 'Belgium',
     flag: '🇧🇪',
     culture: 'europe',
     regions: ['europe'],
     subtitle: 'De Wever, De Croo, Magnette, Bouchez, Charles Michel',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'netherlands',
-    name: 'Hollanda',
-    shortName: 'Hollanda',
+    name: 'Netherlands',
+    shortName: 'Netherlands',
     flag: '🇳🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Sessiz Willem, Johan de Witt, Thorbecke, Rutte, Wilders, Schoof, Timmermans, Yeşilgöz',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'William the Silent, Johan de Witt, Thorbecke, Rutte, Wilders, Schoof, Timmermans, Yeşilgöz',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'cuba',
-    name: 'Küba',
-    shortName: 'Küba',
+    name: 'Cuba',
+    shortName: 'Cuba',
     flag: '🇨🇺',
     culture: 'world',
     regions: ['americas'],
     subtitle: 'José Martí, Fidel Castro, Ernesto "Che" Guevara, Raúl Castro',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'vietnam',
@@ -298,130 +298,130 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇻🇳',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Ho Chi Minh ve General Võ Nguyên Giáp',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Ho Chi Minh and General Võ Nguyên Giáp',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'north-korea',
-    name: 'Kuzey Kore',
-    shortName: 'Kuzey Kore',
+    name: 'North Korea',
+    shortName: 'North Korea',
     flag: '🇰🇵',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Kim İl-sung, Kim Jong-il ve Kim Jong-un (3 Kuşak Kim Hanedanı)',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Kim Il-sung, Kim Jong-il & Kim Jong-un (Three Generations of the Kim Dynasty)',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'cambodia',
-    name: 'Kamboçya',
-    shortName: 'Kamboçya',
+    name: 'Cambodia',
+    shortName: 'Cambodia',
     flag: '🇰🇭',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Pol Pot (Kızıl Kmerler & Ölüm Tarlaları)',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Pol Pot (Khmer Rouge & the Killing Fields)',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'yugoslavia',
-    name: 'Yugoslavya / Balkanlar',
-    shortName: 'Yugoslavya',
+    name: 'Yugoslavia / Balkans',
+    shortName: 'Yugoslavia',
     flag: '🇷🇸',
     culture: 'europe',
     regions: ['europe'],
     subtitle: 'Josip Broz Tito',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'mongolia',
-    name: 'Moğolistan',
-    shortName: 'Moğolistan',
+    name: 'Mongolia',
+    shortName: 'Mongolia',
     flag: '🇲🇳',
     culture: 'mongolia',
     regions: ['asia'],
-    subtitle: 'Cengiz Han ve Kubilay Han',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Genghis Khan and Kublai Khan',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'egypt',
-    name: 'Mısır (Firavunlar, Eyyubiler & Modern)',
-    shortName: 'Mısır & Firavunlar',
+    name: 'Egypt (Pharaohs, Ayyubids & Modern)',
+    shortName: 'Egypt & Pharaohs',
     flag: '🇪🇬',
     culture: 'world',
     regions: ['africa', 'asia'],
-    subtitle: 'Narmer, Keops, Hatşepsut, III. Thutmose, II. Ramses, Kleopatra, Selahaddin Eyyubi, Kavalalı, Nasır',
+    subtitle: 'Narmer, Khufu, Hatshepsut, Thutmose III, Ramesses II, Cleopatra, Saladin, Muhammad Ali, Nasser',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'eg-pharaoh', label: 'Antik Mısır Firavunları' },
-      { key: 'eg-leader', label: 'Eyyubiler & Modern Mısır' },
+      { key: 'all', label: 'All' },
+      { key: 'eg-pharaoh', label: 'Ancient Egyptian Pharaohs' },
+      { key: 'eg-leader', label: 'Ayyubids & Modern Egypt' },
     ],
   },
   {
     key: 'iraq',
-    name: 'Irak',
-    shortName: 'Irak',
+    name: 'Iraq',
+    shortName: 'Iraq',
     flag: '🇮🇶',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Saddam Hüseyin',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Saddam Hussein',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'iran',
-    name: 'İran',
-    shortName: 'İran',
+    name: 'Iran',
+    shortName: 'Iran',
     flag: '🇮🇷',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Emir Kebir, Pehleviler, Musaddık, Humeyni, Hamaney, Süleymani, Bakıri, Selami, Hacızade, Zahedi, Şirazi, Çamran',
+    subtitle: 'Amir Kabir, Pahlavis, Mosaddegh, Khomeini, Khamenei, Soleimani, Bagheri, Salami, Hajizadeh, Zahedi, Shirazi, Chamran',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'me-leader', label: 'Şahlar & Siyasi Liderler' },
-      { key: 'ir-commander', label: 'İran Komutanları' },
+      { key: 'all', label: 'All' },
+      { key: 'me-leader', label: 'Shahs & Political Leaders' },
+      { key: 'ir-commander', label: 'Iranian Commanders' },
     ],
   },
   {
     key: 'syria',
-    name: 'Suriye',
-    shortName: 'Suriye',
+    name: 'Syria',
+    shortName: 'Syria',
     flag: '🇸🇾',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Şükrü el-Kuvvetli, Hafız Esad ve Beşar Esad',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Shukri al-Quwatli, Hafez al-Assad, and Bashar al-Assad',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'saudi-arabia',
-    name: 'Suudi Arabistan',
-    shortName: 'S. Arabistan',
+    name: 'Saudi Arabia',
+    shortName: 'Saudi Arabia',
     flag: '🇸🇦',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Kral Faysal bin Abdülaziz',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'King Faisal bin Abdulaziz',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'palestine',
-    name: 'Filistin',
-    shortName: 'Filistin',
+    name: 'Palestine',
+    shortName: 'Palestine',
     flag: '🇵🇸',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Yaser Arafat, Şeyh Ahmed Yasin, Rantisi, Halid Meşal, İsmail Haniye, Yahya Sinvar, Muhammed Deyf',
+    subtitle: 'Yasser Arafat, Sheikh Ahmed Yassin, Rantisi, Khaled Mashal, Ismail Haniyeh, Yahya Sinwar, Mohammed Deif',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'me-leader', label: 'FKÖ & Filistin Yönetimi' },
-      { key: 'ps-hamas', label: 'Hamas Liderleri' },
+      { key: 'all', label: 'All' },
+      { key: 'me-leader', label: 'PLO & Palestinian Authority' },
+      { key: 'ps-hamas', label: 'Hamas Leaders' },
     ],
   },
   {
     key: 'israel',
-    name: 'İsrail',
-    shortName: 'İsrail',
+    name: 'Israel',
+    shortName: 'Israel',
     flag: '🇮🇱',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Ben-Gurion, Golda Meir, Begin, Rabin, Peres, Şaron, Netanyahu, Lapid, Gantz',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Ben-Gurion, Golda Meir, Begin, Rabin, Peres, Sharon, Netanyahu, Lapid, Gantz',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'libya',
@@ -430,8 +430,8 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇱🇾',
     culture: 'world',
     regions: ['africa'],
-    subtitle: 'Muammer Kaddafi',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Muammar Gaddafi',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'burkina-faso',
@@ -441,171 +441,171 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     culture: 'world',
     regions: ['africa'],
     subtitle: 'Thomas Sankara',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'ghana',
-    name: 'Gana',
-    shortName: 'Gana',
+    name: 'Ghana',
+    shortName: 'Ghana',
     flag: '🇬🇭',
     culture: 'world',
     regions: ['africa'],
     subtitle: 'Kwame Nkrumah',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'tanzania',
-    name: 'Tanzanya',
-    shortName: 'Tanzanya',
+    name: 'Tanzania',
+    shortName: 'Tanzania',
     flag: '🇹🇿',
     culture: 'world',
     regions: ['africa'],
     subtitle: 'Julius Nyerere',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'south-africa',
-    name: 'Güney Afrika',
-    shortName: 'Güney Afrika',
+    name: 'South Africa',
+    shortName: 'South Africa',
     flag: '🇿🇦',
     culture: 'world',
     regions: ['africa'],
     subtitle: 'Nelson Mandela',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'botswana',
-    name: 'Botsvana',
-    shortName: 'Botsvana',
+    name: 'Botswana',
+    shortName: 'Botswana',
     flag: '🇧🇼',
     culture: 'world',
     regions: ['africa'],
     subtitle: 'Seretse Khama',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'azerbaijan',
-    name: 'Azerbaycan',
-    shortName: 'Azerbaycan',
+    name: 'Azerbaijan',
+    shortName: 'Azerbaijan',
     flag: '🇦🇿',
     culture: 'turkey',
     regions: ['asia', 'europe'],
-    subtitle: 'Resulzade, Ebülfez Elçibey, Haydar Aliyev ve İlham Aliyev',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Rasulzade, Abulfaz Elchibey, Heydar Aliyev, and Ilham Aliyev',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'armenia',
-    name: 'Ermenistan',
-    shortName: 'Ermenistan',
+    name: 'Armenia',
+    shortName: 'Armenia',
     flag: '🇦🇲',
     culture: 'world',
     regions: ['asia', 'europe'],
-    subtitle: 'Aram Manukyan, Levon Ter-Petrosyan ve Nikol Paşinyan',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Aram Manukian, Levon Ter-Petrosyan, and Nikol Pashinyan',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'georgia',
-    name: 'Gürcistan',
-    shortName: 'Gürcistan',
+    name: 'Georgia',
+    shortName: 'Georgia',
     flag: '🇬🇪',
     culture: 'world',
     regions: ['asia', 'europe'],
-    subtitle: 'Gamsakhurdia, Şevardnadze, Saakaşvili, İvanişvili, Zurabişvili',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Gamsakhurdia, Shevardnadze, Saakashvili, Ivanishvili, Zourabichvili',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'greece',
-    name: 'Yunanistan',
-    shortName: 'Yunanistan',
+    name: 'Greece',
+    shortName: 'Greece',
     flag: '🇬🇷',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Kolokotronis, Kapodistrias, Venizelos, Miçotakis, Çipras, Androulakis',
+    subtitle: 'Kolokotronis, Kapodistrias, Venizelos, Mitsotakis, Tsipras, Androulakis',
     subCategories: [
-      { key: 'all', label: 'Tümü' },
-      { key: 'gr-history', label: 'Bağımsızlık & Tarih' },
-      { key: 'gr-current', label: 'Güncel Siyasetçiler' },
+      { key: 'all', label: 'All' },
+      { key: 'gr-history', label: 'Independence & History' },
+      { key: 'gr-current', label: 'Contemporary Politicians' },
     ],
   },
   {
     key: 'serbia',
-    name: 'Sırbistan',
-    shortName: 'Sırbistan',
+    name: 'Serbia',
+    shortName: 'Serbia',
     flag: '🇷🇸',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Karayorgi (Karađorđe), Zoran Đinđić, Aleksandar Vučić',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Karađorđe, Zoran Đinđić, Aleksandar Vučić',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'bosnia',
-    name: 'Bosna-Hersek',
-    shortName: 'Bosna-Hersek',
+    name: 'Bosnia & Herzegovina',
+    shortName: 'Bosnia',
     flag: '🇧🇦',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Alija Izetbegović (Bilge Kral) ve Denis Bećirović',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Alija Izetbegović and Denis Bećirović',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'croatia',
-    name: 'Hırvatistan',
-    shortName: 'Hırvatistan',
+    name: 'Croatia',
+    shortName: 'Croatia',
     flag: '🇭🇷',
     culture: 'europe',
     regions: ['europe'],
     subtitle: 'Franjo Tuđman, Andrej Plenković, Zoran Milanović',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'bulgaria',
-    name: 'Bulgaristan',
-    shortName: 'Bulgaristan',
+    name: 'Bulgaria',
+    shortName: 'Bulgaria',
     flag: '🇧🇬',
     culture: 'europe',
     regions: ['europe'],
     subtitle: 'Vasil Levski, Boyko Borisov, Rumen Radev',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'romania',
-    name: 'Romanya',
-    shortName: 'Romanya',
+    name: 'Romania',
+    shortName: 'Romania',
     flag: '🇷🇴',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Alexandru Ioan Cuza, Çavuşesku, Marcel Ciolacu',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Alexandru Ioan Cuza, Ceaușescu, Marcel Ciolacu',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'albania',
-    name: 'Arnavutluk',
-    shortName: 'Arnavutluk',
+    name: 'Albania',
+    shortName: 'Albania',
     flag: '🇦🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'İskender Bey, İsmail Kemali, Enver Hoca, Edi Rama',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Skanderbeg, Ismail Qemali, Enver Hoxha, Edi Rama',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
   {
     key: 'north-macedonia',
-    name: 'Kuzey Makedonya',
-    shortName: 'K. Makedonya',
+    name: 'North Macedonia',
+    shortName: 'N. Macedonia',
     flag: '🇲🇰',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Kiro Gligorov ve Hristijan Mickoski',
-    subCategories: [{ key: 'all', label: 'Tümü' }],
+    subtitle: 'Kiro Gligorov and Hristijan Mickoski',
+    subCategories: [{ key: 'all', label: 'All' }],
   },
 ];
 
 // Continents (+ All)
 const CONTINENT_OPTIONS: { key: GeographicRegion; label: string }[] = [
-  { key: 'all', label: 'Tüm Kıtalar' },
-  { key: 'europe', label: 'Avrupa' },
-  { key: 'asia', label: 'Asya' },
-  { key: 'americas', label: 'Amerika' },
-  { key: 'africa', label: 'Afrika' },
+  { key: 'all', label: 'All Continents' },
+  { key: 'europe', label: 'Europe' },
+  { key: 'asia', label: 'Asia' },
+  { key: 'americas', label: 'Americas' },
+  { key: 'africa', label: 'Africa' },
 ];
 
 export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
@@ -693,7 +693,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
 
       if (selectedEra !== 'all') {
         if (selectedEra === 'early-medieval') {
-          const centuries = ['5. yy', '6. yy', '7. yy', '8. yy', '9. yy', '10. yy'];
+          const centuries = ['5th c.', '6th c.', '7th c.', '8th c.', '9th c.', '10th c.', '5. yy', '6. yy', '7. yy', '8. yy', '9. yy', '10. yy'];
           const matchesCentury = centuries.some((c) => leader.century.includes(c));
           if (!matchesCentury && leader.era !== 'early-medieval') {
             return false;
@@ -704,8 +704,19 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
       }
 
       if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        const text = `${leader.name} ${leader.originalName || ''} ${leader.title} ${leader.country} ${leader.century}`.toLowerCase();
+        const norm = (s: string) =>
+          s
+            .toLowerCase()
+            .replace(/[ş]/g, 's')
+            .replace(/[ç]/g, 'c')
+            .replace(/[ğ]/g, 'g')
+            .replace(/[ıİ]/g, 'i')
+            .replace(/[ö]/g, 'o')
+            .replace(/[ü]/g, 'u')
+            .replace(/[äáàâ]/g, 'a')
+            .replace(/[éèê]/g, 'e');
+        const q = norm(searchQuery.trim());
+        const text = norm(`${leader.name} ${leader.originalName || ''} ${leader.title} ${leader.country} ${leader.century}`);
         if (!text.includes(q)) return false;
       }
 
@@ -789,22 +800,22 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-stone-800/70 pb-5">
             <div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-stone-100 tracking-tight">
-                Ülkeler & Tarihsel Liderler
+                Nations & Historical Figures
               </h1>
               <p className="text-sm text-stone-400 mt-1">
-                Kıta, ülke veya dönem seçerek doğrudan ilgili liderlerin sıralamasına odaklanın.
+                Filter by continent, nation, era, executive power, or global fame league to explore rankings.
               </p>
             </div>
             <div className="text-xs text-stone-400 font-mono shrink-0">
-              {allLeaders.length} Lider · {COUNTRY_HUBS.length} Bölüm
+              {allLeaders.length} Figures · {COUNTRY_HUBS.length} Sections
             </div>
           </div>
 
-          {/* Clean Compact Filter Bar: Continent (Europe/Asia/Americas only) + Era */}
+          {/* Clean Compact Filter Bar: Continent + Era */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
             {/* Continents */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              <span className="text-xs text-stone-500 mr-1 shrink-0">Kıta:</span>
+              <span className="text-xs text-stone-500 mr-1 shrink-0">Continent:</span>
               {CONTINENT_OPTIONS.map((reg) => (
                 <button
                   key={reg.key}
@@ -822,7 +833,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
 
             {/* Era + Sort Selectors */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs text-stone-500 shrink-0">Dönem:</span>
+              <span className="text-xs text-stone-500 shrink-0">Era:</span>
               <select
                 value={selectedEra}
                 onChange={(e) => setSelectedEra(e.target.value as EraKey)}
@@ -840,14 +851,14 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="px-3 py-1.5 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
               >
-                <option value="overall">En Yüksek Puan</option>
-                <option value="popularity">En Popüler (Küresel Şöhret)</option>
-                <option value="chronological">Kronolojik</option>
-                <option value="military">Askeri</option>
-                <option value="economy">Ekonomi</option>
-                <option value="societal">Toplum & Hukuk</option>
-                <option value="diplomacy">Diplomasi</option>
-                <option value="leadership">Liderlik</option>
+                <option value="overall">Highest Overall Score</option>
+                <option value="popularity">Most Iconic (Global Fame)</option>
+                <option value="chronological">Chronological</option>
+                <option value="military">Military</option>
+                <option value="economy">Economy</option>
+                <option value="societal">Society & Law</option>
+                <option value="diplomacy">Diplomacy</option>
+                <option value="leadership">Leadership</option>
               </select>
             </div>
           </div>
@@ -864,7 +875,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Tümü ({powerCounts.all})
+                All ({powerCounts.all})
               </button>
               <button
                 type="button"
@@ -875,7 +886,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                İktidar & Devleti Yönetenler ({powerCounts.ruler})
+                Rulers & Executives ({powerCounts.ruler})
               </button>
               <button
                 type="button"
@@ -886,7 +897,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Muhalefet, Düşünür & Dini Önderler ({powerCounts.nonRuler})
+                Opposition, Thinkers & Religious ({powerCounts.nonRuler})
               </button>
             </div>
 
@@ -900,7 +911,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Tüm Çaplar ({popCounts.all})
+                All Fame Leagues ({popCounts.all})
               </button>
               {POPULARITY_LEAGUES.map((league) => (
                 <button
@@ -960,7 +971,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 className="flex items-center gap-2 px-4 py-2.5 text-sm font-extrabold rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 shadow-lg shadow-amber-500/20 transition-colors shrink-0"
               >
                 <ArrowLeft className="w-4 h-4 stroke-[2.75]" />
-                <span>Geri Dön · Tüm Ülkeler</span>
+                <span>Back · All Nations</span>
               </button>
 
               <div className="hidden sm:flex items-center gap-2 text-xs text-stone-400">
@@ -969,7 +980,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                   onClick={handleBackToPortals}
                   className="hover:text-amber-400 transition-colors"
                 >
-                  Ülkeler
+                  Nations
                 </button>
                 <span className="text-stone-600">/</span>
                 <span className="text-stone-200 font-medium">
@@ -1042,7 +1053,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={`${currentHub.shortName} içinde ara...`}
+                placeholder={`Search within ${currentHub.shortName}...`}
                 className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500"
               />
             </div>
@@ -1065,14 +1076,14 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="bg-stone-900 border border-stone-800 rounded-lg px-2.5 py-1.5 text-xs text-stone-300 focus:outline-none"
               >
-                <option value="overall">Genel Puan</option>
-                <option value="popularity">En Popüler (Küresel Şöhret)</option>
-                <option value="chronological">Kronolojik</option>
-                <option value="military">Askeri</option>
-                <option value="economy">Ekonomi</option>
-                <option value="societal">Toplum & Hukuk</option>
-                <option value="diplomacy">Diplomasi</option>
-                <option value="leadership">Liderlik</option>
+                <option value="overall">Overall Score</option>
+                <option value="popularity">Most Iconic (Global Fame)</option>
+                <option value="chronological">Chronological</option>
+                <option value="military">Military</option>
+                <option value="economy">Economy</option>
+                <option value="societal">Society & Law</option>
+                <option value="diplomacy">Diplomacy</option>
+                <option value="leadership">Leadership</option>
               </select>
             </div>
           </div>
@@ -1089,7 +1100,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Tümü ({powerCounts.all})
+                All ({powerCounts.all})
               </button>
               <button
                 type="button"
@@ -1100,7 +1111,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                İktidar & Devleti Yönetenler ({powerCounts.ruler})
+                Rulers & Executives ({powerCounts.ruler})
               </button>
               <button
                 type="button"
@@ -1111,7 +1122,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Muhalefet, Düşünür & Dini ({powerCounts.nonRuler})
+                Opposition, Thinkers & Religious ({powerCounts.nonRuler})
               </button>
             </div>
 
@@ -1125,7 +1136,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Tüm Çaplar ({popCounts.all})
+                All Fame Leagues ({popCounts.all})
               </button>
               {POPULARITY_LEAGUES.map((league) => (
                 <button
@@ -1151,7 +1162,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between text-xs text-stone-400">
           <span>
-            <strong className="text-stone-200">{sortedLeaders.length}</strong> Lider Listeleniyor
+            Showing <strong className="text-stone-200">{sortedLeaders.length}</strong> Figures
             {activeCountry && currentHub ? ` · ${currentHub.name}` : ''}
           </span>
         </div>
@@ -1159,7 +1170,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
         {sortedLeaders.length === 0 ? (
           <div className="p-12 text-center rounded-xl bg-stone-900/40 border border-stone-800 text-stone-400 space-y-3">
             <Filter className="w-7 h-7 text-stone-600 mx-auto" />
-            <p className="text-sm">Seçilen kriterlere uygun lider bulunamadı.</p>
+            <p className="text-sm">No figures match the selected filters.</p>
             <button
               onClick={() => {
                 setSearchQuery('');
@@ -1171,7 +1182,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
               }}
               className="px-3 py-1.5 text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-lg transition-colors"
             >
-              Filtreleri Sıfırla
+              Reset Filters
             </button>
           </div>
         ) : (
@@ -1197,7 +1208,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
               className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-amber-500/50 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 text-amber-400" />
-              <span>Tüm Ülkelere Geri Dön</span>
+              <span>Back to All Nations</span>
             </button>
           </div>
         )}

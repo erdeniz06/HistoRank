@@ -114,7 +114,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
       votingLeader.id,
       votingLeader.defaultScores,
       votingScores,
-      voterName.trim() || 'Tarihçi'
+      voterName.trim() || 'Historian'
     );
 
     setCommunityData((prev) => ({
@@ -125,8 +125,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
     const isFirst = updated.entryCount === 1;
     setSuccessNotice(
       isFirst
-        ? `🔥 ${votingLeader.name} için ilk entry girildi ve doğrudan yeni canlı ortalama oldu!`
-        : `✓ ${votingLeader.name} için yeni entry kaydedildi, genel ortalama güncellendi (${updated.entryCount}. giriş)!`
+        ? `🔥 First entry submitted for ${votingLeader.name} and immediately set as the new live average!`
+        : `✓ New entry recorded for ${votingLeader.name}; community average updated (Entry #${updated.entryCount})!`
     );
 
     setVotingLeader(null);
@@ -136,10 +136,10 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
   // Reset all community entries back to initial symbolic baseline
   const handleResetAll = () => {
-    if (window.confirm('Tüm halk girişlerini sıfırlayıp sembolik başlangıç puanlarına dönmek istiyor musunuz?')) {
+    if (window.confirm('Reset all community ratings and return to the symbolic historical baseline scores?')) {
       resetCommunityData();
       setCommunityData({});
-      setSuccessNotice('Tüm puanlar sembolik başlangıç durumuna sıfırlandı.');
+      setSuccessNotice('All ratings have been reset to the symbolic historical baseline.');
       setTimeout(() => setSuccessNotice(null), 3000);
     }
   };
@@ -184,17 +184,17 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
               <Flame className="w-3.5 h-3.5 fill-amber-500" />
-              <span>Tarihin Devleri: Canlı Halk Puanlaması & Kapışma Ligi</span>
+              <span>League of Giants: Live Community Scoring & Head-to-Head Arena</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-serif font-extrabold text-stone-100 tracking-tight">
-              En Popüler Liderlerin Kapışması
+              Clash of History’s Most Iconic Leaders
             </h1>
 
             <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-              Tarihin en kudretli şahsiyetleri burada halkın terazisine çıkıyor. Başlangıçta sembolik mutabakat puanları yer alır; 
-              <strong className="text-amber-400 font-semibold"> 1 kullanıcı tek bir entry girdiği an o puan doğrudan yeni canlı ortalama olur! </strong>
-              Sonraki oylarla birlikte puanlar katılımcı ortalamasıyla şekillenir.
+              History’s most formidable figures step onto the public scale. They start with symbolic consensus scores;
+              <strong className="text-amber-400 font-semibold"> the moment 1 user submits a single entry, that score becomes the new live average! </strong>
+              Subsequent votes continuously shape the collective ranking.
             </p>
           </div>
 
@@ -203,10 +203,10 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             <button
               onClick={handleResetAll}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-950/80 hover:bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-200 text-xs transition-colors"
-              title="Sembolik başlangıç durumuna dön"
+              title="Reset to symbolic baseline scores"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Puanları Sıfırla</span>
+              <span>Reset Scores</span>
             </button>
           </div>
         </div>
@@ -220,26 +220,26 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
         )}
       </div>
 
-      {/* DEVLER KAPISMA ARENASI (Duel Arena) */}
+      {/* DUEL ARENA */}
       <div className="p-6 rounded-3xl bg-stone-900 border border-stone-800 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-800">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-amber-500 uppercase tracking-wider mb-0.5">
               <Swords className="w-4 h-4" />
-              <span>Devler Düello Arenası</span>
+              <span>Giants Duel Arena</span>
             </div>
             <h2 className="text-xl font-serif font-bold text-stone-100">
-              Kafakafaya Canlı Kapışma
+              Head-to-Head Live Showdown
             </h2>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-stone-400">Hızlı Eşleşmeler:</span>
+            <span className="text-xs text-stone-400">Quick Matchups:</span>
             <button
               onClick={() => { setDuelFighter1Id('ataturk'); setDuelFighter2Id('caesar'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
-              Atatürk vs Sezar
+              Atatürk vs Caesar
             </button>
             <button
               onClick={() => { setDuelFighter1Id('winston-churchill'); setDuelFighter2Id('margaret-thatcher'); }}
@@ -263,7 +263,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               onClick={() => { setDuelFighter1Id('napoleon'); setDuelFighter2Id('alexander-the-great'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
-              Napolyon vs İskender
+              Napoleon vs Alexander
             </button>
             <button
               onClick={() => { setDuelFighter1Id('george-washington'); setDuelFighter2Id('abraham-lincoln'); }}
@@ -280,7 +280,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
           <div className="lg:col-span-4 p-5 rounded-2xl bg-stone-950/80 border border-amber-500/40 relative space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold text-amber-400">
-                1. KÖŞE (LİDER)
+                1ST CORNER (LEADER)
               </span>
               <select
                 value={duelFighter1Id}
@@ -323,7 +323,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     {f1Tier.tier} TIER
                   </span>
                   <span className="text-[10px] text-stone-500">
-                    ({f1Data.entryCount > 0 ? `${f1Data.entryCount} Giriş` : 'Sembolik'})
+                    ({f1Data.entryCount > 0 ? `${f1Data.entryCount} ${f1Data.entryCount === 1 ? 'Entry' : 'Entries'}` : 'Symbolic'})
                   </span>
                 </div>
                 <div className={`text-[10px] font-medium mt-1 ${f1PopLeague.textClass}`}>
@@ -336,7 +336,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               <div className="bg-stone-900/80 p-2.5 rounded-lg border border-amber-950/40 text-[11px] space-y-1">
                 <div className="flex items-center gap-1 font-semibold text-rose-400">
                   <AlertTriangle className="w-3 h-3 text-rose-400" />
-                  <span>En Tartışmalı 3 Konusu:</span>
+                  <span>Top 3 Controversies:</span>
                 </div>
                 {fighter1.controversies.slice(0, 3).map((c, idx) => (
                   <p key={idx} className="text-stone-300 leading-snug line-clamp-1">
@@ -352,7 +352,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               className="w-full flex items-center justify-center gap-1.5 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-lg transition-colors shadow-sm"
             >
               <Vote className="w-3.5 h-3.5" />
-              <span>{fighter1.name}'e Entry Gir</span>
+              <span>Rate {fighter1.name}</span>
             </button>
           </div>
 
@@ -370,7 +370,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
           <div className="lg:col-span-4 p-5 rounded-2xl bg-stone-950/80 border border-cyan-500/40 relative space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold text-cyan-400">
-                2. KÖŞE (RAKİP)
+                2ND CORNER (CHALLENGER)
               </span>
               <select
                 value={duelFighter2Id}
@@ -413,7 +413,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     {f2Tier.tier} TIER
                   </span>
                   <span className="text-[10px] text-stone-500">
-                    ({f2Data.entryCount > 0 ? `${f2Data.entryCount} Giriş` : 'Sembolik'})
+                    ({f2Data.entryCount > 0 ? `${f2Data.entryCount} ${f2Data.entryCount === 1 ? 'Entry' : 'Entries'}` : 'Symbolic'})
                   </span>
                 </div>
                 <div className={`text-[10px] font-medium mt-1 ${f2PopLeague.textClass}`}>
@@ -426,7 +426,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               <div className="bg-stone-900/80 p-2.5 rounded-lg border border-cyan-950/40 text-[11px] space-y-1">
                 <div className="flex items-center gap-1 font-semibold text-rose-400">
                   <AlertTriangle className="w-3 h-3 text-rose-400" />
-                  <span>En Tartışmalı 3 Konusu:</span>
+                  <span>Top 3 Controversies:</span>
                 </div>
                 {fighter2.controversies.slice(0, 3).map((c, idx) => (
                   <p key={idx} className="text-stone-300 leading-snug line-clamp-1">
@@ -442,7 +442,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               className="w-full flex items-center justify-center gap-1.5 py-2 text-xs font-semibold bg-cyan-500 hover:bg-cyan-400 text-stone-950 rounded-lg transition-colors shadow-sm"
             >
               <Vote className="w-3.5 h-3.5" />
-              <span>{fighter2.name}'e Entry Gir</span>
+              <span>Rate {fighter2.name}</span>
             </button>
           </div>
         </div>
@@ -450,7 +450,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
         {/* 6 Dimension Duel Bar Rows */}
         <div className="pt-4 border-t border-stone-800/80 space-y-2.5">
           <div className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">
-            6 Boyutta Liderler Arasındaki Fark
+            Head-to-Head Difference Across 6 Dimensions
           </div>
 
           {DIMENSIONS.map((dim) => {
@@ -496,15 +496,15 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
         </div>
       </div>
 
-      {/* DEVLER LİGİ SIRALAMASI (Leaderboard Table & Cards) */}
+      {/* LEAGUE OF GIANTS LEADERBOARD */}
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-xl font-serif font-bold text-stone-100">
-              Devler Sıralaması (Canlı Halk Ortalaması)
+              Giants Leaderboard (Live Community Average)
             </h2>
             <p className="text-xs text-stone-400 mt-0.5">
-              1 entry girildiği an o değer yeni ortalama olur; sonraki girişler aritmetik ortalamaya katılır.
+              The first entry sets the live score immediately; every subsequent entry updates the arithmetic mean.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
@@ -516,7 +516,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   powerFilter === 'all' ? 'bg-stone-700 text-white' : 'text-stone-400 hover:text-white'
                 }`}
               >
-                Tümü
+                All
               </button>
               <button
                 type="button"
@@ -525,7 +525,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   powerFilter === 'ruler' ? 'bg-emerald-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                İktidar
+                Rulers & Executives
               </button>
               <button
                 type="button"
@@ -534,7 +534,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   powerFilter === 'non-ruler' ? 'bg-sky-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Muhalefet & Düşünür
+                Opposition & Thinkers
               </button>
             </div>
 
@@ -546,7 +546,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   popularityFilter === 'all' ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
                 }`}
               >
-                Tüm Ligler
+                All Leagues
               </button>
               {POPULARITY_LEAGUES.map((league) => (
                 <button
@@ -566,7 +566,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </div>
 
             <span className="text-xs text-stone-500 font-mono">
-              {sortedGiants.length} Lider
+              {sortedGiants.length} Figures
             </span>
           </div>
         </div>
@@ -610,17 +610,17 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     {/* Entry status badge */}
                     {entryCount === 0 ? (
                       <span className="text-[11px] text-stone-500 italic">
-                        Sembolik (0 Giriş)
+                        Symbolic (0 Entries)
                       </span>
                     ) : isFirstEntry ? (
                       <span className="text-[11px] text-amber-400 font-semibold flex items-center gap-1">
                         <Flame className="w-3 h-3 fill-amber-400" />
-                        1. Entry Canlı Ortalama!
+                        1st Entry Live Average!
                       </span>
                     ) : (
                       <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
                         <Users className="w-3 h-3" />
-                        {entryCount} Kullanıcı Ortalaması
+                        {entryCount}-Voter Average
                       </span>
                     )}
                   </div>
@@ -715,12 +715,12 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     })}
                   </div>
 
-                  {/* En Tartışmalı 3 Konusu (Bilgilendirme Amaçlı) */}
+                  {/* Top 3 Controversies (Informational) */}
                   {leader.controversies && leader.controversies.length > 0 && (
                     <div className="mb-4 bg-stone-950/70 p-2.5 rounded-xl border border-rose-950/40 text-[11px]">
                       <div className="flex items-center gap-1.5 font-semibold text-rose-400 mb-1.5">
                         <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                        <span>En Tartışmalı 3 Konusu:</span>
+                        <span>Top 3 Controversies:</span>
                       </div>
                       <ol className="space-y-1">
                         {leader.controversies.slice(0, 3).map((item, idx) => (
@@ -741,7 +741,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                     className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs rounded-lg transition-colors shadow-sm"
                   >
                     <Vote className="w-3.5 h-3.5" />
-                    <span>Puanını Gir & Ortalamayı Belirle</span>
+                    <span>Enter Rating & Set Average</span>
                   </button>
 
                   <button
@@ -754,10 +754,10 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                       window.scrollTo({ top: 300, behavior: 'smooth' });
                     }}
                     className="flex items-center gap-1 py-2 px-3 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs font-medium rounded-lg transition-colors"
-                    title="Düello arenasına koy"
+                    title="Send to Duel Arena"
                   >
                     <Swords className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Arenaya Al</span>
+                    <span>Duel</span>
                   </button>
                 </div>
               </div>
@@ -776,7 +776,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             <div className="flex items-center justify-between pb-3 border-b border-stone-800">
               <div>
                 <span className="text-xs text-amber-500 font-semibold uppercase tracking-wider block">
-                  Canlı Entry Girişi
+                  Live Rating Entry
                 </span>
                 <h3 className="text-xl font-serif font-bold text-stone-100">
                   {votingLeader.name}
@@ -792,18 +792,18 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
             <form onSubmit={handleSubmitEntry} className="mt-4 space-y-4">
               <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 leading-relaxed">
-                💡 <strong>Kural:</strong> Bu lider için ilk entry'niz ise, girdiğiniz puanlar <strong>doğrudan yeni canlı ortalama</strong> olacaktır!
+                💡 <strong>Rule:</strong> If this is the first community entry for this figure, your scores immediately become the <strong>new live average</strong>!
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-stone-300 mb-1">
-                  Adınız veya Takma Adınız (İsteğe Bağlı)
+                  Your Name or Handle (Optional)
                 </label>
                 <input
                   type="text"
                   value={voterName}
                   onChange={(e) => setVoterName(e.target.value)}
-                  placeholder="Örn: Tarih Meraklısı, Selim, vb."
+                  placeholder="e.g. HistoryBuff, Alex, etc."
                   className="w-full px-3 py-2 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
                 />
               </div>
@@ -838,7 +838,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
               {/* Calculated new average preview */}
               <div className="p-3 rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-between">
-                <span className="text-xs text-stone-400">Girdiğiniz Genel Ortalama:</span>
+                <span className="text-xs text-stone-400">Your Submitted Overall Average:</span>
                 <span className="text-2xl font-mono font-extrabold text-amber-400">
                   {calculateOverallScore(votingScores)} / 100
                 </span>
@@ -851,14 +851,14 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   onClick={() => { setVotingLeader(null); setVotingScores(null); }}
                   className="px-4 py-2 text-xs font-medium text-stone-400 hover:text-white"
                 >
-                  Vazgeç
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="flex items-center gap-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs rounded-lg transition-colors shadow-md"
                 >
                   <Check className="w-4 h-4 stroke-[2.5]" />
-                  <span>Ortalamayı Güncelle & Kaydet</span>
+                  <span>Update Average & Save</span>
                 </button>
               </div>
             </form>

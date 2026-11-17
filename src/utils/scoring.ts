@@ -202,14 +202,14 @@ export function getLeaderPowerRole(leader: Leader): 'ruler' | 'non-ruler' {
 export function getPowerRoleLabel(leader: Leader): string {
   const role = getLeaderPowerRole(leader);
   if (role === 'ruler') {
-    return 'Devlet Yönetimi / İktidar';
+    return 'Head of State / Executive';
   }
   if (leader.subCategory === 'christian-thinker') {
-    return 'Dini Önder / Teolog';
+    return 'Religious Leader / Theologian';
   }
   if (leader.subCategory === 'de-thinker' || leader.id === 'mahatma-gandhi' || leader.id === 'jose-marti') {
-    return 'Fikir & Hareket Önderi';
+    return 'Thinker & Movement Leader';
   }
-  return 'Muhalefet / İktidar Dışı';
+  return 'Opposition / Non-Executive';
 }
 

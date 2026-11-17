@@ -119,7 +119,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
     } catch (err) {
       console.error(err);
       setAiCritique(
-        `${leader.name} için girdiğiniz puanlar (Askeri: ${currentScores.military}, Ekonomi: ${currentScores.economy}, Reform: ${currentScores.societal}), bu liderin tarihi mirası üzerine yapılan modern akademik tartışmalarla dengeli bir uyum sergilemektedir.`
+        `Your scores for ${leader.name} (Military: ${currentScores.military}, Economy: ${currentScores.economy}, Reform: ${currentScores.societal}) align closely with modern historiographical debates over this figure's legacy.`
       );
     } finally {
       setIsLoadingAi(false);
@@ -141,7 +141,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
 
   const datasets = [
     {
-      label: 'Sizin Puanınız',
+      label: 'Your Rating',
       scores: currentScores,
       strokeColor: '#f59e0b', // amber-500
       fillColor: 'rgba(245, 158, 11, 0.25)',
@@ -150,7 +150,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
     ...(showConsensusOverlay
       ? [
           {
-            label: 'Tarihsel Mutabakat',
+            label: 'Historical Consensus',
             scores: leader.defaultScores,
             strokeColor: '#38bdf8', // sky-400
             fillColor: 'rgba(56, 189, 248, 0.12)',
@@ -187,13 +187,13 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
-              <span>{isCompared ? 'Kıyaslamadan Çıkar' : 'Kıyaslamaya Ekle'}</span>
+              <span>{isCompared ? 'Remove from Compare' : 'Add to Compare'}</span>
             </button>
 
             <button
               onClick={onClose}
               className="p-1.5 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition-colors"
-              title="Kapat"
+              title="Close"
             >
               <X className="w-5 h-5" />
             </button>
@@ -259,20 +259,20 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-semibold text-stone-200">
-                    Lideri 6 Boyutta Puanlayın
+                    Score Across 6 Dimensions
                   </h3>
                   <p className="text-xs text-stone-400 mt-0.5">
-                    Değerleri değiştirmek için kaydırıcıları ayarlayın (0 – 100)
+                    Adjust sliders to customize your evaluation (0 – 100)
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleReset}
                     className="flex items-center gap-1 px-2.5 py-1 text-xs text-stone-400 hover:text-stone-200 hover:bg-stone-800 rounded transition-colors"
-                    title="Konsensüs puanlarına dön"
+                    title="Reset to consensus scores"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Sıfırla</span>
+                    <span>Reset</span>
                   </button>
                 </div>
               </div>
@@ -336,12 +336,12 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
               {/* User Note Textarea */}
               <div className="space-y-2 pt-2">
                 <label className="block text-xs font-medium text-stone-300">
-                  Kişisel Tarihsel Değerlendirmeniz & Yorumunuz (İsteğe Bağlı)
+                  Personal Historical Notes & Commentary (Optional)
                 </label>
                 <textarea
                   value={userNotes}
                   onChange={(e) => setUserNotes(e.target.value)}
-                  placeholder="Bu lider hakkındaki şahsi düşünceleriniz, başarı veya başarısızlık nedenleri..."
+                  placeholder="Your personal assessment on their policies, successes, or failures..."
                   rows={2}
                   className="w-full px-3 py-2 text-xs text-stone-200 bg-stone-950/70 border border-stone-800 rounded-lg focus:outline-none focus:border-amber-500 resize-none placeholder:text-stone-600"
                 />
@@ -352,7 +352,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                 <div className="text-xs text-stone-500">
                   {saveSuccess && (
                     <span className="text-emerald-400 font-medium">
-                      ✓ Puanlamanız yerel olarak kaydedildi!
+                      ✓ Your rating has been saved locally!
                     </span>
                   )}
                 </div>
@@ -362,7 +362,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   className="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-stone-950 font-semibold text-xs rounded-lg transition-colors shadow-md shadow-amber-950/30"
                 >
                   <Save className="w-3.5 h-3.5" />
-                  <span>Puanlamamı Kaydet</span>
+                  <span>Save My Rating</span>
                 </button>
               </div>
             </div>
@@ -372,7 +372,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
               {/* Overall Score Badge */}
               <div className="w-full flex items-center justify-between p-3.5 rounded-xl bg-stone-900 border border-stone-800">
                 <div>
-                  <span className="text-xs text-stone-400 block">Hesaplanan Genel Puan</span>
+                  <span className="text-xs text-stone-400 block">Calculated Overall Score</span>
                   <div className="flex items-baseline gap-1.5 mt-0.5">
                     <span
                       className="text-3xl font-extrabold font-mono tabular-nums"
@@ -409,7 +409,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   <div className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-stone-900/70 border border-stone-800/80 text-xs">
                     <div className="min-w-0">
                       <span className="text-[11px] text-stone-400 block">
-                        Küresel Popülerlik & Tanınırlık Ligi
+                        Global Recognition & Fame League
                       </span>
                       <span className={`font-semibold ${popLeague.textClass}`}>
                         {popLeague.icon} {popLeague.label}
@@ -438,7 +438,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   onChange={(e) => setShowConsensusOverlay(e.target.checked)}
                   className="rounded border-stone-700 text-amber-500 focus:ring-0 accent-amber-500"
                 />
-                <span>Tarihsel Mutabakat (Mavi Çizgi) ile Kıyasla</span>
+                <span>Compare with Historical Consensus (Blue Line)</span>
               </label>
 
               {/* AI Historian Button & Response Container */}
@@ -451,8 +451,8 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   <Sparkles className="w-4 h-4 text-amber-400" />
                   <span>
                     {isLoadingAi
-                      ? 'Tarihçi Analizi Hazırlanıyor...'
-                      : 'AI Tarihçi Görüşü Al'}
+                      ? 'Preparing Historian Critique...'
+                      : 'Get Historian Evaluation'}
                   </span>
                 </button>
 
@@ -460,7 +460,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   <div className="mt-4 p-4 rounded-xl bg-stone-900 border border-amber-900/40 text-xs text-stone-300 leading-relaxed space-y-2">
                     <div className="flex items-center gap-1.5 font-semibold text-amber-400 mb-1 text-xs">
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>Tarihsel Değerlendirme & Hakem Raporu</span>
+                      <span>Historical Evaluation & Scholar Report</span>
                     </div>
                     <p className="whitespace-pre-line text-stone-300">
                       {aiCritique}
@@ -477,7 +477,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
             <div className="p-4 rounded-xl bg-stone-950/40 border border-stone-800/80">
               <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs mb-3">
                 <Award className="w-4 h-4" />
-                <span>Temel Tarihsel Başarılar & Reformlar</span>
+                <span>Key Historical Achievements & Reforms</span>
               </div>
               <ul className="space-y-2 text-xs text-stone-300">
                 {leader.keyAchievements.map((item, idx) => (
@@ -493,7 +493,7 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
             <div className="p-4 rounded-xl bg-stone-950/60 border border-rose-950/40">
               <div className="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-3">
                 <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
-                <span>En Tartışmalı 3 Konusu (Bilgilendirme Amaçlı)</span>
+                <span>Top 3 Historical Controversies</span>
               </div>
               <ol className="space-y-2.5 text-xs text-stone-300">
                 {leader.controversies.slice(0, 3).map((item, idx) => (

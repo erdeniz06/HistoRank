@@ -25,78 +25,88 @@ import { RUSSIA_DEEP_LEADERS } from './russiaDeep';
 import { CHINA_AND_INDIA_DEEP } from './chinaAndIndiaDeep';
 import { USA_UK_GERMANY_DEEP } from './usaUkGermanyDeep';
 import { BRAZIL_UKRAINE_POLAND_NL_JP_DEEP } from './brazilUkrainePolandNlJpDeep';
+import { MARIE_ANTOINETTE_AND_USA_POLITICS } from './marieAntoinetteAndUsaPolitics';
+import { UK_DEEP_POLITICS } from './ukDeepPolitics';
+import { GERMANY_DEEP_POLITICS } from './germanyDeepPolitics';
+import { TURKISH_INDEPENDENCE_PASHAS } from './turkishIndependencePashas';
+import {
+  LEADER_EN_TRANSLATIONS,
+  COUNTRY_EN_MAP,
+  translateCenturyEn,
+  translateYearsActiveEn,
+} from './en';
 
 export const DIMENSIONS: DimensionInfo[] = [
   {
     key: 'military',
-    label: 'Askeri & Taktiksel Deha',
-    shortLabel: 'Askeri',
-    description: 'Savaş meydanı stratejisi, taktik yenilikçilik, ordu teşkilatı, fetih veya savunma başarısı.',
+    label: 'Military & Tactical Genius',
+    shortLabel: 'Military',
+    description: 'Battlefield strategy, tactical innovation, army organization, conquest, or defensive mastery.',
     iconName: 'Shield',
     color: '#ef4444', // red
   },
   {
     key: 'economy',
-    label: 'Ekonomi & Refah Yönetimi',
-    shortLabel: 'Ekonomi',
-    description: 'Maliye politikaları, ticaret, sanayileşme, hazine disiplini, kalkınma ve halkın refahı.',
+    label: 'Economy & Prosperity Governance',
+    shortLabel: 'Economy',
+    description: 'Fiscal policy, trade, industrialization, treasury discipline, development, and public welfare.',
     iconName: 'Coins',
     color: '#eab308', // amber
   },
   {
     key: 'societal',
-    label: 'Toplumsal & Hukuki Reform',
-    shortLabel: 'Toplum & Hukuk',
-    description: 'Adalet sistemi, vatandaşlık hakları, eğitim atılımları, kültür, sanat ve kurumsal dönüşüm.',
+    label: 'Social & Legal Reform',
+    shortLabel: 'Society & Law',
+    description: 'Justice system, civil rights, educational breakthroughs, culture, arts, and institutional reform.',
     iconName: 'Scale',
     color: '#3b82f6', // blue
   },
   {
     key: 'diplomacy',
-    label: 'Diplomasi & Dış Politika',
-    shortLabel: 'Diplomasi',
-    description: 'İttifak kurma kabiliyeti, antlaşmalar, barış inşası, uluslararası denge ve yumuşak güç.',
+    label: 'Diplomacy & Foreign Policy',
+    shortLabel: 'Diplomacy',
+    description: 'Alliance building, treaties, peacemaking, international balance, and soft power.',
     iconName: 'Globe',
     color: '#10b981', // emerald
   },
   {
     key: 'leadership',
-    label: 'Liderlik, Karizma & Kriz İdaresi',
-    shortLabel: 'Liderlik',
-    description: 'Halkı peşinden sürükleme gücü, buhran anlarında dirayet, retorik ve vizyoner irade.',
+    label: 'Leadership, Charisma & Crisis Control',
+    shortLabel: 'Leadership',
+    description: 'Ability to rally the public, steadfastness in crises, rhetoric, and visionary resolve.',
     iconName: 'Crown',
     color: '#8b5cf6', // purple
   },
   {
     key: 'legacy',
-    label: 'Tarihsel Miras & Kalıcılık',
-    shortLabel: 'Miras',
-    description: 'Kurduğu rejimlerin, anayasaların, fikirlerin ve kurumların yüzyıllar sonraki canlılığı.',
+    label: 'Historical Legacy & Endurance',
+    shortLabel: 'Legacy',
+    description: 'Longevity and enduring influence of institutions, constitutions, ideas, and regimes centuries later.',
     iconName: 'Hourglass',
     color: '#f97316', // orange
   },
 ];
 
 export const ERAS: EraInfo[] = [
-  { key: 'all', label: 'Tüm Dönemler', description: 'Antik çağlardan günümüze tüm tarihi liderler', centuries: [] },
-  { key: 'ancient', label: 'Antik Çağ', description: 'MÖ 3000 – MS 500 dönemi', centuries: ['MÖ 6. yy', 'MÖ 5. yy', 'MÖ 4. yy', 'MÖ 1. yy', '2. yy'] },
-  { key: 'early-medieval', label: 'Erken Orta Çağ', description: 'MS 5. – 10. Yüzyıllar (Kavimler Göçü & Erken Feodal)', centuries: ['5. yy', '6. yy', '7. yy', '8. yy', '9. yy', '10. yy'] },
-  { key: 'medieval', label: 'Yüksek & Geç Orta Çağ', description: '11. – 15. Yüzyıllar arası', centuries: ['11. yy', '12. yy', '13. yy', '14. yy', '15. yy'] },
-  { key: 'early-modern', label: 'Yeni Çağ', description: '16. – 18. Yüzyıllar', centuries: ['16. yy', '17. yy', '18. yy'] },
-  { key: '19th', label: '19. Yüzyıl', description: '1801 – 1900 Sanayi ve İmparatorluklar Çağı', centuries: ['19. yy'] },
-  { key: '20th', label: '20. Yüzyıl', description: '1901 – 2000 Dünya Savaşları ve Soğuk Savaş', centuries: ['20. yy'] },
-  { key: '21st', label: '21. Yüzyıl / Çağdaş', description: '2001 – Günümüz Çağdaş Dünya Liderleri', centuries: ['21. yy'] },
+  { key: 'all', label: 'All Eras', description: 'All historical figures from Antiquity to the present day', centuries: [] },
+  { key: 'ancient', label: 'Antiquity', description: '3000 BCE – 500 CE', centuries: ['6th c. BCE', '5th c. BCE', '4th c. BCE', '1st c. BCE', '2nd c. CE'] },
+  { key: 'early-medieval', label: 'Early Middle Ages', description: '5th – 10th Centuries CE (Migrations & Early Feudalism)', centuries: ['5th c.', '6th c.', '7th c.', '8th c.', '9th c.', '10th c.'] },
+  { key: 'medieval', label: 'High & Late Middle Ages', description: '11th – 15th Centuries CE', centuries: ['11th c.', '12th c.', '13th c.', '14th c.', '15th c.'] },
+  { key: 'early-modern', label: 'Early Modern Era', description: '16th – 18th Centuries', centuries: ['16th c.', '17th c.', '18th c.'] },
+  { key: '19th', label: '19th Century', description: '1801 – 1900: Age of Industry and Empires', centuries: ['19th c.'] },
+  { key: '20th', label: '20th Century', description: '1901 – 2000: World Wars and Cold War', centuries: ['20th c.'] },
+  { key: '21st', label: '21st Century / Contemporary', description: '2001 – Present: Contemporary World Leaders', centuries: ['21st c.'] },
 ];
 
 export const TIERS: TierConfig[] = [
-  { tier: 'S', label: 'Tarihe Yön Veren Zirve Liderler', minScore: 90, color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.12)', borderColor: '#b45309' },
-  { tier: 'A', label: 'Büyük Devlet Adamları & Reformcular', minScore: 80, color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: '#047857' },
-  { tier: 'B', label: 'Yetkin & İstikrarlı Yöneticiler', minScore: 70, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: '#1d4ed8' },
-  { tier: 'C', label: 'Tartışmalı & Sınırlı Dönemler', minScore: 55, color: '#eab308', bgColor: 'rgba(234, 179, 8, 0.12)', borderColor: '#a16207' },
-  { tier: 'D', label: 'Yıkıcı & Bunalımlı Miraslar', minScore: 0, color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.12)', borderColor: '#b91c1c' },
+  { tier: 'S', label: 'Epoch-Defining Apex Leaders', minScore: 90, color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.12)', borderColor: '#b45309' },
+  { tier: 'A', label: 'Great Statesmen & Reformers', minScore: 80, color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: '#047857' },
+  { tier: 'B', label: 'Capable & Steady Administrators', minScore: 70, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: '#1d4ed8' },
+  { tier: 'C', label: 'Contested & Constrained Tenures', minScore: 55, color: '#eab308', bgColor: 'rgba(234, 179, 8, 0.12)', borderColor: '#a16207' },
+  { tier: 'D', label: 'Destructive & Crisis-Torn Legacies', minScore: 0, color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.12)', borderColor: '#b91c1c' },
 ];
 
-export const INITIAL_LEADERS: Leader[] = [
+const RAW_INITIAL_LEADERS: Leader[] = [
   // 1. MUSTAFA KEMAL ATATÜRK
   {
     id: 'ataturk',
@@ -1469,4 +1479,32 @@ export const INITIAL_LEADERS: Leader[] = [
   ...CHINA_AND_INDIA_DEEP,
   ...USA_UK_GERMANY_DEEP,
   ...BRAZIL_UKRAINE_POLAND_NL_JP_DEEP,
+  ...MARIE_ANTOINETTE_AND_USA_POLITICS,
+  ...UK_DEEP_POLITICS,
+  ...GERMANY_DEEP_POLITICS,
+  ...TURKISH_INDEPENDENCE_PASHAS,
 ];
+
+export const INITIAL_LEADERS: Leader[] = RAW_INITIAL_LEADERS.map((leader) => {
+  const tr = LEADER_EN_TRANSLATIONS[leader.id];
+  if (!tr) {
+    return {
+      ...leader,
+      country: COUNTRY_EN_MAP[leader.country] ?? leader.country,
+      century: translateCenturyEn(leader.century),
+      yearsActive: translateYearsActiveEn(leader.yearsActive),
+    };
+  }
+  return {
+    ...leader,
+    name: tr.name ?? leader.name,
+    title: tr.title,
+    country: tr.country ?? COUNTRY_EN_MAP[leader.country] ?? leader.country,
+    century: tr.century ?? translateCenturyEn(leader.century),
+    yearsActive: tr.yearsActive ?? translateYearsActiveEn(leader.yearsActive),
+    summary: tr.summary,
+    keyAchievements: tr.keyAchievements,
+    controversies: tr.controversies ?? leader.controversies,
+    famousQuote: tr.famousQuote !== undefined ? tr.famousQuote : leader.famousQuote,
+  };
+});

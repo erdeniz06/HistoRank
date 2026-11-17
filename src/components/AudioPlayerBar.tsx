@@ -71,7 +71,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                 ? 'bg-amber-500 text-stone-950'
                 : 'bg-stone-800 hover:bg-stone-700 text-stone-200'
             }`}
-            title={isPlaying ? 'Duraklat' : 'Kültürel Müziği Başlat'}
+            title={isPlaying ? 'Pause' : 'Play Cultural Ambience'}
           >
             {isPlaying ? (
               <Pause className="w-3.5 h-3.5 fill-current" />
@@ -83,7 +83,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           <button
             onClick={handleNextTrack}
             className="flex items-center justify-center w-7 h-7 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-400 hover:text-amber-400 transition-colors shrink-0"
-            title="Sonraki Beste"
+            title="Next Track"
           >
             <SkipForward className="w-3.5 h-3.5" />
           </button>
@@ -95,7 +95,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             </span>
             <span className="text-stone-600 hidden sm:inline">·</span>
             <span className="text-[11px] text-stone-500 hidden sm:inline truncate">
-              Eser {trackIndex}/{totalTracks}
+              Track {trackIndex}/{totalTracks}
             </span>
           </div>
         </div>
@@ -139,7 +139,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <button
               onClick={() => culturalAudio.setVolume(volume > 0 ? 0 : 0.5)}
               className="hover:text-stone-200 transition-colors"
-              title={volume === 0 ? 'Sesi Aç' : 'Sesi Kapat'}
+              title={volume === 0 ? 'Unmute' : 'Mute'}
             >
               {volume === 0 ? (
                 <VolumeX className="w-3.5 h-3.5 text-stone-500" />
@@ -155,7 +155,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               value={volume}
               onChange={handleVolumeChange}
               className="w-14 sm:w-16 h-1 bg-stone-800 rounded appearance-none cursor-pointer accent-amber-500"
-              title={`Ses: %${Math.round(volume * 100)}`}
+              title={`Volume: ${Math.round(volume * 100)}%`}
             />
           </div>
         </div>

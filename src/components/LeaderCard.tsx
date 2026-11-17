@@ -82,17 +82,17 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
             <span className="text-stone-600" aria-hidden="true">·</span>
             <span
               className={`inline-flex items-center gap-1 font-medium ${popLeague.textClass}`}
-              title={`Küresel Tanınırlık / Popülerlik: ${popScore}/100 (${popLeague.label})`}
+              title={`Global Recognition / Popularity: ${popScore}/100 (${popLeague.label})`}
             >
               <span>{popLeague.icon}</span>
               <span>{popLeague.shortLabel}</span>
               <span className="font-mono text-[10px] opacity-80">({popScore})</span>
             </span>
             {hasUserScore && (
-              <span className="text-amber-400 font-semibold">· ✓ Sizin Puanınız Aktif</span>
+              <span className="text-amber-400 font-semibold">· ✓ Your Rating Active</span>
             )}
             {leader.isCustom && (
-              <span className="text-cyan-400 font-medium">· Özel Eklendi</span>
+              <span className="text-cyan-400 font-medium">· Custom Entry</span>
             )}
           </div>
         </div>
@@ -166,7 +166,7 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
         {leader.controversies && leader.controversies.length > 0 && (
           <div className="pt-2.5 border-t border-stone-800/70 mb-3">
             <div className="text-[10px] font-semibold uppercase tracking-wider text-rose-400/90 mb-1.5">
-              Tartışmalı 3 Konu
+              Top 3 Controversies
             </div>
             <ol className="space-y-1 text-[11px]">
               {leader.controversies.slice(0, 3).map((item, idx) => (
@@ -183,7 +183,7 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
       {/* Footer */}
       <div className="flex items-center justify-between pt-3 border-t border-stone-800/70">
         <span className="text-xs text-stone-400 group-hover:text-amber-400 transition-colors font-medium">
-          Puanla & İncele →
+          Rate & Inspect →
         </span>
 
         <button
@@ -197,17 +197,17 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
               ? 'bg-amber-500 text-stone-950 font-semibold'
               : 'bg-stone-800/80 text-stone-300 hover:bg-stone-700 hover:text-white'
           }`}
-          title={isCompared ? 'Kıyaslamadan çıkar' : 'Kıyaslamaya ekle'}
+          title={isCompared ? 'Remove from comparison' : 'Add to comparison'}
         >
           {isCompared ? (
             <>
               <Check className="w-3.5 h-3.5" />
-              <span>Seçildi</span>
+              <span>Selected</span>
             </>
           ) : (
             <>
               <Plus className="w-3.5 h-3.5" />
-              <span>Kıyasla</span>
+              <span>Compare</span>
             </>
           )}
         </button>

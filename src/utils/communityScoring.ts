@@ -192,7 +192,7 @@ export function submitCommunityEntry(
   leaderId: string,
   symbolicDefaultScores: LeaderScores,
   newScores: LeaderScores,
-  voterName = 'Kullanıcı'
+  voterName = 'Member'
 ): CommunityLeaderData {
   const all = loadAllCommunityData();
   const current = all[leaderId] || {

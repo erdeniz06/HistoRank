@@ -34,67 +34,67 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
 }) => {
   const collections: CollectionDef[] = [
     {
-      id: 'turkey-presidents',
-      culture: 'turkey',
-      title: 'Türkiye Siyaseti: CB’ler, Başbakanlar & Güncel Liderler',
-      subtitle: 'Cumhuriyetin kuruluşundan 13. CB’ye, Erbakan, Ecevit, Menderes, İmamoğlu ve Türkeş',
-      description:
-        'Mustafa Kemal Atatürk, İsmet İnönü, Turgut Özal, Süleyman Demirel, Recep Tayyip Erdoğan; efsane başbakanlar Necmettin Erbakan, Bülent Ecevit, Adnan Menderes, Tansu Çiller; güncel liderler Ekrem İmamoğlu, Mansur Yavaş, Kemal Kılıçdaroğlu, Devlet Bahçeli.',
-      flag: '🇹🇷',
-      icon: Landmark,
-      filterFn: (l) => l.category === 'turkey' || l.countryCode === 'TR',
-    },
-    {
-      id: 'uk-premiers',
-      culture: 'uk',
-      title: 'Birleşik Krallık: 10 Downing Street Başbakanları',
-      subtitle: 'Son 25 yılın tüm başbakanları, Thatcher, Churchill & Tudor Çağı',
-      description:
-        'Keir Starmer, Rishi Sunak, Liz Truss, Boris Johnson, Theresa May, David Cameron, Gordon Brown, Tony Blair; efsanevi Margaret Thatcher ("Demir Leydi"), Winston Churchill ve Kraliçe I. Elizabeth.',
-      flag: '🇬🇧',
-      icon: Crown,
-      filterFn: (l) => l.category === 'uk' || l.countryCode === 'GB',
-    },
-    {
       id: 'usa-presidents',
       culture: 'usa',
-      title: 'Amerika Birleşik Devletleri: Beyaz Saray Başkanları',
-      subtitle: 'Kurucu Babalardan Soğuk Savaş ve Modern Süper Güce',
+      title: 'United States: Presidents, Cabinet & Congress',
+      subtitle: 'From Founding Fathers to Superpower Diplomacy & Modern Politics',
       description:
-        'Donald Trump, Joe Biden, Barack Obama, George W. Bush, Bill Clinton, Ronald Reagan, John F. Kennedy (JFK), Franklin D. Roosevelt (FDR), Abraham Lincoln ve George Washington.',
+        'George Washington, Abraham Lincoln, FDR, JFK, Ronald Reagan, Barack Obama, Donald Trump, Henry Kissinger, George Marshall, Hillary Clinton, John McCain, and Bernie Sanders.',
       flag: '🇺🇸',
       icon: ShieldCheck,
       filterFn: (l) => l.category === 'usa' || l.countryCode === 'US',
     },
     {
-      id: 'france-history',
-      culture: 'france',
-      title: 'Fransa: İhtilal, İmparatorluk & Beşinci Cumhuriyet',
-      subtitle: 'Giyotinden Élysée Sarayı’na Fransız Siyasi Tarihi',
+      id: 'uk-premiers',
+      culture: 'uk',
+      title: 'United Kingdom: Crown, Downing Street & Parliament',
+      subtitle: 'Monarchs, Prime Ministers, Chancellors & Reformers',
       description:
-        'Robespierre ve Danton’un ihtilal ateşi, Napolyon’un imparatorluk vizyonu, De Gaulle’ün cumhuriyet inşası, Macron ve Le Pen ile modern Fransız kutuplaşması.',
-      flag: '🇫🇷',
+        'Winston Churchill, Margaret Thatcher, Clement Attlee, Elizabeth I, Queen Victoria, Aneurin Bevan, Ernest Bevin, William Wilberforce, Emmeline Pankhurst, Keir Starmer, and Rishi Sunak.',
+      flag: '🇬🇧',
       icon: Crown,
-      filterFn: (l) => l.category === 'france' || l.countryCode === 'FR',
+      filterFn: (l) => l.category === 'uk' || l.countryCode === 'GB',
     },
     {
       id: 'germany-prussia',
       culture: 'germany',
-      title: 'Almanya & Prusya: Demir Şansölyelerden Birleşmeye',
-      subtitle: 'Kıta Avrupası’nın Güç Merkezinde Hükmedenler',
+      title: 'Germany & Prussia: Chancellors, Thinkers & Resistance',
+      subtitle: 'From Frederick the Great and Bismarck to Modern Berlin',
       description:
-        'Büyük Friedrich’in aydın mutlakiyeti, Bismarck’ın kan ve demir diplomasisi, Hitler’in karanlık totaliter felaketi, Willy Brandt’ın barış atılımı, Helmut Kohl ve Angela Merkel.',
+        'Frederick the Great, Otto von Bismarck, Konrad Adenauer, Willy Brandt, Helmut Schmidt, Angela Merkel, Wolfgang Schäuble, Hans-Dietrich Genscher, Ursula von der Leyen, and Sophie Scholl.',
       flag: '🇩🇪',
       icon: ShieldCheck,
       filterFn: (l) => l.category === 'germany' || l.countryCode === 'DE',
     },
     {
+      id: 'france-history',
+      culture: 'france',
+      title: 'France: Monarchy, Revolution, Empire & Fifth Republic',
+      subtitle: 'From Charlemagne and Louis XIV to Napoleon and Macron',
+      description:
+        'Louis XIV, Marie Antoinette, Robespierre, Napoleon Bonaparte, Napoleon III, Charles de Gaulle, François Mitterrand, Emmanuel Macron, and Marine Le Pen.',
+      flag: '🇫🇷',
+      icon: Crown,
+      filterFn: (l) => l.category === 'france' || l.countryCode === 'FR',
+    },
+    {
+      id: 'turkey-presidents',
+      culture: 'turkey',
+      title: 'Turkey: Ottoman Empire & Modern Republic',
+      subtitle: 'From Seljuks and Ottoman Sultans to Modern Turkish Politics',
+      description:
+        'Mustafa Kemal Atatürk, Mehmed the Conqueror, Suleiman the Magnificent, İsmet İnönü, Turgut Özal, Bülent Ecevit, Süleyman Demirel, Recep Tayyip Erdoğan, Ekrem İmamoğlu, and Özgür Özel.',
+      flag: '🇹🇷',
+      icon: Landmark,
+      filterFn: (l) => l.category === 'turkey' || l.countryCode === 'TR',
+    },
+    {
       id: 'spain-monarchy',
       culture: 'spain',
-      title: 'İspanya: Küresel Monarşi & Modern Siyaset',
-      subtitle: 'Katolik Krallardan 4 Büyük Partinin Liderlerine',
+      title: 'Spain: Global Monarchy & Modern Democracy',
+      subtitle: 'From the Catholic Monarchs to Contemporary Politics',
       description:
-        'I. İsabella’nın birleşik İspanya’sı, II. Felipe’nin cihan imparatorluğu, Pedro Sánchez, Alberto Feijóo, Santiago Abascal ve Yolanda Díaz.',
+        'Isabella I of Castile, Ferdinand II of Aragon, Philip II, Adolfo Suárez, Felipe González, and Pedro Sánchez.',
       flag: '🇪🇸',
       icon: Crown,
       filterFn: (l) => l.category === 'spain' || l.countryCode === 'ES',
@@ -102,10 +102,10 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
     {
       id: 'ancient-world',
       culture: 'ancient',
-      title: 'Roma & Antik Dünyanın Fatihleri',
-      subtitle: 'Cumhuriyetler, İmparatorluklar ve Felsefi Krallar',
+      title: 'Rome & the Classical World',
+      subtitle: 'Republics, Emperors, Strategists, and Philosopher Kings',
       description:
-        'Julius Caesar, Büyük İskender, ilk imparator Caesar Augustus (Octavius), Stoacı filozof-imparator Marcus Aurelius ve Atina demokrasisinin mimarı Perikles.',
+        'Julius Caesar, Alexander the Great, Augustus, Trajan, Constantine the Great, Marcus Aurelius, and Pericles.',
       flag: '🏛️',
       icon: BookOpen,
       filterFn: (l) => l.category === 'ancient' || l.era === 'ancient',
@@ -142,7 +142,7 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
               <div className="flex items-center justify-between mb-2">
                 <span className="text-2xl">{col.flag}</span>
                 <span className="text-xs font-mono font-medium text-stone-500">
-                  {count} Lider
+                  {count} Figures
                 </span>
               </div>
               <h3 className={`text-sm font-semibold truncate ${isActive ? 'text-amber-400' : 'text-stone-200'}`}>
@@ -162,10 +162,10 @@ export const SpecialCollections: React.FC<SpecialCollectionsProps> = ({
           <div className="flex items-center gap-2 text-xs text-stone-400 mb-1">
             <span className="text-lg">{activeCol.flag}</span>
             <span className="font-semibold uppercase tracking-wider text-amber-500">
-              Tematik Ulusal Koleksiyon
+              Thematic National Collection
             </span>
             <span aria-hidden="true" className="text-stone-600">·</span>
-            <span>{collectionLeaders.length} Lider Listelendi</span>
+            <span>{collectionLeaders.length} Figures Listed</span>
           </div>
           <h2 className="text-2xl font-serif font-bold text-stone-100">
             {activeCol.title}
