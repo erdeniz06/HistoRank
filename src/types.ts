@@ -160,6 +160,8 @@ export interface LeaderScores {
 
 export type PopularityTier = 'global-icon' | 'international' | 'national' | 'niche';
 
+export type AuthorityTier = 'sovereign' | 'cabinet' | 'opposition';
+
 export interface Leader {
   id: string;
   name: string;

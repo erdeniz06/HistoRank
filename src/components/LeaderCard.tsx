@@ -2,14 +2,15 @@ import React from 'react';
 import { Leader, UserRating } from '../types';
 import {
   calculateOverallScore,
+  getAuthorityTierLabel,
   getEffectiveScores,
+  getLeaderAuthorityTier,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
-  getLeaderPowerRole,
   getLeaderTierSubtitle,
   getPopularityLeagueInfo,
-  getPowerRoleLabel,
   getTierForScore,
+  isGiantLeader,
 } from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
 import { Check, Plus } from 'lucide-react';
@@ -34,8 +35,9 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   const tier = getTierForScore(overallScore);
   const tierSubtitle = getLeaderTierSubtitle(leader, scores, tier.tier);
   const hasUserScore = !!userRating;
-  const powerRole = getLeaderPowerRole(leader);
-  const powerRoleLabel = getPowerRoleLabel(leader);
+  const authorityTier = getLeaderAuthorityTier(leader);
+  const authorityLabel = getAuthorityTierLabel(leader);
+  const isGiant = isGiantLeader(leader.id);
   const popScore = getLeaderPopularityScore(leader);
   const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
 
@@ -69,16 +71,32 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
           <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] mt-1.5">
             <span
               className={`inline-flex items-center gap-1 font-medium ${
-                powerRole === 'ruler' ? 'text-emerald-400/90' : 'text-sky-400/90'
+                authorityTier === 'sovereign'
+                  ? 'text-emerald-400/90'
+                  : authorityTier === 'cabinet'
+                  ? 'text-violet-400/90'
+                  : 'text-sky-400/90'
               }`}
             >
               <span
                 className={`w-1.5 h-1.5 rounded-full ${
-                  powerRole === 'ruler' ? 'bg-emerald-400' : 'bg-sky-400'
+                  authorityTier === 'sovereign'
+                    ? 'bg-emerald-400'
+                    : authorityTier === 'cabinet'
+                    ? 'bg-violet-400'
+                    : 'bg-sky-400'
                 }`}
               />
-              {powerRoleLabel}
+              {authorityLabel}
             </span>
+            {isGiant && (
+              <>
+                <span className="text-stone-600" aria-hidden="true">·</span>
+                <span className="text-amber-400 font-semibold" title="Member of the League of Giants">
+                  ★ Giants League
+                </span>
+              </>
+            )}
             <span className="text-stone-600" aria-hidden="true">·</span>
             <span
               className={`inline-flex items-center gap-1 font-medium ${popLeague.textClass}`}

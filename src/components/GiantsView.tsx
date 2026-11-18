@@ -9,13 +9,11 @@ import {
   resetCommunityData,
 } from '../utils/communityScoring';
 import {
-  POPULARITY_LEAGUES,
   calculateOverallScore,
+  getAuthorityTierLabel,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
-  getLeaderPowerRole,
   getPopularityLeagueInfo,
-  getPowerRoleLabel,
   getTierForScore,
 } from '../utils/scoring';
 import { RadarChart, RadarDataset } from './RadarChart';
@@ -68,8 +66,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   const [votingScores, setVotingScores] = useState<LeaderScores | null>(null);
   const [voterName, setVoterName] = useState<string>('');
   const [successNotice, setSuccessNotice] = useState<string | null>(null);
-  const [powerFilter, setPowerFilter] = useState<'all' | 'ruler' | 'non-ruler'>('all');
-  const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
+  const [eraBand, setEraBand] = useState<'all' | 'ancient' | 'medieval' | 'early-modern' | 'modern'>('all');
+  const [fameBand, setFameBand] = useState<'all' | 'global-icon' | 'international'>('all');
 
   // Helper to get effective live community scores
   const getLeaderLiveScores = (leader: Leader): { scores: LeaderScores; entryCount: number; lastUpdated: number } => {
@@ -88,14 +86,23 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
     };
   };
 
-  // Sort giants by live crowdsourced overall score
+  const matchesEraBand = (leader: Leader) => {
+    if (eraBand === 'all') return true;
+    if (eraBand === 'ancient') return leader.era === 'ancient';
+    if (eraBand === 'medieval') return leader.era === 'early-medieval' || leader.era === 'medieval';
+    if (eraBand === 'early-modern') return leader.era === 'early-modern' || leader.era === '19th';
+    return leader.era === '20th' || leader.era === '21st';
+  };
+
+  // Sort giants by live crowdsourced overall score (tiebreak by global fame)
   const sortedGiants = [...giants]
-    .filter((l) => powerFilter === 'all' || getLeaderPowerRole(l) === powerFilter)
-    .filter((l) => popularityFilter === 'all' || getLeaderPopularityTier(l) === popularityFilter)
+    .filter(matchesEraBand)
+    .filter((l) => fameBand === 'all' || getLeaderPopularityTier(l) === fameBand)
     .sort((a, b) => {
       const scoreA = calculateOverallScore(getLeaderLiveScores(a).scores);
       const scoreB = calculateOverallScore(getLeaderLiveScores(b).scores);
-      return scoreB - scoreA;
+      if (scoreB !== scoreA) return scoreB - scoreA;
+      return getLeaderPopularityScore(b) - getLeaderPopularityScore(a);
     });
 
   // Open Vote modal
@@ -184,17 +191,16 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
               <Flame className="w-3.5 h-3.5 fill-amber-500" />
-              <span>League of Giants: Live Community Scoring & Head-to-Head Arena</span>
+              <span>League of Giants · Sovereign Heads of State & Global Icons</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-serif font-extrabold text-stone-100 tracking-tight">
-              Clash of History’s Most Iconic Leaders
+              History’s Highest-Stature Sovereign Rulers
             </h1>
 
             <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-              History’s most formidable figures step onto the public scale. They start with symbolic consensus scores;
-              <strong className="text-amber-400 font-semibold"> the moment 1 user submits a single entry, that score becomes the new live average! </strong>
-              Subsequent votes continuously shape the collective ranking.
+              Entry here requires passing a dual bar: <strong className="text-emerald-400 font-semibold">Supreme Sovereign State Authority</strong> (emperors, monarchs, presidents, and prime ministers—never ministers or local officials) plus <strong className="text-amber-400 font-semibold">Global Historical Recognition</strong>.
+              Cabinet ministers, generals, and thinkers are evaluated separately in the Tier List.
             </p>
           </div>
 
@@ -242,34 +248,34 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               Atatürk vs Caesar
             </button>
             <button
-              onClick={() => { setDuelFighter1Id('winston-churchill'); setDuelFighter2Id('margaret-thatcher'); }}
-              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
-            >
-              Churchill vs Thatcher
-            </button>
-            <button
-              onClick={() => { setDuelFighter1Id('donald-trump'); setDuelFighter2Id('barack-obama'); }}
-              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
-            >
-              Trump vs Obama
-            </button>
-            <button
-              onClick={() => { setDuelFighter1Id('necmettin-erbakan'); setDuelFighter2Id('bulent-ecevit'); }}
-              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
-            >
-              Erbakan vs Ecevit
-            </button>
-            <button
               onClick={() => { setDuelFighter1Id('napoleon'); setDuelFighter2Id('alexander-the-great'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
               Napoleon vs Alexander
             </button>
             <button
+              onClick={() => { setDuelFighter1Id('winston-churchill'); setDuelFighter2Id('franklin-d-roosevelt'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Churchill vs FDR
+            </button>
+            <button
               onClick={() => { setDuelFighter1Id('george-washington'); setDuelFighter2Id('abraham-lincoln'); }}
               className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
             >
               Washington vs Lincoln
+            </button>
+            <button
+              onClick={() => { setDuelFighter1Id('fatih-mehmed'); setDuelFighter2Id('saladin'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Mehmed II vs Saladin
+            </button>
+            <button
+              onClick={() => { setDuelFighter1Id('queen-elizabeth-1'); setDuelFighter2Id('queen-victoria'); }}
+              className="px-2.5 py-1 text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-md transition-colors"
+            >
+              Elizabeth I vs Victoria
             </button>
           </div>
         </div>
@@ -498,75 +504,69 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
 
       {/* LEAGUE OF GIANTS LEADERBOARD */}
       <div className="space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div>
             <h2 className="text-xl font-serif font-bold text-stone-100">
-              Giants Leaderboard (Live Community Average)
+              League of Giants Leaderboard
             </h2>
             <p className="text-xs text-stone-400 mt-0.5">
-              The first entry sets the live score immediately; every subsequent entry updates the arithmetic mean.
+              Strictly world-famous sovereign Heads of State & Rulers ({giants.length} titans). First community entry sets the live average immediately.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
-            <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
-              <button
-                type="button"
-                onClick={() => setPowerFilter('all')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  powerFilter === 'all' ? 'bg-stone-700 text-white' : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                All
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('ruler')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  powerFilter === 'ruler' ? 'bg-emerald-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-emerald-300'
-                }`}
-              >
-                Rulers & Executives
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('non-ruler')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  powerFilter === 'non-ruler' ? 'bg-sky-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-sky-300'
-                }`}
-              >
-                Opposition & Thinkers
-              </button>
-            </div>
-
             <div className="flex flex-wrap items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
-              <button
-                type="button"
-                onClick={() => setPopularityFilter('all')}
-                className={`px-2 py-1 rounded-md font-medium transition-colors ${
-                  popularityFilter === 'all' ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                All Leagues
-              </button>
-              {POPULARITY_LEAGUES.map((league) => (
+              {[
+                { key: 'all', label: 'All Eras' },
+                { key: 'ancient', label: 'Ancient' },
+                { key: 'medieval', label: 'Medieval' },
+                { key: 'early-modern', label: '16th–19th c.' },
+                { key: 'modern', label: '20th–21st c.' },
+              ].map((item) => (
                 <button
-                  key={league.key}
+                  key={item.key}
                   type="button"
-                  onClick={() => setPopularityFilter(league.key)}
-                  title={league.description}
-                  className={`px-2 py-1 rounded-md font-medium transition-colors ${
-                    popularityFilter === league.key
-                      ? `${league.bgClass} ${league.textClass} font-semibold`
-                      : 'text-stone-400 hover:text-white'
+                  onClick={() => setEraBand(item.key as any)}
+                  className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                    eraBand === item.key ? 'bg-stone-700 text-white font-semibold' : 'text-stone-400 hover:text-white'
                   }`}
                 >
-                  {league.icon} {league.shortLabel}
+                  {item.label}
                 </button>
               ))}
             </div>
 
+            <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
+              <button
+                type="button"
+                onClick={() => setFameBand('all')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  fameBand === 'all' ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
+                }`}
+              >
+                All Giants
+              </button>
+              <button
+                type="button"
+                onClick={() => setFameBand('global-icon')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  fameBand === 'global-icon' ? 'bg-amber-500/20 text-amber-300 font-semibold' : 'text-stone-400 hover:text-amber-300'
+                }`}
+              >
+                🌍 Global Icons (90+)
+              </button>
+              <button
+                type="button"
+                onClick={() => setFameBand('international')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  fameBand === 'international' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-stone-400 hover:text-emerald-300'
+                }`}
+              >
+                🌐 World Titans (80–89)
+              </button>
+            </div>
+
             <span className="text-xs text-stone-500 font-mono">
-              {sortedGiants.length} Figures
+              {sortedGiants.length} Sovereign Giants
             </span>
           </div>
         </div>
@@ -645,8 +645,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                         {leader.title}
                       </p>
                       <div className="text-[10px] font-medium mt-0.5 flex flex-wrap items-center gap-2">
-                        <span className={getLeaderPowerRole(leader) === 'ruler' ? 'text-emerald-400/90' : 'text-sky-400/90'}>
-                          ● {getPowerRoleLabel(leader)}
+                        <span className="text-emerald-400/90">
+                          ● {getAuthorityTierLabel(leader)}
                         </span>
                         <span className="text-stone-600">·</span>
                         <span className={popLeague.textClass}>

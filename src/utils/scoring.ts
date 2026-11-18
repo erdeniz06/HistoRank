@@ -1,4 +1,4 @@
-import { Leader, LeaderScores, TierConfig, TierLevel, UserRating } from '../types';
+import { AuthorityTier, Leader, LeaderScores, TierConfig, TierLevel, UserRating } from '../types';
 import { TIERS } from '../data/leaders';
 export { getLeaderTierSubtitle } from './leaderEpithets';
 export {
@@ -7,6 +7,7 @@ export {
   getLeaderPopularityTier,
   getPopularityLeagueInfo,
 } from './popularity';
+export { GIANTS_IDS, GIANTS_ID_SET, isGiantLeader } from './communityScoring';
 
 const RATINGS_STORAGE_KEY = 'pantheon_user_ratings_v1';
 const CUSTOM_LEADERS_KEY = 'pantheon_custom_leaders_v1';
@@ -181,6 +182,9 @@ export const NON_RULER_IDS = new Set<string>([
   'st-francis-assisi',
   'st-thomas-aquinas',
   'martin-luther',
+  'john-calvin',
+  'sakamoto-ryoma',
+  'zeki-velidi-togan',
   'mahatma-gandhi',
   'jose-marti',
   'vasil-levski',
@@ -189,6 +193,206 @@ export const NON_RULER_IDS = new Set<string>([
   'khaled-mashal',
   'mohammed-deif',
 ]);
+
+/**
+ * Cabinet ministers, grand viziers/chief ministers serving under a monarch,
+ * vice presidents, judges, central bank chairs, and field commanders/admirals
+ * who held high executive or military office below the sovereign Head of State/Government.
+ */
+export const CABINET_OR_COMMANDER_IDS = new Set<string>([
+  // Turkey — Pure Republican Cabinet Ministers & Party Coalition Deputies
+  'hasan-ali-yucel',
+  'mahmut-esat-bozkurt',
+  'tevfik-rustu-aras',
+  'numan-menemencioglu',
+  'sukru-kaya',
+  'fatin-rustu-zorlu',
+  'kemal-dervis',
+  'ismail-cem',
+  'ali-babacan',
+  'meral-aksener',
+  'devlet-bahceli',
+  'alparslan-turkes',
+  // Turkey — War of Independence Pashas, Marshals & Military Chiefs
+  'fevzi-cakmak',
+  'kazim-karabekir',
+  'ali-fuat-cebesoy',
+  'refet-bele',
+  'nurettin-pasa',
+  'fahrettin-altay',
+  'cevat-cobanli',
+  'faruk-gurler',
+  'muhsin-batur',
+  'memduh-tagmac',
+  'cemal-madanoglu',
+  'esref-bitlis',
+  // Ottoman & Seljuk / Göktürk Grand Viziers, Viziers & Commanders
+  'barbaros-hayreddin-pasa',
+  'piri-reis',
+  'turgut-reis',
+  'kilic-ali-pasa',
+  'sokullu-mehmed-pasa',
+  'pargali-ibrahim-pasa',
+  'koprulu-mehmed-pasa',
+  'cezayirli-gazi-hasan-pasa',
+  'gazi-osman-pasa',
+  'mithat-pasa',
+  'enver-pasa',
+  'cemal-pasa',
+  'talat-pasa',
+  'mahmud-sevket-pasa',
+  'said-halim-pasa',
+  'damat-ferid-pasa',
+  'ali-kemal',
+  'ahmed-tevfik-pasa',
+  'nizamulmulk',
+  'vezir-tonyukuk',
+  'kul-tigin',
+  // United States — Cabinet Secretaries, Vice Presidents, Judiciary, Fed & Commanders
+  'benjamin-franklin',
+  'alexander-hamilton',
+  'henry-kissinger',
+  'hillary-clinton',
+  'george-marshall',
+  'colin-powell',
+  'condoleezza-rice',
+  'robert-mcnamara',
+  'antony-blinken',
+  'marco-rubio',
+  'janet-yellen',
+  'jerome-powell',
+  'j-edgar-hoover',
+  'john-marshall',
+  'ruth-bader-ginsburg',
+  'jd-vance',
+  'kamala-harris',
+  'mike-pence',
+  'dick-cheney',
+  'al-gore',
+  'pete-buttigieg',
+  'tulsi-gabbard',
+  'robert-f-kennedy-jr',
+  'douglas-macarthur',
+  // United Kingdom — Cabinet Ministers, Deputy PMs, Naval Admirals & Regional First Ministers
+  'horatio-nelson',
+  'rachel-reeves',
+  'tony-benn',
+  'aneurin-bevan',
+  'ernest-bevin',
+  'robin-cook',
+  'david-lammy',
+  'angela-rayner',
+  'yvette-cooper',
+  'george-osborne',
+  'jeremy-hunt',
+  'kwasi-kwarteng',
+  'michael-heseltine',
+  'kenneth-clarke',
+  'suella-braverman',
+  'priti-patel',
+  'jacob-rees-mogg',
+  'nick-clegg',
+  'nicola-sturgeon',
+  'alex-salmond',
+  // Germany — Cabinet Ministers, Vice Chancellors & Regional Minister-Presidents
+  'robert-habeck',
+  'boris-pistorius',
+  'christian-lindner',
+  'markus-soder',
+  'franz-josef-strauss',
+  'joschka-fischer',
+  'annalena-baerbock',
+  'oskar-lafontaine',
+  'wolfgang-schauble',
+  'hans-dietrich-genscher',
+  'ursula-von-der-leyen',
+  'egon-bahr',
+  'cem-ozdemir',
+  'karl-lauterbach',
+  'nancy-faeser',
+  'lars-klingbeil',
+  'matthias-erzberger',
+  'walther-rathenau',
+  // France, Italy & Spain — Chief Ministers, Cabinet Ministers & Generals
+  'cardinal-richelieu',
+  'georges-danton',
+  'marquis-de-lafayette',
+  'joan-of-arc',
+  'bruno-retailleau',
+  'giuseppe-garibaldi',
+  'matteo-salvini',
+  'yolanda-diaz',
+  'pablo-iglesias-turrion',
+  // Russia, USSR, China, Japan, India, Cuba, Vietnam, Israel, Iran & Islamic Commanders
+  'leon-trotsky',
+  'georgy-zhukov',
+  'lavrentiy-beria',
+  'mikhail-kutuzov',
+  'zheng-he',
+  'okubo-toshimichi',
+  'saigo-takamori',
+  'togo-heihachiro',
+  'sardar-patel',
+  'bhimrao-ambedkar',
+  'che-guevara',
+  'vo-nguyen-giap',
+  'moshe-dayan',
+  'benny-gantz',
+  'amir-kabir',
+  'qasem-soleimani',
+  'mohammad-bagheri',
+  'hossein-salami',
+  'amir-ali-hajizadeh',
+  'mohammad-reza-zahedi',
+  'ali-sayyad-shirazi',
+  'hassan-tehrani-moghaddam',
+  'mostafa-chamran',
+  'halid-bin-velid',
+  'tarik-bin-ziyad',
+]);
+
+export function getLeaderAuthorityTier(leader: Leader): AuthorityTier {
+  if (CABINET_OR_COMMANDER_IDS.has(leader.id)) {
+    return 'cabinet';
+  }
+  if (leader.subCategory === 'ottoman-commander' || leader.subCategory === 'ir-commander') {
+    return 'cabinet';
+  }
+  if (leader.subCategory === 'islamic-commander' && leader.id !== 'sultan-baybars') {
+    return 'cabinet';
+  }
+  if (
+    NON_RULER_IDS.has(leader.id) ||
+    leader.powerRole === 'non-ruler' ||
+    leader.subCategory === 'de-thinker' ||
+    leader.subCategory === 'christian-thinker'
+  ) {
+    return 'opposition';
+  }
+  return 'sovereign';
+}
+
+export function getAuthorityTierLabel(leader: Leader): string {
+  const tier = getLeaderAuthorityTier(leader);
+  if (tier === 'sovereign') {
+    return 'Head of State / Ruler';
+  }
+  if (tier === 'cabinet') {
+    return 'Minister / Commander';
+  }
+  if (leader.subCategory === 'christian-thinker') {
+    return 'Religious Leader / Theologian';
+  }
+  if (
+    leader.subCategory === 'de-thinker' ||
+    leader.id === 'mahatma-gandhi' ||
+    leader.id === 'jose-marti' ||
+    leader.id === 'sakamoto-ryoma'
+  ) {
+    return 'Thinker & Movement Leader';
+  }
+  return 'Opposition / Non-Executive';
+}
 
 export function getLeaderPowerRole(leader: Leader): 'ruler' | 'non-ruler' {
   if (leader.powerRole) return leader.powerRole;
@@ -200,16 +404,6 @@ export function getLeaderPowerRole(leader: Leader): 'ruler' | 'non-ruler' {
 }
 
 export function getPowerRoleLabel(leader: Leader): string {
-  const role = getLeaderPowerRole(leader);
-  if (role === 'ruler') {
-    return 'Head of State / Executive';
-  }
-  if (leader.subCategory === 'christian-thinker') {
-    return 'Religious Leader / Theologian';
-  }
-  if (leader.subCategory === 'de-thinker' || leader.id === 'mahatma-gandhi' || leader.id === 'jose-marti') {
-    return 'Thinker & Movement Leader';
-  }
-  return 'Opposition / Non-Executive';
+  return getAuthorityTierLabel(leader);
 }
 

@@ -1,16 +1,18 @@
 import React, { useState, useMemo } from 'react';
-import { Leader, PopularityTier, TierLevel, UserRating } from '../types';
+import { AuthorityTier, Leader, PopularityTier, TierLevel, UserRating } from '../types';
 import { TIERS } from '../data/leaders';
 import {
   POPULARITY_LEAGUES,
   calculateOverallScore,
+  getAuthorityTierLabel,
   getEffectiveScores,
+  getLeaderAuthorityTier,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
-  getLeaderPowerRole,
   getLeaderTierSubtitle,
   getPopularityLeagueInfo,
   getTierForScore,
+  isGiantLeader,
 } from '../utils/scoring';
 
 interface TierListViewProps {
@@ -27,7 +29,8 @@ export const TierListView: React.FC<TierListViewProps> = ({
   const [useUserRatings, setUseUserRatings] = useState<boolean>(true);
   const [selectedFilterCategory, setSelectedFilterCategory] = useState<string>('all');
   const [selectedFilterEra, setSelectedFilterEra] = useState<string>('all');
-  const [powerFilter, setPowerFilter] = useState<'all' | 'ruler' | 'non-ruler'>('all');
+  const [authorityFilter, setAuthorityFilter] = useState<'all' | AuthorityTier>('all');
+  const [giantsOnly, setGiantsOnly] = useState<boolean>(false);
   const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
   const [separateByPopularity, setSeparateByPopularity] = useState<boolean>(true);
 
@@ -40,12 +43,15 @@ export const TierListView: React.FC<TierListViewProps> = ({
       if (selectedFilterEra !== 'all' && leader.era !== selectedFilterEra) {
         return false;
       }
-      if (powerFilter !== 'all' && getLeaderPowerRole(leader) !== powerFilter) {
+      if (authorityFilter !== 'all' && getLeaderAuthorityTier(leader) !== authorityFilter) {
+        return false;
+      }
+      if (giantsOnly && !isGiantLeader(leader.id)) {
         return false;
       }
       return true;
     });
-  }, [leaders, selectedFilterCategory, selectedFilterEra, powerFilter]);
+  }, [leaders, selectedFilterCategory, selectedFilterEra, authorityFilter, giantsOnly]);
 
   const popularityCounts = useMemo(() => {
     const counts: Record<'all' | PopularityTier, number> = {
@@ -140,18 +146,20 @@ export const TierListView: React.FC<TierListViewProps> = ({
                     const tierSubtitle = getLeaderTierSubtitle(leader, scores, tierConfig.tier);
                     const popScore = getLeaderPopularityScore(leader);
                     const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
+                    const authorityLabel = getAuthorityTierLabel(leader);
 
                     return (
                       <div
                         key={leader.id}
                         onClick={() => onSelectLeader(leader)}
                         className="group flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
-                        title={`${leader.name} — ${overall}/100 (${tierConfig.tier} Tier · ${tierSubtitle}) · Recognition: ${popScore}/100 (${popLeague.shortLabel})`}
+                        title={`${leader.name} — ${overall}/100 (${tierConfig.tier} Tier · ${tierSubtitle}) · ${authorityLabel} · Recognition: ${popScore}/100 (${popLeague.shortLabel})`}
                       >
                         <span className="text-lg shrink-0">{leader.flag}</span>
 
-                        <div className="min-w-0 max-w-[150px]">
+                        <div className="min-w-0 max-w-[155px]">
                           <h4 className="text-xs font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
+                            {isGiantLeader(leader.id) ? '★ ' : ''}
                             {leader.name}
                           </h4>
                           <div className="text-[10px] text-stone-400 truncate flex items-center gap-1">
@@ -197,7 +205,7 @@ export const TierListView: React.FC<TierListViewProps> = ({
               Historical Tier List
             </h2>
             <p className="text-xs text-stone-400 mt-0.5">
-              Ranked S–D by 6 governance dimensions and separated into distinct Global Recognition leagues.
+              Separate Sovereign Heads of State from Cabinet Ministers & Generals, or isolate the League of Giants.
             </p>
           </div>
 
@@ -227,35 +235,46 @@ export const TierListView: React.FC<TierListViewProps> = ({
               </button>
             </div>
 
-            {/* Power Role Filter */}
-            <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
+            {/* Authority Tier Filter */}
+            <div className="flex flex-wrap items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
               <button
                 type="button"
-                onClick={() => setPowerFilter('all')}
+                onClick={() => setAuthorityFilter('all')}
                 className={`px-2.5 py-1.5 rounded-md font-medium transition-colors ${
-                  powerFilter === 'all'
+                  authorityFilter === 'all'
                     ? 'bg-stone-700 text-white font-semibold'
                     : 'text-stone-400 hover:text-white'
                 }`}
               >
-                All
+                All Offices
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('ruler')}
+                onClick={() => setAuthorityFilter('sovereign')}
                 className={`px-2.5 py-1.5 rounded-md font-medium transition-colors ${
-                  powerFilter === 'ruler'
+                  authorityFilter === 'sovereign'
                     ? 'bg-emerald-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                Rulers & Executives
+                Heads of State & Rulers
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('non-ruler')}
+                onClick={() => setAuthorityFilter('cabinet')}
                 className={`px-2.5 py-1.5 rounded-md font-medium transition-colors ${
-                  powerFilter === 'non-ruler'
+                  authorityFilter === 'cabinet'
+                    ? 'bg-violet-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-violet-300'
+                }`}
+              >
+                Ministers & Commanders
+              </button>
+              <button
+                type="button"
+                onClick={() => setAuthorityFilter('opposition')}
+                className={`px-2.5 py-1.5 rounded-md font-medium transition-colors ${
+                  authorityFilter === 'opposition'
                     ? 'bg-sky-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
@@ -263,6 +282,20 @@ export const TierListView: React.FC<TierListViewProps> = ({
                 Opposition & Thinkers
               </button>
             </div>
+
+            {/* League of Giants Only Toggle */}
+            <button
+              type="button"
+              onClick={() => setGiantsOnly((prev) => !prev)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
+                giantsOnly
+                  ? 'bg-amber-500 text-stone-950 border-amber-400 shadow-sm'
+                  : 'bg-stone-950 text-amber-400 border-amber-500/30 hover:border-amber-400'
+              }`}
+              title="Filter exclusively to globally renowned sovereign Heads of State in the League of Giants"
+            >
+              ★ League of Giants Only
+            </button>
 
             {/* Category Filter */}
             <select

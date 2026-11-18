@@ -3,16 +3,15 @@ import { Leader, LeaderScores, UserRating } from '../types';
 import { DIMENSIONS } from '../data/leaders';
 import {
   calculateOverallScore,
+  getAuthorityTierLabel,
   getEffectiveScores,
+  getLeaderAuthorityTier,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
-  getLeaderPowerRole,
   getLeaderTierSubtitle,
   getPopularityLeagueInfo,
-  getPowerRoleLabel,
   getTierForScore,
-  removeUserRating,
-  saveUserRating,
+  isGiantLeader,
 } from '../utils/scoring';
 import { RadarChart } from './RadarChart';
 import {
@@ -224,18 +223,39 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                   {leader.title}
                 </p>
                 <span className="text-stone-600" aria-hidden="true">·</span>
-                <span
-                  className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
-                    getLeaderPowerRole(leader) === 'ruler' ? 'text-emerald-400' : 'text-sky-400'
-                  }`}
-                >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full ${
-                      getLeaderPowerRole(leader) === 'ruler' ? 'bg-emerald-400' : 'bg-sky-400'
-                    }`}
-                  />
-                  {getPowerRoleLabel(leader)}
-                </span>
+                {(() => {
+                  const authorityTier = getLeaderAuthorityTier(leader);
+                  return (
+                    <span
+                      className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
+                        authorityTier === 'sovereign'
+                          ? 'text-emerald-400'
+                          : authorityTier === 'cabinet'
+                          ? 'text-violet-400'
+                          : 'text-sky-400'
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          authorityTier === 'sovereign'
+                            ? 'bg-emerald-400'
+                            : authorityTier === 'cabinet'
+                            ? 'bg-violet-400'
+                            : 'bg-sky-400'
+                        }`}
+                      />
+                      {getAuthorityTierLabel(leader)}
+                    </span>
+                  );
+                })()}
+                {isGiantLeader(leader.id) && (
+                  <>
+                    <span className="text-stone-600" aria-hidden="true">·</span>
+                    <span className="text-xs font-semibold text-amber-400">
+                      ★ League of Giants
+                    </span>
+                  </>
+                )}
               </div>
               <p className="text-sm text-stone-300 leading-relaxed max-w-2xl">
                 {leader.summary}

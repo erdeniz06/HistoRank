@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Leader, PopularityTier, UserRating, EraKey, GeographicRegion } from '../types';
+import { AuthorityTier, Leader, PopularityTier, UserRating, EraKey, GeographicRegion } from '../types';
 import {
   POPULARITY_LEAGUES,
   calculateOverallScore,
   getEffectiveScores,
+  getLeaderAuthorityTier,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
-  getLeaderPowerRole,
 } from '../utils/scoring';
 import { ERAS } from '../data/leaders';
 import { CultureKey } from '../audio/culturalAudioEngine';
@@ -631,7 +631,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [selectedEra, setSelectedEra] = useState<EraKey>('all');
   const [selectedRegion, setSelectedRegion] = useState<GeographicRegion>('all');
-  const [powerFilter, setPowerFilter] = useState<'all' | 'ruler' | 'non-ruler'>('all');
+  const [powerFilter, setPowerFilter] = useState<'all' | AuthorityTier>('all');
   const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<
@@ -725,18 +725,21 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   }, [allLeaders, activeCountry, activeSubCategory, selectedEra, selectedRegion, searchQuery]);
 
   const powerCounts = useMemo(() => {
-    let ruler = 0;
-    let nonRuler = 0;
+    let sovereign = 0;
+    let cabinet = 0;
+    let opposition = 0;
     for (const l of baseFilteredLeaders) {
-      if (getLeaderPowerRole(l) === 'ruler') ruler++;
-      else nonRuler++;
+      const auth = getLeaderAuthorityTier(l);
+      if (auth === 'sovereign') sovereign++;
+      else if (auth === 'cabinet') cabinet++;
+      else opposition++;
     }
-    return { all: baseFilteredLeaders.length, ruler, nonRuler };
+    return { all: baseFilteredLeaders.length, sovereign, cabinet, opposition };
   }, [baseFilteredLeaders]);
 
   const powerFilteredLeaders = useMemo(() => {
     if (powerFilter === 'all') return baseFilteredLeaders;
-    return baseFilteredLeaders.filter((l) => getLeaderPowerRole(l) === powerFilter);
+    return baseFilteredLeaders.filter((l) => getLeaderAuthorityTier(l) === powerFilter);
   }, [baseFilteredLeaders, powerFilter]);
 
   const popCounts = useMemo(() => {
@@ -879,25 +882,36 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('ruler')}
+                onClick={() => setPowerFilter('sovereign')}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'ruler'
+                  powerFilter === 'sovereign'
                     ? 'bg-emerald-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                Rulers & Executives ({powerCounts.ruler})
+                Heads of State & Rulers ({powerCounts.sovereign})
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('non-ruler')}
+                onClick={() => setPowerFilter('cabinet')}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'non-ruler'
+                  powerFilter === 'cabinet'
+                    ? 'bg-violet-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-violet-300'
+                }`}
+              >
+                Ministers & Commanders ({powerCounts.cabinet})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('opposition')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'opposition'
                     ? 'bg-sky-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Opposition, Thinkers & Religious ({powerCounts.nonRuler})
+                Opposition & Thinkers ({powerCounts.opposition})
               </button>
             </div>
 
@@ -1104,25 +1118,36 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('ruler')}
+                onClick={() => setPowerFilter('sovereign')}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'ruler'
+                  powerFilter === 'sovereign'
                     ? 'bg-emerald-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-emerald-300'
                 }`}
               >
-                Rulers & Executives ({powerCounts.ruler})
+                Heads of State & Rulers ({powerCounts.sovereign})
               </button>
               <button
                 type="button"
-                onClick={() => setPowerFilter('non-ruler')}
+                onClick={() => setPowerFilter('cabinet')}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'non-ruler'
+                  powerFilter === 'cabinet'
+                    ? 'bg-violet-500 text-stone-950 font-semibold'
+                    : 'text-stone-400 hover:text-violet-300'
+                }`}
+              >
+                Ministers & Commanders ({powerCounts.cabinet})
+              </button>
+              <button
+                type="button"
+                onClick={() => setPowerFilter('opposition')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  powerFilter === 'opposition'
                     ? 'bg-sky-500 text-stone-950 font-semibold'
                     : 'text-stone-400 hover:text-sky-300'
                 }`}
               >
-                Opposition, Thinkers & Religious ({powerCounts.nonRuler})
+                Opposition & Thinkers ({powerCounts.opposition})
               </button>
             </div>
 
