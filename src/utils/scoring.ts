@@ -1,5 +1,6 @@
-import { AuthorityTier, Leader, LeaderScores, TierConfig, TierLevel, UserRating } from '../types';
+import { AuthorityTier, Leader, LeaderboardScope, LeaderScores, TierConfig, TierLevel, UserRating } from '../types';
 import { TIERS } from '../data/leaders';
+import { getLeaderPopularityScore } from './popularity';
 export { getLeaderTierSubtitle } from './leaderEpithets';
 export {
   POPULARITY_LEAGUES,
@@ -394,6 +395,45 @@ export function getAuthorityTierLabel(leader: Leader): string {
   return 'Opposition / Non-Executive';
 }
 
+export const FAMOUS_RULER_MIN_SCORE = 80;
+
+export function hasLeaderGoverned(leader: Leader): boolean {
+  return getLeaderAuthorityTier(leader) !== 'opposition';
+}
+
+export function isFamousRuler(leader: Leader): boolean {
+  return hasLeaderGoverned(leader) && getLeaderPopularityScore(leader) >= FAMOUS_RULER_MIN_SCORE;
+}
+
+export function matchesLeaderboardScope(leader: Leader, scope: LeaderboardScope): boolean {
+  if (scope === 'all') return true;
+  if (!hasLeaderGoverned(leader)) return false;
+  const pop = getLeaderPopularityScore(leader);
+  if (scope === 'famous-rulers') return pop >= FAMOUS_RULER_MIN_SCORE;
+  return pop < FAMOUS_RULER_MIN_SCORE;
+}
+
+export function getSimpleStatusLabel(leader: Leader): string {
+  const tier = getLeaderAuthorityTier(leader);
+  if (tier === 'opposition') {
+    if (leader.subCategory === 'christian-thinker') return 'Religious / Theologian (Non-Ruler)';
+    if (
+      leader.subCategory === 'de-thinker' ||
+      leader.id === 'mahatma-gandhi' ||
+      leader.id === 'jose-marti' ||
+      leader.id === 'sakamoto-ryoma'
+    ) {
+      return 'Thinker / Movement (Non-Ruler)';
+    }
+    return 'Opposition / Non-Ruler';
+  }
+  const famous = getLeaderPopularityScore(leader) >= FAMOUS_RULER_MIN_SCORE;
+  if (tier === 'sovereign') {
+    return famous ? 'World-Famous Ruler' : 'National / Lesser-Known Ruler';
+  }
+  return famous ? 'Famous Minister / Commander' : 'Minister / Commander';
+}
+
 export function getLeaderPowerRole(leader: Leader): 'ruler' | 'non-ruler' {
   if (leader.powerRole) return leader.powerRole;
   if (NON_RULER_IDS.has(leader.id)) return 'non-ruler';
@@ -404,6 +444,6 @@ export function getLeaderPowerRole(leader: Leader): 'ruler' | 'non-ruler' {
 }
 
 export function getPowerRoleLabel(leader: Leader): string {
-  return getAuthorityTierLabel(leader);
+  return getSimpleStatusLabel(leader);
 }
 

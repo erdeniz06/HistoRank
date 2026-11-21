@@ -2,15 +2,13 @@ import React from 'react';
 import { Leader, UserRating } from '../types';
 import {
   calculateOverallScore,
-  getAuthorityTierLabel,
   getEffectiveScores,
-  getLeaderAuthorityTier,
   getLeaderPopularityScore,
-  getLeaderPopularityTier,
   getLeaderTierSubtitle,
-  getPopularityLeagueInfo,
+  getSimpleStatusLabel,
   getTierForScore,
-  isGiantLeader,
+  hasLeaderGoverned,
+  isFamousRuler,
 } from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
 import { Check, Plus } from 'lucide-react';
@@ -35,11 +33,10 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   const tier = getTierForScore(overallScore);
   const tierSubtitle = getLeaderTierSubtitle(leader, scores, tier.tier);
   const hasUserScore = !!userRating;
-  const authorityTier = getLeaderAuthorityTier(leader);
-  const authorityLabel = getAuthorityTierLabel(leader);
-  const isGiant = isGiantLeader(leader.id);
+  const governed = hasLeaderGoverned(leader);
+  const famous = isFamousRuler(leader);
+  const statusLabel = getSimpleStatusLabel(leader);
   const popScore = getLeaderPopularityScore(leader);
-  const popLeague = getPopularityLeagueInfo(getLeaderPopularityTier(leader));
 
   return (
     <div
@@ -71,46 +68,29 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
           <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] mt-1.5">
             <span
               className={`inline-flex items-center gap-1 font-medium ${
-                authorityTier === 'sovereign'
-                  ? 'text-emerald-400/90'
-                  : authorityTier === 'cabinet'
-                  ? 'text-violet-400/90'
-                  : 'text-sky-400/90'
+                !governed
+                  ? 'text-sky-400/90'
+                  : famous
+                  ? 'text-amber-400/95'
+                  : 'text-emerald-400/90'
               }`}
             >
               <span
                 className={`w-1.5 h-1.5 rounded-full ${
-                  authorityTier === 'sovereign'
-                    ? 'bg-emerald-400'
-                    : authorityTier === 'cabinet'
-                    ? 'bg-violet-400'
-                    : 'bg-sky-400'
+                  !governed ? 'bg-sky-400' : famous ? 'bg-amber-400' : 'bg-emerald-400'
                 }`}
               />
-              {authorityLabel}
+              {statusLabel}
             </span>
-            {isGiant && (
-              <>
-                <span className="text-stone-600" aria-hidden="true">·</span>
-                <span className="text-amber-400 font-semibold" title="Member of the League of Giants">
-                  ★ Giants League
-                </span>
-              </>
-            )}
             <span className="text-stone-600" aria-hidden="true">·</span>
-            <span
-              className={`inline-flex items-center gap-1 font-medium ${popLeague.textClass}`}
-              title={`Global Recognition / Popularity: ${popScore}/100 (${popLeague.label})`}
-            >
-              <span>{popLeague.icon}</span>
-              <span>{popLeague.shortLabel}</span>
-              <span className="font-mono text-[10px] opacity-80">({popScore})</span>
+            <span className="text-stone-400 font-mono text-[10px]" title="Global Recognition">
+              Fame {popScore}
             </span>
             {hasUserScore && (
-              <span className="text-amber-400 font-semibold">· ✓ Your Rating Active</span>
+              <span className="text-amber-400 font-semibold">· ✓ My Rating</span>
             )}
             {leader.isCustom && (
-              <span className="text-cyan-400 font-medium">· Custom Entry</span>
+              <span className="text-cyan-400 font-medium">· Custom</span>
             )}
           </div>
         </div>

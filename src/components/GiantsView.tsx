@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Leader, LeaderScores, PopularityTier } from '../types';
+import React, { useState, useMemo } from 'react';
+import { Leader, LeaderScores } from '../types';
 import { DIMENSIONS } from '../data/leaders';
 import {
   GIANTS_IDS,
@@ -10,7 +10,6 @@ import {
 } from '../utils/communityScoring';
 import {
   calculateOverallScore,
-  getAuthorityTierLabel,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
   getPopularityLeagueInfo,
@@ -67,7 +66,17 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   const [voterName, setVoterName] = useState<string>('');
   const [successNotice, setSuccessNotice] = useState<string | null>(null);
   const [eraBand, setEraBand] = useState<'all' | 'ancient' | 'medieval' | 'early-modern' | 'modern'>('all');
-  const [fameBand, setFameBand] = useState<'all' | 'global-icon' | 'international'>('all');
+  const [countryFilter, setCountryFilter] = useState<string>('all');
+
+  const giantCountries = useMemo(() => {
+    const map = new Map<string, { key: string; flag: string; label: string }>();
+    for (const g of giants) {
+      if (!map.has(g.category)) {
+        map.set(g.category, { key: g.category, flag: g.flag, label: g.country });
+      }
+    }
+    return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
+  }, [giants]);
 
   // Helper to get effective live community scores
   const getLeaderLiveScores = (leader: Leader): { scores: LeaderScores; entryCount: number; lastUpdated: number } => {
@@ -97,7 +106,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
   // Sort giants by live crowdsourced overall score (tiebreak by global fame)
   const sortedGiants = [...giants]
     .filter(matchesEraBand)
-    .filter((l) => fameBand === 'all' || getLeaderPopularityTier(l) === fameBand)
+    .filter((l) => countryFilter === 'all' || l.category === countryFilter)
     .sort((a, b) => {
       const scoreA = calculateOverallScore(getLeaderLiveScores(a).scores);
       const scoreB = calculateOverallScore(getLeaderLiveScores(b).scores);
@@ -514,6 +523,19 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
+            <select
+              value={countryFilter}
+              onChange={(e) => setCountryFilter(e.target.value)}
+              className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
+            >
+              <option value="all">🌐 All Countries</option>
+              {giantCountries.map((c) => (
+                <option key={c.key} value={c.key}>
+                  {c.flag} {c.label}
+                </option>
+              ))}
+            </select>
+
             <div className="flex flex-wrap items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
               {[
                 { key: 'all', label: 'All Eras' },
@@ -527,7 +549,7 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   type="button"
                   onClick={() => setEraBand(item.key as any)}
                   className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                    eraBand === item.key ? 'bg-stone-700 text-white font-semibold' : 'text-stone-400 hover:text-white'
+                    eraBand === item.key ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
                   }`}
                 >
                   {item.label}
@@ -535,38 +557,8 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
               ))}
             </div>
 
-            <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
-              <button
-                type="button"
-                onClick={() => setFameBand('all')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  fameBand === 'all' ? 'bg-amber-500 text-stone-950 font-semibold' : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                All Giants
-              </button>
-              <button
-                type="button"
-                onClick={() => setFameBand('global-icon')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  fameBand === 'global-icon' ? 'bg-amber-500/20 text-amber-300 font-semibold' : 'text-stone-400 hover:text-amber-300'
-                }`}
-              >
-                🌍 Global Icons (90+)
-              </button>
-              <button
-                type="button"
-                onClick={() => setFameBand('international')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  fameBand === 'international' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-stone-400 hover:text-emerald-300'
-                }`}
-              >
-                🌐 World Titans (80–89)
-              </button>
-            </div>
-
             <span className="text-xs text-stone-500 font-mono">
-              {sortedGiants.length} Sovereign Giants
+              {sortedGiants.length} Giants
             </span>
           </div>
         </div>
@@ -645,12 +637,12 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                         {leader.title}
                       </p>
                       <div className="text-[10px] font-medium mt-0.5 flex flex-wrap items-center gap-2">
-                        <span className="text-emerald-400/90">
-                          ● {getAuthorityTierLabel(leader)}
+                        <span className="text-amber-400/90">
+                          ★ World-Famous Sovereign Ruler
                         </span>
                         <span className="text-stone-600">·</span>
                         <span className={popLeague.textClass}>
-                          {popLeague.icon} {popLeague.shortLabel} ({popScore})
+                          {popLeague.icon} {popScore}/100 Fame
                         </span>
                       </div>
 

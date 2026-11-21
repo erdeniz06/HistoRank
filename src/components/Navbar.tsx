@@ -214,7 +214,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-400 hover:text-stone-200'
             }`}
           >
-            Nations & History
+            By Country
+          </button>
+
+          <button
+            onClick={() => onSelectTab('tierlist')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
+              activeTab === 'tierlist'
+                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            Tier List
           </button>
 
           <button
@@ -242,17 +253,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ({comparedCount})
               </span>
             )}
-          </button>
-
-          <button
-            onClick={() => onSelectTab('tierlist')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
-              activeTab === 'tierlist'
-                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
-          >
-            Tier List
           </button>
         </nav>
 

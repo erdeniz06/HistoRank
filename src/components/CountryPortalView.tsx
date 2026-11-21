@@ -1,17 +1,16 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { AuthorityTier, Leader, PopularityTier, UserRating, EraKey, GeographicRegion } from '../types';
+import { Leader, LeaderboardScope, UserRating, EraKey, GeographicRegion } from '../types';
 import {
-  POPULARITY_LEAGUES,
   calculateOverallScore,
   getEffectiveScores,
-  getLeaderAuthorityTier,
   getLeaderPopularityScore,
-  getLeaderPopularityTier,
+  getTierForScore,
+  matchesLeaderboardScope,
 } from '../utils/scoring';
 import { ERAS } from '../data/leaders';
 import { CultureKey } from '../audio/culturalAudioEngine';
 import { LeaderCard } from './LeaderCard';
-import { ArrowLeft, Filter, Search } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Filter, Search } from 'lucide-react';
 
 interface CountryPortalViewProps {
   allLeaders: Leader[];
@@ -631,8 +630,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [selectedEra, setSelectedEra] = useState<EraKey>('all');
   const [selectedRegion, setSelectedRegion] = useState<GeographicRegion>('all');
-  const [powerFilter, setPowerFilter] = useState<'all' | AuthorityTier>('all');
-  const [popularityFilter, setPopularityFilter] = useState<'all' | PopularityTier>('all');
+  const [scope, setScope] = useState<LeaderboardScope>('famous-rulers');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<
     'overall' | 'popularity' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership'
@@ -641,19 +639,26 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   useEffect(() => {
     setActiveSubCategory('all');
     setSelectedEra('all');
-    setPowerFilter('all');
-    setPopularityFilter('all');
     setSearchQuery('');
   }, [activeCountry]);
 
   const currentHub = COUNTRY_HUBS.find((h) => h.key === activeCountry) || null;
 
   const handleSelectCountry = (hub: CountryHubDef) => {
+    const hasMatchInCurrentScope = allLeaders.some(
+      (l) => l.category === hub.key && matchesLeaderboardScope(l, scope)
+    );
+    if (!hasMatchInCurrentScope && scope === 'famous-rulers') {
+      const hasLesser = allLeaders.some(
+        (l) => l.category === hub.key && matchesLeaderboardScope(l, 'lesser-known-rulers')
+      );
+      if (hasLesser) {
+        setScope('lesser-known-rulers');
+      }
+    }
     setCountry(hub.key);
     setActiveSubCategory('all');
     setSelectedEra('all');
-    setPowerFilter('all');
-    setPopularityFilter('all');
     onSelectCulture(hub.culture);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -661,34 +666,65 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const handleBackToPortals = () => {
     setCountry(null);
     setActiveSubCategory('all');
-    setPowerFilter('all');
-    setPopularityFilter('all');
     setSearchQuery('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const visibleHubs = useMemo(() => {
-    if (selectedRegion === 'all') return COUNTRY_HUBS;
-    return COUNTRY_HUBS.filter((hub) => hub.regions.includes(selectedRegion));
-  }, [selectedRegion]);
+    const byRegion =
+      selectedRegion === 'all'
+        ? COUNTRY_HUBS
+        : COUNTRY_HUBS.filter((hub) => hub.regions.includes(selectedRegion));
+    if (!searchQuery.trim() || activeCountry) return byRegion;
+    const q = searchQuery.trim().toLowerCase();
+    return byRegion.filter(
+      (h) =>
+        h.name.toLowerCase().includes(q) ||
+        h.shortName.toLowerCase().includes(q) ||
+        h.subtitle.toLowerCase().includes(q)
+    );
+  }, [selectedRegion, searchQuery, activeCountry]);
 
-  // Base filtered list BEFORE powerFilter, so we can show ruler vs non-ruler split counts
-  const baseFilteredLeaders = useMemo(() => {
+  // Precompute top ranked leaders per country under the active scope (for Directory ranking cards)
+  const countryDirectoryData = useMemo(() => {
+    const map: Record<
+      string,
+      { topLeaders: Leader[]; scopedCount: number; famousCount: number; lesserCount: number; allCount: number }
+    > = {};
+
+    for (const hub of COUNTRY_HUBS) {
+      const inCountry = allLeaders.filter((l) => l.category === hub.key);
+      const famousCount = inCountry.filter((l) => matchesLeaderboardScope(l, 'famous-rulers')).length;
+      const lesserCount = inCountry.filter((l) => matchesLeaderboardScope(l, 'lesser-known-rulers')).length;
+      const scoped = inCountry
+        .filter((l) => matchesLeaderboardScope(l, scope))
+        .sort((a, b) => {
+          const sa = calculateOverallScore(getEffectiveScores(a, userRatings));
+          const sb = calculateOverallScore(getEffectiveScores(b, userRatings));
+          if (sb !== sa) return sb - sa;
+          return getLeaderPopularityScore(b) - getLeaderPopularityScore(a);
+        });
+
+      map[hub.key] = {
+        topLeaders: scoped.slice(0, 3),
+        scopedCount: scoped.length,
+        famousCount,
+        lesserCount,
+        allCount: inCountry.length,
+      };
+    }
+
+    return map;
+  }, [allLeaders, scope, userRatings]);
+
+  // Base filtered list in focused Country view BEFORE scope split (so tab counts remain accurate)
+  const baseCountryLeaders = useMemo(() => {
+    if (!activeCountry) return [];
     return allLeaders.filter((leader) => {
-      if (activeCountry && leader.category !== activeCountry) {
-        return false;
-      }
+      if (leader.category !== activeCountry) return false;
 
       if (activeSubCategory !== 'all' && leader.subCategory !== activeSubCategory) {
         return false;
-      }
-
-      if (!activeCountry && selectedRegion !== 'all') {
-        const matchesRegionsArray = leader.regions?.includes(selectedRegion);
-        const matchesPrimaryRegion = leader.region === selectedRegion;
-        if (!matchesRegionsArray && !matchesPrimaryRegion) {
-          return false;
-        }
       }
 
       if (selectedEra !== 'all') {
@@ -722,47 +758,21 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
 
       return true;
     });
-  }, [allLeaders, activeCountry, activeSubCategory, selectedEra, selectedRegion, searchQuery]);
+  }, [allLeaders, activeCountry, activeSubCategory, selectedEra, searchQuery]);
 
-  const powerCounts = useMemo(() => {
-    let sovereign = 0;
-    let cabinet = 0;
-    let opposition = 0;
-    for (const l of baseFilteredLeaders) {
-      const auth = getLeaderAuthorityTier(l);
-      if (auth === 'sovereign') sovereign++;
-      else if (auth === 'cabinet') cabinet++;
-      else opposition++;
+  const scopeCounts = useMemo(() => {
+    let famous = 0;
+    let lesser = 0;
+    for (const l of baseCountryLeaders) {
+      if (matchesLeaderboardScope(l, 'famous-rulers')) famous++;
+      else if (matchesLeaderboardScope(l, 'lesser-known-rulers')) lesser++;
     }
-    return { all: baseFilteredLeaders.length, sovereign, cabinet, opposition };
-  }, [baseFilteredLeaders]);
-
-  const powerFilteredLeaders = useMemo(() => {
-    if (powerFilter === 'all') return baseFilteredLeaders;
-    return baseFilteredLeaders.filter((l) => getLeaderAuthorityTier(l) === powerFilter);
-  }, [baseFilteredLeaders, powerFilter]);
-
-  const popCounts = useMemo(() => {
-    const counts: Record<'all' | PopularityTier, number> = {
-      all: powerFilteredLeaders.length,
-      'global-icon': 0,
-      international: 0,
-      national: 0,
-      niche: 0,
-    };
-    for (const l of powerFilteredLeaders) {
-      counts[getLeaderPopularityTier(l)]++;
-    }
-    return counts;
-  }, [powerFilteredLeaders]);
-
-  const filteredLeaders = useMemo(() => {
-    if (popularityFilter === 'all') return powerFilteredLeaders;
-    return powerFilteredLeaders.filter((l) => getLeaderPopularityTier(l) === popularityFilter);
-  }, [powerFilteredLeaders, popularityFilter]);
+    return { famous, lesser, all: baseCountryLeaders.length };
+  }, [baseCountryLeaders]);
 
   const sortedLeaders = useMemo(() => {
-    return [...filteredLeaders].sort((a, b) => {
+    const scoped = baseCountryLeaders.filter((l) => matchesLeaderboardScope(l, scope));
+    return [...scoped].sort((a, b) => {
       const scoresA = getEffectiveScores(a, userRatings);
       const scoresB = getEffectiveScores(b, userRatings);
 
@@ -775,19 +785,13 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
         return (a.yearsActive || '').localeCompare(b.yearsActive || '');
       }
       if (sortBy === 'overall') {
-        return calculateOverallScore(scoresB) - calculateOverallScore(scoresA);
+        const diff = calculateOverallScore(scoresB) - calculateOverallScore(scoresA);
+        if (diff !== 0) return diff;
+        return getLeaderPopularityScore(b) - getLeaderPopularityScore(a);
       }
       return scoresB[sortBy] - scoresA[sortBy];
     });
-  }, [filteredLeaders, userRatings, sortBy]);
-
-  const hubCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const hub of COUNTRY_HUBS) {
-      counts[hub.key] = allLeaders.filter((l) => l.category === hub.key).length;
-    }
-    return counts;
-  }, [allLeaders]);
+  }, [baseCountryLeaders, scope, userRatings, sortBy]);
 
   const comparedIdSet = useMemo(
     () => new Set(comparedLeaders.map((c) => c.id)),
@@ -796,28 +800,79 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* MODE 1: COUNTRY DIRECTORY */}
+      {/* MODE 1: RANKINGS BY COUNTRY (PRIMARY DIRECTORY WITH FLAGS) */}
       {!activeCountry && (
         <div className="space-y-6">
-          {/* Clean Intro Header */}
+          {/* Clean Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-stone-800/70 pb-5">
             <div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-stone-100 tracking-tight">
-                Nations & Historical Figures
+                Rankings by Country
               </h1>
               <p className="text-sm text-stone-400 mt-1">
-                Filter by continent, nation, era, executive power, or global fame league to explore rankings.
+                Explore each nation’s ranked historical leaders with flags. Rulers are divided into Famous vs. Lesser-Known; non-rulers only appear in All (Everyone).
               </p>
             </div>
             <div className="text-xs text-stone-400 font-mono shrink-0">
-              {allLeaders.length} Figures · {COUNTRY_HUBS.length} Sections
+              {COUNTRY_HUBS.length} Countries & Eras · {allLeaders.length} Figures
             </div>
           </div>
 
-          {/* Clean Compact Filter Bar: Continent + Era */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
+          {/* Single Clean Control Bar: Scope + Continents + Country Search */}
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              {/* 3-Tab Scope Selector */}
+              <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900 rounded-xl border border-stone-800 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setScope('famous-rulers')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    scope === 'famous-rulers'
+                      ? 'bg-amber-500 text-stone-950 font-semibold'
+                      : 'text-stone-300 hover:text-amber-300'
+                  }`}
+                >
+                  ⭐ Famous Rulers
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScope('lesser-known-rulers')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    scope === 'lesser-known-rulers'
+                      ? 'bg-emerald-500 text-stone-950 font-semibold'
+                      : 'text-stone-300 hover:text-emerald-300'
+                  }`}
+                >
+                  🏛️ Lesser-Known Rulers
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScope('all')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    scope === 'all'
+                      ? 'bg-sky-500 text-stone-950 font-semibold'
+                      : 'text-stone-300 hover:text-sky-300'
+                  }`}
+                >
+                  🌐 All (Everyone)
+                </button>
+              </div>
+
+              {/* Filter Countries Input */}
+              <div className="relative w-full sm:w-64">
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Find country (USA, Turkey, France...)"
+                  className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500"
+                />
+              </div>
+            </div>
+
             {/* Continents */}
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
               <span className="text-xs text-stone-500 mr-1 shrink-0">Continent:</span>
               {CONTINENT_OPTIONS.map((reg) => (
                 <button
@@ -833,139 +888,96 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 </button>
               ))}
             </div>
-
-            {/* Era + Sort Selectors */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs text-stone-500 shrink-0">Era:</span>
-              <select
-                value={selectedEra}
-                onChange={(e) => setSelectedEra(e.target.value as EraKey)}
-                className="px-3 py-1.5 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
-              >
-                {ERAS.map((era) => (
-                  <option key={era.key} value={era.key}>
-                    {era.label}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-1.5 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
-              >
-                <option value="overall">Highest Overall Score</option>
-                <option value="popularity">Most Iconic (Global Fame)</option>
-                <option value="chronological">Chronological</option>
-                <option value="military">Military</option>
-                <option value="economy">Economy</option>
-                <option value="societal">Society & Law</option>
-                <option value="diplomacy">Diplomacy</option>
-                <option value="leadership">Leadership</option>
-              </select>
-            </div>
           </div>
 
-          {/* Power Role & Popularity League Separation Bars (Mode 1) */}
-          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-2.5 pt-1">
-            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
-              <button
-                type="button"
-                onClick={() => setPowerFilter('all')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'all'
-                    ? 'bg-amber-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-              >
-                All ({powerCounts.all})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('sovereign')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'sovereign'
-                    ? 'bg-emerald-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-emerald-300'
-                }`}
-              >
-                Heads of State & Rulers ({powerCounts.sovereign})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('cabinet')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'cabinet'
-                    ? 'bg-violet-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-violet-300'
-                }`}
-              >
-                Ministers & Commanders ({powerCounts.cabinet})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('opposition')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'opposition'
-                    ? 'bg-sky-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-sky-300'
-                }`}
-              >
-                Opposition & Thinkers ({powerCounts.opposition})
-              </button>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
-              <button
-                type="button"
-                onClick={() => setPopularityFilter('all')}
-                className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors ${
-                  popularityFilter === 'all'
-                    ? 'bg-stone-700 text-white font-semibold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-              >
-                All Fame Leagues ({popCounts.all})
-              </button>
-              {POPULARITY_LEAGUES.map((league) => (
-                <button
-                  key={league.key}
-                  type="button"
-                  onClick={() => setPopularityFilter(league.key)}
-                  title={league.description}
-                  className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors border ${
-                    popularityFilter === league.key
-                      ? `${league.bgClass} ${league.textClass} ${league.borderClass} font-semibold`
-                      : 'border-transparent text-stone-400 hover:text-stone-200'
-                  }`}
-                >
-                  {league.icon} {league.shortLabel} ({popCounts[league.key]})
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Compact Country Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
+          {/* Country Ranking Cards with Flags & Top 3 Preview */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {visibleHubs.map((hub) => {
-              const count = hubCounts[hub.key] || 0;
+              const data = countryDirectoryData[hub.key];
+              const top = data?.topLeaders || [];
+
               return (
                 <button
                   key={hub.key}
                   type="button"
                   onClick={() => handleSelectCountry(hub)}
-                  title={hub.subtitle}
-                  className="group text-left px-3.5 py-2.5 rounded-xl bg-stone-900/60 border border-stone-800/80 hover:border-amber-500/50 hover:bg-stone-900 transition-colors flex items-center justify-between gap-2"
+                  className="group text-left p-4 rounded-2xl bg-stone-900/70 border border-stone-800 hover:border-amber-500/60 hover:bg-stone-900 transition-all flex flex-col justify-between gap-3"
                 >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-lg shrink-0">{hub.flag}</span>
-                    <span className="text-xs font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
-                      {hub.shortName}
-                    </span>
+                  <div>
+                    {/* Flag & Country Title Row */}
+                    <div className="flex items-center justify-between gap-3 pb-3 border-b border-stone-800/80">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="text-3xl shrink-0" aria-hidden="true">{hub.flag}</span>
+                        <div className="min-w-0">
+                          <h2 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
+                            {hub.name}
+                          </h2>
+                          <span className="text-[11px] text-stone-400 block">
+                            {data?.famousCount || 0} Famous · {data?.lesserCount || 0} Lesser-Known
+                          </span>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-stone-500 group-hover:text-amber-400 shrink-0 transition-colors" />
+                    </div>
+
+                    {/* Top 3 Ranked Preview inside Card */}
+                    <div className="mt-3 space-y-1.5">
+                      {top.length === 0 ? (
+                        <div className="text-[11px] text-stone-500 italic py-2">
+                          0 figures in this filter — click to inspect national rulers
+                        </div>
+                      ) : (
+                        top.map((leader, idx) => {
+                          const score = calculateOverallScore(getEffectiveScores(leader, userRatings));
+                          const tier = getTierForScore(score);
+                          return (
+                            <div
+                              key={leader.id}
+                              className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-lg bg-stone-950/70 border border-stone-800/60 text-xs"
+                            >
+                              <div className="flex items-center gap-2 min-w-0">
+                                <span
+                                  className={`font-mono font-bold text-[11px] w-4 shrink-0 ${
+                                    idx === 0
+                                      ? 'text-amber-400'
+                                      : idx === 1
+                                      ? 'text-stone-300'
+                                      : 'text-amber-700'
+                                  }`}
+                                >
+                                  #{idx + 1}
+                                </span>
+                                <span className="text-sm shrink-0" aria-hidden="true">{leader.flag}</span>
+                                <span className="text-stone-200 font-medium truncate">
+                                  {leader.name}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0">
+                                <span
+                                  className="text-[10px] font-extrabold px-1.5 py-0.5 rounded border"
+                                  style={{
+                                    color: tier.color,
+                                    backgroundColor: tier.bgColor,
+                                    borderColor: tier.borderColor,
+                                  }}
+                                >
+                                  {tier.tier}
+                                </span>
+                                <span className="font-mono font-bold text-stone-200 tabular-nums w-6 text-right">
+                                  {score}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
                   </div>
-                  <span className="text-[11px] font-mono text-stone-500 group-hover:text-stone-300 shrink-0 tabular-nums">
-                    {count}
-                  </span>
+
+                  <div className="text-[11px] font-medium text-stone-400 group-hover:text-amber-400 transition-colors flex items-center justify-between pt-1">
+                    <span>Open Full Ranking</span>
+                    <span className="font-mono text-stone-500">{data?.scopedCount || 0} shown</span>
+                  </div>
                 </button>
               );
             })}
@@ -973,31 +985,24 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
         </div>
       )}
 
-      {/* MODE 2: FOCUSED COUNTRY VIEW */}
+      {/* MODE 2: FOCUSED COUNTRY RANKING VIEW */}
       {activeCountry && currentHub && (
         <div className="space-y-5">
-          {/* Top-left High-Contrast Back Button + Breadcrumb */}
+          {/* Top Back Button + Country Switcher with Flags */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={handleBackToPortals}
-                className="flex items-center gap-2 px-4 py-2.5 text-sm font-extrabold rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 shadow-lg shadow-amber-500/20 transition-colors shrink-0"
+                className="flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-extrabold rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 shadow-lg shadow-amber-500/20 transition-colors shrink-0"
               >
                 <ArrowLeft className="w-4 h-4 stroke-[2.75]" />
-                <span>Back · All Nations</span>
+                <span>All Countries</span>
               </button>
 
               <div className="hidden sm:flex items-center gap-2 text-xs text-stone-400">
-                <button
-                  type="button"
-                  onClick={handleBackToPortals}
-                  className="hover:text-amber-400 transition-colors"
-                >
-                  Nations
-                </button>
-                <span className="text-stone-600">/</span>
-                <span className="text-stone-200 font-medium">
+                <span>/</span>
+                <span className="text-stone-200 font-semibold">
                   {currentHub.flag} {currentHub.shortName}
                 </span>
               </div>
@@ -1013,22 +1018,21 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
             >
               {COUNTRY_HUBS.map((h) => (
                 <option key={h.key} value={h.key}>
-                  {h.flag} {h.shortName} ({hubCounts[h.key] || 0})
+                  {h.flag} {h.name} ({countryDirectoryData[h.key]?.allCount || 0})
                 </option>
               ))}
             </select>
           </div>
 
-          <div className="p-5 rounded-xl bg-stone-900/70 border border-stone-800">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">{currentHub.flag}</span>
-                <div>
-                  <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100">
-                    {currentHub.name}
-                  </h1>
-                  <p className="text-xs text-stone-400 mt-0.5">{currentHub.subtitle}</p>
-                </div>
+          {/* Country Flag Banner + Optional Subcategories */}
+          <div className="p-5 rounded-2xl bg-stone-900/80 border border-stone-800">
+            <div className="flex items-center gap-4">
+              <span className="text-4xl sm:text-5xl shrink-0" aria-hidden="true">{currentHub.flag}</span>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100">
+                  {currentHub.name} — Historical Ranking
+                </h1>
+                <p className="text-xs text-stone-400 mt-0.5">{currentHub.subtitle}</p>
               </div>
             </div>
 
@@ -1060,19 +1064,56 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
             )}
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="relative flex-1 min-w-[200px] max-w-sm">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={`Search within ${currentHub.shortName}...`}
-                className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500"
-              />
+          {/* Clean 3-Tab Scope Selector + Search/Era/Sort */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900 rounded-xl border border-stone-800 text-xs w-fit">
+              <button
+                type="button"
+                onClick={() => setScope('famous-rulers')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  scope === 'famous-rulers'
+                    ? 'bg-amber-500 text-stone-950 font-semibold'
+                    : 'text-stone-300 hover:text-amber-300'
+                }`}
+              >
+                ⭐ Famous Rulers ({scopeCounts.famous})
+              </button>
+              <button
+                type="button"
+                onClick={() => setScope('lesser-known-rulers')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  scope === 'lesser-known-rulers'
+                    ? 'bg-emerald-500 text-stone-950 font-semibold'
+                    : 'text-stone-300 hover:text-emerald-300'
+                }`}
+              >
+                🏛️ Lesser-Known Rulers ({scopeCounts.lesser})
+              </button>
+              <button
+                type="button"
+                onClick={() => setScope('all')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                  scope === 'all'
+                    ? 'bg-sky-500 text-stone-950 font-semibold'
+                    : 'text-stone-300 hover:text-sky-300'
+                }`}
+              >
+                🌐 All — Everyone ({scopeCounts.all})
+              </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <div className="relative min-w-[180px]">
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={`Search in ${currentHub.shortName}...`}
+                  className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-stone-200 placeholder:text-stone-500 focus:outline-none focus:border-amber-500"
+                />
+              </div>
+
               <select
                 value={selectedEra}
                 onChange={(e) => setSelectedEra(e.target.value as EraKey)}
@@ -1090,8 +1131,8 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="bg-stone-900 border border-stone-800 rounded-lg px-2.5 py-1.5 text-xs text-stone-300 focus:outline-none"
               >
-                <option value="overall">Overall Score</option>
-                <option value="popularity">Most Iconic (Global Fame)</option>
+                <option value="overall">Highest Score</option>
+                <option value="popularity">Most Famous</option>
                 <option value="chronological">Chronological</option>
                 <option value="military">Military</option>
                 <option value="economy">Economy</option>
@@ -1102,142 +1143,63 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
             </div>
           </div>
 
-          {/* Power Role & Popularity League Separation Bars (Mode 2 - Focused Country) */}
-          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-2.5">
-            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
-              <button
-                type="button"
-                onClick={() => setPowerFilter('all')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'all'
-                    ? 'bg-amber-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-              >
-                All ({powerCounts.all})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('sovereign')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'sovereign'
-                    ? 'bg-emerald-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-emerald-300'
-                }`}
-              >
-                Heads of State & Rulers ({powerCounts.sovereign})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('cabinet')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'cabinet'
-                    ? 'bg-violet-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-violet-300'
-                }`}
-              >
-                Ministers & Commanders ({powerCounts.cabinet})
-              </button>
-              <button
-                type="button"
-                onClick={() => setPowerFilter('opposition')}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  powerFilter === 'opposition'
-                    ? 'bg-sky-500 text-stone-950 font-semibold'
-                    : 'text-stone-400 hover:text-sky-300'
-                }`}
-              >
-                Opposition & Thinkers ({powerCounts.opposition})
-              </button>
+          {/* Country Ranked Leader Cards */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between text-xs text-stone-400">
+              <span>
+                Showing <strong className="text-stone-200">{sortedLeaders.length}</strong> ranked figures in {currentHub.flag} {currentHub.name}
+              </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-900/90 rounded-xl border border-stone-800 text-xs w-fit">
+            {sortedLeaders.length === 0 ? (
+              <div className="p-12 text-center rounded-xl bg-stone-900/40 border border-stone-800 text-stone-400 space-y-3">
+                <Filter className="w-7 h-7 text-stone-600 mx-auto" />
+                <p className="text-sm">No figures in this category/filter.</p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedEra('all');
+                    setActiveSubCategory('all');
+                    setScope('all');
+                  }}
+                  className="px-3 py-1.5 text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-lg transition-colors"
+                >
+                  Show Everyone in {currentHub.shortName}
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {sortedLeaders.map((leader, idx) => (
+                  <div key={leader.id} className="relative">
+                    <div className="absolute -top-2 -left-2 z-10 px-2 py-0.5 rounded-md bg-stone-950 border border-stone-700 font-mono text-[11px] font-extrabold text-amber-400 shadow">
+                      #{idx + 1}
+                    </div>
+                    <LeaderCard
+                      leader={leader}
+                      userRating={userRatings[leader.id]}
+                      isCompared={comparedIdSet.has(leader.id)}
+                      onToggleCompare={onToggleCompare}
+                      onSelect={onSelectLeader}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="pt-4 flex justify-center">
               <button
                 type="button"
-                onClick={() => setPopularityFilter('all')}
-                className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors ${
-                  popularityFilter === 'all'
-                    ? 'bg-stone-700 text-white font-semibold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
+                onClick={handleBackToPortals}
+                className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-amber-500/50 transition-colors"
               >
-                All Fame Leagues ({popCounts.all})
+                <ArrowLeft className="w-4 h-4 text-amber-400" />
+                <span>Back to All Countries</span>
               </button>
-              {POPULARITY_LEAGUES.map((league) => (
-                <button
-                  key={league.key}
-                  type="button"
-                  onClick={() => setPopularityFilter(league.key)}
-                  title={league.description}
-                  className={`px-2.5 py-1.5 rounded-lg font-medium transition-colors border ${
-                    popularityFilter === league.key
-                      ? `${league.bgClass} ${league.textClass} ${league.borderClass} font-semibold`
-                      : 'border-transparent text-stone-400 hover:text-stone-200'
-                  }`}
-                >
-                  {league.icon} {league.shortLabel} ({popCounts[league.key]})
-                </button>
-              ))}
             </div>
           </div>
         </div>
       )}
-
-      {/* LEADER LISTING */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs text-stone-400">
-          <span>
-            Showing <strong className="text-stone-200">{sortedLeaders.length}</strong> Figures
-            {activeCountry && currentHub ? ` · ${currentHub.name}` : ''}
-          </span>
-        </div>
-
-        {sortedLeaders.length === 0 ? (
-          <div className="p-12 text-center rounded-xl bg-stone-900/40 border border-stone-800 text-stone-400 space-y-3">
-            <Filter className="w-7 h-7 text-stone-600 mx-auto" />
-            <p className="text-sm">No figures match the selected filters.</p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedEra('all');
-                setActiveSubCategory('all');
-                setSelectedRegion('all');
-                setPowerFilter('all');
-                setPopularityFilter('all');
-              }}
-              className="px-3 py-1.5 text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-lg transition-colors"
-            >
-              Reset Filters
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sortedLeaders.map((leader) => (
-              <LeaderCard
-                key={leader.id}
-                leader={leader}
-                userRating={userRatings[leader.id]}
-                isCompared={comparedIdSet.has(leader.id)}
-                onToggleCompare={onToggleCompare}
-                onSelect={onSelectLeader}
-              />
-            ))}
-          </div>
-        )}
-
-        {activeCountry && (
-          <div className="pt-4 flex justify-center">
-            <button
-              type="button"
-              onClick={handleBackToPortals}
-              className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-amber-500/50 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 text-amber-400" />
-              <span>Back to All Nations</span>
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 };
+

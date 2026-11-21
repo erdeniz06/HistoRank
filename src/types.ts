@@ -162,6 +162,8 @@ export type PopularityTier = 'global-icon' | 'international' | 'national' | 'nic
 
 export type AuthorityTier = 'sovereign' | 'cabinet' | 'opposition';
 
+export type LeaderboardScope = 'famous-rulers' | 'lesser-known-rulers' | 'all';
+
 export interface Leader {
   id: string;
   name: string;

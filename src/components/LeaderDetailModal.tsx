@@ -3,15 +3,15 @@ import { Leader, LeaderScores, UserRating } from '../types';
 import { DIMENSIONS } from '../data/leaders';
 import {
   calculateOverallScore,
-  getAuthorityTierLabel,
   getEffectiveScores,
-  getLeaderAuthorityTier,
   getLeaderPopularityScore,
   getLeaderPopularityTier,
   getLeaderTierSubtitle,
   getPopularityLeagueInfo,
+  getSimpleStatusLabel,
   getTierForScore,
-  isGiantLeader,
+  hasLeaderGoverned,
+  isFamousRuler,
 } from '../utils/scoring';
 import { RadarChart } from './RadarChart';
 import {
@@ -224,38 +224,23 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
                 </p>
                 <span className="text-stone-600" aria-hidden="true">·</span>
                 {(() => {
-                  const authorityTier = getLeaderAuthorityTier(leader);
+                  const governed = hasLeaderGoverned(leader);
+                  const famous = isFamousRuler(leader);
                   return (
                     <span
                       className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
-                        authorityTier === 'sovereign'
-                          ? 'text-emerald-400'
-                          : authorityTier === 'cabinet'
-                          ? 'text-violet-400'
-                          : 'text-sky-400'
+                        !governed ? 'text-sky-400' : famous ? 'text-amber-400' : 'text-emerald-400'
                       }`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${
-                          authorityTier === 'sovereign'
-                            ? 'bg-emerald-400'
-                            : authorityTier === 'cabinet'
-                            ? 'bg-violet-400'
-                            : 'bg-sky-400'
+                          !governed ? 'bg-sky-400' : famous ? 'bg-amber-400' : 'bg-emerald-400'
                         }`}
                       />
-                      {getAuthorityTierLabel(leader)}
+                      {getSimpleStatusLabel(leader)}
                     </span>
                   );
                 })()}
-                {isGiantLeader(leader.id) && (
-                  <>
-                    <span className="text-stone-600" aria-hidden="true">·</span>
-                    <span className="text-xs font-semibold text-amber-400">
-                      ★ League of Giants
-                    </span>
-                  </>
-                )}
               </div>
               <p className="text-sm text-stone-300 leading-relaxed max-w-2xl">
                 {leader.summary}
