@@ -3,7 +3,7 @@ import { ArrowLeft, Plus, Search, X } from 'lucide-react';
 import { Leader, UserRating } from '../types';
 import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
 
-export type NavTab = 'portals' | 'giants' | 'compare' | 'tierlist';
+export type NavTab = 'portals' | 'global' | 'tierlist' | 'giants' | 'compare';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -215,6 +215,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             By Country
+          </button>
+
+          <button
+            onClick={() => onSelectTab('global')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
+              activeTab === 'global'
+                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            Global Rankings
           </button>
 
           <button

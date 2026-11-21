@@ -15,6 +15,7 @@ import { TierListView } from './components/TierListView';
 import { AddLeaderModal } from './components/AddLeaderModal';
 import { GiantsView } from './components/GiantsView';
 import { CountryPortalView } from './components/CountryPortalView';
+import { GlobalRankingsView } from './components/GlobalRankingsView';
 import { AudioPlayerBar } from './components/AudioPlayerBar';
 import { culturalAudio, CultureKey } from './audio/culturalAudioEngine';
 import { Swords } from 'lucide-react';
@@ -203,6 +204,20 @@ export default function App() {
             onSelectCulture={handleSelectCulture}
             activeCountry={activeCountry}
             onChangeCountry={handleChangeCountry}
+            onOpenGlobalRankings={() => {
+              setActiveTab('global');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
+        {activeTab === 'global' && (
+          <GlobalRankingsView
+            leaders={leaders}
+            userRatings={userRatings}
+            comparedLeaders={comparedLeaders}
+            onToggleCompare={handleToggleCompare}
+            onSelectLeader={handleSelectLeaderWithCulture}
           />
         )}
 

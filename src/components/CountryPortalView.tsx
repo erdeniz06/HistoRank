@@ -21,6 +21,7 @@ interface CountryPortalViewProps {
   onSelectCulture: (culture: CultureKey) => void;
   activeCountry?: string | null;
   onChangeCountry?: (key: string | null) => void;
+  onOpenGlobalRankings?: () => void;
 }
 
 interface CountryHubDef {
@@ -616,6 +617,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   onSelectCulture,
   activeCountry: controlledCountry,
   onChangeCountry,
+  onOpenGlobalRankings,
 }) => {
   const [internalCountry, setInternalCountry] = useState<string | null>(null);
   const activeCountry = controlledCountry !== undefined ? controlledCountry : internalCountry;
@@ -813,8 +815,19 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 Explore each nation’s ranked historical leaders with flags. Rulers are divided into Famous vs. Lesser-Known; non-rulers only appear in All (Everyone).
               </p>
             </div>
-            <div className="text-xs text-stone-400 font-mono shrink-0">
-              {COUNTRY_HUBS.length} Countries & Eras · {allLeaders.length} Figures
+            <div className="flex items-center gap-3 shrink-0">
+              {onOpenGlobalRankings && (
+                <button
+                  type="button"
+                  onClick={onOpenGlobalRankings}
+                  className="px-3.5 py-2 text-xs font-bold rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/35 transition-colors"
+                >
+                  🌍 World Overall Rankings →
+                </button>
+              )}
+              <span className="text-xs text-stone-400 font-mono">
+                {COUNTRY_HUBS.length} Sections · {allLeaders.length} Figures
+              </span>
             </div>
           </div>
 
