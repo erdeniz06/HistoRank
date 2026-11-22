@@ -16,6 +16,7 @@ import {
   getTierForScore,
 } from '../utils/scoring';
 import { RadarChart, RadarDataset } from './RadarChart';
+import { FlagIcon } from './FlagIcon';
 import {
   Flame,
   Swords,
@@ -311,16 +312,29 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </div>
 
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-amber-500/40 shrink-0 flex items-center justify-center text-2xl">
-                {fighter1.flag}
+              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-amber-500/40 shrink-0 flex items-center justify-center">
+                <FlagIcon
+                  flag={fighter1.flag}
+                  countryCode={fighter1.countryCode}
+                  category={fighter1.category}
+                  size="lg"
+                  title={fighter1.country}
+                />
               </div>
 
               <div className="min-w-0">
                 <h3 className="text-base font-bold text-stone-100 truncate">
                   {fighter1.name}
                 </h3>
-                <p className="text-xs text-stone-400 line-clamp-1">
-                  {fighter1.country} · {fighter1.century}
+                <p className="text-xs text-stone-400 flex items-center gap-1.5 truncate mt-0.5">
+                  <FlagIcon
+                    flag={fighter1.flag}
+                    countryCode={fighter1.countryCode}
+                    category={fighter1.category}
+                    size="xs"
+                    title={fighter1.country}
+                  />
+                  <span className="truncate">{fighter1.country} · {fighter1.century}</span>
                 </p>
                 <div className="flex items-center flex-wrap gap-2 mt-1.5">
                   <span className="text-2xl font-mono font-extrabold text-amber-400 tabular-nums">
@@ -401,16 +415,29 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </div>
 
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-cyan-500/40 shrink-0 flex items-center justify-center text-2xl">
-                {fighter2.flag}
+              <div className="w-12 h-12 rounded-xl bg-stone-900 border border-cyan-500/40 shrink-0 flex items-center justify-center">
+                <FlagIcon
+                  flag={fighter2.flag}
+                  countryCode={fighter2.countryCode}
+                  category={fighter2.category}
+                  size="lg"
+                  title={fighter2.country}
+                />
               </div>
 
               <div className="min-w-0">
                 <h3 className="text-base font-bold text-stone-100 truncate">
                   {fighter2.name}
                 </h3>
-                <p className="text-xs text-stone-400 line-clamp-1">
-                  {fighter2.country} · {fighter2.century}
+                <p className="text-xs text-stone-400 flex items-center gap-1.5 truncate mt-0.5">
+                  <FlagIcon
+                    flag={fighter2.flag}
+                    countryCode={fighter2.countryCode}
+                    category={fighter2.category}
+                    size="xs"
+                    title={fighter2.country}
+                  />
+                  <span className="truncate">{fighter2.country} · {fighter2.century}</span>
                 </p>
                 <div className="flex items-center flex-wrap gap-2 mt-1.5">
                   <span className="text-2xl font-mono font-extrabold text-cyan-400 tabular-nums">
@@ -523,18 +550,25 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
-            <select
-              value={countryFilter}
-              onChange={(e) => setCountryFilter(e.target.value)}
-              className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
-            >
-              <option value="all">🌐 All Countries</option>
-              {giantCountries.map((c) => (
-                <option key={c.key} value={c.key}>
-                  {c.flag} {c.label}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-2 bg-stone-950 border border-stone-800 rounded-lg pl-2.5 pr-1 py-1">
+              <FlagIcon
+                flag={countryFilter === 'all' ? '🌐' : giantCountries.find((c) => c.key === countryFilter)?.flag}
+                category={countryFilter}
+                size="sm"
+              />
+              <select
+                value={countryFilter}
+                onChange={(e) => setCountryFilter(e.target.value)}
+                className="px-1.5 py-0.5 text-xs bg-stone-950 text-stone-200 focus:outline-none"
+              >
+                <option value="all">🌐 All Countries</option>
+                {giantCountries.map((c) => (
+                  <option key={c.key} value={c.key}>
+                    {c.flag} {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             <div className="flex flex-wrap items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
               {[
@@ -594,8 +628,15 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                       >
                         #{index + 1}
                       </span>
-                      <span className="font-medium text-stone-400">
-                        {leader.country} · {leader.century}
+                      <span className="font-medium text-stone-300 inline-flex items-center gap-1.5">
+                        <FlagIcon
+                          flag={leader.flag}
+                          countryCode={leader.countryCode}
+                          category={leader.category}
+                          size="xs"
+                          title={leader.country}
+                        />
+                        <span>{leader.country} · {leader.century}</span>
                       </span>
                     </div>
 
@@ -621,9 +662,15 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                   <div className="flex items-start gap-3 mb-3">
                     <div
                       onClick={() => onSelectLeader(leader)}
-                      className="w-11 h-11 rounded-xl bg-stone-950 border border-stone-800 shrink-0 cursor-pointer flex items-center justify-center text-2xl hover:border-amber-500/50 transition-colors"
+                      className="w-11 h-11 rounded-xl bg-stone-950 border border-stone-800 shrink-0 cursor-pointer flex items-center justify-center hover:border-amber-500/50 transition-colors"
                     >
-                      {leader.flag}
+                      <FlagIcon
+                        flag={leader.flag}
+                        countryCode={leader.countryCode}
+                        category={leader.category}
+                        size="lg"
+                        title={leader.country}
+                      />
                     </div>
 
                     <div className="flex-1 min-w-0">
@@ -770,8 +817,15 @@ export const GiantsView: React.FC<GiantsViewProps> = ({
                 <span className="text-xs text-amber-500 font-semibold uppercase tracking-wider block">
                   Live Rating Entry
                 </span>
-                <h3 className="text-xl font-serif font-bold text-stone-100">
-                  {votingLeader.name}
+                <h3 className="text-xl font-serif font-bold text-stone-100 flex items-center gap-2.5 mt-0.5">
+                  <FlagIcon
+                    flag={votingLeader.flag}
+                    countryCode={votingLeader.countryCode}
+                    category={votingLeader.category}
+                    size="md"
+                    title={votingLeader.country}
+                  />
+                  <span>{votingLeader.name}</span>
                 </h3>
               </div>
               <button

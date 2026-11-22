@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { culturalAudio, CULTURES, CultureKey } from '../audio/culturalAudioEngine';
+import { FlagIcon } from './FlagIcon';
 import {
   Volume2,
   VolumeX,
@@ -89,7 +90,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           </button>
 
           <div className="flex items-center gap-2 min-w-0">
-            <span className="text-sm shrink-0">{activeProfile.flag}</span>
+            <FlagIcon flag={activeProfile.flag} size="sm" title={activeProfile.name} />
             <span className="text-stone-200 font-medium truncate">
               {isPlaying ? currentTrack.title : activeProfile.name}
             </span>
@@ -127,7 +128,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                         : 'text-stone-300 hover:bg-stone-800'
                     }`}
                   >
-                    <span>{c.flag}</span>
+                    <FlagIcon flag={c.flag} size="xs" title={c.name} />
                     <span className="truncate">{c.name}</span>
                   </button>
                 ))}

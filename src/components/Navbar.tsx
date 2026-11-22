@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ArrowLeft, Plus, Search, X } from 'lucide-react';
 import { Leader, UserRating } from '../types';
 import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
+import { FlagIcon } from './FlagIcon';
 
-export type NavTab = 'portals' | 'global' | 'tierlist' | 'giants' | 'compare';
+export type NavTab = 'global' | 'portals' | 'tierlist' | 'giants' | 'compare';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -100,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           )}
           <button
-            onClick={() => onSelectTab('portals')}
+            onClick={() => onSelectTab('global')}
             className="flex items-center gap-2 text-left whitespace-nowrap shrink-0 group focus:outline-none"
           >
             <span className="font-cinzel text-lg sm:text-xl font-extrabold tracking-widest text-stone-100 group-hover:text-amber-400 transition-colors">
@@ -167,7 +168,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                         className="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 text-left hover:bg-stone-800/80 transition-colors"
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="text-lg shrink-0">{leader.flag}</span>
+                          <FlagIcon
+                            flag={leader.flag}
+                            countryCode={leader.countryCode}
+                            category={leader.category}
+                            size="md"
+                            title={leader.country}
+                          />
                           <div className="min-w-0">
                             <div className="text-xs font-semibold text-stone-100 truncate">
                               {leader.name}
@@ -204,19 +211,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </div>
 
-        {/* Clean 4-Tab Nav */}
+        {/* Clean 5-Tab Nav — Global Rankings First */}
         <nav className="flex items-center gap-4 sm:gap-5 text-xs sm:text-sm font-medium overflow-x-auto no-scrollbar py-1 order-2 md:order-3">
-          <button
-            onClick={() => onSelectTab('portals')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
-              activeTab === 'portals'
-                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
-          >
-            By Country
-          </button>
-
           <button
             onClick={() => onSelectTab('global')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
@@ -226,6 +222,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Global Rankings
+          </button>
+
+          <button
+            onClick={() => onSelectTab('portals')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 ${
+              activeTab === 'portals'
+                ? 'text-amber-400 font-semibold border-b-2 border-amber-500'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            By Country
           </button>
 
           <button

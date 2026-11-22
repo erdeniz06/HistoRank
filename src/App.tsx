@@ -21,7 +21,9 @@ import { culturalAudio, CultureKey } from './audio/culturalAudioEngine';
 import { Swords } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<NavTab>('portals');
+  const [activeTab, setActiveTab] = useState<NavTab>(() =>
+    window.location.hash.startsWith('#country=') ? 'portals' : 'global'
+  );
   const [activeCountry, setActiveCountry] = useState<string | null>(() => {
     const match = window.location.hash.match(/^#country=([a-z0-9-]+)$/);
     return match ? match[1] : null;
@@ -31,7 +33,12 @@ export default function App() {
   useEffect(() => {
     const onPopState = () => {
       const match = window.location.hash.match(/^#country=([a-z0-9-]+)$/);
-      setActiveCountry(match ? match[1] : null);
+      if (match) {
+        setActiveCountry(match[1]);
+        setActiveTab('portals');
+      } else {
+        setActiveCountry(null);
+      }
     };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
@@ -48,6 +55,9 @@ export default function App() {
   const handleSelectNavTab = (tab: NavTab) => {
     if (tab === 'portals' && activeCountry !== null) {
       handleChangeCountry(null);
+    } else if (tab !== 'portals' && window.location.hash.startsWith('#country=')) {
+      window.history.pushState({}, '', `#${tab}`);
+      setActiveCountry(null);
     }
     setActiveTab(tab);
   };
@@ -194,6 +204,16 @@ export default function App() {
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        {activeTab === 'global' && (
+          <GlobalRankingsView
+            leaders={leaders}
+            userRatings={userRatings}
+            comparedLeaders={comparedLeaders}
+            onToggleCompare={handleToggleCompare}
+            onSelectLeader={handleSelectLeaderWithCulture}
+          />
+        )}
+
         {activeTab === 'portals' && (
           <CountryPortalView
             allLeaders={leaders}
@@ -208,16 +228,6 @@ export default function App() {
               setActiveTab('global');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-          />
-        )}
-
-        {activeTab === 'global' && (
-          <GlobalRankingsView
-            leaders={leaders}
-            userRatings={userRatings}
-            comparedLeaders={comparedLeaders}
-            onToggleCompare={handleToggleCompare}
-            onSelectLeader={handleSelectLeaderWithCulture}
           />
         )}
 

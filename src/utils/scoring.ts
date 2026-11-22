@@ -350,6 +350,19 @@ export const CABINET_OR_COMMANDER_IDS = new Set<string>([
   'mostafa-chamran',
   'halid-bin-velid',
   'tarik-bin-ziyad',
+  // Western Classical, Early Modern & WWII Field Generals, Marshals & Chief Diplomats
+  'william-wallace',
+  'hannibal-barca',
+  'belisarius',
+  'duke-of-marlborough',
+  'charles-maurice-de-talleyrand',
+  'klemens-von-metternich',
+  'helmuth-von-moltke',
+  'robert-e-lee',
+  'william-tecumseh-sherman',
+  'george-patton',
+  'bernard-montgomery',
+  'erwin-rommel',
 ]);
 
 export function getLeaderAuthorityTier(leader: Leader): AuthorityTier {

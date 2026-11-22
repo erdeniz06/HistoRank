@@ -14,6 +14,34 @@ import { Leader } from '../types';
  */
 export const IRAN_MODERN_LEADERS: Leader[] = [
   {
+    id: 'hasan-sabbah',
+    name: 'Hasan-i Sabbah',
+    originalName: 'Ḥasan-i Ṣabbāḥ (حسن صباح)',
+    title: 'Nizari İsmaili Devleti Kurucusu & Alamut Kalesi Lideri ("Dağın Şeyhi") (1090 – 1124)',
+    country: 'İran (Alamut Devleti)',
+    countryCode: 'IR',
+    flag: '🇮🇷',
+    century: '11. - 12. yy',
+    era: 'medieval',
+    yearsActive: '1090 – 1124',
+    category: 'iran',
+    subCategory: 'me-leader',
+    region: 'asia',
+    defaultScores: { military: 86, economy: 72, societal: 74, diplomacy: 79, leadership: 91, legacy: 88 },
+    summary: 'Büyük Selçuklu İmparatorluğu’na karşı Elburz Dağları’ndaki Alamut Kalesi merkezli Nizari İsmaili Devleti’ni kuran stratejist ve devlet adamı. Düzenli ordular yerine fedai suikast ağını, istihbaratı ve aşılmaz dağ kalelerini kullanarak dönemin süper güçlerini dengelemiştir.',
+    keyAchievements: [
+      '1090’da Alamut Kalesi’ni kansız biçimde ele geçirip Selçuklu kuşatmalarına 34 yıl direnen özerk bir kale-devlet ağı kurması',
+      'Asimetrik savaş, istihbarat teşkilatı ve hedefli siyasi suikast doktrinini devlet stratejisine dönüştürmesi',
+      'Alamut’ta dönemin ünlü astronomi ve felsefe kütüphanesini toplayıp uzun vadeli kuşatmalar için tahıl ve su altyapısı kurması',
+    ],
+    controversies: [
+      'Büyük Selçuklu Başveziri Nizamülmülk başta olmak üzere pek çok sultan, komutan ve kadıya yönelik suikast emirleri vermesi',
+      'Devlet içindeki katı disiplin uğruna kendi iki oğlunu dahi farklı gerekçelerle idam ettirmesi',
+      'Avrupa ve İslam dünyasında "Haşhaşiler / Assassins" adıyla anılan gizli terör ve korku düzeninin kurucusu olması',
+    ],
+    famousQuote: 'İnançlı bir avuç insanın iradesi, yüz bin kişilik orduların kılıcından daha keskindir.',
+  },
+  {
     id: 'amir-kabir',
     name: 'Emir Kebir (Mirza Taki Han)',
     originalName: 'Amīr Kabīr (امیرکبیر)',

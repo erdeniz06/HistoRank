@@ -681,4 +681,23 @@ export const EN_PART_07: Record<string, LeaderEnTranslation> = {
       'Secured the "Asiento" slave-trade monopoly to Spanish colonies under the Treaty of Utrecht, deepening imperial complicity in slavery',
     ],
   },
+  'hasan-sabbah': {
+    name: 'Hasan-i Sabbah',
+    title: 'Founder of the Nizari Ismaili State & Lord of Alamut ("Old Man of the Mountain") (1090 – 1124)',
+    country: 'Iran (Alamut State)',
+    century: '11th – 12th c.',
+    yearsActive: '1090 – 1124',
+    summary: 'Persian strategist and founder of the Nizari Ismaili State centered at Alamut Fortress in the Elburz Mountains. Rather than fielding mass armies against the Seljuk Empire, he pioneered asymmetric fortress warfare, intelligence networks, and targeted political deterrence for 34 unbroken years.',
+    keyAchievements: [
+      'Captured Alamut Fortress without bloodshed in 1090 and built an autonomous network of mountain strongholds that withstood decades of Seljuk sieges',
+      'Elevated asymmetric warfare, espionage, and targeted deterrence into a state doctrine capable of balancing regional superpowers',
+      'Assembled a renowned scholarly library at Alamut while engineering deep cisterns and granaries for multi-year siege self-sufficiency',
+    ],
+    controversies: [
+      'Ordered the assassinations of Seljuk Grand Vizier Nizam al-Mulk alongside numerous sultans, generals, and rival jurists',
+      'Enforced extreme ideological austerity, famously ordering the execution of both of his own sons for alleged violations of discipline',
+      'Became synonymous in Middle Eastern and European lore with the secretive "Assassins" (Hashashiyyin) order of political terror',
+    ],
+    famousQuote: 'The resolve of a handful of disciplined believers cuts sharper than an army of a hundred thousand swords.',
+  },
 };

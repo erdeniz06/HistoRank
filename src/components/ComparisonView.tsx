@@ -10,6 +10,7 @@ import {
   getTierForScore,
 } from '../utils/scoring';
 import { RadarChart, RadarDataset } from './RadarChart';
+import { FlagIcon } from './FlagIcon';
 import { Swords, X, Trophy, Plus, Sparkles } from 'lucide-react';
 
 interface ComparisonViewProps {
@@ -105,8 +106,15 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ backgroundColor: color.stroke }}
                 />
+                <FlagIcon
+                  flag={leader.flag}
+                  countryCode={leader.countryCode}
+                  category={leader.category}
+                  size="xs"
+                  title={leader.country}
+                />
                 <span className="font-semibold text-stone-200">{leader.name}</span>
-                <span className="text-stone-500">({leader.country})</span>
+                <span className="text-stone-400">({leader.country})</span>
                 <span className={`font-mono font-bold ${color.text}`}>
                   {overall}
                 </span>
@@ -223,6 +231,13 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                                   className="w-2 h-2 rounded-full"
                                   style={{ backgroundColor: color.stroke }}
                                 />
+                                <FlagIcon
+                                  flag={leader.flag}
+                                  countryCode={leader.countryCode}
+                                  category={leader.category}
+                                  size="xs"
+                                  title={leader.country}
+                                />
                                 {leader.name}
                                 {isLeaderInThisDim && (
                                   <Trophy className="w-3 h-3 text-amber-400 inline ml-1" />
@@ -293,8 +308,15 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                           <h5 className="font-semibold text-sm text-stone-200">
                             {leader.name}
                           </h5>
-                          <span className="text-[11px] text-stone-400 block">
-                            {leader.country}
+                          <span className="inline-flex items-center gap-1.5 text-[11px] text-stone-300 mt-0.5">
+                            <FlagIcon
+                              flag={leader.flag}
+                              countryCode={leader.countryCode}
+                              category={leader.category}
+                              size="xs"
+                              title={leader.country}
+                            />
+                            <span>{leader.country}</span>
                           </span>
                           <span className={`text-[10px] font-medium block mt-1 ${popLeague.textClass}`}>
                             {popLeague.icon} {popLeague.shortLabel} ({popScore})

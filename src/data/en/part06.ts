@@ -546,7 +546,7 @@ export const EN_PART_06: Record<string, LeaderEnTranslation> = {
     country: 'Burkina Faso',
     century: '20th c.',
     yearsActive: '1983 – 1987',
-    summary: 'Revolutionary leader who renamed Upper Volta to Burkina Faso ("Land of Upright People"). In four years he slashed corruption, sold off government luxury cars, vaccinated 2.5 million children, banned FGM, and achieved food self-sufficiency.',
+    summary: 'Revolutionary leader assassinated at age 37 who renamed Upper Volta to Burkina Faso ("Land of Upright People"). In four years he slashed corruption, sold off government luxury cars, vaccinated 2.5 million children, banned FGM, and achieved food self-sufficiency.',
     keyAchievements: [
       'Vaccinated 2.5 million children against meningitis, yellow fever, and measles in four years, sharply cutting infant mortality',
       'Planted 10 million trees to combat Sahel desertification and doubled grain output to end reliance on foreign food aid',
@@ -555,9 +555,28 @@ export const EN_PART_06: Record<string, LeaderEnTranslation> = {
     controversies: [
       'Governed via an unelected revolutionary military council that banned opposition parties and cracked down on striking teachers’ unions',
       'Tried former officials before Popular Revolutionary Tribunals (TPR) without standard legal defense',
-      'Assassinated in a 1987 coup led by his closest comrade, Blaise Compaoré',
+      'Assassinated at 37 in a 1987 coup led by his closest comrade, Blaise Compaoré',
     ],
     famousQuote: 'He who feeds you, controls you; we will consume what we produce.',
+  },
+  'ibrahim-traore': {
+    name: 'Ibrahim Traoré',
+    title: 'President of the Transition of Burkina Faso (2022 – Present)',
+    country: 'Burkina Faso',
+    century: '21st c.',
+    yearsActive: '2022 – Present',
+    summary: 'Burkinabé military officer who took office in 2022 at age 34 as the world’s youngest head of state. Terminated French military pacts, co-founded the Alliance of Sahel States (AES) with Mali and Niger, and pursued resource nationalism and Pan-Africanist self-reliance.',
+    keyAchievements: [
+      'Ended French military presence in Burkina Faso and redirected security and resource partnerships around national sovereignty',
+      'Co-founded the Alliance of Sahel States (AES) with Mali and Niger as a mutual defense and economic confederation',
+      'Expanded state control over gold mining and launched state-backed agricultural and industrial self-sufficiency drives',
+    ],
+    controversies: [
+      'Took power via a military coup, suspended constitutional rule, and extended the transitional period while postponing elections',
+      'Faced widespread criticism over suspension of critical media outlets and alleged forced conscription of political dissidents',
+      'Despite mass mobilization campaigns, ongoing jihadist insurgency continues to contest large portions of national territory',
+    ],
+    famousQuote: 'True independence begins when we take ownership of our own resources.',
   },
   'kwame-nkrumah': {
     name: 'Kwame Nkrumah',

@@ -14,6 +14,7 @@ import {
   isFamousRuler,
 } from '../utils/scoring';
 import { RadarChart } from './RadarChart';
+import { FlagIcon } from './FlagIcon';
 import {
   X,
   RotateCcw,
@@ -168,7 +169,13 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
         {/* Header Ribbon */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-800 bg-stone-950/70">
           <div className="flex items-center gap-2 text-xs text-stone-400">
-            <span className="text-lg">{leader.flag}</span>
+            <FlagIcon
+              flag={leader.flag}
+              countryCode={leader.countryCode}
+              category={leader.category}
+              size="sm"
+              title={leader.country}
+            />
             <span className="font-medium text-stone-200">{leader.country}</span>
             <span aria-hidden="true" className="text-stone-600">·</span>
             <span>{leader.century}</span>
@@ -203,8 +210,14 @@ export const LeaderDetailModal: React.FC<LeaderDetailModalProps> = ({
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           {/* Hero Profile Block */}
           <div className="flex flex-col sm:flex-row gap-5 items-start">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shrink-0 bg-stone-950 border border-stone-800 flex items-center justify-center text-4xl shadow-inner">
-              {leader.flag}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shrink-0 bg-stone-950 border border-stone-800 flex items-center justify-center shadow-inner">
+              <FlagIcon
+                flag={leader.flag}
+                countryCode={leader.countryCode}
+                category={leader.category}
+                size="xl"
+                title={leader.country}
+              />
             </div>
 
             <div className="flex-1 min-w-0">

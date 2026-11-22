@@ -13,6 +13,7 @@ import {
 } from '../utils/scoring';
 import { Check, LayoutGrid, ListOrdered, Plus, Search } from 'lucide-react';
 import { LeaderCard } from './LeaderCard';
+import { FlagIcon } from './FlagIcon';
 
 interface GlobalRankingsViewProps {
   leaders: Leader[];
@@ -345,7 +346,13 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                       {/* Flag + Name + Role */}
                       <td className="py-3 px-3">
                         <div className="flex items-center gap-3 min-w-0">
-                          <span className="text-2xl shrink-0" aria-hidden="true">{leader.flag}</span>
+                          <FlagIcon
+                            flag={leader.flag}
+                            countryCode={leader.countryCode}
+                            category={leader.category}
+                            size="lg"
+                            title={leader.country}
+                          />
                           <div className="min-w-0">
                             <div className="font-bold text-stone-100 group-hover:text-amber-400 transition-colors truncate max-w-[240px] sm:max-w-[300px]">
                               {leader.name}
@@ -353,7 +360,7 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                             <div className="text-[11px] text-stone-400 truncate max-w-[240px] sm:max-w-[320px]">
                               {leader.title}
                             </div>
-                            <div className="flex items-center gap-2 mt-0.5 text-[10px]">
+                            <div className="flex items-center flex-wrap gap-2 mt-0.5 text-[10px]">
                               <span
                                 className={
                                   !governed ? 'text-sky-400' : famous ? 'text-amber-400' : 'text-emerald-400'
@@ -361,16 +368,34 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                               >
                                 ● {getSimpleStatusLabel(leader)}
                               </span>
-                              <span className="sm:hidden text-stone-500">· {leader.country}</span>
+                              <span className="sm:hidden inline-flex items-center gap-1 text-stone-400">
+                                <span>·</span>
+                                <FlagIcon
+                                  flag={leader.flag}
+                                  countryCode={leader.countryCode}
+                                  category={leader.category}
+                                  size="xs"
+                                  title={leader.country}
+                                />
+                                <span>{leader.country}</span>
+                              </span>
                             </div>
                           </div>
                         </div>
                       </td>
 
                       {/* Country */}
-                      <td className="py-3 px-3 hidden sm:table-cell text-stone-300 whitespace-nowrap">
-                        <span className="mr-1.5">{leader.flag}</span>
-                        <span>{leader.country}</span>
+                      <td className="py-3 px-3 hidden sm:table-cell text-stone-200 whitespace-nowrap">
+                        <div className="inline-flex items-center gap-2">
+                          <FlagIcon
+                            flag={leader.flag}
+                            countryCode={leader.countryCode}
+                            category={leader.category}
+                            size="sm"
+                            title={leader.country}
+                          />
+                          <span>{leader.country}</span>
+                        </div>
                       </td>
 
                       {/* Century */}

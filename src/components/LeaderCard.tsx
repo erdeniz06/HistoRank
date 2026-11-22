@@ -12,6 +12,7 @@ import {
 } from '../utils/scoring';
 import { DIMENSIONS } from '../data/leaders';
 import { Check, Plus } from 'lucide-react';
+import { FlagIcon } from './FlagIcon';
 
 interface LeaderCardProps {
   leader: Leader;
@@ -46,8 +47,14 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
       <div>
         {/* Header Metadata */}
         <div className="flex items-center justify-between text-xs text-stone-400 mb-2.5">
-          <div className="flex items-center gap-1.5 min-w-0 truncate">
-            <span className="text-base shrink-0">{leader.flag}</span>
+          <div className="flex items-center gap-2 min-w-0 truncate">
+            <FlagIcon
+              flag={leader.flag}
+              countryCode={leader.countryCode}
+              category={leader.category}
+              size="sm"
+              title={leader.country}
+            />
             <span className="font-medium text-stone-300 truncate">{leader.country}</span>
             <span aria-hidden="true" className="text-stone-600">·</span>
             <span className="shrink-0">{leader.century}</span>

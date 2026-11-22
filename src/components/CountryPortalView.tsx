@@ -10,6 +10,7 @@ import {
 import { ERAS } from '../data/leaders';
 import { CultureKey } from '../audio/culturalAudioEngine';
 import { LeaderCard } from './LeaderCard';
+import { FlagIcon } from './FlagIcon';
 import { ArrowLeft, ChevronRight, Filter, Search } from 'lucide-react';
 
 interface CountryPortalViewProps {
@@ -43,11 +44,11 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇺🇸',
     culture: 'usa',
     regions: ['americas'],
-    subtitle: 'Washington, Lincoln, FDR, Kennedy, Kissinger, Marshall, Hillary Clinton, Colin Powell, Jerome Powell, McCain, Sanders, JD Vance, Rubio',
+    subtitle: 'Washington, Lincoln, FDR, Kennedy, Grant, Lee, Sherman, Patton, Eisenhower, Marshall, Kissinger, McCain, Sanders',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'us-president', label: 'US Presidents' },
-      { key: 'us-party', label: 'Cabinet, Congress, Judiciary, Governors & Opposition' },
+      { key: 'us-party', label: 'Cabinet, Generals, Judiciary, Governors & Opposition' },
     ],
   },
   {
@@ -57,7 +58,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇬🇧',
     culture: 'uk',
     regions: ['europe'],
-    subtitle: 'Monarchs, Churchill, Thatcher, Attlee, Chamberlain, Bevan, Bevin, Cook, Pankhurst, Wilberforce, Osborne, Starmer, Sunak, Farage',
+    subtitle: 'William Wallace, Robert the Bruce, Monarchs, Marlborough, Nelson, Wellington, Montgomery, Churchill, Thatcher, Attlee',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'uk-monarch', label: 'Kings, Queens & Commanders' },
@@ -72,12 +73,12 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇩🇪',
     culture: 'germany',
     regions: ['europe'],
-    subtitle: 'Frederick the Great, Bismarck, Adenauer, Brandt, Schmidt, Merkel, Schäuble, Genscher, Von der Leyen, Steinmeier, Weizsäcker, Cem Özdemir, Scholl',
+    subtitle: 'Frederick the Great, Metternich, Bismarck, Moltke, Adenauer, Rommel, Brandt, Schmidt, Merkel, Schäuble, Genscher',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'de-chancellor', label: 'Chancellors, Presidents & Monarchs' },
       { key: 'de-thinker', label: 'Marxists, SPD Pioneers, Resistance & Brecht' },
-      { key: 'de-party', label: 'Cabinet Ministers, State & Opposition Leaders' },
+      { key: 'de-party', label: 'Generals, Cabinet Ministers & Opposition Leaders' },
     ],
   },
   {
@@ -87,10 +88,10 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇫🇷',
     culture: 'france',
     regions: ['europe'],
-    subtitle: 'Clovis, Charlemagne, Joan of Arc, Louis XIV, Louis XVI, Marie Antoinette, Napoleon I/II/III, De Gaulle, Mitterrand, Macron, Le Pen',
+    subtitle: 'Charles Martel, Charlemagne, Joan of Arc, Louis XIV, Talleyrand, Napoleon I/III, De Gaulle, Mitterrand, Macron',
     subCategories: [
       { key: 'all', label: 'All' },
-      { key: 'fr-leader', label: 'Kings, Queens, Emperors & Presidents' },
+      { key: 'fr-leader', label: 'Kings, Commanders, Diplomats & Presidents' },
       { key: 'fr-party', label: 'Contemporary & Opposition Politicians' },
     ],
   },
@@ -193,10 +194,10 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🏛️',
     culture: 'ancient',
     regions: ['europe', 'asia', 'africa'],
-    subtitle: 'Caesar, Augustus, Trajan, Constantine, Theodosius I, Antoninus Pius, Aurelian, Heraclius, Alexander the Great',
+    subtitle: 'Caesar, Augustus, Hannibal Barca, Scipio Africanus, Belisarius, Trajan, Constantine, Justinian, Alexander the Great',
     subCategories: [
       { key: 'all', label: 'All' },
-      { key: 'ancient-rome', label: 'Rome & Eastern Rome' },
+      { key: 'ancient-rome', label: 'Rome, Carthage & Byzantium' },
       { key: 'ancient-greece', label: 'Greece & Macedonia' },
     ],
   },
@@ -372,10 +373,10 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇮🇷',
     culture: 'world',
     regions: ['asia'],
-    subtitle: 'Amir Kabir, Pahlavis, Mosaddegh, Khomeini, Khamenei, Soleimani, Bagheri, Salami, Hajizadeh, Zahedi, Shirazi, Chamran',
+    subtitle: 'Hasan-i Sabbah, Amir Kabir, Pahlavis, Mosaddegh, Khomeini, Khamenei, Soleimani, Bagheri, Salami, Hajizadeh, Zahedi, Shirazi, Chamran',
     subCategories: [
       { key: 'all', label: 'All' },
-      { key: 'me-leader', label: 'Shahs & Political Leaders' },
+      { key: 'me-leader', label: 'Rulers, Shahs & Political Leaders' },
       { key: 'ir-commander', label: 'Iranian Commanders' },
     ],
   },
@@ -440,7 +441,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇧🇫',
     culture: 'world',
     regions: ['africa'],
-    subtitle: 'Thomas Sankara',
+    subtitle: 'Thomas Sankara and Ibrahim Traoré',
     subCategories: [{ key: 'all', label: 'All' }],
   },
   {
@@ -920,7 +921,12 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                     {/* Flag & Country Title Row */}
                     <div className="flex items-center justify-between gap-3 pb-3 border-b border-stone-800/80">
                       <div className="flex items-center gap-3 min-w-0">
-                        <span className="text-3xl shrink-0" aria-hidden="true">{hub.flag}</span>
+                        <FlagIcon
+                          flag={hub.flag}
+                          category={hub.key}
+                          size="lg"
+                          title={hub.name}
+                        />
                         <div className="min-w-0">
                           <h2 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors truncate">
                             {hub.name}
@@ -960,7 +966,13 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                                 >
                                   #{idx + 1}
                                 </span>
-                                <span className="text-sm shrink-0" aria-hidden="true">{leader.flag}</span>
+                                <FlagIcon
+                                  flag={leader.flag}
+                                  countryCode={leader.countryCode}
+                                  category={leader.category}
+                                  size="xs"
+                                  title={leader.country}
+                                />
                                 <span className="text-stone-200 font-medium truncate">
                                   {leader.name}
                                 </span>
@@ -1015,32 +1027,53 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
 
               <div className="hidden sm:flex items-center gap-2 text-xs text-stone-400">
                 <span>/</span>
-                <span className="text-stone-200 font-semibold">
-                  {currentHub.flag} {currentHub.shortName}
+                <span className="inline-flex items-center gap-1.5 text-stone-200 font-semibold">
+                  <FlagIcon
+                    flag={currentHub.flag}
+                    category={currentHub.key}
+                    size="xs"
+                    title={currentHub.name}
+                  />
+                  <span>{currentHub.shortName}</span>
                 </span>
               </div>
             </div>
 
-            <select
-              value={activeCountry}
-              onChange={(e) => {
-                const target = COUNTRY_HUBS.find((h) => h.key === e.target.value);
-                if (target) handleSelectCountry(target);
-              }}
-              className="bg-stone-900 border border-stone-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:outline-none focus:border-amber-500"
-            >
-              {COUNTRY_HUBS.map((h) => (
-                <option key={h.key} value={h.key}>
-                  {h.flag} {h.name} ({countryDirectoryData[h.key]?.allCount || 0})
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-2">
+              <FlagIcon
+                flag={currentHub.flag}
+                category={currentHub.key}
+                size="sm"
+                title={currentHub.name}
+              />
+              <select
+                value={activeCountry}
+                onChange={(e) => {
+                  const target = COUNTRY_HUBS.find((h) => h.key === e.target.value);
+                  if (target) handleSelectCountry(target);
+                }}
+                className="bg-stone-900 border border-stone-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:outline-none focus:border-amber-500"
+              >
+                {COUNTRY_HUBS.map((h) => (
+                  <option key={h.key} value={h.key}>
+                    {h.flag} {h.name} ({countryDirectoryData[h.key]?.allCount || 0})
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Country Flag Banner + Optional Subcategories */}
           <div className="p-5 rounded-2xl bg-stone-900/80 border border-stone-800">
             <div className="flex items-center gap-4">
-              <span className="text-4xl sm:text-5xl shrink-0" aria-hidden="true">{currentHub.flag}</span>
+              <div className="w-14 h-11 rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center shrink-0">
+                <FlagIcon
+                  flag={currentHub.flag}
+                  category={currentHub.key}
+                  size="xl"
+                  title={currentHub.name}
+                />
+              </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100">
                   {currentHub.name} — Historical Ranking
@@ -1159,8 +1192,15 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
           {/* Country Ranked Leader Cards */}
           <div className="space-y-4">
             <div className="flex items-center justify-between text-xs text-stone-400">
-              <span>
-                Showing <strong className="text-stone-200">{sortedLeaders.length}</strong> ranked figures in {currentHub.flag} {currentHub.name}
+              <span className="inline-flex items-center gap-1.5 flex-wrap">
+                Showing <strong className="text-stone-200">{sortedLeaders.length}</strong> ranked figures in{' '}
+                <FlagIcon
+                  flag={currentHub.flag}
+                  category={currentHub.key}
+                  size="xs"
+                  title={currentHub.name}
+                />{' '}
+                <strong className="text-stone-200">{currentHub.name}</strong>
               </span>
             </div>
 

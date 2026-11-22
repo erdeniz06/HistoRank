@@ -10,6 +10,7 @@ import {
   getTierForScore,
   matchesLeaderboardScope,
 } from '../utils/scoring';
+import { FlagIcon } from './FlagIcon';
 
 interface TierListViewProps {
   leaders: Leader[];
@@ -48,6 +49,7 @@ const COUNTRY_OPTIONS = [
   { key: 'vietnam', label: '🇻🇳 Vietnam' },
   { key: 'north-korea', label: '🇰🇵 North Korea' },
   { key: 'south-africa', label: '🇿🇦 South Africa' },
+  { key: 'burkina-faso', label: '🇧🇫 Burkina Faso' },
   { key: 'azerbaijan', label: '🇦🇿 Azerbaijan' },
   { key: 'iraq', label: '🇮🇶 Iraq' },
   { key: 'syria', label: '🇸🇾 Syria' },
@@ -123,17 +125,25 @@ export const TierListView: React.FC<TierListViewProps> = ({
 
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Country Filter with Flags */}
-            <select
-              value={selectedCountry}
-              onChange={(e) => setSelectedCountry(e.target.value)}
-              className="px-3 py-1.5 text-xs bg-stone-950 border border-stone-800 rounded-lg text-stone-200 focus:outline-none focus:border-amber-500"
-            >
-              {COUNTRY_OPTIONS.map((c) => (
-                <option key={c.key} value={c.key}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-2 bg-stone-950 border border-stone-800 rounded-lg pl-2.5 pr-1 py-1">
+              <FlagIcon
+                flag={selectedCountry === 'all' ? '🌐' : undefined}
+                category={selectedCountry}
+                size="sm"
+                title={selectedCountry}
+              />
+              <select
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+                className="px-1.5 py-0.5 text-xs bg-stone-950 text-stone-200 focus:outline-none"
+              >
+                {COUNTRY_OPTIONS.map((c) => (
+                  <option key={c.key} value={c.key}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {/* Score Source Switch */}
             <div className="flex items-center gap-1 p-1 bg-stone-950 rounded-lg border border-stone-800 text-xs">
@@ -255,7 +265,13 @@ export const TierListView: React.FC<TierListViewProps> = ({
                           className="group flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 cursor-pointer transition-colors"
                           title={`${leader.name} — ${overall}/100 (${tierSubtitle}) · ${statusLabel}`}
                         >
-                          <span className="text-xl shrink-0" aria-hidden="true">{leader.flag}</span>
+                          <FlagIcon
+                            flag={leader.flag}
+                            countryCode={leader.countryCode}
+                            category={leader.category}
+                            size="md"
+                            title={leader.country}
+                          />
 
                           <div className="min-w-0 max-w-[160px]">
                             <h4 className="text-xs font-semibold text-stone-100 group-hover:text-amber-400 transition-colors truncate">

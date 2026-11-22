@@ -163,6 +163,9 @@ function ordinal(n: number): string {
 
 export function translateCenturyEn(c: string): string {
   const trimmed = c.trim();
+  if (/\bc\.(\s*(BCE|CE|AD))?$/i.test(trimmed)) {
+    return trimmed;
+  }
   const isBce = /(?:^|\s)MÖ(?=\s|$)/.test(trimmed);
   const isCe = /(?:^|\s)MS(?=\s|$)/.test(trimmed);
 
