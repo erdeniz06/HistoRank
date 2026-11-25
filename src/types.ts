@@ -82,6 +82,9 @@ export type LeaderCategory =
   | 'india'
   | 'brazil'
   | 'ukraine'
+  | 'turkmenistan'
+  | 'kyrgyzstan'
+  | 'kazakhstan'
   | 'ancient';
 
 export type GeographicRegion = 'all' | 'europe' | 'asia' | 'americas' | 'africa';
@@ -146,6 +149,7 @@ export type SubCategoryKey =
   | 'in-leader'
   | 'br-leader'
   | 'ua-leader'
+  | 'ca-leader'
   | 'ancient-rome'
   | 'ancient-greece';
 
@@ -224,6 +228,9 @@ export interface Leader {
     | 'india'
     | 'brazil'
     | 'ukraine'
+    | 'turkmenistan'
+    | 'kyrgyzstan'
+    | 'kazakhstan'
     | 'ancient'
     | 'custom';
   subCategory?: SubCategoryKey;

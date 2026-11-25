@@ -30,6 +30,7 @@ import { UK_DEEP_POLITICS } from './ukDeepPolitics';
 import { GERMANY_DEEP_POLITICS } from './germanyDeepPolitics';
 import { TURKISH_INDEPENDENCE_PASHAS } from './turkishIndependencePashas';
 import { WESTERN_GENERALS_AND_STATESMEN } from './westernGeneralsAndStatesmen';
+import { UKRAINE_AND_CENTRAL_ASIA_PRESIDENTS } from './ukraineAndCentralAsiaPresidents';
 import {
   LEADER_EN_TRANSLATIONS,
   COUNTRY_EN_MAP,
@@ -1485,6 +1486,7 @@ const RAW_INITIAL_LEADERS: Leader[] = [
   ...GERMANY_DEEP_POLITICS,
   ...TURKISH_INDEPENDENCE_PASHAS,
   ...WESTERN_GENERALS_AND_STATESMEN,
+  ...UKRAINE_AND_CENTRAL_ASIA_PRESIDENTS,
 ];
 
 export const INITIAL_LEADERS: Leader[] = RAW_INITIAL_LEADERS.map((leader) => {

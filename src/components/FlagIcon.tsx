@@ -2,8 +2,8 @@ import React from 'react';
 import {
   AL, AM, AR, AT, AU, AZ, BA, BE, BF, BG, BR, BW, CA, CH, CN, CU, CZ,
   DE, DK, EG, ES, FI, FR, GB, GE, GH, GR, HR, HU, ID, IE, IL, IN, IQ,
-  IR, IT, JP, KH, KP, KR, KZ, LY, MK, MN, MX, NL, NO, PK, PL, PS, PT,
-  RO, RS, RU, SA, SE, SG, SY, TH, TR, TZ, UA, US, UZ, VA, VN, ZA,
+  IR, IT, JP, KG, KH, KP, KR, KZ, LY, MK, MN, MX, NL, NO, PK, PL, PS, PT,
+  RO, RS, RU, SA, SE, SG, SY, TH, TM, TR, TZ, UA, US, UZ, VA, VN, ZA,
 } from 'country-flag-icons/react/3x2';
 
 type FlagComponent = React.ComponentType<{ className?: string; title?: string }>;
@@ -11,8 +11,8 @@ type FlagComponent = React.ComponentType<{ className?: string; title?: string }>
 const ISO_FLAG_MAP: Record<string, FlagComponent> = {
   AL, AM, AR, AT, AU, AZ, BA, BE, BF, BG, BR, BW, CA, CH, CN, CU, CZ,
   DE, DK, EG, ES, FI, FR, GB, GE, GH, GR, HR, HU, ID, IE, IL, IN, IQ,
-  IR, IT, JP, KH, KP, KR, KZ, LY, MK, MN, MX, NL, NO, PK, PL, PS, PT,
-  RO, RS, RU, SA, SE, SG, SY, TH, TR, TZ, UA, US, UZ, VA, VN, ZA,
+  IR, IT, JP, KG, KH, KP, KR, KZ, LY, MK, MN, MX, NL, NO, PK, PL, PS, PT,
+  RO, RS, RU, SA, SE, SG, SY, TH, TM, TR, TZ, UA, US, UZ, VA, VN, ZA,
 };
 
 const CATEGORY_TO_ISO: Record<string, string> = {
@@ -54,6 +54,9 @@ const CATEGORY_TO_ISO: Record<string, string> = {
   azerbaijan: 'AZ',
   armenia: 'AM',
   georgia: 'GE',
+  kazakhstan: 'KZ',
+  kyrgyzstan: 'KG',
+  turkmenistan: 'TM',
   greece: 'GR',
   serbia: 'RS',
   bosnia: 'BA',

@@ -170,6 +170,8 @@ export default function App() {
       handleSelectCulture('ancient');
     } else if (leader.category === 'mongolia' || leader.countryCode === 'MN') {
       handleSelectCulture('mongolia');
+    } else if (['kazakhstan', 'kyrgyzstan', 'turkmenistan'].includes(leader.category)) {
+      handleSelectCulture('turkic');
     } else {
       handleSelectCulture('world');
     }
