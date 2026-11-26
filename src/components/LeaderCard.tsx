@@ -14,10 +14,22 @@ import { DIMENSIONS } from '../data/leaders';
 import { Check, Plus } from 'lucide-react';
 import { FlagIcon } from './FlagIcon';
 
+export type LeaderCardSortKey =
+  | 'overall'
+  | 'popularity'
+  | 'chronological'
+  | 'military'
+  | 'economy'
+  | 'societal'
+  | 'diplomacy'
+  | 'leadership'
+  | 'legacy';
+
 interface LeaderCardProps {
   leader: Leader;
   userRating?: UserRating;
   isCompared: boolean;
+  activeSortKey?: LeaderCardSortKey;
   onToggleCompare: (leader: Leader) => void;
   onSelect: (leader: Leader) => void;
 }
@@ -26,6 +38,7 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   leader,
   userRating,
   isCompared,
+  activeSortKey = 'overall',
   onToggleCompare,
   onSelect,
 }) => {
@@ -38,6 +51,16 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
   const famous = isFamousRuler(leader);
   const statusLabel = getSimpleStatusLabel(leader);
   const popScore = getLeaderPopularityScore(leader);
+  const activeDim =
+    activeSortKey !== 'overall' && activeSortKey !== 'popularity' && activeSortKey !== 'chronological'
+      ? DIMENSIONS.find((d) => d.key === activeSortKey)
+      : undefined;
+  const focusedScore = activeDim
+    ? scores[activeDim.key]
+    : activeSortKey === 'popularity'
+    ? popScore
+    : overallScore;
+  const focusedTier = getTierForScore(focusedScore);
 
   return (
     <div
@@ -102,35 +125,63 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
           </div>
         </div>
 
-        {/* High-Visibility Tier & Overall Score Strip */}
+        {/* High-Visibility Tier & Active Score Strip */}
         <div
           className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl border mb-3"
           style={{
-            backgroundColor: tier.bgColor,
-            borderColor: tier.borderColor,
+            backgroundColor: activeDim || activeSortKey === 'popularity' ? focusedTier.bgColor : tier.bgColor,
+            borderColor: activeDim ? activeDim.color : activeSortKey === 'popularity' ? focusedTier.borderColor : tier.borderColor,
           }}
         >
           <div className="flex items-center gap-2 min-w-0">
-            <span
-              className="px-2 py-0.5 rounded-md text-xs font-extrabold tracking-wider uppercase shrink-0 bg-stone-950/70 border"
-              style={{
-                color: tier.color,
-                borderColor: tier.borderColor,
-              }}
-            >
-              {tier.tier} TIER
-            </span>
-            <span className="text-[11px] font-medium text-stone-200 truncate">
-              {tierSubtitle}
-            </span>
+            {activeDim ? (
+              <>
+                <span
+                  className="px-2 py-0.5 rounded-md text-[11px] font-extrabold tracking-wider uppercase shrink-0 bg-stone-950/80 border"
+                  style={{
+                    color: activeDim.color,
+                    borderColor: activeDim.color,
+                  }}
+                >
+                  {activeDim.shortLabel}
+                </span>
+                <span className="text-[11px] font-medium text-stone-300 truncate font-mono">
+                  Overall: {overallScore} ({tier.tier})
+                </span>
+              </>
+            ) : activeSortKey === 'popularity' ? (
+              <>
+                <span className="px-2 py-0.5 rounded-md text-[11px] font-extrabold tracking-wider uppercase shrink-0 bg-stone-950/80 border border-amber-500/50 text-amber-300">
+                  Fame
+                </span>
+                <span className="text-[11px] font-medium text-stone-300 truncate font-mono">
+                  Overall: {overallScore} ({tier.tier})
+                </span>
+              </>
+            ) : (
+              <>
+                <span
+                  className="px-2 py-0.5 rounded-md text-xs font-extrabold tracking-wider uppercase shrink-0 bg-stone-950/70 border"
+                  style={{
+                    color: tier.color,
+                    borderColor: tier.borderColor,
+                  }}
+                >
+                  {tier.tier} TIER
+                </span>
+                <span className="text-[11px] font-medium text-stone-200 truncate">
+                  {tierSubtitle}
+                </span>
+              </>
+            )}
           </div>
 
           <div className="flex items-baseline gap-0.5 shrink-0">
             <span
               className="text-2xl font-mono font-black tabular-nums leading-none"
-              style={{ color: tier.color }}
+              style={{ color: activeDim ? activeDim.color : activeSortKey === 'popularity' ? '#f59e0b' : tier.color }}
             >
-              {overallScore}
+              {focusedScore}
             </span>
             <span className="text-[11px] font-mono text-stone-400">/100</span>
           </div>
@@ -145,14 +196,21 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({
         <div className="grid grid-cols-3 gap-1.5 mb-3">
           {DIMENSIONS.map((dim) => {
             const val = scores[dim.key];
+            const isActiveDim = activeSortKey === dim.key;
             return (
               <div
                 key={dim.key}
-                className="px-2 py-1.5 rounded-lg bg-stone-950/80 border border-stone-800/80"
+                className={`px-2 py-1.5 rounded-lg border transition-colors ${
+                  isActiveDim
+                    ? 'bg-amber-500/15 border-amber-500/70 ring-1 ring-amber-500/40'
+                    : 'bg-stone-950/80 border-stone-800/80'
+                }`}
               >
                 <div className="flex items-center justify-between gap-1">
-                  <span className="text-[10px] text-stone-400 truncate">{dim.shortLabel}</span>
-                  <span className="text-xs font-mono tabular-nums font-extrabold text-stone-100">
+                  <span className={`text-[10px] truncate ${isActiveDim ? 'text-amber-300 font-bold' : 'text-stone-400'}`}>
+                    {dim.shortLabel}
+                  </span>
+                  <span className={`text-xs font-mono tabular-nums font-extrabold ${isActiveDim ? 'text-amber-200' : 'text-stone-100'}`}>
                     {val}
                   </span>
                 </div>

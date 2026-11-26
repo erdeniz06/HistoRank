@@ -130,6 +130,7 @@ export const NON_RULER_IDS = new Set<string>([
   'jordan-bardella',
   'jean-luc-melenchon',
   'eric-zemmour',
+  'jean-jaures',
 
   // Almanya muhalefet & Marksist / SPD düşünürler
   'alice-weidel',
@@ -144,6 +145,7 @@ export const NON_RULER_IDS = new Set<string>([
   'eduard-bernstein',
   'clara-zetkin',
   'bertolt-brecht',
+  'adolf-eichmann',
 
   // İngiltere muhalefet
   'kemi-badenoch',
@@ -193,6 +195,7 @@ export const NON_RULER_IDS = new Set<string>([
   'abdel-aziz-al-rantisi',
   'khaled-mashal',
   'mohammed-deif',
+  'andrei-sakharov',
 ]);
 
 /**
@@ -314,11 +317,17 @@ export const CABINET_OR_COMMANDER_IDS = new Set<string>([
   'lars-klingbeil',
   'matthias-erzberger',
   'walther-rathenau',
+  'joseph-goebbels',
+  'hermann-goring',
   // France, Italy & Spain — Chief Ministers, Cabinet Ministers & Generals
   'cardinal-richelieu',
   'georges-danton',
   'marquis-de-lafayette',
   'joan-of-arc',
+  'jean-monnet',
+  'simone-veil',
+  'emile-vandervelde',
+  'paul-hymans',
   'bruno-retailleau',
   'giuseppe-garibaldi',
   'matteo-salvini',

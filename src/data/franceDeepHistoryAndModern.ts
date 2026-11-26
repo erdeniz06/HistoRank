@@ -121,7 +121,7 @@ export const FRANCE_DEEP_LEADERS: Leader[] = [
   {
     id: 'charlemagne',
     name: 'Şarlman (Büyük Charles)',
-    originalName: 'Carolus Magnus / Charlemagne',
+    originalName: 'Carolus Magnus / Karl der Große / Charlemagne',
     title: 'Frank Kralı & İlk Batı Roma İmparatoru',
     country: 'Karolenj İmparatorluğu (Fransa)',
     countryCode: 'FR',

@@ -73,7 +73,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇩🇪',
     culture: 'germany',
     regions: ['europe'],
-    subtitle: 'Frederick the Great, Metternich, Bismarck, Moltke, Adenauer, Rommel, Brandt, Schmidt, Merkel, Schäuble, Genscher',
+    subtitle: 'Frederick the Great, Metternich, Bismarck, Wilhelm II, Hindenburg, Adenauer, Rommel, Brandt, Schmidt, Merkel',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'de-chancellor', label: 'Chancellors, Presidents & Monarchs' },
@@ -194,7 +194,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🏛️',
     culture: 'ancient',
     regions: ['europe', 'asia', 'africa'],
-    subtitle: 'Caesar, Augustus, Cincinnatus, Hannibal Barca, Scipio Africanus, Gaius Marius, Belisarius, Trajan, Constantine, Alexander',
+    subtitle: 'Caesar, Augustus, Cincinnatus, Hannibal Barca, Scipio Africanus, Gaius Marius, Belisarius, Trajan, Constantine, Philip II, Alexander',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'ancient-rome', label: 'Rome, Carthage & Byzantium' },
@@ -269,7 +269,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇧🇪',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'De Wever, De Croo, Magnette, Bouchez, Charles Michel',
+    subtitle: 'Leopold I, Albert I, Spaak, Baudouin, Martens, Dehaene, Verhofstadt, Charles Michel, De Croo, De Wever',
     subCategories: [{ key: 'all', label: 'All' }],
   },
   {
@@ -666,7 +666,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
   const [scope, setScope] = useState<LeaderboardScope>('famous-rulers');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<
-    'overall' | 'popularity' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership'
+    'overall' | 'popularity' | 'chronological' | 'military' | 'economy' | 'societal' | 'diplomacy' | 'leadership' | 'legacy'
   >('overall');
 
   useEffect(() => {
@@ -822,7 +822,9 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
         if (diff !== 0) return diff;
         return getLeaderPopularityScore(b) - getLeaderPopularityScore(a);
       }
-      return scoresB[sortBy] - scoresA[sortBy];
+      const dimDiff = scoresB[sortBy] - scoresA[sortBy];
+      if (dimDiff !== 0) return dimDiff;
+      return calculateOverallScore(scoresB) - calculateOverallScore(scoresA);
     });
   }, [baseCountryLeaders, scope, userRatings, sortBy]);
 
@@ -1215,6 +1217,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                 <option value="societal">Society & Law</option>
                 <option value="diplomacy">Diplomacy</option>
                 <option value="leadership">Leadership</option>
+                <option value="legacy">Historical Legacy</option>
               </select>
             </div>
           </div>
@@ -1261,6 +1264,7 @@ export const CountryPortalView: React.FC<CountryPortalViewProps> = ({
                       leader={leader}
                       userRating={userRatings[leader.id]}
                       isCompared={comparedIdSet.has(leader.id)}
+                      activeSortKey={sortBy}
                       onToggleCompare={onToggleCompare}
                       onSelect={onSelectLeader}
                     />

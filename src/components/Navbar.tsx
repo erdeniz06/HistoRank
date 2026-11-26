@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { ArrowLeft, Plus, Search, X } from 'lucide-react';
+import { ArrowLeft, Plus, Search, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { Leader, UserRating } from '../types';
 import { calculateOverallScore, getEffectiveScores, getTierForScore } from '../utils/scoring';
 import { FlagIcon } from './FlagIcon';
@@ -16,6 +16,12 @@ interface NavbarProps {
   onSelectLeader: (leader: Leader) => void;
   showCountryBackButton?: boolean;
   onBackFromCountry?: () => void;
+  zoomPercent: number;
+  minZoom: number;
+  maxZoom: number;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onZoomReset: () => void;
 }
 
 function normalizeSearchText(str: string): string {
@@ -50,6 +56,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLeader,
   showCountryBackButton,
   onBackFromCountry,
+  zoomPercent,
+  minZoom,
+  maxZoom,
+  onZoomIn,
+  onZoomOut,
+  onZoomReset,
 }) => {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -274,8 +286,47 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Primary Action */}
-        <div className="flex items-center shrink-0 order-4">
+        {/* Zoom Controls + Primary Action */}
+        <div className="flex items-center gap-2 shrink-0 order-4">
+          <div
+            className="flex items-center bg-stone-900 border border-stone-800 rounded-lg p-0.5"
+            aria-label="Zoom controls"
+          >
+            <button
+              type="button"
+              onClick={onZoomOut}
+              disabled={zoomPercent <= minZoom}
+              className="p-1.5 rounded-md text-stone-300 hover:text-white hover:bg-stone-800 disabled:opacity-35 disabled:pointer-events-none transition-colors"
+              title="Zoom out"
+              aria-label="Zoom out"
+            >
+              <ZoomOut className="w-3.5 h-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={onZoomReset}
+              className={`px-1.5 py-1 text-[11px] font-mono font-semibold rounded-md transition-colors tabular-nums ${
+                zoomPercent !== 100
+                  ? 'text-amber-400 hover:bg-stone-800'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              title="Reset zoom to 100%"
+              aria-label={`Current zoom ${zoomPercent}%, click to reset to 100%`}
+            >
+              {zoomPercent}%
+            </button>
+            <button
+              type="button"
+              onClick={onZoomIn}
+              disabled={zoomPercent >= maxZoom}
+              className="p-1.5 rounded-md text-stone-300 hover:text-white hover:bg-stone-800 disabled:opacity-35 disabled:pointer-events-none transition-colors"
+              title="Zoom in"
+              aria-label="Zoom in"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
           <button
             onClick={onOpenAddModal}
             className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-stone-950 bg-amber-500 hover:bg-amber-400 rounded-lg transition-colors whitespace-nowrap"

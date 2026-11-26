@@ -20,6 +20,10 @@ import { AudioPlayerBar } from './components/AudioPlayerBar';
 import { culturalAudio, CultureKey } from './audio/culturalAudioEngine';
 import { Swords } from 'lucide-react';
 
+const ZOOM_STORAGE_KEY = 'historank_ui_zoom_v1';
+const MIN_ZOOM = 70;
+const MAX_ZOOM = 140;
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>(() =>
     window.location.hash.startsWith('#country=') ? 'portals' : 'global'
@@ -72,6 +76,28 @@ export default function App() {
 
   const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [zoomPercent, setZoomPercent] = useState<number>(() => {
+    try {
+      const saved = Number(localStorage.getItem(ZOOM_STORAGE_KEY));
+      if (saved >= MIN_ZOOM && saved <= MAX_ZOOM) return saved;
+    } catch {
+      // ignore storage errors
+    }
+    return 100;
+  });
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${zoomPercent}%`;
+    try {
+      localStorage.setItem(ZOOM_STORAGE_KEY, String(zoomPercent));
+    } catch {
+      // ignore storage errors
+    }
+  }, [zoomPercent]);
+
+  const handleZoomIn = () => setZoomPercent((z) => Math.min(MAX_ZOOM, z + 10));
+  const handleZoomOut = () => setZoomPercent((z) => Math.max(MIN_ZOOM, z - 10));
+  const handleZoomReset = () => setZoomPercent(100);
 
   const [comparedLeaderIds, setComparedLeaderIds] = useState<string[]>([
     'caesar',
@@ -198,6 +224,12 @@ export default function App() {
           handleChangeCountry(null);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        zoomPercent={zoomPercent}
+        minZoom={MIN_ZOOM}
+        maxZoom={MAX_ZOOM}
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
+        onZoomReset={handleZoomReset}
       />
 
       <AudioPlayerBar

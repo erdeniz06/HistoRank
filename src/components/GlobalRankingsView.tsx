@@ -278,12 +278,23 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
         </div>
       </div>
 
-      {/* Results Count */}
-      <div className="flex items-center justify-between text-xs text-stone-400">
+      {/* Results Count & Active Sort Indicator */}
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-stone-400">
         <span>
           Showing <strong className="text-stone-200">{displayedLeaders.length}</strong> of{' '}
           <strong className="text-stone-200">{rankedLeaders.length}</strong> ranked figures worldwide
         </span>
+        {sortBy !== 'overall' && (
+          <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium">
+            Ranked strictly by{' '}
+            <strong>
+              {sortBy === 'popularity'
+                ? 'Global Fame'
+                : DIMENSIONS.find((d) => d.key === sortBy)?.label}
+            </strong>{' '}
+            (high → low)
+          </span>
+        )}
       </div>
 
       {/* Empty State */}
@@ -302,12 +313,37 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                   <th className="py-3 px-3">Leader & Title</th>
                   <th className="py-3 px-3 hidden sm:table-cell">Country</th>
                   <th className="py-3 px-2 hidden md:table-cell text-center">Era</th>
-                  {DIMENSIONS.map((d) => (
-                    <th key={d.key} className="py-3 px-2 hidden xl:table-cell text-center" title={d.label}>
-                      {d.shortLabel}
-                    </th>
-                  ))}
-                  <th className="py-3 px-3 text-center">Score</th>
+                  {DIMENSIONS.map((d) => {
+                    const isActiveCol = sortBy === d.key;
+                    return (
+                      <th
+                        key={d.key}
+                        onClick={() => setSortBy(d.key)}
+                        className={`py-3 px-2 hidden xl:table-cell text-center cursor-pointer transition-colors select-none ${
+                          isActiveCol
+                            ? 'text-amber-300 bg-amber-500/10 font-extrabold'
+                            : 'hover:text-stone-200'
+                        }`}
+                        title={`Sort strictly by ${d.label}`}
+                      >
+                        {d.shortLabel}
+                        {isActiveCol ? ' ↓' : ''}
+                      </th>
+                    );
+                  })}
+                  <th
+                    onClick={() => setSortBy('overall')}
+                    className={`py-3 px-3 text-center cursor-pointer transition-colors select-none ${
+                      sortBy !== 'overall' ? 'text-amber-300' : ''
+                    }`}
+                    title="Active ranking score"
+                  >
+                    {sortBy === 'overall'
+                      ? 'Overall'
+                      : sortBy === 'popularity'
+                      ? 'Fame ↓'
+                      : `${DIMENSIONS.find((d) => d.key === sortBy)?.shortLabel} ↓`}
+                  </th>
                   <th className="py-3 pl-2 pr-4 text-right">Compare</th>
                 </tr>
               </thead>
@@ -316,6 +352,17 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                   const scores = getEffectiveScores(leader, userRatings, useUserRatings);
                   const overall = calculateOverallScore(scores);
                   const tier = getTierForScore(overall);
+                  const popScore = getLeaderPopularityScore(leader);
+                  const activeDim =
+                    sortBy !== 'overall' && sortBy !== 'popularity'
+                      ? DIMENSIONS.find((d) => d.key === sortBy)
+                      : undefined;
+                  const primaryScore = activeDim
+                    ? scores[activeDim.key]
+                    : sortBy === 'popularity'
+                    ? popScore
+                    : overall;
+                  const primaryTier = getTierForScore(primaryScore);
                   const governed = hasLeaderGoverned(leader);
                   const famous = isFamousRuler(leader);
                   const isCompared = comparedIdSet.has(leader.id);
@@ -404,32 +451,56 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                       </td>
 
                       {/* 6 Dimension Columns on XL screens */}
-                      {DIMENSIONS.map((d) => (
-                        <td key={d.key} className="py-3 px-2 hidden xl:table-cell text-center font-mono text-stone-300 tabular-nums">
-                          {scores[d.key]}
-                        </td>
-                      ))}
+                      {DIMENSIONS.map((d) => {
+                        const isActiveCol = sortBy === d.key;
+                        return (
+                          <td
+                            key={d.key}
+                            className={`py-3 px-2 hidden xl:table-cell text-center font-mono tabular-nums ${
+                              isActiveCol
+                                ? 'bg-amber-500/10 text-amber-300 font-extrabold'
+                                : 'text-stone-300'
+                            }`}
+                          >
+                            {scores[d.key]}
+                          </td>
+                        );
+                      })}
 
-                      {/* Tier + Overall Score */}
+                      {/* Active Ranked Score (Sorted Dimension / Fame / Overall) */}
                       <td className="py-3 px-3 text-center whitespace-nowrap">
-                        <div className="inline-flex items-center gap-1.5">
-                          <span
-                            className="text-[10px] font-extrabold px-1.5 py-0.5 rounded border"
-                            style={{
-                              color: tier.color,
-                              backgroundColor: tier.bgColor,
-                              borderColor: tier.borderColor,
-                            }}
-                          >
-                            {tier.tier}
-                          </span>
-                          <span
-                            className="text-sm font-mono font-black tabular-nums"
-                            style={{ color: tier.color }}
-                          >
-                            {overall}
-                          </span>
-                        </div>
+                        {sortBy === 'overall' ? (
+                          <div className="inline-flex items-center gap-1.5">
+                            <span
+                              className="text-[10px] font-extrabold px-1.5 py-0.5 rounded border"
+                              style={{
+                                color: tier.color,
+                                backgroundColor: tier.bgColor,
+                                borderColor: tier.borderColor,
+                              }}
+                            >
+                              {tier.tier}
+                            </span>
+                            <span
+                              className="text-sm font-mono font-black tabular-nums"
+                              style={{ color: tier.color }}
+                            >
+                              {overall}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="inline-flex flex-col items-center leading-tight">
+                            <span
+                              className="text-sm font-mono font-black tabular-nums"
+                              style={{ color: activeDim ? activeDim.color : primaryTier.color }}
+                            >
+                              {primaryScore}
+                            </span>
+                            <span className="text-[10px] font-mono text-stone-500">
+                              Avg {overall}
+                            </span>
+                          </div>
+                        )}
                       </td>
 
                       {/* Compare Action */}
@@ -469,6 +540,7 @@ export const GlobalRankingsView: React.FC<GlobalRankingsViewProps> = ({
                 leader={leader}
                 userRating={userRatings[leader.id]}
                 isCompared={comparedIdSet.has(leader.id)}
+                activeSortKey={sortBy}
                 onToggleCompare={onToggleCompare}
                 onSelect={onSelectLeader}
               />
