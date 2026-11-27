@@ -32,6 +32,14 @@ import { TURKISH_INDEPENDENCE_PASHAS } from './turkishIndependencePashas';
 import { WESTERN_GENERALS_AND_STATESMEN } from './westernGeneralsAndStatesmen';
 import { UKRAINE_AND_CENTRAL_ASIA_PRESIDENTS } from './ukraineAndCentralAsiaPresidents';
 import { FRANCE_AND_BELGIUM_DEEP } from './franceAndBelgiumDeep';
+import { TURKISH_MODERN_POLITICS_AND_FIGURES } from './turkishModernPoliticsAndFigures';
+import { GREECE_EXPANSION } from './greeceExpansion';
+import { NETHERLANDS_EXPANSION } from './netherlandsExpansion';
+import { BELGIUM_EXPANSION } from './belgiumExpansion';
+import { UK_EXPANSION } from './ukExpansion';
+import { FRANCE_EXPANSION } from './franceExpansion';
+import { GERMANY_EXPANSION } from './germanyExpansion';
+import { ITALY_EXPANSION } from './italyExpansion';
 import {
   LEADER_EN_TRANSLATIONS,
   COUNTRY_EN_MAP,
@@ -684,6 +692,7 @@ const RAW_INITIAL_LEADERS: Leader[] = [
     era: 'early-modern',
     yearsActive: '1793 – 1794',
     category: 'france',
+    subCategory: 'fr-leader',
     defaultScores: {
       military: 70,
       economy: 62,
@@ -1489,6 +1498,14 @@ const RAW_INITIAL_LEADERS: Leader[] = [
   ...WESTERN_GENERALS_AND_STATESMEN,
   ...UKRAINE_AND_CENTRAL_ASIA_PRESIDENTS,
   ...FRANCE_AND_BELGIUM_DEEP,
+  ...TURKISH_MODERN_POLITICS_AND_FIGURES,
+  ...GREECE_EXPANSION,
+  ...NETHERLANDS_EXPANSION,
+  ...BELGIUM_EXPANSION,
+  ...UK_EXPANSION,
+  ...FRANCE_EXPANSION,
+  ...GERMANY_EXPANSION,
+  ...ITALY_EXPANSION,
 ];
 
 export const INITIAL_LEADERS: Leader[] = RAW_INITIAL_LEADERS.map((leader) => {

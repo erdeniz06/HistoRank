@@ -58,7 +58,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇬🇧',
     culture: 'uk',
     regions: ['europe'],
-    subtitle: 'William Wallace, Robert the Bruce, Monarchs, Marlborough, Nelson, Wellington, Montgomery, Churchill, Thatcher, Attlee',
+    subtitle: 'Alfred the Great, Henry VII, Elizabeth I, Cromwell, Peel, Gladstone, Churchill, Attlee, Thatcher, Blair, Starmer',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'uk-monarch', label: 'Kings, Queens & Commanders' },
@@ -73,7 +73,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇩🇪',
     culture: 'germany',
     regions: ['europe'],
-    subtitle: 'Frederick the Great, Metternich, Bismarck, Wilhelm II, Hindenburg, Adenauer, Rommel, Brandt, Schmidt, Merkel',
+    subtitle: 'Otto I, Frederick the Great, Clausewitz, Bismarck, Wilhelm I & II, Adenauer, Brandt, Schmidt, Kohl, Merkel, Scholz',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'de-chancellor', label: 'Chancellors, Presidents & Monarchs' },
@@ -88,7 +88,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇫🇷',
     culture: 'france',
     regions: ['europe'],
-    subtitle: 'Charles Martel, Charlemagne, Joan of Arc, Louis XIV, Talleyrand, Napoleon I/III, De Gaulle, Mitterrand, Macron',
+    subtitle: 'Charlemagne, Louis XI & XIV, Colbert, Napoleon, Robespierre, Clemenceau, Jean Moulin, De Gaulle, Pompidou, Mitterrand, Macron',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'fr-leader', label: 'Kings, Commanders, Diplomats & Presidents' },
@@ -150,7 +150,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇮🇹',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Medici, Machiavelli, Cavour, Garibaldi, Mazzini, Mussolini, De Gasperi, Gramsci, Berlinguer, Aldo Moro, Draghi, Meloni',
+    subtitle: 'Cosimo de’ Medici, Machiavelli, Cavour, Garibaldi, Giolitti, Pertini, De Gasperi, Andreotti, Falcone, Berlusconi, Draghi, Meloni',
     subCategories: [{ key: 'all', label: 'All' }],
   },
   {
@@ -269,7 +269,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇧🇪',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Leopold I, Albert I, Spaak, Baudouin, Martens, Dehaene, Verhofstadt, Charles Michel, De Croo, De Wever',
+    subtitle: 'Ambiorix, Artevelde, Leopold I & II, Albert I, Spaak, Baudouin, Harmel, Van Rompuy, Martens, Verhofstadt, Di Rupo, De Wever',
     subCategories: [{ key: 'all', label: 'All' }],
   },
   {
@@ -279,7 +279,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇳🇱',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'William the Silent, Johan de Witt, Thorbecke, Rutte, Wilders, Schoof, Timmermans, Yeşilgöz',
+    subtitle: 'William the Silent, Maurice, De Ruyter, Johan de Witt, Wilhelmina, Drees, Lubbers, Wim Kok, Pim Fortuyn, Rutte, Wilders, Schoof',
     subCategories: [{ key: 'all', label: 'All' }],
   },
   {
@@ -551,7 +551,7 @@ const COUNTRY_HUBS: CountryHubDef[] = [
     flag: '🇬🇷',
     culture: 'europe',
     regions: ['europe'],
-    subtitle: 'Kolokotronis, Kapodistrias, Venizelos, Mitsotakis, Tsipras, Androulakis',
+    subtitle: 'Rigas Feraios, Kolokotronis, Bouboulina, Kapodistrias, Trikoupis, Venizelos, Karamanlis, Papandreou, Simitis, Tsipras, Mitsotakis',
     subCategories: [
       { key: 'all', label: 'All' },
       { key: 'gr-history', label: 'Independence & History' },
